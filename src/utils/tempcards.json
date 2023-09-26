@@ -1,0 +1,28 @@
+{
+  "bots": [
+    {
+      "id": 1,
+      "name": "Bot1",
+      "special": true,
+      "desciption": "bot1 desciption"
+    },
+    {
+      "id": 2,
+      "name": "Bot2",
+      "special": true,
+      "desciption": "bot2 description"
+    },
+    {
+      "id": 3,
+      "name": "Bot3",
+      "special": true,
+      "desciption": "bot3 description"
+    },
+    {
+      "id": 4,
+      "name": "Bot4",
+      "special": true,
+      "desciption": "bot4 description"
+    }
+  ]
+}
