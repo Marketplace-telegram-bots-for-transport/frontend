@@ -53,11 +53,13 @@
 			{
 				"files": [
 					"**/*.stories.*",
-					"src/stories/**/*"
+					"src/stories/**/*",
+					"*.jsx"
 				],
 				"rules": {
 					"import/no-anonymous-default-export": "off",
-					"import/no-extraneous-dependencies": "off"
+					"import/no-extraneous-dependencies": "off",
+					"react/prop-types": "off"
 				}
 			}
 		]
@@ -89,6 +91,7 @@
 		"husky": "^8.0.3",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
+		"prop-types": "^15.8.1",
 		"sass": "^1.68.0"
 	},
 	"lint-staged": {
