@@ -1,19 +1,19 @@
 .main {
-	padding: 74px;
+  padding: 74px;
 
-	&__titleContainer {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-	}
+  &__titleContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-	&__titleLogo {
-		width: 60px;
-		height: 60px;
-	}
+  &__titleLogo {
+    width: 60px;
+    height: 60px;
+  }
 
-	&__titleText {
-		font-size: 62px;
-		margin: 0;
-	}
+  &__titleText {
+    font-size: 62px;
+    margin: 0;
+  }
 }
