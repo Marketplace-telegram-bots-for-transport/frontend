@@ -1,17 +1,17 @@
 .specials {
-    max-width: 1292px;
-    padding-top: 50px;
+	max-width: 1292px;
+	padding-top: 50px;
 
-    &__title {
-        font-size: 42px;
-        margin: 0;
-    }
+	&__title {
+		font-size: 42px;
+		margin: 0;
+	}
 
-    &__list {
-        list-style: none;
-        margin: 0;
-        padding: 40px 0 0 0;
-        display: flex;
-        gap: 40px;
-    }
+	&__list {
+		list-style: none;
+		margin: 0;
+		padding: 40px 0 0 0;
+		display: flex;
+		gap: 40px;
+	}
 }
