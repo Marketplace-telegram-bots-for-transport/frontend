@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
 
 const App = () => {
   const [isLoggedIn /* , setIsLoggedIn */] = useState(false);
@@ -19,7 +20,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
               />
               <Main />
-              {/* <Footer /> */}
+              <Footer />
             </>
           }
         />

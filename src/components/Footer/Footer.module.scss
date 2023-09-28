@@ -1,0 +1,15 @@
+.footer {
+  max-width: 1292px;
+  margin: 0 auto;
+  background-color: #dfeaef;
+
+  &__container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__container_address {
+    display: flex;
+  }
+}
