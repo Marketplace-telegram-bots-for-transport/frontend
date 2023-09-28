@@ -1,5 +1,5 @@
 import SpecialOffers from '../SpecialOffers/SpecialOffers';
-import logo from '../../images/temp_logo.svg';
+import logo from '../../images/logo-min.svg';
 import styles from './Main.module.scss';
 
 const Main = () => {
