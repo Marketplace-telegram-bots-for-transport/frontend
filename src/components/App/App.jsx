@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 
+/* import InfoTooltip from '../InfoTooltip/InfoTooltip'; */
+
 const App = () => {
   const [isLoggedIn /* , setIsLoggedIn */] = useState(false);
 
