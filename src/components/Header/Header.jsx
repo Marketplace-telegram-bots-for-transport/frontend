@@ -30,7 +30,7 @@ function Header(props) {
             </div>
           </form>
         </div>
-        <Submenu isLoggedIn={isLoggedIn} ounterBots={1} />
+        <Submenu isLoggedIn={isLoggedIn} counterBots={1} />
       </div>
     </header>
   );
