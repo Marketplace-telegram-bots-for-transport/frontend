@@ -1,64 +1,239 @@
 .submenu {
-  &__container_basket_account {
+  position: relative;
+  display: flex;
+  margin-right: 165px;
+
+  &__button {
     display: flex;
-  }
-
-  &__basket {
-    position: relative;
-  }
-
-  &__basket_button {
-    background-color: #345474;
-    background-image: url(../../../images/basket-min.svg);
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    background-color: #3b7dd6;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    margin-right: 20px;
-    height: 20px;
   }
 
-  &__basket_counter {
+  &__button:hover {
+    background-color: #2f5e9d;
+  }
+
+  &__button:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  &__buttonBasket {
+    background-image: url(../../../images/basket-min.svg);
+  }
+
+  &__buttonBasket_open {
+    background-color: #183357;
+  }
+
+  &__counterBasket {
     position: absolute;
     bottom: 0;
-    left: 10px;
-    width: 10px;
-    height: 10px;
-    margin: 0;
-    border-radius: 50%;
-    padding: 0;
-    color: white;
-    background-color: red;
-  }
-
-  &__basket_hiding {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 200px;
-    height: 150px;
-    background-color: wheat;
-  }
-
-  &__profile {
-    position: relative;
-  }
-
-  &__profile_button {
+    left: 30px;
     width: 15px;
-    height: 21px;
-    background-color: #345474;
-    background-image: url(../../../images/profile-min.svg);
+    height: 15px;
+    border-radius: 100px;
+    color: #f8fafc;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: normal;
+    text-align: center;
+    background-color: #e44f2f;
+  }
+
+  &__containerHidden {
+    position: absolute;
+    top: 83px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 292px;
+    border-radius: 10px;
+    background-color: #f8fafc;
+  }
+
+  &__hiddenTitle {
+    margin: 20px 0 5px 20px;
+    color: #183357;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: normal;
+  }
+
+  &__hiddenSubtitle {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    border-bottom: 0.5px solid #d3e2f7;
+    padding-bottom: 10px;
+    color: #183357;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  &__basketMini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 10px 20px;
+  }
+
+  &__basketMini_img {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__basketMini_description {
+    max-width: 117px;
+    margin-right: 10px;
+  }
+
+  &__basketMini_title {
+    margin-bottom: 5px;
+    overflow: hidden;
+    color: #183357;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__basketMini_counter {
+    color: #183357;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: normal;
+  }
+
+  &__basketMini_price {
+    margin-right: 10px;
+    color: #183357;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: normal;
+  }
+
+  &__basketMini_button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: inherit;
+    background-image: url(../../../images/button-delete-min.svg);
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
   }
 
-  &__profile_hiding {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 200px;
-    height: 150px;
-    background-color: wheat;
+  &__basketMini_button:hover {
+    background-image: url(../../../images/button-delete-hover-min.svg);
+  }
+
+  &__basketMini_button:active {
+    background-image: url(../../../images/button-delete-pressed-min.svg);
+  }
+
+  &__hiddenButton {
+    padding: 0;
+    margin: 0 20px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3b7dd6;
+    cursor: pointer;
+  }
+
+  &__hiddenButton:hover {
+    background-color: #2f5e9d;
+  }
+
+  &__hiddenButton:active {
+    background-color: #183357;
+  }
+
+  &__buttonProfile {
+    background-image: url(../../../images/profile-min.svg);
+  }
+
+  &__buttonProfile_open {
+    background-color: #183357;
+  }
+
+  &__containerHidden_profile {
+    min-width: 242px;
+  }
+
+  &__hiddenDescription_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 20px 0 20px;
+    border-bottom: 0.5px solid #d3e2f7;
+    padding-bottom: 10px;
+  }
+
+  &__hiddenImg_profile {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  &__hiddenTitle_profile {
+    max-width: 157px;
+    overflow: hidden;
+    color: #183357;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__hiddenNavigate_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 20px;
+  }
+
+  &__hiddenLink_profile {
+    box-sizing: border-box;
+    min-width: 207px;
+    min-height: 40px;
+    padding: 11px 0 11px 15px;
+    color: #3b7dd6;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  &__hiddenLink_profile:hover {
+    color: #2f5e9d;
+  }
+
+  &__hiddenLink_profile:active {
+    color: #183357;
+  }
+
+  &__hiddenSubtitle_profile {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__hiddenButton_link {
+    display: block;
+    color: #f8fafc;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: normal;
+    text-decoration: none;
+    padding: 15px 0 15px 0;
   }
 }

@@ -1,11 +1,84 @@
 .header {
-  max-width: 1292px;
+  max-width: 1920px;
   margin: 0 auto;
-  background-color: #dfeaef;
+  border-bottom: 0.5px solid #3b7dd6;
 
   &__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &__logoContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 165px;
+  }
+
+  &__logoLink {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    text-decoration: none;
+    background-image: url(../../images/logo-min.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__logoLink:hover {
+    background-image: url(../../images/logo-state-hover-min.svg);
+  }
+
+  &__logoLink:active {
+    background-image: url(../../images/logo-state-pressed-min.svg);
+  }
+
+  &__logoTitle {
+    color: #183357;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: normal;
+  }
+
+  &__search {
+    border-radius: 10px;
+    background-color: #d3e2f7;
+  }
+
+  &__searchField {
+    display: flex;
+    align-items: center;
+    min-width: 530px;
+  }
+
+  &__searchFieldImage {
+    padding: 10px 10px 10px 20px;
+  }
+
+  &__searchFieldInput {
+    flex-grow: 1;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px 11px 0;
+    outline: none;
+    font-weight: 300;
+    font-size: 16px;
+    font-size: 14px;
+    line-height: normal;
+    background-color: #d3e2f7;
+  }
+
+  ::-webkit-input-placeholder {
+    color: #84a7d5;
+  }
+  :-moz-placeholder {
+    color: #84a7d5;
+  }
+  ::-moz-placeholder {
+    color: #84a7d5;
+  }
+  :-ms-input-placeholder {
+    color: #84a7d5;
   }
 }
