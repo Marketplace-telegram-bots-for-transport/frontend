@@ -1,0 +1,137 @@
+$font-stack:    Geologica, Arial, sans-serif;
+$primary-color: #35383B;
+$input-text-color: #84A7D5;
+
+@mixin textDecoration($size, $color, $lineHeight) {
+    font-family: $font-stack;
+    font-size: $size;
+    font-weight: 300;
+    line-height: $lineHeight;
+    text-align: left;
+    color: $color;
+}
+
+.payment {
+    padding: 0 135px;
+
+    &__content {
+        width: 415px;
+        padding: 40px;
+        box-sizing: border-box;
+        background-color: #F8FAFC;
+        box-shadow: 
+        0px 5px 10px 0px rgba(142, 154, 169, 0.1),
+        0px 19px 19px 0px rgba(142, 154, 169, 0.09),
+        0px 42px 25px 0px rgba(142, 154, 169, 0.05),
+        0px 75px 30px 0px rgba(142, 154, 169, 0.01),
+        0px 116px 33px 0px rgba(142, 154, 169, 0);
+    }
+
+    &__title {
+        @include textDecoration(24px, $primary-color, 30px);
+        margin-bottom: 10px;
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        @include textDecoration(14px, $primary-color, 18px);
+    }
+
+    &__card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__cardInfo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__cardDate {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    &__label {
+        margin-bottom: 23px;
+    }
+
+    &__input {
+        border: none;
+        background-color: #D3E2F7;
+        border-radius: 10px;
+        width: 100%;
+        height: 38px;
+        padding: 10px 20px;
+        margin-top: 5px;
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: $input-text-color;
+        }
+    }
+
+    &__inputHeading {
+        @include textDecoration(14px, $primary-color, 18px);
+        padding: 0 10px;
+    }
+
+    &__inputDate {
+        width: 66px;
+    }
+
+    &__labelCode {
+        width: 144px;
+    }
+
+    &__cardDateSlash {
+        @include textDecoration(24px, $input-text-color, 35px);
+        margin: 0 10px;
+        padding: 0;
+    }
+
+    &__totalCount {
+        @include textDecoration(18px, $primary-color, 23px);
+        margin-bottom: 5px;
+    }
+
+    &__inputPromocode {
+        margin-bottom: 33px;
+    }
+
+    &__total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+        border-top: 1px solid #D3E2F7;
+    }
+
+    &__sum {
+        @include textDecoration(24px, $primary-color, 30px);
+        font-weight: 600;
+    }
+
+    &__button {
+        border: none;
+        width: 178px;
+        height: 50px;
+        padding: 10px 47px;
+        background-color: #3B7DD6;
+        border-radius: 15px;
+        @include textDecoration(24px, #fff, 30px);
+        font-weight: 400;
+        transition: .3s;
+
+        &:hover {
+           background-color: #2F5E9D;
+        }
+    }
+}
