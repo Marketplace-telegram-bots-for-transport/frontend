@@ -24,6 +24,43 @@ const App = () => {
     navigate('/');
   };
 
+  // Функция удаления товара из коризны
+  const deleteCartProduct = (id) => {
+    setCartProducts(() => {
+      return cartProducts.filter((product) => {
+        return id !== product.id;
+      });
+    });
+  };
+
+  const increaseProductCount = (id) => {
+    setCartProducts(() => {
+      return cartProducts.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            count: product.count + 1,
+          };
+        }
+        return product;
+      });
+    });
+  };
+
+  const decreaseProductCount = (id) => {
+    setCartProducts(() => {
+      return cartProducts.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            count: product.count - 1 >= 1 ? product.count - 1 : product.count,
+          };
+        }
+        return product;
+      });
+    });
+  };
+
   return (
     <>
       <Routes>
@@ -41,7 +78,18 @@ const App = () => {
             </>
           }
         />
-        <Route path='/cart' element={<Cart cartProducts={cartProducts} />} />
+        <Route
+          path='/cart'
+          element={
+            <Cart
+              isLoggedIn={isLoggedIn}
+              cartProducts={cartProducts}
+              deleteCartProduct={deleteCartProduct}
+              increaseProductCount={increaseProductCount}
+              decreaseProductCount={decreaseProductCount}
+            />
+          }
+        />
       </Routes>
 
       {/* <InfoTooltip /> */}

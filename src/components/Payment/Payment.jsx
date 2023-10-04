@@ -1,11 +1,36 @@
+import { useState } from 'react';
 import styles from './Payment.module.scss';
 
-function PaymentCopy() {
+function Payment({ totalSum }) {
+  const [formValue, setFormValue] = useState({
+    email: '',
+    number: '',
+    month: '',
+    year: '',
+    code: '',
+    promocode: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className={styles.payment}>
       <div className={styles.payment__content}>
         <h3 className={styles.payment__title}>Платежная информация</h3>
-        <form action='#' className={styles.payment__form}>
+        <form
+          action='#'
+          className={styles.payment__form}
+          onSubmit={handleSubmit}
+        >
           <label className={styles.payment__label} htmlFor='email-input'>
             {' '}
             <span className={styles.payment__inputHeading}>
@@ -39,6 +64,7 @@ function PaymentCopy() {
                 minLength='19'
                 maxLength='19'
                 required
+                onChange={handleChange}
               />
             </label>
             <div className={styles.payment__cardInfo}>
@@ -55,18 +81,24 @@ function PaymentCopy() {
                     inputMode='numeric'
                     type='text'
                     id='month-input'
+                    minLength='2'
+                    maxLength='2'
                     required
+                    onChange={handleChange}
                   />
                   <span className={styles.payment__cardDateSlash}>/</span>
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputDate}`}
                     name='cardYear'
-                    placeholder='ГГ'
+                    placeholder='ГГГГ'
                     autoComplete='cc-year'
                     inputMode='numeric'
                     type='text'
                     id='year-input'
+                    minLength='4'
+                    maxLength='4'
                     required
+                    onChange={handleChange}
                   />
                 </div>
               </label>
@@ -88,6 +120,7 @@ function PaymentCopy() {
                   minLength='1'
                   maxLength='3'
                   required
+                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -102,9 +135,10 @@ function PaymentCopy() {
             minLength='3'
             maxLength='30'
             required
+            onChange={handleChange}
           />
           <div className={styles.payment__total}>
-            <p className={styles.payment__sum}>20000 руб.</p>
+            <p className={styles.payment__sum}>{totalSum} руб.</p>
             <button className={styles.payment__button}>Купить</button>
           </div>
         </form>
@@ -113,4 +147,4 @@ function PaymentCopy() {
   );
 }
 
-export default PaymentCopy;
+export default Payment;

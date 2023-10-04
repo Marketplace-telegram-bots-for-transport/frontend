@@ -1,6 +1,23 @@
 import styles from './CartProduct.module.scss';
 
-function CartProduct({ product }) {
+function CartProduct({
+  product,
+  deleteCartProduct,
+  increaseProductCount,
+  decreaseProductCount,
+}) {
+  function handleDeleteCartProduct() {
+    deleteCartProduct(product.id);
+  }
+
+  function handleIncreaseProduct() {
+    increaseProductCount(product.id);
+  }
+
+  function handleDecreaseProduct() {
+    decreaseProductCount(product.id);
+  }
+
   return (
     <li className={styles.product}>
       <div className={styles.product__item}>
@@ -8,15 +25,30 @@ function CartProduct({ product }) {
         <p className={styles.product__title}>{product.name}</p>
       </div>
       <div className={styles.product__item}>
-        <p className={styles.product__price}>{product.price} ₽</p>
+        <p className={styles.product__price}>
+          {product.price * product.count} ₽
+        </p>
         <div className={styles.product__count}>
-          <button className={styles.product__btnCount}>-</button>
-          <span className={styles.product__countProperity}>4</span>
-          <button className={styles.product__btnCount}>+</button>
+          <button
+            className={styles.product__btnCount}
+            onClick={handleDecreaseProduct}
+          >
+            -
+          </button>
+          <span className={styles.product__countProperity}>
+            {product.count}
+          </span>
+          <button
+            className={styles.product__btnCount}
+            onClick={handleIncreaseProduct}
+          >
+            +
+          </button>
         </div>
         <button
           className={styles.product__btnDelete}
           aria-label='delete button'
+          onClick={handleDeleteCartProduct}
         />
       </div>
     </li>
