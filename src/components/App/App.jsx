@@ -33,6 +33,7 @@ const App = () => {
     });
   };
 
+  // Функция увеличения количества товара
   const increaseProductCount = (id) => {
     setCartProducts(() => {
       return cartProducts.map((product) => {
@@ -47,6 +48,7 @@ const App = () => {
     });
   };
 
+  // Функция уменьшения количества товара
   const decreaseProductCount = (id) => {
     setCartProducts(() => {
       return cartProducts.map((product) => {
