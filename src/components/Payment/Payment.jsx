@@ -61,8 +61,8 @@ function Payment({ totalSum }) {
                 inputMode='numeric'
                 type='text'
                 id='number-input'
-                minLength='19'
-                maxLength='19'
+                minLength='16'
+                maxLength='16'
                 required
                 onChange={handleChange}
               />
