@@ -5,16 +5,21 @@ import * as data from '../../utils/tempcards.json';
 const BotsList = () => {
   const { bots } = data;
 
+  const handleBuyClick = () => {
+    // TODO: добавление в корзину
+  };
+
   return (
     <ul className={styles.bots}>
       {bots.map((bot) => (
         <li key={bot.id}>
           <BotCard
-            img={bot.img}
+            mainPhoto={bot.main_photo}
             name={bot.name}
             author={bot.author}
             categories={bot.categories}
             price={bot.price}
+            onBuyClick={handleBuyClick}
           />
         </li>
       ))}

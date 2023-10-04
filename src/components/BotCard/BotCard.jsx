@@ -1,10 +1,17 @@
 import styles from './BotCard.module.scss';
 
-const BotCard = ({ img, name, author, categories, price }) => {
+const BotCard = ({
+  mainPhoto,
+  name,
+  author,
+  categories,
+  price,
+  onBuyClick,
+}) => {
   return (
     <div className={styles.bot}>
       <div className={styles.bot__background}>
-        <img className={styles.bot__img} src={img} alt='bot img' />
+        <img className={styles.bot__img} src={mainPhoto} alt='bot img' />
       </div>
       <div className={styles.bot__brief}>
         <p className={styles.bot__name}>{name}</p>
@@ -25,7 +32,12 @@ const BotCard = ({ img, name, author, categories, price }) => {
           aria-label='Add-to-favourites'
           aria-hidden='true'
         />
-        <button className={styles.bot__buyBtn} type='button' aria-label='Buy'>
+        <button
+          className={styles.bot__buyBtn}
+          type='button'
+          aria-label='Buy'
+          onClick={onBuyClick}
+        >
           Купить
         </button>
       </div>
