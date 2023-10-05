@@ -6,6 +6,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import { products } from '../../utils/products';
+import BotDetails from '../BotDetails/BotDetails';
 
 const App = () => {
   const navigate = useNavigate();
@@ -83,13 +84,34 @@ const App = () => {
         <Route
           path='/cart'
           element={
-            <Cart
+             <>
+              <Header
+                counterBots={/* bots.length */ 0}
+                isLoggedIn={isLoggedIn}
+                isLogOut={handleLogOut}
+              />
+              <Cart
               isLoggedIn={isLoggedIn}
               cartProducts={cartProducts}
               deleteCartProduct={deleteCartProduct}
               increaseProductCount={increaseProductCount}
               decreaseProductCount={decreaseProductCount}
+               />
+              <Footer />
+              </>
             />
+        <Route
+          path='/botdetails'
+          element={
+            <>
+              <Header
+                counterBots={/* bots.length */ 0}
+                isLoggedIn={isLoggedIn}
+                isLogOut={handleLogOut}
+              />
+              <BotDetails />
+              <Footer />
+            </>
           }
         />
       </Routes>

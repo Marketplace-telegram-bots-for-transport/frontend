@@ -1,0 +1,58 @@
+.screenExamples {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 60px 0 0 0;
+
+  &__title {  width: 100%;
+    margin: 0;
+    text-align: start;
+    font-size: 36px;
+    line-height: 45px;
+    color: #35383B;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__sliderButtonLeft {
+    width: 60px;
+    height: 60px;
+    background-image: url('../../images/botDetails_images/screen-examples-arrow-left.svg');
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    margin: auto 0;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    transition: transform 3s ease-in-out;
+    max-width: 100%;
+    padding: 40px 40px 60px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  &__sliderButtonRight {
+    width: 60px;
+    height: 60px;
+    background-image: url('../../images/botDetails_images/screen-examples-arrow-right.svg');
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    margin: auto 0;
+  }
+}
