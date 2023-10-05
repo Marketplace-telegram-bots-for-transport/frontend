@@ -1,0 +1,47 @@
+@mixin textDecoration($color, $weight) {
+    font-family: Geologica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: $weight;
+    line-height: 30px;
+    text-align: center;
+    color: $color;
+}
+
+.modalAuth {
+    padding: 0 125px;
+
+    &__content {
+        border-radius: 10px;
+        width: 415px;
+        padding: 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        background-color: #F8FAFC;
+        box-shadow: 
+        0px 5px 10px 0px rgba(142, 154, 169, 0.1),
+        0px 19px 19px 0px rgba(142, 154, 169, 0.09),
+        0px 42px 25px 0px rgba(142, 154, 169, 0.05),
+        0px 75px 30px 0px rgba(142, 154, 169, 0.01),
+        0px 116px 33px 0px rgba(142, 154, 169, 0);
+    }
+
+    &__desc {
+        margin: 0;
+        padding: 0;
+        @include textDecoration(#35383B, 300);
+    }
+
+    &__btn {
+        margin-top: 20px;
+        width: 100%;
+        border: none;
+        border-radius: 15px;
+        padding: 10px 24px;
+        background-color: #3B7DD6;
+        @include textDecoration(#F8FAFC, 400);
+        cursor: pointer;
+    }
+}
