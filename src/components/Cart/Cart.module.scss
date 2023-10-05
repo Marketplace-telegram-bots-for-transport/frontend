@@ -1,0 +1,65 @@
+$font-stack: Geologica, Arial, sans-serif;
+$primary-color: #35383b;
+$input-text-color: #84a7d5;
+
+@mixin textDecoration($size, $color, $lineHeight) {
+  font-family: $font-stack;
+  font-size: $size;
+  font-weight: 300;
+  line-height: $lineHeight;
+  text-align: left;
+  color: $color;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1920px;
+  width: 100%;
+  padding: 60px 165px;
+  margin: 0 auto;
+}
+
+.cart__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart__title {
+  font-weight: 510;
+  @include textDecoration(42px, $primary-color, 50px);
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  padding: 0 125px;
+  border-right: 1px solid #d3e2f7;
+
+  &__list {
+    margin: 0 0 30px 0;
+    padding: 60px 0 30px;
+    width: 915px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 60px;
+    border-top: 1px solid #d3e2f7;
+  }
+
+  &__count {
+    @include textDecoration(24px, $primary-color, 30px);
+    font-weight: 300;
+  }
+
+  &__sum {
+    @include textDecoration(36px, $primary-color, 45px);
+    font-weight: 600;
+  }
+}

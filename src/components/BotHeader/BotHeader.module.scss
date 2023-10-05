@@ -1,0 +1,32 @@
+.botHeader {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 60px;
+
+  &__button {
+    width: 30px;
+    height: 30px;
+    background-image: url('../../images/botDetails_images/chevron-left.svg');
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+  }
+
+  &__mainTitle {
+    font-size: 24px;
+    font-weight: 400px;
+    line-height: 30px;
+    color: #3b7dd6;
+    margin: 0 auto 0 0;
+  }
+
+  &__mainSubtitle {
+    font-size: 14px;
+    font-weight: 400px;
+    line-height: 17.5px;
+    color: #35383b;
+    margin: 10px auto 0 5px;
+  }
+}

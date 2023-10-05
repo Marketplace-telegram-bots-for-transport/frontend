@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import CurrentUserContext from '../../context/CurrentUserContext';
@@ -6,6 +6,9 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
+import Cart from '../Cart/Cart';
+import { products } from '../../utils/products';
+import BotDetails from '../BotDetails/BotDetails';
 
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
@@ -15,6 +18,11 @@ const App = () => {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [cartProducts, setCartProducts] = useState([]);
+
+  useEffect(() => {
+    setCartProducts(products);
+  }, []);
 
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
@@ -31,6 +39,45 @@ const App = () => {
     navigate('/');
   };
 
+  // Функция удаления товара из коризны
+  const deleteCartProduct = (id) => {
+    setCartProducts(() => {
+      return cartProducts.filter((product) => {
+        return id !== product.id;
+      });
+    });
+  };
+
+  // Функция увеличения количества товара
+  const increaseProductCount = (id) => {
+    setCartProducts(() => {
+      return cartProducts.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            count: product.count + 1,
+          };
+        }
+        return product;
+      });
+    });
+  };
+
+  // Функция уменьшения количества товара
+  const decreaseProductCount = (id) => {
+    setCartProducts(() => {
+      return cartProducts.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            count: product.count - 1 >= 1 ? product.count - 1 : product.count,
+          };
+        }
+        return product;
+      });
+    });
+  };
+
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <Routes>
@@ -44,6 +91,40 @@ const App = () => {
                 isLogOut={handleLogOut}
               />
               <Main />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/cart'
+          element={
+            <>
+              <Header
+                counterBots={/* bots.length */ 0}
+                isLoggedIn={isLoggedIn}
+                isLogOut={handleLogOut}
+              />
+              <Cart
+                isLoggedIn={isLoggedIn}
+                cartProducts={cartProducts}
+                deleteCartProduct={deleteCartProduct}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+              />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/botdetails'
+          element={
+            <>
+              <Header
+                counterBots={/* bots.length */ 0}
+                isLoggedIn={isLoggedIn}
+                isLogOut={handleLogOut}
+              />
+              <BotDetails />
               <Footer />
             </>
           }
