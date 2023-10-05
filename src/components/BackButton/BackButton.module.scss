@@ -1,49 +1,49 @@
-$font-stack:    Geologica, Arial, sans-serif;
-$primary-color: #35383B;
-$text-color: #3B7DD6;
+$font-stack: Geologica, Arial, sans-serif;
+$primary-color: #35383b;
+$text-color: #3b7dd6;
 
 .returnElement {
-    &__container {
-        display: flex;
-        align-items: center;
-        column-gap: 10px;
-        cursor: pointer;
-    }
+  &__container {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+  }
 
-    &__btn {
-        background-image: url('../../images/back-icon.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        width: 24px;
-        height: 24px;
-        border: none;
-        background-color: rgba(0, 0, 0, 0);
-    }
+  &__btn {
+    background-image: url('../../images/back-icon.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
 
-    &__title {
-        margin: 0;
-        padding: 0;
-        font-family: $font-stack;
-        font-size: 24px;
-        font-weight: 400;
-        line-height: 30px;
-        text-align: center;
-        color: $text-color;
-        transition: .3s;
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-family: $font-stack;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    color: $text-color;
+    transition: 0.3s;
 
-        &:hover {
-            color: #2F5E9D;
-        }
+    &:hover {
+      color: #2f5e9d;
     }
-    
-    &__ref {
-        margin: 10px 35px 0;
-        padding: 0;
-        font-family: $font-stack;
-        font-size: 14px;
-        font-weight: 300;
-        line-height: 18px;
-        text-align: left;
-        color: $primary-color;
-    }
+  }
+
+  &__ref {
+    margin: 10px 35px 0;
+    padding: 0;
+    font-family: $font-stack;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    text-align: left;
+    color: $primary-color;
+  }
 }

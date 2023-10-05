@@ -18,7 +18,7 @@
 .averageRating {
   font-size: 48px;
   font-weight: bold;
-  color: #35383B;
+  color: #35383b;
 }
 
 .stars {
@@ -35,7 +35,6 @@
 .star:last-child {
   margin-right: 0;
 }
-
 
 .star-5:hover ~ .star-5,
 .star-4:hover ~ .star-4,
@@ -60,16 +59,14 @@
 .ratingBar {
   width: 450px;
   height: 20px;
-  background-color: #D3E2F7;
+  background-color: #d3e2f7;
   border-radius: 5px;
 }
 
 .ratingBarInner {
   height: 100%;
-  background-color: #3B7DD6;
+  background-color: #3b7dd6;
   border-radius: 5px;
-  width: 0; 
+  width: 0;
   transition: width 0.5s;
 }
-
-

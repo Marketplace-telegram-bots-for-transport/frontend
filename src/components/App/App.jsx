@@ -84,22 +84,23 @@ const App = () => {
         <Route
           path='/cart'
           element={
-             <>
+            <>
               <Header
                 counterBots={/* bots.length */ 0}
                 isLoggedIn={isLoggedIn}
                 isLogOut={handleLogOut}
               />
               <Cart
-              isLoggedIn={isLoggedIn}
-              cartProducts={cartProducts}
-              deleteCartProduct={deleteCartProduct}
-              increaseProductCount={increaseProductCount}
-              decreaseProductCount={decreaseProductCount}
-               />
+                isLoggedIn={isLoggedIn}
+                cartProducts={cartProducts}
+                deleteCartProduct={deleteCartProduct}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+              />
               <Footer />
-              </>
-            />
+            </>
+          }
+        />
         <Route
           path='/botdetails'
           element={
