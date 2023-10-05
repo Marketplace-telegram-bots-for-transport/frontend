@@ -3,6 +3,7 @@
   margin: 0 auto;
   border-top: 0.5px solid #3b7dd6;
   padding: 40px 0 40px;
+  flex-shrink: 0;
 
   &__container {
     display: flex;
