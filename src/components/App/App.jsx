@@ -1,13 +1,15 @@
-import { useState, createContext /* временное значение */ } from 'react';
+import { useState, useMemo } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import CurrentUserContext from '../../context/CurrentUserContext';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
-// eslint-disable-next-line import/no-cycle
-import PasswordReset from '../PasswordReset/PasswordReset';
 
-export const currentUserContext = createContext(); /* временное значение */
+import ResetPassword from '../ResetPassword/ResetPassword';
+import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
+import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 
 const App = () => {
   const navigate = useNavigate();
@@ -15,7 +17,12 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
-  const [otp, setOTP] = useState(''); // состояние одноразового пароля
+  const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+
+  /* временные значения */
+  const contextValue = useMemo(() => {
+    return { OTP, setOTP, email, setEmail };
+  }, [OTP, setOTP, email, setEmail]);
 
   /* Функция для выхода из профиля, 
   должна будет стирать данные токена */
@@ -25,10 +32,7 @@ const App = () => {
   };
 
   return (
-    <currentUserContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      /* временное значение */ value={{ otp, setOTP, email, setEmail }}
-    >
+    <CurrentUserContext.Provider value={contextValue}>
       <Routes>
         <Route
           path='/'
@@ -50,13 +54,35 @@ const App = () => {
           element={
             <>
               <Header counterBots={/* bots.length */ 0} />
-              <PasswordReset />
+              <ResetPassword />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path='/OTP-password'
+          element={
+            <>
+              <Header counterBots={/* bots.length */ 0} />
+              <OTPPassword />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path='/change-password'
+          element={
+            <>
+              <Header counterBots={/* bots.length */ 0} />
+              <ChangePassword />
               <Footer />
             </>
           }
         />
       </Routes>
-    </currentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 };
 

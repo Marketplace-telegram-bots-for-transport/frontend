@@ -32,6 +32,7 @@ export function useForm() {
   return {
     values,
     errors,
+    setErrors,
     handleChange,
     isValid,
     setIsValid,
