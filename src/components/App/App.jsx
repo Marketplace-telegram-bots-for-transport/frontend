@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import styles from './App.module.scss';
+
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import Header from '../Header/Header';
@@ -80,89 +82,91 @@ const App = () => {
 
   return (
     <CurrentUserContext.Provider value={contextValue}>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Header
-                counterBots={/* bots.length */ 0}
-                isLoggedIn={isLoggedIn}
-                isLogOut={handleLogOut}
-              />
-              <Main />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path='/cart'
-          element={
-            <>
-              <Header
-                counterBots={/* bots.length */ 0}
-                isLoggedIn={isLoggedIn}
-                isLogOut={handleLogOut}
-              />
-              <Cart
-                isLoggedIn={isLoggedIn}
-                cartProducts={cartProducts}
-                deleteCartProduct={deleteCartProduct}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-              />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path='/botdetails'
-          element={
-            <>
-              <Header
-                counterBots={/* bots.length */ 0}
-                isLoggedIn={isLoggedIn}
-                isLogOut={handleLogOut}
-              />
-              <BotDetails />
-              <Footer />
-            </>
-          }
-        />
+      <div className={styles.page}>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <Header
+                  counterBots={/* bots.length */ 0}
+                  isLoggedIn={isLoggedIn}
+                  isLogOut={handleLogOut}
+                />
+                <Main />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/cart'
+            element={
+              <>
+                <Header
+                  counterBots={/* bots.length */ 0}
+                  isLoggedIn={isLoggedIn}
+                  isLogOut={handleLogOut}
+                />
+                <Cart
+                  isLoggedIn={isLoggedIn}
+                  cartProducts={cartProducts}
+                  deleteCartProduct={deleteCartProduct}
+                  increaseProductCount={increaseProductCount}
+                  decreaseProductCount={decreaseProductCount}
+                />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/botdetails'
+            element={
+              <>
+                <Header
+                  counterBots={/* bots.length */ 0}
+                  isLoggedIn={isLoggedIn}
+                  isLogOut={handleLogOut}
+                />
+                <BotDetails />
+                <Footer />
+              </>
+            }
+          />
 
-        <Route
-          path='/reset-password'
-          element={
-            <>
-              <Header counterBots={/* bots.length */ 0} />
-              <ResetPassword />
-              <Footer />
-            </>
-          }
-        />
+          <Route
+            path='/reset-password'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <ResetPassword />
+                <Footer />
+              </>
+            }
+          />
 
-        <Route
-          path='/OTP-password'
-          element={
-            <>
-              <Header counterBots={/* bots.length */ 0} />
-              <OTPPassword />
-              <Footer />
-            </>
-          }
-        />
+          <Route
+            path='/OTP-password'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <OTPPassword />
+                <Footer />
+              </>
+            }
+          />
 
-        <Route
-          path='/change-password'
-          element={
-            <>
-              <Header counterBots={/* bots.length */ 0} />
-              <ChangePassword />
-              <Footer />
-            </>
-          }
-        />
-      </Routes>
+          <Route
+            path='/change-password'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <ChangePassword />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </div>
     </CurrentUserContext.Provider>
   );
 };
