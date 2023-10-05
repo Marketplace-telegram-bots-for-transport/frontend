@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
+import BotDetails from '../BotDetails/BotDetails';
 
 const App = () => {
   const navigate = useNavigate();
@@ -30,6 +31,20 @@ const App = () => {
                 isLogOut={handleLogOut}
               />
               <Main />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/botdetails'
+          element={
+            <>
+              <Header
+                counterBots={/* bots.length */ 0}
+                isLoggedIn={isLoggedIn}
+                isLogOut={handleLogOut}
+              />
+              <BotDetails />
               <Footer />
             </>
           }

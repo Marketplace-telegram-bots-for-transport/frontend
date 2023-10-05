@@ -1,0 +1,26 @@
+$app-background-color: #fff;
+
+.details {
+  background-color: $app-background-color;
+  margin: 0 auto;
+  padding: 60px 0 90px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 1920px;
+  box-sizing: border-box;
+  background-color: #fff;
+
+  &__mainSection {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding-right: 20px;
+  }
+}
