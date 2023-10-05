@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import CurrentUserContext from '../../context/CurrentUserContext';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -7,6 +9,10 @@ import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import { products } from '../../utils/products';
 import BotDetails from '../BotDetails/BotDetails';
+
+import ResetPassword from '../ResetPassword/ResetPassword';
+import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
+import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 
 const App = () => {
   const navigate = useNavigate();
@@ -17,6 +23,14 @@ const App = () => {
   useEffect(() => {
     setCartProducts(products);
   }, []);
+
+  const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
+  const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+
+  /* временные значения */
+  const contextValue = useMemo(() => {
+    return { OTP, setOTP, email, setEmail };
+  }, [OTP, setOTP, email, setEmail]);
 
   /* Функция для выхода из профиля, 
   должна будет стирать данные токена */
@@ -65,7 +79,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <CurrentUserContext.Provider value={contextValue}>
       <Routes>
         <Route
           path='/'
@@ -115,10 +129,41 @@ const App = () => {
             </>
           }
         />
-      </Routes>
 
-      {/* <InfoTooltip /> */}
-    </>
+        <Route
+          path='/reset-password'
+          element={
+            <>
+              <Header counterBots={/* bots.length */ 0} />
+              <ResetPassword />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path='/OTP-password'
+          element={
+            <>
+              <Header counterBots={/* bots.length */ 0} />
+              <OTPPassword />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route
+          path='/change-password'
+          element={
+            <>
+              <Header counterBots={/* bots.length */ 0} />
+              <ChangePassword />
+              <Footer />
+            </>
+          }
+        />
+      </Routes>
+    </CurrentUserContext.Provider>
   );
 };
 
