@@ -1,3 +1,5 @@
+@import '../../../vendor/_varibles';
+
 .submenu {
   position: relative;
   display: flex;
@@ -9,18 +11,14 @@
     height: 40px;
     border: none;
     border-radius: 30px;
-    background-color: #3b7dd6;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: $background-color-button-default center no-repeat;
     cursor: pointer;
-  }
-
-  &__button:hover {
-    background-color: #2f5e9d;
-  }
-
-  &__button:not(:last-child) {
-    margin-right: 20px;
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
   }
 
   &__buttonBasket {
@@ -28,7 +26,7 @@
   }
 
   &__buttonBasket_open {
-    background-color: #183357;
+    background-color: $background-color-button-pressed;
   }
 
   &__counterBasket {
@@ -38,12 +36,13 @@
     width: 15px;
     height: 15px;
     border-radius: 100px;
-    color: #f8fafc;
     font-weight: 500;
     font-size: 10px;
     line-height: normal;
     text-align: center;
-    background-color: #e44f2f;
+    color: $color-button-text;
+    background-color: $color-red-errors;
+    /* @include text (); */
   }
 
   &__containerHidden {
@@ -54,28 +53,30 @@
     flex-direction: column;
     min-width: 292px;
     border-radius: 10px;
-    background-color: #f8fafc;
     z-index: 10;
+    @include shadowBackground($background-bots-main, $box-shadow-main);
   }
 
   &__hiddenTitle {
     margin: 20px 0 5px 20px;
-    color: #183357;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: normal;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
   }
 
   &__hiddenSubtitle {
-    margin-right: 20px;
-    margin-bottom: 10px;
-    margin-left: 20px;
+    margin: 0 20px 10px 20px;
     border-bottom: 0.5px solid #d3e2f7;
     padding-bottom: 10px;
-    color: #183357;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
   }
 
   &__basketMini {
@@ -98,46 +99,47 @@
   &__basketMini_title {
     margin-bottom: 5px;
     overflow: hidden;
-    color: #183357;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
   }
 
   &__basketMini_counter {
-    color: #183357;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: normal;
+    @include text(
+      10px,
+      $weight-400,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
   }
 
   &__basketMini_price {
     margin-right: 10px;
-    color: #183357;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
   }
 
   &__basketMini_button {
     width: 24px;
     height: 24px;
     border: none;
-    background-color: inherit;
-    background-image: url(../../../images/button-delete-min.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url(../../../images/button-delete-min.svg) center no-repeat;
     cursor: pointer;
-  }
-
-  &__basketMini_button:hover {
-    background-image: url(../../../images/button-delete-hover-min.svg);
-  }
-
-  &__basketMini_button:active {
-    background-image: url(../../../images/button-delete-pressed-min.svg);
+    &:hover {
+      background-image: url(../../../images/button-delete-hover-min.svg);
+    }
+    &:active {
+      background-image: url(../../../images/button-delete-pressed-min.svg);
+    }
   }
 
   &__hiddenButton {
@@ -145,16 +147,14 @@
     margin: 0 20px 20px;
     border: none;
     border-radius: 10px;
-    background-color: #3b7dd6;
+    background-color: $background-color-button-default;
     cursor: pointer;
-  }
-
-  &__hiddenButton:hover {
-    background-color: #2f5e9d;
-  }
-
-  &__hiddenButton:active {
-    background-color: #183357;
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
   }
 
   &__buttonProfile {
@@ -162,7 +162,7 @@
   }
 
   &__buttonProfile_open {
-    background-color: #183357;
+    background-color: $background-color-button-pressed;
   }
 
   &__containerHidden_profile {
@@ -187,12 +187,14 @@
   &__hiddenTitle_profile {
     max-width: 157px;
     overflow: hidden;
-    color: #183357;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
   }
 
   &__hiddenNavigate_profile {
@@ -207,19 +209,18 @@
     min-width: 207px;
     min-height: 40px;
     padding: 11px 0 11px 15px;
-    color: #3b7dd6;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: normal;
-    text-decoration: none;
-  }
-
-  &__hiddenLink_profile:hover {
-    color: #2f5e9d;
-  }
-
-  &__hiddenLink_profile:active {
-    color: #183357;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
   }
 
   &__hiddenSubtitle_profile {
@@ -230,11 +231,12 @@
 
   &__hiddenButton_link {
     display: block;
-    color: #f8fafc;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: normal;
-    text-decoration: none;
     padding: 15px 0 15px 0;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-button-text
+    );
   }
 }

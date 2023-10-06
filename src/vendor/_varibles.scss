@@ -1,0 +1,89 @@
+@mixin text($size, $weight, $lineHeight, $color) {
+  font-family: 'Geologica', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $lineHeight;
+  color: $color;
+  text-decoration: none;
+}
+
+@mixin shadowBackground($background, $boxShadow) {
+  background-color: $background;
+  box-shadow: $boxShadow;
+}
+
+@mixin input($border, $background) {
+  border: $border;
+  background-color: $background;
+  border-radius: 10px;
+}
+
+/* FONTS */
+/* font weights */
+$weight-300: 300;
+$weight-400: 400;
+$weight-500: 500;
+$weight-600: 600;
+
+/* font size */
+$font-h1-60: 60px;
+$font-h2-60: 36px;
+$font-medium-24: 24px;
+$font-small-14: 14px;
+$font-footer-18: 18px;
+$font-medium-button-24: 24px;
+$font-small-button-14: 14px;
+
+/* line-height */
+$line-height-h1: 75px;
+$line-height-h2: 45px;
+$line-height-medium-24: 30px;
+$line-height-small-14: 17.5px;
+$line-height-footer: 22.5px;
+
+/* COLORS */
+$color-blue-dark-title: #183357;
+$color-gray-text: #35383b;
+$color-red-errors: #e44f2f;
+$color-blue-input-text: #84a7d5;
+
+/* colors-link */
+$color-link-main: #3b7dd6;
+$color-link-hover: #2f5e9d;
+$color-link-pressed: #183357;
+
+/* colors-buttons */
+$background-color-button-default: #3b7dd6;
+$background-color-button-hover: #2f5e9d;
+$background-color-button-pressed: #183357;
+$background-color-button-disable: #9cbdea;
+$color-button-text: #f8fafc;
+
+/* substrate */
+$background-white: #fff;
+$background-button-input-category: #d3e2f7;
+$background-bots-main: #f8fafc;
+//$box-shadow- : 0px -5px 10px 0px rgba(142, 154, 169, 0.10), 0px -19px 19px 0px rgba(142, 154, 169, 0.09), 0px -42px 25px 0px rgba(142, 154, 169, 0.05), 0px -75px 30px 0px rgba(142, 154, 169, 0.01), 0px -116px 33px 0px rgba(142, 154, 169, 0.00);
+$box-shadow-main:
+  0px 1px 3px 0px rgba(106, 141, 190, 0.1),
+  0px 6px 6px 0px rgba(106, 141, 190, 0.09),
+  0px 13px 8px 0px rgba(106, 141, 190, 0.05),
+  0px 23px 9px 0px rgba(106, 141, 190, 0.01),
+  0px 35px 10px 0px rgba(106, 141, 190, 0);
+
+/* INPUTS */
+$border-main: 1px solid #d3e2f7;
+$border-active: 1px solid #183357;
+/* 
+  $
+  $ 
+  */
+
+body {
+  background: url(../images/Background.jpg) no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
