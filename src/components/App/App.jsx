@@ -15,6 +15,8 @@ import BotDetails from '../BotDetails/BotDetails';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const App = () => {
   const navigate = useNavigate();
@@ -150,6 +152,28 @@ const App = () => {
               <>
                 <Header counterBots={/* bots.length */ 0} />
                 <OTPPassword />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path='/login'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <Login />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path='/signup'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <Register />
                 <Footer />
               </>
             }
