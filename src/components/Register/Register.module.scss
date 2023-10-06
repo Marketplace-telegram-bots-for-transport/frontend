@@ -7,8 +7,13 @@
   width: 455px;
   box-sizing: border-box;
   border-radius: 20px;
-  background: #FFF;
-  box-shadow: 0px 1px 3px 0px rgba(106, 141, 190, 0.10), 0px 6px 6px 0px rgba(106, 141, 190, 0.09), 0px 13px 8px 0px rgba(106, 141, 190, 0.05), 0px 23px 9px 0px rgba(106, 141, 190, 0.01), 0px 35px 10px 0px rgba(106, 141, 190, 0.00);
+  background: #fff;
+  box-shadow:
+    0px 1px 3px 0px rgba(106, 141, 190, 0.1),
+    0px 6px 6px 0px rgba(106, 141, 190, 0.09),
+    0px 13px 8px 0px rgba(106, 141, 190, 0.05),
+    0px 23px 9px 0px rgba(106, 141, 190, 0.01),
+    0px 35px 10px 0px rgba(106, 141, 190, 0);
 
   &__titleContainer {
     margin: 0 auto;
@@ -23,8 +28,11 @@
   }
 
   &__title {
-    margin:0;
-    color: var(--web-main-color-dark, var(--buttons-filled-pressed-button, #183357));
+    margin: 0;
+    color: var(
+      --web-main-color-dark,
+      var(--buttons-filled-pressed-button, #183357)
+    );
     font-family: Geologica;
     font-size: 36px;
     font-style: normal;
@@ -34,7 +42,10 @@
   }
 
   &__text {
-    color: var(--web-main-color-dark, var(--buttons-filled-pressed-button, #183357));
+    color: var(
+      --web-main-color-dark,
+      var(--buttons-filled-pressed-button, #183357)
+    );
     text-align: center;
     font-family: Geologica;
     font-size: 24px;
@@ -49,7 +60,7 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   &__inputContainer {
     display: flex;
     gap: 15px;
@@ -60,9 +71,12 @@
     margin: 0;
     padding: 10px 20px;
     border-radius: 10px;
-    background: var(--web-main-color-light, #D3E2F7);
+    background: var(--web-main-color-light, #d3e2f7);
     border: none;
-    color: var(--web-main-color-dark, var(--buttons-filled-pressed-button, #183357));
+    color: var(
+      --web-main-color-dark,
+      var(--buttons-filled-pressed-button, #183357)
+    );
     font-family: Geologica;
     font-size: 14px;
     font-style: normal;
@@ -76,7 +90,7 @@
   }
 
   &__input::placeholder {
-    color: var(--web-textbox-text, #84A7D5);
+    color: var(--web-textbox-text, #84a7d5);
     font-family: Geologica;
     font-size: 14px;
     font-style: normal;
@@ -84,7 +98,7 @@
     line-height: normal;
   }
   &__error {
-    color: var(--web-error, #E44F2F);
+    color: var(--web-error, #e44f2f);
     font-family: Geologica;
     font-size: 14px;
     font-style: normal;
@@ -96,7 +110,7 @@
   &__password {
     margin: 0;
     border-radius: 10px;
-    background: var(--web-main-color-light, #D3E2F7);
+    background: var(--web-main-color-light, #d3e2f7);
     position: relative;
   }
 
@@ -129,12 +143,15 @@
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid var(--buttons-filled-default-button, #3B7DD6);
+    border: 1px solid var(--buttons-filled-default-button, #3b7dd6);
   }
 
   &__label {
     margin: 0 0 0 20px;
-    color: var(--web-main-color-dark, var(--buttons-filled-pressed-button, #183357));
+    color: var(
+      --web-main-color-dark,
+      var(--buttons-filled-pressed-button, #183357)
+    );
     font-family: Geologica;
     font-size: 14px;
     font-style: normal;
@@ -146,7 +163,7 @@
     margin: 20px 0 0;
     padding: 10px 30px;
     width: 100%;
-    color: var(--web-white, #F8FAFC);
+    color: var(--web-white, #f8fafc);
     text-align: center;
     font-family: Geologica;
     font-size: 24px;
@@ -156,11 +173,11 @@
     cursor: pointer;
     border: none;
     border-radius: 15px;
-    background: var(--buttons-filled-default-button, #3B7DD6);
+    background: var(--buttons-filled-default-button, #3b7dd6);
   }
 
   &__button:disabled {
     cursor: auto;
-    background: #D3E2F7;
+    background: #d3e2f7;
   }
 }
