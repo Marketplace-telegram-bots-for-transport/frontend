@@ -1,5 +1,5 @@
 import { useContext /* временное значение */ } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext'; /* временное значение */
 
 import styles from './ResetPassword.module.scss';
@@ -41,32 +41,25 @@ function PasswordReset() {
   return (
     <section className={styles.reset}>
       <div className={styles.reset__container}>
-        <div className={styles.reset__containerLogo}>
+        <div className={styles.reset__title}>
           <button
-            className={styles.reset__buttonLogo}
+            className={styles.reset__buttonTitle}
             type='button'
             aria-label='Кнопка назад'
             onClick={() => navigate(-1)}
           />
-          <Link className={styles.reset__logoLink} to='/' />
-          <h1 className={styles.reset__logoTitle}>BotDepot</h1>
+          <h3 className={styles.reset__textTitle}>Восстановления пароля</h3>
         </div>
         <form className={styles.reset__form} noValidate onSubmit={createOTP}>
-          <h2 className={styles.reset__formTitle}>Восстановления пароля</h2>
-          <h3 className={styles.reset__formSubtitle}>
-            Введите адрес электронной почты,
-            <br /> к которой привязан аккаунт
+          <h3 className={styles.reset__formText}>
+            Введите адрес электронной почты вашего аккаунта
           </h3>
           <input
-            className={`${styles.reset__formInput} ${
-              values.email !== undefined && values.email !== ''
-                ? styles.reset__formInput_filled
-                : styles.reset__formInput
-            }`}
+            className={styles.reset__formInput}
             id='email'
             name='email'
             type='email'
-            placeholder='example@yandex.ru'
+            placeholder='Введите эл. почту'
             value={values.email || ''}
             onChange={(e) => {
               handleChange(e);
@@ -76,7 +69,7 @@ function PasswordReset() {
           />
           <span className={styles.reset__formInput_error}>{errors.email}</span>
           <button
-            className={`
+            className={`${styles.reset__formButton}
                 ${
                   isValid
                     ? styles.reset__formButton

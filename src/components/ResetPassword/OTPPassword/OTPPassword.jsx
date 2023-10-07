@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import CurrentUserContext from '../../../context/CurrentUserContext'; /* временное значение */
 
@@ -12,7 +12,7 @@ function OTPPassword() {
 
   const { OTP, setOTP, email } = useContext(CurrentUserContext);
 
-  const { values, handleChange, isValid, setIsValid } = useForm();
+  const { values, handleChange, isValid, setIsValid, errors } = useForm();
 
   const [timerCount, setTimerCount] = useState(5);
   const [OTPinput, setOTPinput] = useState([0, 0, 0, 0, 0, 0]);
@@ -78,196 +78,173 @@ function OTPPassword() {
   return (
     <section className={styles.otp}>
       <div className={styles.otp__container}>
-        <div className={styles.otp__containerLogo}>
+        <div className={styles.otp__title}>
           <button
-            className={styles.otp__buttonLogo}
+            className={styles.otp__buttonTitle}
             type='button'
             aria-label='Кнопка назад'
             onClick={() => navigate(-1)}
           />
-          <Link className={styles.otp__logoLink} to='/' />
-          <h1 className={styles.otp__logoTitle}>BotDepot</h1>
+          <h3 className={styles.otp__textTitle}>Восстановления пароля</h3>
         </div>
         <form className={styles.otp__form} noValidate>
-          <h2 className={styles.otp__formTitle}>Восстановления пароля</h2>
-          <h3 className={styles.otp__formSubtitle}>
+          <h3 className={styles.otp__formText}>
             Введите код, присланный на почту {email}
           </h3>
-          <div className={styles.otp__formInput_container}>
-            <input
-              className={`
+          <input
+            className={`
+                  ${styles.otp__formInput} 
+                  ${styles.otp__formInput_number}`}
+            id='input1'
+            name='input1'
+            type='text'
+            pattern='[0-9]'
+            placeholder='-'
+            maxLength={1}
+            value={values.input1 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                e.target.value,
+                OTPinput[1],
+                OTPinput[2],
+                OTPinput[3],
+                OTPinput[4],
+                OTPinput[5],
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input1}</span>
+          <input
+            className={`
+                  ${styles.otp__formInput} 
+                  ${styles.otp__formInput_number}`}
+            id='input2'
+            name='input2'
+            type='text'
+            maxLength={1}
+            pattern='[0-9]'
+            placeholder='-'
+            value={values.input2 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                OTPinput[0],
+                e.target.value,
+                OTPinput[2],
+                OTPinput[3],
+                OTPinput[4],
+                OTPinput[5],
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input2}</span>
+          <input
+            className={`
+                  ${styles.otp__formInput} 
+                  ${styles.otp__formInput_number}`}
+            id='input3'
+            name='input3'
+            type='text'
+            maxLength={1}
+            pattern='[0-9]'
+            placeholder='-'
+            value={values.input3 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                OTPinput[0],
+                OTPinput[1],
+                e.target.value,
+                OTPinput[3],
+                OTPinput[4],
+                OTPinput[5],
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input3}</span>
+          <input
+            className={`
                   ${styles.otp__formInput} 
                   ${styles.otp__formInput_number}
-                  ${
-                    values.input1 !== undefined && values.input1 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }`}
-              id='input1'
-              name='input1'
-              type='text'
-              pattern='[0-9]'
-              placeholder='-'
-              maxLength={1}
-              value={values.input1 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  e.target.value,
-                  OTPinput[1],
-                  OTPinput[2],
-                  OTPinput[3],
-                  OTPinput[4],
-                  OTPinput[5],
-                ]);
-              }}
-              required
-            />
-            <input
-              className={`
+                  `}
+            id='input4'
+            name='input4'
+            type='text'
+            maxLength={1}
+            pattern='[0-9]'
+            placeholder='-'
+            value={values.input4 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                OTPinput[0],
+                OTPinput[1],
+                OTPinput[2],
+                e.target.value,
+                OTPinput[4],
+                OTPinput[5],
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input4}</span>
+          <input
+            className={`
                   ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  ${
-                    values.input2 !== undefined && values.input2 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }`}
-              id='input2'
-              name='input2'
-              type='text'
-              maxLength={1}
-              placeholder='-'
-              value={values.input2 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  OTPinput[0],
-                  e.target.value,
-                  OTPinput[2],
-                  OTPinput[3],
-                  OTPinput[4],
-                  OTPinput[5],
-                ]);
-              }}
-              required
-            />
-            <input
-              className={`
+                  ${styles.otp__formInput_number}`}
+            id='input5'
+            name='input5'
+            type='text'
+            maxLength={1}
+            pattern='[0-9]'
+            placeholder='-'
+            value={values.input5 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                OTPinput[0],
+                OTPinput[1],
+                OTPinput[2],
+                OTPinput[3],
+                e.target.value,
+                OTPinput[5],
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input5}</span>
+          <input
+            className={`
                   ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  ${
-                    values.input3 !== undefined && values.input3 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }`}
-              id='input3'
-              name='input3'
-              type='text'
-              maxLength={1}
-              placeholder='-'
-              value={values.input3 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  OTPinput[0],
-                  OTPinput[1],
-                  e.target.value,
-                  OTPinput[3],
-                  OTPinput[4],
-                  OTPinput[5],
-                ]);
-              }}
-              required
-            />
-            <input
-              className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  ${
-                    values.input4 !== undefined && values.input4 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }`}
-              id='input4'
-              name='input4'
-              type='text'
-              maxLength={1}
-              placeholder='-'
-              value={values.input4 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  OTPinput[0],
-                  OTPinput[1],
-                  OTPinput[2],
-                  e.target.value,
-                  OTPinput[4],
-                  OTPinput[5],
-                ]);
-              }}
-              required
-            />
-            <input
-              className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  ${
-                    values.input5 !== undefined && values.input5 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }`}
-              id='input5'
-              name='input5'
-              type='text'
-              maxLength={1}
-              placeholder='-'
-              value={values.input5 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  OTPinput[0],
-                  OTPinput[1],
-                  OTPinput[2],
-                  OTPinput[3],
-                  e.target.value,
-                  OTPinput[5],
-                ]);
-              }}
-              required
-            />
-            <input
-              className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  ${
-                    values.input6 !== undefined && values.input6 !== ''
-                      ? styles.otp__formInput_filled
-                      : styles.otp__formInput_number
-                  }
-                    `}
-              id='input6'
-              name='input6'
-              type='text'
-              maxLength={1}
-              placeholder='-'
-              value={values.input6 || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput([
-                  OTPinput[0],
-                  OTPinput[1],
-                  OTPinput[2],
-                  OTPinput[3],
-                  OTPinput[4],
-                  e.target.value,
-                ]);
-              }}
-              required
-            />
-          </div>
+                  ${styles.otp__formInput_number}`}
+            id='input6'
+            name='input6'
+            type='text'
+            pattern='[0-9]'
+            maxLength={1}
+            placeholder='-'
+            value={values.input6 || ''}
+            onChange={(e) => {
+              handleChange(e);
+              setOTPinput([
+                OTPinput[0],
+                OTPinput[1],
+                OTPinput[2],
+                OTPinput[3],
+                OTPinput[4],
+                e.target.value,
+              ]);
+            }}
+            required
+          />
+          <span className={styles.otp__formInput_error}>{errors.input6}</span>
           <span className={styles.otp__formInput_error}>{commonError}</span>
           <button
-            className={`
+            className={`${styles.otp__formButton}
             ${
               isValid ? styles.otp__formButton : styles.otp__formButton_disabled
             }
@@ -280,12 +257,8 @@ function OTPPassword() {
             Продолжить
           </button>
           <button
-            className={`
-            ${
-              disable
-                ? styles.otp__timeoutButton_disable
-                : styles.otp__timeoutButton
-            }
+            className={`${styles.otp__timeButton}
+            ${disable ? styles.otp__timeButton_disable : styles.otp__timeButton}
           `}
             type='submit'
             aria-label='Кнопка отправить новый код'

@@ -70,5 +70,14 @@
     &::-webkit-input-placeholder {
       color: $color-blue-input-text;
     }
+    &:-moz-placeholder {
+      color: $color-blue-input-text;
+    }
+    &::-moz-placeholder {
+      color: $color-blue-input-text;
+    }
+    &:-ms-input-placeholder {
+      color: $color-blue-input-text;
+    }
   }
 }
