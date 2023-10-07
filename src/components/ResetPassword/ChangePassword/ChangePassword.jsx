@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import accepted from '../../../images/accepted-min.svg';
 
@@ -9,15 +9,8 @@ import { useForm } from '../../../utils/formValidator';
 
 function ChangePassword() {
   const navigate = useNavigate();
-  const {
-    values,
-    errors,
-    setErrors,
-    handleChange,
-    isValid,
-    setIsValid,
-    inputValidities,
-  } = useForm();
+  const { values, errors, handleChange, isValid, setIsValid, inputValidities } =
+    useForm();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // состояние просмотра пароля
   const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -35,17 +28,12 @@ function ChangePassword() {
     setPasswordsMatch(match);
     const inputValid = inputValidities.password && inputValidities.repeat;
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      repeat: match ? '' : 'Пароли не совпадают',
-    }));
     setIsValid(match && inputValid);
   }, [
     values.password,
     values.repeat,
     inputValidities.password,
     inputValidities.repeat,
-    setErrors,
     setPasswordsMatch,
     setIsValid,
   ]);
@@ -67,28 +55,25 @@ function ChangePassword() {
 
   return (
     <section className={styles.change}>
-      <div className={styles.change__container}>
+      <div
+        className={`${styles.change__container} ${
+          isPasswordChanged ? styles.change__success : ''
+        }`}
+      >
         {isPasswordChanged ? (
           <>
-            <div className={styles.change__containerLogo}>
-              <Link className={styles.change__logoLink} to='/' />
-              <h1 className={styles.change__logoTitle}>BotDepot</h1>
-            </div>
-            <div className={styles.change__content}>
+            <div className={styles.change__success}>
               <img
-                className={styles.change__picture}
+                className={styles.change__successPicture}
                 src={accepted}
                 alt='Информационное сообщение:'
               />
-              <p className={styles.change__formTitle}>
+              <h3 className={styles.change__successTitle}>
                 Пароль успешно изменен!
-              </p>
+              </h3>
             </div>
             <button
-              className={`
-                ${styles.change__formButton}
-                ${styles.change__formButton_back}
-              `}
+              className={styles.change__formButton}
               type='button'
               aria-label='Кнопка вернуться к авторизации'
               onClick={() => navigate('/login')}
@@ -98,29 +83,24 @@ function ChangePassword() {
           </>
         ) : (
           <>
-            <div className={styles.change__containerLogo}>
+            <div className={styles.change__title}>
               <button
-                className={styles.change__buttonLogo}
+                className={styles.change__buttonTitle}
                 type='button'
                 aria-label='Кнопка назад'
                 onClick={() => navigate(-1)}
               />
-              <Link className={styles.change__logoLink} to='/' />
-              <h1 className={styles.change__logoTitle}>BotDepot</h1>
+              <h3 className={styles.change__textTitle}>Введите новый пароль</h3>{' '}
             </div>
             <form
               className={styles.change__form}
               noValidate
               onSubmit={sendNewPassword}
             >
-              <h2 className={styles.change__formTitle}>Введите новый пароль</h2>
-              <div className={styles.change__inputContainet}>
+              <div className={styles.change__formInput_container}>
+                <h3 className={styles.change__formInput_text}>Новый пароль</h3>
                 <input
-                  className={`${styles.change__formInput} ${
-                    values.password !== undefined && values.password !== ''
-                      ? styles.change__formInput_filled
-                      : styles.change__formInput
-                  }`}
+                  className={styles.change__formInput}
                   id='password'
                   name='password'
                   type={isPasswordVisible ? 'text' : 'password'}
@@ -133,25 +113,23 @@ function ChangePassword() {
                   required
                 />
                 <button
-                  className={`${styles.change__viewButton} ${
+                  className={`${styles.change__formButton_look} ${
                     isPasswordVisible
-                      ? styles.change__viewButton_password_open
-                      : styles.change__viewButton_password_close
+                      ? styles.change__formButton_look_open
+                      : styles.change__formButton_look_close
                   }`}
                   type='button'
                   aria-label='Кнопка скрыть/показать пароль'
                   onClick={handlePasswordVisibility}
                 />
+                <span className={styles.change__formInput_error}>
+                  {errors.password}
+                </span>
               </div>
-              <div className={styles.change__inputContainet}>
+              <div className={styles.change__formInput_container}>
+                <h3 className={styles.change__formInput_text}>Новый пароль</h3>
                 <input
-                  className={`
-                  ${styles.change__formInput} 
-                  ${
-                    values.repeat !== undefined && values.repeat !== ''
-                      ? styles.change__formInput_filled
-                      : styles.change__formInput
-                  }`}
+                  className={styles.change__formInput}
                   id='repeat'
                   name='repeat'
                   type={isPasswordVisible ? 'text' : 'password'}
@@ -164,21 +142,22 @@ function ChangePassword() {
                   required
                 />
                 <button
-                  className={`${styles.change__viewButton} ${
+                  className={`${styles.change__formButton_look} ${
                     isPasswordVisible
-                      ? styles.change__viewButton_password_open
-                      : styles.change__viewButton_password_close
+                      ? styles.change__formButton_look_open
+                      : styles.change__formButton_look_close
                   }`}
                   type='button'
                   aria-label='Кнопка скрыть/показать пароль'
                   onClick={handlePasswordVisibility}
                 />
+                <span className={styles.change__formInput_error}>
+                  {errors.repeat}
+                </span>
               </div>
-              <span className={styles.change__formInput_error}>
-                {errors.repeat}
-              </span>
+
               <button
-                className={`
+                className={`${styles.change__formButton}
                   ${
                     isValid && passwordsMatch
                       ? styles.change__formButton

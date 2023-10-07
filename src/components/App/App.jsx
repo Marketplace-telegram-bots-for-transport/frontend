@@ -12,11 +12,11 @@ import Cart from '../Cart/Cart';
 import { products } from '../../utils/products';
 import BotDetails from '../BotDetails/BotDetails';
 
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
 
 const App = () => {
   const navigate = useNavigate();
@@ -136,28 +136,6 @@ const App = () => {
           />
 
           <Route
-            path='/reset-password'
-            element={
-              <>
-                <Header counterBots={/* bots.length */ 0} />
-                <ResetPassword />
-                <Footer />
-              </>
-            }
-          />
-
-          <Route
-            path='/OTP-password'
-            element={
-              <>
-                <Header counterBots={/* bots.length */ 0} />
-                <OTPPassword />
-                <Footer />
-              </>
-            }
-          />
-
-          <Route
             path='/login'
             element={
               <>
@@ -174,6 +152,28 @@ const App = () => {
               <>
                 <Header counterBots={/* bots.length */ 0} />
                 <Register />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path='/reset-password'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <ResetPassword />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path='/OTP-password'
+            element={
+              <>
+                <Header counterBots={/* bots.length */ 0} />
+                <OTPPassword />
                 <Footer />
               </>
             }
