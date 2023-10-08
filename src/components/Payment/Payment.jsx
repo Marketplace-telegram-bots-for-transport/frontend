@@ -25,7 +25,7 @@ function Payment({ totalSum }) {
   return (
     <div className={styles.payment}>
       <div className={styles.payment__content}>
-        <h3 className={styles.payment__title}>Платежная информация</h3>
+        <h3 className={styles.payment__title}>Оплата картой</h3>
         <form
           action='#'
           className={styles.payment__form}
@@ -138,7 +138,7 @@ function Payment({ totalSum }) {
             onChange={handleChange}
           />
           <div className={styles.payment__total}>
-            <p className={styles.payment__sum}>{totalSum} руб.</p>
+            <p className={styles.payment__sum}>{totalSum}₽</p>
             <button className={styles.payment__button}>Купить</button>
           </div>
         </form>

@@ -22,7 +22,7 @@ const App = () => {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
 
   useEffect(() => {
     setCartProducts(products);

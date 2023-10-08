@@ -36,27 +36,28 @@ function Cart({
 
   return (
     <section className={styles.cart}>
-      <div className={styles.cart__content}>
-        <div className={styles.products}>
-          <BackButton />
-          <ul className={styles.products__list}>
-            {cartProducts.map((product) => (
-              <CartProduct
-                key={product.id}
-                product={product}
-                deleteCartProduct={deleteCartProduct}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-              />
-            ))}
-          </ul>
-          <div className={styles.products__total}>
+      <div className={styles.products}>
+        <BackButton />
+        <ul className={styles.products__list}>
+          {cartProducts.map((product) => (
+            <CartProduct
+              key={product.id}
+              product={product}
+              deleteCartProduct={deleteCartProduct}
+              increaseProductCount={increaseProductCount}
+              decreaseProductCount={decreaseProductCount}
+            />
+          ))}
+        </ul>
+        <div className={styles.products__total}>
+          <h3 className={styles.products__totalTitle}>Итог</h3>
+          <div className={styles.products__totalContainer}>
             <p className={styles.products__count}>Всего: {countText}</p>
-            <p className={styles.products__sum}>{totalSum} руб.</p>
+            <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
         </div>
-        {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
       </div>
+      {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
     </section>
   );
 }
