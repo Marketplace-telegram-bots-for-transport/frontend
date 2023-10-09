@@ -15,69 +15,68 @@
     margin: 15px 0;
   }
 
-  &__logoContainer {
+  &__logo {
     display: flex;
     align-items: center;
     margin-left: 165px;
+    &_link {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+      text-decoration: none;
+      background: url(../../images/logo-min.svg) center no-repeat;
+      &:hover {
+        background-image: url(../../images/logo-state-hover-min.svg);
+      }
+      &:active {
+        background-image: url(../../images/logo-state-pressed-min.svg);
+      }
+    }
+    &_title {
+      @include text(
+        $weight-600,
+        $font-h2-60,
+        $line-height-h2,
+        $color-blue-dark-title
+      );
+    }
   }
 
-  &__logoLink {
-    display: block;
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
-    text-decoration: none;
-    background: url(../../images/logo-min.svg) center no-repeat;
-    &:hover {
-      background-image: url(../../images/logo-state-hover-min.svg);
+  &__search {
+    &_form {
+      display: flex;
+      align-items: center;
+      min-width: 530px;
     }
-    &:active {
-      background-image: url(../../images/logo-state-pressed-min.svg);
-    }
-  }
-
-  &__logoTitle {
-    @include text(
-      $weight-600,
-      $font-h2-60,
-      $line-height-h2,
-      $color-blue-dark-title
-    );
-  }
-
-  &__searchForm {
-    display: flex;
-    align-items: center;
-    min-width: 530px;
-  }
-
-  &__searchFieldInput {
-    flex-grow: 1;
-    padding: 11px 20px 11px 50px;
-    outline: none;
-    background: url(../../images/search-min.svg) no-repeat;
-    background-position: 20px 10px;
-    @include text(
-      $font-small-14,
-      $weight-300,
-      $line-height-small-14,
-      $color-blue-dark-title
-    );
-    @include input($border-main, $background-bots-main);
-    &:focus {
-      @include input($border-active, $background-bots-main);
-    }
-    &::-webkit-input-placeholder {
-      color: $color-blue-input-text;
-    }
-    &:-moz-placeholder {
-      color: $color-blue-input-text;
-    }
-    &::-moz-placeholder {
-      color: $color-blue-input-text;
-    }
-    &:-ms-input-placeholder {
-      color: $color-blue-input-text;
+    &_input {
+      flex-grow: 1;
+      padding: 11px 20px 11px 50px;
+      outline: none;
+      background: url(../../images/search-min.svg) no-repeat;
+      background-position: 20px 10px;
+      @include text(
+        $font-small-14,
+        $weight-300,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+      @include input($border-main, $background-bots-main);
+      &:focus {
+        @include input($border-active, $background-bots-main);
+      }
+      &::-webkit-input-placeholder {
+        color: $color-blue-input-text;
+      }
+      &:-moz-placeholder {
+        color: $color-blue-input-text;
+      }
+      &::-moz-placeholder {
+        color: $color-blue-input-text;
+      }
+      &:-ms-input-placeholder {
+        color: $color-blue-input-text;
+      }
     }
   }
 }
