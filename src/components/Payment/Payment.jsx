@@ -1,27 +1,32 @@
-import { useState } from 'react';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import styles from './Payment.module.scss';
 
 function Payment({ totalSum }) {
-  const [formValue, setFormValue] = useState({
-    email: '',
-    number: '',
-    month: '',
-    year: '',
-    code: '',
-    promocode: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
+  // const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormAndValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Проверка валидности формы для отправки на сервер
+    if (isValid) {
+      // код для отправки данных
+      resetForm();
+    }
   };
+
+  // Функция, которая сокращает сообщение об ошибке до 1 предложения в целях экономии места для соответсвия макету
+  const handleError = (error) => {
+    if (error) {
+      const firstSentenceMatch = error.match(/([^.]*)\.\s/);
+      if (firstSentenceMatch) {
+        const firstSentence = firstSentenceMatch[1];
+        return firstSentence;
+      }
+    }
+    return error;
+  };
+
   return (
     <div className={styles.payment}>
       <div className={styles.payment__content}>
@@ -38,6 +43,7 @@ function Payment({ totalSum }) {
             </span>
             <input
               name='email'
+              value={values.email || ''}
               placeholder='example@yandex.ru'
               type='email'
               id='email-input'
@@ -45,7 +51,13 @@ function Payment({ totalSum }) {
               minLength='2'
               maxLength='30'
               required
+              onChange={handleChange}
             />
+            {errors.email && (
+              <span className={styles.payment__error}>
+                {handleError(errors.email)}
+              </span>
+            )}
           </label>
           <fieldset className={styles.payment__card}>
             <label className={styles.payment__label} htmlFor='number-input'>
@@ -55,7 +67,8 @@ function Payment({ totalSum }) {
               </span>
               <input
                 className={`${styles.payment__input} ${styles.payment__inputNumber}`}
-                name='cardNumber'
+                name='number'
+                value={values.number || ''}
                 placeholder='____-____-____-____'
                 autoComplete='cc-number'
                 inputMode='numeric'
@@ -66,6 +79,11 @@ function Payment({ totalSum }) {
                 required
                 onChange={handleChange}
               />
+              {errors.number && (
+                <span className={styles.payment__error}>
+                  {handleError(errors.number)}
+                </span>
+              )}
             </label>
             <div className={styles.payment__cardInfo}>
               <label className={styles.payment__label} htmlFor='number-input'>
@@ -75,7 +93,8 @@ function Payment({ totalSum }) {
                 <div className={styles.payment__cardDate}>
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputDate}`}
-                    name='cardMonth'
+                    name='month'
+                    value={values.month || ''}
                     placeholder='ММ'
                     autoComplete='cc-month'
                     inputMode='numeric'
@@ -89,7 +108,8 @@ function Payment({ totalSum }) {
                   <span className={styles.payment__cardDateSlash}>/</span>
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputDate}`}
-                    name='cardYear'
+                    name='year'
+                    value={values.year || ''}
                     placeholder='ГГГГ'
                     autoComplete='cc-year'
                     inputMode='numeric'
@@ -111,7 +131,8 @@ function Payment({ totalSum }) {
                 </span>
                 <input
                   className={`${styles.payment__input} ${styles.payment__inputCode}`}
-                  name='cardCode'
+                  name='code'
+                  value={values.code || ''}
                   placeholder='CVC'
                   autoComplete='cc-number'
                   inputMode='numeric'
@@ -123,18 +144,26 @@ function Payment({ totalSum }) {
                   onChange={handleChange}
                 />
               </label>
+              {(errors.month || errors.year || errors.code) && (
+                <span className={styles.payment__error}>
+                  {handleError(errors.month) ||
+                    handleError(errors.year) ||
+                    handleError(errors.code) ||
+                    ''}
+                </span>
+              )}
             </div>
           </fieldset>
           <p className={styles.payment__totalCount}>Всего: 4 товара</p>
           <input
             className={`${styles.payment__input} ${styles.payment__inputPromocode}`}
-            name='cardPromocode'
+            name='promocode'
+            value={values.promocode || ''}
             placeholder='Промокод'
             type='text'
             id='promocode-input'
             minLength='3'
             maxLength='30'
-            required
             onChange={handleChange}
           />
           <div className={styles.payment__total}>
