@@ -7,6 +7,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 1",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 1",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 1"
     },
@@ -17,6 +20,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 2",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 2",
+      "count": 1,
       "category": "Грузы",
       "description": "Описание бота 2"
     },
@@ -27,6 +33,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 3",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 3",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 3"
     },
@@ -37,6 +46,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 4",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 4",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 4"
     },
@@ -46,6 +58,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 5",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 5",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 5"
     },
@@ -56,6 +71,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 6",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 6",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 6"
     },
@@ -66,6 +84,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 7",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 7",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 7"
     },
@@ -76,6 +97,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 8",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 8",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 8"
     },
@@ -86,6 +110,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 9",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 9",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 9"
     },
@@ -96,6 +123,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 10",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 10",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 10"
     },
@@ -106,6 +136,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 11",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 11",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 11"
     },
@@ -116,6 +149,9 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 12",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -126,6 +162,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -136,6 +173,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -146,6 +184,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -156,6 +195,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -166,6 +206,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -176,6 +217,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -186,6 +228,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -196,6 +239,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -206,6 +250,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -216,6 +261,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -226,6 +272,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     },
@@ -236,6 +283,7 @@
       "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
       "author": "Автор бота 12",
       "price": "7500.00",
+      "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
     }

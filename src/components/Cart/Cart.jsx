@@ -12,7 +12,7 @@ function Cart({
   increaseProductCount,
   decreaseProductCount,
 }) {
-  const [totalSum, setTotalSum] = useState(0);
+  const [totalSum, setTotalSum] = useState(0.0);
   const count = cartProducts.length;
   let countText = '';
   if (count === 1) {
@@ -25,8 +25,10 @@ function Cart({
 
   const findTotalSum = useCallback(() => {
     return cartProducts.reduce((previousValue, product) => {
-      return previousValue + product.count * product.price;
-    }, 0);
+      return (
+        previousValue + parseFloat(product.price).toFixed(2) * product.count
+      );
+    }, 0.0);
   }, [cartProducts]);
 
   useEffect(() => {
@@ -36,27 +38,28 @@ function Cart({
 
   return (
     <section className={styles.cart}>
-      <div className={styles.cart__content}>
-        <div className={styles.products}>
-          <BackButton />
-          <ul className={styles.products__list}>
-            {cartProducts.map((product) => (
-              <CartProduct
-                key={product.id}
-                product={product}
-                deleteCartProduct={deleteCartProduct}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-              />
-            ))}
-          </ul>
-          <div className={styles.products__total}>
+      <div className={styles.products}>
+        <BackButton />
+        <ul className={styles.products__list}>
+          {cartProducts.map((product) => (
+            <CartProduct
+              key={product.id}
+              product={product}
+              deleteCartProduct={deleteCartProduct}
+              increaseProductCount={increaseProductCount}
+              decreaseProductCount={decreaseProductCount}
+            />
+          ))}
+        </ul>
+        <div className={styles.products__total}>
+          <h3 className={styles.products__totalTitle}>Итог</h3>
+          <div className={styles.products__totalContainer}>
             <p className={styles.products__count}>Всего: {countText}</p>
-            <p className={styles.products__sum}>{totalSum} руб.</p>
+            <p className={styles.products__sum}>{totalSum.toFixed(2)}₽</p>
           </div>
         </div>
-        {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
       </div>
+      {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
     </section>
   );
 }
