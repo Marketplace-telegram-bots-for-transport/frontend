@@ -140,10 +140,10 @@ function Submenu(props) {
                   overflow: 'auto',
                 }}
               >
-                <Link className={styles.submenu__hiddenButton_link} to='/cart'>
+                {/* <Link className={styles.submenu__hiddenButton_link} to='/cart'>
                   Перейти к корзине
                 </Link>
-              </button>
+                </button> */}
                 {cartProducts.map((bot, index) => (
                   <div
                     className={styles.submenu__mini}

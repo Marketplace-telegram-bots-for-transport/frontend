@@ -35,44 +35,47 @@ const BotsList = ({ addProductToCart }) => {
   };
 
   return (
-    <ul className={styles.bots}>
-      {bots.map((bot) => (
-        <li key={bot.id}>
-          <BotCard
-            mainPhoto={bot.main_photo}
-            name={bot.name}
-            author={bot.author}
-            categories={bot.categories}
-            price={bot.price}
-            onBuyClick={() => handleBuyClick(bot)}
-          />
-        </li>
-      ))}
-    </ul>
-    <div className={botsContainerClass} id='bots'>
+    <>
       <ul className={styles.bots}>
-        {displayedBots.map((bot) => (
+        {bots.map((bot) => (
           <li key={bot.id}>
             <BotCard
               mainPhoto={bot.main_photo}
               name={bot.name}
               author={bot.author}
-              category={bot.category}
+              categories={bot.categories}
               price={bot.price}
               id={bot.id}
-              onBuyClick={handleBuyClick}
+              onBuyClick={() => handleBuyClick(bot)}
             />
           </li>
         ))}
       </ul>
-      <button
-        className={moreBtnClass}
-        type='button'
-        onClick={handleDisplayMoreClick}
-      >
-        Показать еще ({NUMBER_OF_DISPLAYED_BOTS_1920})
-      </button>
-    </div>
+      <div className={botsContainerClass} id='bots'>
+        <ul className={styles.bots}>
+          {displayedBots.map((bot) => (
+            <li key={bot.id}>
+              <BotCard
+                mainPhoto={bot.main_photo}
+                name={bot.name}
+                author={bot.author}
+                category={bot.category}
+                price={bot.price}
+                id={bot.id}
+                onBuyClick={handleBuyClick}
+              />
+            </li>
+          ))}
+        </ul>
+        <button
+          className={moreBtnClass}
+          type='button'
+          onClick={handleDisplayMoreClick}
+        >
+          Показать еще ({NUMBER_OF_DISPLAYED_BOTS_1920})
+        </button>
+      </div>
+    </>
   );
 };
 

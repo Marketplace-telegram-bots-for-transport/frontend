@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
 import styles from './BotCard.module.scss';
 
-
-const BotCard = ({ mainPhoto, name, author, category, price, onBuyClick, id }) => {
+const BotCard = ({
+  mainPhoto,
+  name,
+  author,
+  category,
+  price,
+  onBuyClick,
+  id,
+}) => {
   return (
     <div className={styles.bot}>
       <div className={styles.bot__background}>

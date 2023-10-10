@@ -19,10 +19,8 @@ import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 
 const App = () => {
   const navigate = useNavigate();
-
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
-
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
 
