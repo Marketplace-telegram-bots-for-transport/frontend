@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
-import logo from '../../images/Logo.svg';
+// import back from '../../images/Logo.svg';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function Register({ loggedIn, onRegister }) {
@@ -15,12 +15,21 @@ function Register({ loggedIn, onRegister }) {
   const [passwardRepeatEyeClass, setPasswardRepeatEyeClass] = React.useState(
     `${styles.register__viewPassword}`
   );
+  const [isDisabled, setIsDisabled] = React.useState(true);
 
   React.useEffect(() => {
     if (loggedIn) {
       navigate('/');
     }
   }, [loggedIn, navigate]);
+
+  React.useEffect(() => {
+    if (values.passwordrepeat === values.password) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [values.passwordrepeat, values.password]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -47,22 +56,30 @@ function Register({ loggedIn, onRegister }) {
     }
   }
 
+  function goBack() {
+    navigate(-1);
+  }
+
   return (
     <main className={styles.register}>
-      <div className={styles.register__titleContainer}>
-        <img className={styles.register__image} src={logo} alt='логотип' />
-        <h2 className={styles.register__title}>BotDepot</h2>
-      </div>
-      <h3 className={styles.register__text}>Регистрация</h3>
-      <form
-        className={styles.register__form}
-        noValidate
-        onSubmit={handleSubmit}
-      >
-        <div className={styles.register__inputContainer}>
+      <div className={styles.register__registerContainer}>
+        <div className={styles.register__titleContainer}>
+          <button
+            aria-label='назад'
+            className={styles.register__back}
+            onClick={goBack}
+          />
+          <h2 className={styles.register__title}>Регистрация</h2>
+        </div>
+        <form
+          className={styles.register__form}
+          noValidate
+          onSubmit={handleSubmit}
+        >
+          <h3 className={styles.register__inputName}>Логин</h3>
           <input
             className={styles.register__input}
-            placeholder='Логин (латиницей, до 16 символов)'
+            placeholder='Введите логин'
             type='text'
             id='register'
             name='register'
@@ -74,6 +91,20 @@ function Register({ loggedIn, onRegister }) {
             onChange={handleChange}
           />
           <span className={styles.register__error}>{errors.register}</span>
+          <h3 className={styles.register__inputName}>E-mail</h3>
+          <input
+            className={styles.register__input}
+            placeholder='Введите e-mail'
+            type='email'
+            id='email'
+            name='email'
+            required
+            pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            value={values.email || ''}
+            onChange={handleChange}
+          />
+          <span className={styles.register__error}>{errors.email}</span>
+          <h3 className={styles.register__inputName}>Пароль</h3>
           <div className={styles.register__password}>
             <input
               className={styles.register__input}
@@ -97,6 +128,7 @@ function Register({ loggedIn, onRegister }) {
             />
           </div>
           <span className={styles.register__error}>{errors.password}</span>
+          <h3 className={styles.register__inputName}>Повторите пароль</h3>
           <div className={styles.register__password}>
             <input
               className={styles.register__input}
@@ -117,35 +149,32 @@ function Register({ loggedIn, onRegister }) {
               aria-label='key'
             />
           </div>
-          <span className={styles.register__error}>Пароли не совпадают</span>
-          <input
-            className={styles.register__input}
-            placeholder='Электронная почта (example@yandex.ru)'
-            type='email'
-            id='email'
-            name='email'
-            required
-            pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-            value={values.email || ''}
-            onChange={handleChange}
-          />
-          <span className={styles.register__error}>{errors.email}</span>
-        </div>
-        <div className={styles.register__approval}>
-          <input
-            className={styles.register__checkbox}
-            type='checkbox'
-            required
-            onChange={handleChange}
-          />
-          <span className={styles.register__label}>
-            Согласен на обработку персональных данных
+          <span className={styles.register__error}>
+            {`${
+              values.passwordrepeat === values.password
+                ? ''
+                : 'Пароли не совпадают'
+            }`}
           </span>
-        </div>
-        <button className={styles.register__button} disabled={!isValid}>
-          Зарегистрироваться
-        </button>
-      </form>
+          <div className={styles.register__approval}>
+            <input
+              className={styles.register__checkbox}
+              type='checkbox'
+              required
+              onChange={handleChange}
+            />
+            <span className={styles.register__label}>
+              Согласен на обработку персональных данных
+            </span>
+          </div>
+          <button
+            className={styles.register__button}
+            disabled={!isValid || isDisabled}
+          >
+            Зарегистрироваться
+          </button>
+        </form>
+      </div>
     </main>
   );
 }
