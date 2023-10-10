@@ -9,8 +9,15 @@ import { useForm } from '../../../utils/formValidator';
 
 function ChangePassword() {
   const navigate = useNavigate();
-  const { values, errors, handleChange, isValid, setIsValid, inputValidities } =
-    useForm();
+  const {
+    values,
+    errors,
+    setErrors,
+    handleChange,
+    isValid,
+    setIsValid,
+    inputValidities,
+  } = useForm();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false); // состояние просмотра пароля
   const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -28,14 +35,21 @@ function ChangePassword() {
     setPasswordsMatch(match);
     const inputValid = inputValidities.password && inputValidities.repeat;
 
+    if (!match) {
+      setErrors({ ...errors, common: 'Пароли не совпадают' });
+    } else {
+      setErrors('');
+    }
+
     setIsValid(match && inputValid);
   }, [
     values.password,
     values.repeat,
     inputValidities.password,
     inputValidities.repeat,
-    setPasswordsMatch,
     setIsValid,
+    setErrors,
+    errors,
   ]);
 
   /* ПРОВЕРКА СОВПАДЕНИЙ ПАРОЛЕЙ ПРИ КАЖДОМ ВВОДИМОМ ЗНАЧЕНИИ */
@@ -90,7 +104,7 @@ function ChangePassword() {
                 aria-label='Кнопка назад'
                 onClick={() => navigate(-1)}
               />
-              <h3 className={styles.change__textTitle}>Введите новый пароль</h3>{' '}
+              <h3 className={styles.change__textTitle}>Введите новый пароль</h3>
             </div>
             <form
               className={styles.change__form}
@@ -152,10 +166,9 @@ function ChangePassword() {
                   onClick={handlePasswordVisibility}
                 />
                 <span className={styles.change__formInput_error}>
-                  {errors.repeat}
+                  {errors.repeat || errors.common}
                 </span>
               </div>
-
               <button
                 className={`${styles.change__formButton}
                   ${
