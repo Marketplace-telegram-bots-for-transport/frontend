@@ -15,6 +15,9 @@
     padding: 10px;
     background: $background-color-button-default center no-repeat;
     cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     &:hover {
       background-color: $background-color-button-hover;
     }
@@ -30,6 +33,9 @@
       margin-left: 20px;
       background-image: url(../../../images/profile-min.svg);
       background-size: 50%;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
       &_open {
         background-color: $background-color-button-pressed;
       }
@@ -108,6 +114,9 @@
       padding: 0;
       background-color: $background-color-button-default;
       cursor: pointer;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
       &:hover {
         background-color: $background-color-button-hover;
       }
@@ -117,6 +126,9 @@
       &_link {
         display: block;
         padding: 15px 0 15px 0;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
         @include text(
           $font-small-14,
           $weight-500,
@@ -177,6 +189,7 @@
       border: none;
       background: url(../../../images/button-delete-min.svg) center no-repeat;
       cursor: pointer;
+      transition: background-image 0.3s ease;
       &:hover {
         background-image: url(../../../images/button-delete-hover-min.svg);
       }
@@ -227,6 +240,7 @@
       min-width: 207px;
       min-height: 40px;
       padding: 11px 0 11px 15px;
+      transition: color 0.3s ease;
       @include text(
         $font-small-14,
         $weight-500,

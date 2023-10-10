@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import * as data from '../../../utils/tempcards.json';
@@ -191,12 +192,14 @@ function Submenu(props) {
               type='button'
               aria-label='Переход на страницу каталога'
             >
-              <Link
+              <ScrollLink
                 className={styles.submenu__hidden_button_link}
-                to='/catalog'
+                to='catalog'
+                smooth
+                duration={1000}
               >
                 Перейти к каталогу
-              </Link>
+              </ScrollLink>
             </button>
           )}
         </div>

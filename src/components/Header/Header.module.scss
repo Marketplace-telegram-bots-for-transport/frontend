@@ -26,6 +26,7 @@
       margin-right: 15px;
       text-decoration: none;
       background: url(../../images/logo-min.svg) center no-repeat;
+      transition: background-image 0.3s ease;
       &:hover {
         background-image: url(../../images/logo-state-hover-min.svg);
       }
