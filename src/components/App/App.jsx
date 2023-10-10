@@ -97,9 +97,9 @@ const App = () => {
             element={
               <>
                 <Header
-                  counterBots={/* bots.length */ 0}
                   isLoggedIn={isLoggedIn}
                   isLogOut={handleLogOut}
+                  cartProducts={cartProducts}
                 />
                 <Main addProductToCart={addProductToCart} />
                 <Footer />
@@ -111,9 +111,9 @@ const App = () => {
             element={
               <>
                 <Header
-                  counterBots={/* bots.length */ 0}
                   isLoggedIn={isLoggedIn}
                   isLogOut={handleLogOut}
+                  cartProducts={cartProducts}
                 />
                 <Cart
                   isLoggedIn={isLoggedIn}
@@ -127,13 +127,13 @@ const App = () => {
             }
           />
           <Route
-            path='/botdetails'
+            path='/botdetails/:botId'
             element={
               <>
                 <Header
-                  counterBots={/* bots.length */ 0}
                   isLoggedIn={isLoggedIn}
                   isLogOut={handleLogOut}
+                  cartProducts={cartProducts}
                 />
                 <BotDetails />
                 <Footer />
@@ -145,7 +145,7 @@ const App = () => {
             path='/login'
             element={
               <>
-                <Header counterBots={/* bots.length */ 0} />
+                <Header cartProducts={cartProducts} />
                 <Login />
                 <Footer />
               </>
@@ -156,7 +156,7 @@ const App = () => {
             path='/signup'
             element={
               <>
-                <Header counterBots={/* bots.length */ 0} />
+                <Header cartProducts={cartProducts} />
                 <Register />
                 <Footer />
               </>
@@ -167,7 +167,7 @@ const App = () => {
             path='/reset-password'
             element={
               <>
-                <Header counterBots={/* bots.length */ 0} />
+                <Header cartProducts={cartProducts} />
                 <ResetPassword />
                 <Footer />
               </>
@@ -178,7 +178,7 @@ const App = () => {
             path='/OTP-password'
             element={
               <>
-                <Header counterBots={/* bots.length */ 0} />
+                <Header cartProducts={cartProducts} />
                 <OTPPassword />
                 <Footer />
               </>
@@ -189,7 +189,7 @@ const App = () => {
             path='/change-password'
             element={
               <>
-                <Header counterBots={/* bots.length */ 0} />
+                <Header cartProducts={cartProducts} />
                 <ChangePassword />
                 <Footer />
               </>

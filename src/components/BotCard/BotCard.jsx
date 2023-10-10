@@ -1,28 +1,22 @@
+import { Link } from 'react-router-dom';
 import styles from './BotCard.module.scss';
 
-const BotCard = ({
-  mainPhoto,
-  name,
-  author,
-  categories,
-  price,
-  onBuyClick,
-}) => {
+
+const BotCard = ({ mainPhoto, name, author, category, price, onBuyClick, id }) => {
   return (
     <div className={styles.bot}>
       <div className={styles.bot__background}>
-        <img className={styles.bot__img} src={mainPhoto} alt='bot img' />
+        <Link to={`/botdetails/${id}`}>
+          {/* Используем Link для перехода */}
+          <img className={styles.bot__img} src={mainPhoto} alt='bot img' />
+        </Link>
       </div>
       <div className={styles.bot__brief}>
         <p className={styles.bot__name}>{name}</p>
         <p className={styles.bot__author}>{author}</p>
       </div>
       <div className={styles.bot__categories}>
-        {categories.map((category) => (
-          <p key={category} className={styles.bot__category}>
-            {category}
-          </p>
-        ))}
+        <p className={styles.bot__category}>{category}</p>
       </div>
       <p className={styles.bot__price}>{price}₽</p>
       <div className={styles.bot__buttons}>

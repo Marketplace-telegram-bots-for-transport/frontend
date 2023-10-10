@@ -1,3 +1,6 @@
+@import './../../vendor/_varibles';
+
+
 .rating {
   display: flex;
   padding: 20px 20px 20px 0;
@@ -8,6 +11,12 @@
   &__title {
     text-align: start;
     font-size: 38px;
+    @include text(
+      36px,
+      600,
+      45px,
+      #35383B,
+    );
   }
 }
 

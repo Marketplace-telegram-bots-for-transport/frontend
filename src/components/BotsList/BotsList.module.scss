@@ -1,8 +1,36 @@
+.botsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &_extraMargin {
+    margin-bottom: 60px;
+  }
+}
+
 .bots {
-  padding-top: 60px;
+  padding: 60px 165px 0 165px;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
+
+  &__moreBtn {
+    width: 273px;
+    height: 50px;
+    border: none;
+    margin-top: 60px;
+    background-color: #fff;
+    color: #3b7dd6;
+    font-size: 24px;
+
+    &_hidden {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

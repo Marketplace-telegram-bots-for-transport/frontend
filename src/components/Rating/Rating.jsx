@@ -20,7 +20,7 @@ function Rating() {
   };
 
   const renderRatingBars = () => {
-    return [5, 4, 3, 2, 1].map((rating, index) => (
+    return [1, 2, 3, 4, 5].map((rating, index) => (
       <div key={rating} className={styles.ratingsCount}>
         <span>{rating}</span>
         <div className={styles.ratingBar}>
@@ -43,23 +43,26 @@ function Rating() {
   };
 
   return (
-    <div className={styles.rating}>
-      <div className={styles.left}>
-        <div className={styles.averageRating}>{averageRatingCounter()}</div>
-        <div className={styles.stars}>
-          {[1, 2, 3, 4, 5].map((rating, index) => (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-            <span
-              key={rating}
-              className={`${styles.star} star-${rating}`}
-              onClick={() => handleStarClick(index)}
-            >
-              &#9733;
-            </span>
-          ))}
+    <div className={styles.rating__main}>
+      <h2 className={styles.rating__title}>Рейтинг</h2>
+      <div className={styles.rating}>
+        <div className={styles.left}>
+          <div className={styles.averageRating}>{averageRatingCounter()}</div>
+          <div className={styles.stars}>
+            {[1, 2, 3, 4, 5].map((rating, index) => (
+              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+              <span
+                key={rating}
+                className={`${styles.star} star-${rating}`}
+                onClick={() => handleStarClick(index)}
+              >
+                &#9733;
+              </span>
+            ))}
+          </div>
         </div>
+        <div className={styles.right}>{renderRatingBars()}</div>
       </div>
-      <div className={styles.right}>{renderRatingBars()}</div>
     </div>
   );
 }
