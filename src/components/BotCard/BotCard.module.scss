@@ -85,6 +85,10 @@
     background-image: url('../../images/add-to-favourites-btn.svg');
     background-position: center;
     background-repeat: no-repeat;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__buyBtn {
@@ -94,5 +98,9 @@
     background-color: #3b7dd6;
     color: #f8fafc;
     font-size: 14px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
