@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './ModalWithAuth.module.scss';
 
 function ModalWithAuth() {
@@ -7,7 +8,11 @@ function ModalWithAuth() {
         <p className={styles.modalAuth__desc}>
           Для продолжения покупки необходимо авторизоваться
         </p>
-        <button className={styles.modalAuth__btn}>Перейти к авторизации</button>
+        <button className={styles.modalAuth__btn}>
+          <Link className={styles.modalAuth__link} to='/login'>
+            Перейти к авторизации
+          </Link>
+        </button>
       </div>
     </div>
   );

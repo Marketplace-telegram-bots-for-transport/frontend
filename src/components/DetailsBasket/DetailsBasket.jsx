@@ -9,7 +9,9 @@ function DetailsBasket({ botPrice }) {
         <p className={styles.basketSection__totalPrice}>
           <span>{botPrice}</span>&#8381;
         </p>
-        <button className={styles.basketSection__button}>В корзину</button>
+        <button className={styles.basketSection__button}>
+          Добавить в корзину
+        </button>
       </div>
     </div>
   );

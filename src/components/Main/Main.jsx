@@ -4,7 +4,6 @@ import BotsList from '../BotsList/BotsList';
 // import * as cats from '../../utils/tempcats.json';
 
 const Main = ({ addProductToCart }) => {
-  // const Main = () => {
   // const { categories } = cats;
 
   return (

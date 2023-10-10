@@ -34,13 +34,23 @@
     margin: 0;
     padding: 0;
     max-width: 185px;
-    @include text($font-medium-24, $weight-400, $line-height-medium-24, $color-blue-dark-title);
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
   }
 
   &__price {
     margin: 0;
     padding: 0;
-    @include text($font-medium-24, $weight-600, $line-height-medium-24, $color-blue-dark-title);
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
   }
 
   &__count {
@@ -59,7 +69,12 @@
   }
 
   &__countProperity {
-    @include text($font-small-14, $weight-500, $line-height-small-14, $color-blue-button-text);
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-blue-button-text
+    );
   }
 
   &__btnCount {
@@ -69,10 +84,20 @@
     width: 14px;
     cursor: pointer;
     padding: 0;
-    @include text($font-medium-24, $weight-500, $line-height-medium-24, $color-blue-button-text);
+    @include text(
+      $font-medium-24,
+      $weight-500,
+      $line-height-medium-24,
+      $color-blue-button-text
+    );
 
     &:hover {
-      @include text($font-medium-24, $weight-500, $line-height-medium-24, $background-color-button-hover);
+      @include text(
+        $font-medium-24,
+        $weight-500,
+        $line-height-medium-24,
+        $background-color-button-hover
+      );
     }
   }
 
