@@ -19,6 +19,7 @@ const BotsList = () => {
             author={bot.author}
             categories={bot.categories}
             price={bot.price}
+            id={bot.id}
             onBuyClick={handleBuyClick}
           />
         </li>

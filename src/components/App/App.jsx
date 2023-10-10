@@ -121,7 +121,7 @@ const App = () => {
             }
           />
           <Route
-            path='/botdetails:botId'
+            path='/botdetails/:botId'
             element={
               <>
                 <Header
