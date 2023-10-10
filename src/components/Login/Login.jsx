@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
-import logo from '../../images/Logo.svg';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function Login({ onLogin, loggedIn }) {
@@ -35,57 +34,59 @@ function Login({ onLogin, loggedIn }) {
 
   return (
     <main className={styles.login}>
-      <div className={styles.login__titleContainer}>
-        <img className={styles.login__image} src={logo} alt='логотип' />
-        <h2 className={styles.login__title}>BotDepot</h2>
-      </div>
-      <h3 className={styles.login__text}>Войдите, чтобы продолжить</h3>
-      <form className={styles.login__form} noValidate onSubmit={handleSubmit}>
-        <input
-          className={styles.login__input}
-          placeholder='Логин или email'
-          type='text'
-          id='login'
-          name='login'
-          required
-          value={values.login || ''}
-          onChange={handleChange}
-          minLength='2'
-        />
-        <span className={styles.login__error}>{errors.login}</span>
-        <div className={styles.login__password}>
+      <div className={styles.login__loginContainer}>
+        <h2 className={styles.login__title}>Войдите, чтобы продолжить</h2>
+        <form className={styles.login__form} noValidate onSubmit={handleSubmit}>
+          <h3 className={styles.login__inputName}>Логин или email</h3>
           <input
             className={styles.login__input}
-            placeholder='Пароль'
-            type={type}
-            id='password'
-            name='password'
+            placeholder='Логин или email'
+            type='text'
+            id='login'
+            name='login'
             required
-            minLength='8'
-            maxLength='16'
-            value={values.password || ''}
+            value={values.login || ''}
             onChange={handleChange}
+            minLength='2'
           />
-          <div
-            className={passwardEyeClass}
-            onClick={togglePasswardEye}
-            onKeyDown={togglePasswardEye}
-            role='button'
-            tabIndex='0'
-            aria-label='key'
-          />
-        </div>
-        <span className={styles.login__error}>{errors.password}</span>
-        <Link to='/reset-password' className={styles.login__resetLink}>
-          Не помню пароль
-        </Link>
-        <button className={styles.login__button} disabled={!isValid}>
-          Войти
-        </button>
-        <Link to='/signup' className={styles.login__registrLink}>
-          Зарегистрироваться
-        </Link>
-      </form>
+          <span className={styles.login__error}>{errors.login}</span>
+          <div className={styles.login__inputNameContainer}>
+            <h3 className={styles.login__inputName}>Пароль</h3>
+            <Link to='/reset-password' className={styles.login__resetLink}>
+              Не помню пароль
+            </Link>
+          </div>
+          <div className={styles.login__password}>
+            <input
+              className={styles.login__input}
+              placeholder='Пароль'
+              type={type}
+              id='password'
+              name='password'
+              required
+              minLength='8'
+              maxLength='16'
+              value={values.password || ''}
+              onChange={handleChange}
+            />
+            <div
+              className={passwardEyeClass}
+              onClick={togglePasswardEye}
+              onKeyDown={togglePasswardEye}
+              role='button'
+              tabIndex='0'
+              aria-label='key'
+            />
+          </div>
+          <span className={styles.login__error}>{errors.password}</span>
+          <button className={styles.login__button} disabled={!isValid}>
+            Войти
+          </button>
+          <Link to='/signup' className={styles.login__registrLink}>
+            Зарегистрироваться
+          </Link>
+        </form>
+      </div>
     </main>
   );
 }

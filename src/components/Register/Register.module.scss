@@ -1,47 +1,40 @@
 .register {
-  display: flex;
-  margin: 70px auto 73px;
-  padding: 40px;
-  justify-content: center;
-  flex-direction: column;
-  width: 455px;
-  box-sizing: border-box;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow:
-    0px 1px 3px 0px rgba(106, 141, 190, 0.1),
-    0px 6px 6px 0px rgba(106, 141, 190, 0.09),
-    0px 13px 8px 0px rgba(106, 141, 190, 0.05),
-    0px 23px 9px 0px rgba(106, 141, 190, 0.01),
-    0px 35px 10px 0px rgba(106, 141, 190, 0);
+  max-width: 455px;
+  margin: 0 auto;
+  padding: 151px 0 64px;
+
+  &__registerContainer {
+    display: flex;
+    padding: 40px;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow:
+      0px 1px 3px 0px rgba(106, 141, 190, 0.1),
+      0px 6px 6px 0px rgba(106, 141, 190, 0.09),
+      0px 13px 8px 0px rgba(106, 141, 190, 0.05),
+      0px 23px 9px 0px rgba(106, 141, 190, 0.01),
+      0px 35px 10px 0px rgba(106, 141, 190, 0);
+  }
 
   &__titleContainer {
-    margin: 0 auto;
+    margin: 0 0 0 10px;
     display: flex;
     align-items: center;
   }
 
-  &__image {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
+  &__back {
+    width: 24px;
+    height: 24px;
+    background: url(../../images/back-left-lg-min.svg);
+    border: none;
+    cursor: pointer;
   }
 
   &__title {
-    margin: 0;
-    color: var(
-      --web-main-color-dark,
-      var(--buttons-filled-pressed-button, #183357)
-    );
-    font-family: Geologica;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-align: center;
-  }
-
-  &__text {
+    margin: 0 auto;
     color: var(
       --web-main-color-dark,
       var(--buttons-filled-pressed-button, #183357)
@@ -52,26 +45,36 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
-    margin: 40px 0 0;
   }
 
   &__form {
-    margin: 20px 0 0;
+    margin: 30px 0 0;
     display: flex;
     flex-direction: column;
   }
 
   &__inputContainer {
+    margin: 0;
     display: flex;
-    gap: 15px;
     flex-direction: column;
   }
 
+  &__inputName {
+    margin: 10px 0 0;
+    padding: 0 10px;
+    font-family: Geologica;
+    color: #183357;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+
   &__input {
-    margin: 0;
+    margin: 5px 0 0;
     padding: 10px 20px;
     border-radius: 10px;
-    background: var(--web-main-color-light, #d3e2f7);
+    background: #f8fafc;
     border: none;
     color: var(
       --web-main-color-dark,
@@ -87,6 +90,7 @@
 
   &__input:focus {
     outline: none;
+    border: 1px solid var(--web-main-color-dark, #183357);
   }
 
   &__input::placeholder {
@@ -97,6 +101,7 @@
     font-weight: 300;
     line-height: normal;
   }
+
   &__error {
     color: var(--web-error, #e44f2f);
     font-family: Geologica;
@@ -105,12 +110,12 @@
     font-weight: 300;
     line-height: normal;
     margin: 5px 0 0;
+    min-height: 18px;
   }
 
   &__password {
     margin: 0;
     border-radius: 10px;
-    background: var(--web-main-color-light, #d3e2f7);
     position: relative;
   }
 
@@ -119,7 +124,7 @@
     width: 20px;
     height: 20px;
     background: url('../../images/eye.svg');
-    top: 10px;
+    top: 15px;
     right: 20px;
   }
 
@@ -128,26 +133,28 @@
     width: 20px;
     height: 20px;
     background: url('../../images/eye-off.svg');
-    top: 10px;
+    top: 15px;
     right: 20px;
   }
 
   &__approval {
-    margin: 63px 0 0;
+    margin: 40px 0 0;
     display: flex;
   }
 
   &__checkbox {
-    width: 40px;
-    height: 40px;
+    display: flex;
+    width: 32px;
+    height: 32px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid var(--buttons-filled-default-button, #3b7dd6);
+    border: 1px solid var(--web-main-color, #3b7dd6);
+    background: var(--web-white, #f8fafc);
   }
 
   &__label {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 15px;
     color: var(
       --web-main-color-dark,
       var(--buttons-filled-pressed-button, #183357)
@@ -176,8 +183,12 @@
     background: var(--buttons-filled-default-button, #3b7dd6);
   }
 
+  &__button:hover {
+    background: var(--buttons-filled-hovered-button, #2f5e9d);
+  }
+
   &__button:disabled {
     cursor: auto;
-    background: #d3e2f7;
+    background: var(--buttons-filled-disabled-button, #9cbdea);
   }
 }
