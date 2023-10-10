@@ -113,13 +113,17 @@
     width: 178px;
     height: 50px;
     padding: 10px 47px;
-    background-color: #3b7dd6;
+    background-color: $background-color-button-disable;
     border-radius: 15px;
     @include text($font-medium-24, $weight-400, $line-height-medium-24, $color-button-text);
     transition: 0.3s;
 
-    &:hover {
-      background-color: #2f5e9d;
+    &_active {
+      background-color: $background-color-button-default;
+
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
     }
   }
 

@@ -92,10 +92,7 @@ function Submenu(props) {
                 type='button'
                 aria-label='Переход на страницу корзины'
               >
-                <Link
-                  className={styles.submenu__hiddenButton_link}
-                  to='/basket'
-                >
+                <Link className={styles.submenu__hiddenButton_link} to='/cart'>
                   Перейти к корзине
                 </Link>
               </button>

@@ -1,0 +1,69 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "ratings": { "value_avg": 5.0 },
+      "name": "Bot1",
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 1",
+      "price": "7500.11",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 1",
+      "count": 1
+    },
+    {
+      "id": 2,
+      "ratings": { "value_avg": 4.2 },
+      "name": "Bot2",
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 2",
+      "price": "7500.50",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 2",
+      "count": 1
+    },
+    {
+      "id": 3,
+      "ratings": { "value_avg": 3.7 },
+      "name": "Bot3",
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 3",
+      "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 3",
+      "count": 1
+    },
+    {
+      "id": 4,
+      "name": "Bot4",
+      "ratings": { "value_avg": 4.4 },
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 4",
+      "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 4",
+      "count": 1
+    },
+    {
+      "id": 5,
+      "name": "Bot5",
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 5",
+      "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 5",
+      "count": 1
+    },
+    {
+      "id": 6,
+      "ratings": { "value_avg": 4.9 },
+      "name": "Bot6",
+      "main_photo": "https://images.unsplash.com/photo-1473042904451-00171c69419d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2998&q=80",
+      "author": "Автор бота 6",
+      "price": "7500.00",
+      "categories": ["Доставка", "Грузы"],
+      "description": "Описание бота 6",
+      "count": 1
+    }
+  ]
+}

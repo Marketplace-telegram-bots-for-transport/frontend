@@ -26,7 +26,7 @@ function CartProduct({
       </div>
       <div className={styles.product__item}>
         <p className={styles.product__price}>
-          {product.price * product.count} ₽
+          {parseFloat(product.price * product.count).toFixed(2)} ₽
         </p>
         <div className={styles.product__count}>
           <button

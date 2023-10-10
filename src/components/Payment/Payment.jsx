@@ -1,10 +1,17 @@
+import React, { useRef } from 'react'; // Добавим импорт useRef
+import InputMask from 'react-input-mask';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import styles from './Payment.module.scss';
 
 function Payment({ totalSum }) {
-  // const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  const buttonClassName = isValid
+    ? `${styles.payment__button} ${styles.payment__button_active}`
+    : styles.payment__button;
+
+  // реф для элемента InputMask
+  const inputMaskRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,20 +72,23 @@ function Payment({ totalSum }) {
                 {' '}
                 Номер карты для оплаты
               </span>
-              <input
-                className={`${styles.payment__input} ${styles.payment__inputNumber}`}
-                name='number'
-                value={values.number || ''}
-                placeholder='____-____-____-____'
-                autoComplete='cc-number'
-                inputMode='numeric'
-                type='text'
-                id='number-input'
-                minLength='16'
-                maxLength='16'
-                required
-                onChange={handleChange}
-              />
+              <React.StrictMode>
+                <InputMask
+                  ref={inputMaskRef}
+                  className={`${styles.payment__input} ${styles.payment__inputNumber}`}
+                  name='number'
+                  value={values.number || ''}
+                  placeholder='____-____-____-____'
+                  autoComplete='cc-number'
+                  inputMode='numeric'
+                  type='text'
+                  id='number-input'
+                  mask='9999-9999-9999-9999'
+                  maskChar={null} // Установите maskChar в null
+                  required
+                  onChange={handleChange}
+                />
+              </React.StrictMode>
               {errors.number && (
                 <span className={styles.payment__error}>
                   {handleError(errors.number)}
@@ -138,7 +148,7 @@ function Payment({ totalSum }) {
                   inputMode='numeric'
                   type='text'
                   id='code-input'
-                  minLength='1'
+                  minLength='3'
                   maxLength='3'
                   required
                   onChange={handleChange}
@@ -168,7 +178,9 @@ function Payment({ totalSum }) {
           />
           <div className={styles.payment__total}>
             <p className={styles.payment__sum}>{totalSum}₽</p>
-            <button className={styles.payment__button}>Купить</button>
+            <button className={buttonClassName} disabled={!isValid}>
+              Купить
+            </button>
           </div>
         </form>
       </div>

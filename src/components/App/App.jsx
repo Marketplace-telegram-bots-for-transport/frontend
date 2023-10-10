@@ -1,15 +1,14 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
-
+import * as cartData from '../../utils/products.json';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
-import { products } from '../../utils/products';
 import BotDetails from '../BotDetails/BotDetails';
 
 import Login from '../Login/Login';
@@ -24,12 +23,14 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
 
-  useEffect(() => {
-    setCartProducts(products);
-  }, []);
-
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+
+  // Временные товары корзины
+  useEffect(() => {
+    const { products } = cartData;
+    setCartProducts(products);
+  }, []);
 
   /* временные значения */
   const contextValue = useMemo(() => {
@@ -82,6 +83,11 @@ const App = () => {
     });
   };
 
+  // Функция добавления товара в корзину
+  const addProductToCart = (newBot) => {
+    setCartProducts([...cartProducts, newBot]);
+  };
+
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <div className={styles.page}>
@@ -95,7 +101,7 @@ const App = () => {
                   isLoggedIn={isLoggedIn}
                   isLogOut={handleLogOut}
                 />
-                <Main />
+                <Main addProductToCart={addProductToCart} />
                 <Footer />
               </>
             }

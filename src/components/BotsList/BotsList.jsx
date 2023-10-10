@@ -2,11 +2,11 @@ import BotCard from '../BotCard/BotCard';
 import styles from './BotsList.module.scss';
 import * as data from '../../utils/tempcards.json';
 
-const BotsList = () => {
+const BotsList = ({ addProductToCart }) => {
   const { bots } = data;
 
-  const handleBuyClick = () => {
-    // TODO: добавление в корзину
+  const handleBuyClick = (bot) => {
+    addProductToCart(bot);
   };
 
   return (
@@ -19,7 +19,7 @@ const BotsList = () => {
             author={bot.author}
             categories={bot.categories}
             price={bot.price}
-            onBuyClick={handleBuyClick}
+            onBuyClick={() => handleBuyClick(bot)}
           />
         </li>
       ))}

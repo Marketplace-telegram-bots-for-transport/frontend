@@ -2,11 +2,11 @@ import styles from './Main.module.scss';
 import Banner from '../Banner/Banner';
 import BotsList from '../BotsList/BotsList';
 
-const Main = () => {
+const Main = ({ addProductToCart }) => {
   return (
     <main className={styles.main}>
       <Banner />
-      <BotsList />
+      <BotsList addProductToCart={addProductToCart} />
     </main>
   );
 };
