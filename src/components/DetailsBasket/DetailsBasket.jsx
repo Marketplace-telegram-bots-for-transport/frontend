@@ -7,9 +7,9 @@ function DetailsBasket({ botPrice }) {
       <div className={styles.basketSection__basket}>
         <h2 className={styles.basketSection__title}>Цена:</h2>
         <p className={styles.basketSection__totalPrice}>
-          <span>0.00{botPrice}</span>&#8381;
+          <span>{botPrice}</span>&#8381;
         </p>
-        <button className={styles.basketSection__button}>Купить</button>
+        <button className={styles.basketSection__button}>В корзину</button>
       </div>
     </div>
   );

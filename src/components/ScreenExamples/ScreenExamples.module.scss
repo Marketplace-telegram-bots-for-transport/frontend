@@ -1,3 +1,5 @@
+@import './../../vendor/_varibles';
+
 .screenExamples {
   display: flex;
   flex-direction: column;
@@ -11,9 +13,12 @@
     width: 100%;
     margin: 0;
     text-align: start;
-    font-size: 36px;
-    line-height: 45px;
-    color: #35383b;
+    @include text(
+      36px,
+      600,
+      45px,
+      #35383B,
+    );
   }
 
   &__container {

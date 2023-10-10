@@ -1,7 +1,9 @@
+@import './../../vendor/_varibles';
+
 .botBody {
   display: flex;
   flex-direction: row;
-  column-gap: 20px;
+  column-gap: 41px;
   margin: 0 0 auto 0;
   width: 100%;
   max-height: 100%;
@@ -9,6 +11,8 @@
   &__image {
     max-width: 200px;
     max-height: 200px;
+    border-radius: 15px;
+    margin-top: 18px;
   }
 
   &__info {
@@ -25,7 +29,12 @@
 
   &__title {
     margin: 0;
-    font-size: 36px;
+    @include text(
+      60px,
+      600,
+      75px,
+      #183357,
+    );
   }
 
   &__linkLikeSection {
@@ -59,8 +68,13 @@
   &__subtitle {
     display: flex;
     align-items: flex-start;
-    margin: 10px 0 20px 0;
-    font-size: 24px;
+    margin: 15px 0 20px 0;
+    @include text(
+      24px,
+      300,
+      30px,
+      #35383B,
+    );
   }
 
   &__description {
@@ -76,9 +90,12 @@
     text-wrap: wrap;
     text-align: start;
     margin: 0;
-    font-size: 24px;
-    line-height: 30px;
-    font-weight: 300;
+    @include text(
+      24px,
+      300,
+      30px,
+      #35383B,
+    );
   }
 
   &__descriptionExpanded {
@@ -91,8 +108,12 @@
     background: transparent;
     border: none;
     margin: 15px 0 0 auto;
-    font-size: 14px;
-    line-height: 17.5px;
     color: #3b7dd6;
+    @include text(
+      14px,
+      500,
+      17.5px,
+      #3B7DD6,
+    );
   }
 }
