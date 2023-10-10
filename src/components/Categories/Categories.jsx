@@ -1,44 +1,56 @@
-import { useState } from 'react';
+import Carousel from 'react-multi-carousel';
+import Category from '../Category/Category';
+import styles from './Categories.module.scss';
+import 'react-multi-carousel/lib/styles.css';
 
-const CategoriesComponent = ({ children }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrevClick = () => {
-    // Decrease the currentIndex by 1, but make sure it doesn't go below 0
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleNextClick = () => {
-    // Increase the currentIndex by 1, but make sure it doesn't exceed the number of children - 3
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, children.length - 3)
-    );
+const Categories = ({ categories }) => {
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
   };
 
   return (
-    <div className='carousel'>
-      <button onClick={handlePrevClick} disabled={currentIndex === 0}>
-        Previous
-      </button>
-      <div className='carousel-container'>
-        <div
-          className='carousel-content'
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            transition: 'transform 0.5s ease-in-out',
-          }}
+    <div className={styles.categories}>
+      <div style={{ position: 'relative' }}>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          showDots
+          responsive={responsive}
+          ssr // means to render carousel on server-side.
+          infinite
+          autoPlaySpeed={1000}
+          keyBoardControl
+          customTransition='all .5'
+          transitionDuration={500}
+          containerClass='carousel-container'
+          deviceType='desktop'
+          dotListClass='custom-dot-list-style'
         >
-          {children}
-        </div>
+          {categories.map((category) => (
+            <div key={category.id}>
+              <Category name={category.name} />
+            </div>
+          ))}
+        </Carousel>
       </div>
-      <button
-        onClick={handleNextClick}
-        disabled={currentIndex === children.length - 3}
-      >
-        Next
-      </button>
     </div>
   );
 };
 
-export default CategoriesComponent;
+export default Categories;
