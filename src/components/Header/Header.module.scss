@@ -36,8 +36,8 @@
     }
     &_title {
       @include text(
-        $weight-600,
         $font-h2-60,
+        $weight-600,
         $line-height-h2,
         $color-blue-dark-title
       );
