@@ -1,40 +1,36 @@
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import CurrentUserContext from '../../../context/CurrentUserContext'; /* временное значение */
 
 import styles from './OTPPassword.module.scss';
 
-import { useForm } from '../../../utils/formValidator';
+import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 
 function OTPPassword() {
   const navigate = useNavigate();
 
   const { OTP, setOTP, email } = useContext(CurrentUserContext);
+  const { values, handleChange, isValid, setIsValid, errors } =
+    useFormAndValidation();
 
-  const { values, handleChange, isValid, setIsValid, errors } = useForm();
-
-  const [timerCount, setTimerCount] = useState(5);
+  const [timerCount, setTimerCount] = useState(60);
   const [OTPinput, setOTPinput] = useState([0, 0, 0, 0, 0, 0]);
   const [disable, setDisable] = useState(true);
   const [commonError, setCommonError] = useState('');
 
-  /* ФУНКЦИЯ ПОВТОРНОГО ЗАПРОСА ОДНОРАЗОВОГО ПАРОЛЯ + ТАЙМЕР */
-  function resendOTP(e) {
+  /* ФУНКЦИЯ ПОВТОРНОГО ЗАПРОСА ОДНОРАЗОВОГО ПАРОЛЯ + СБРОСА ТАЙМЕР */
+  function handleResendOTP(e) {
     e.preventDefault();
-
     if (disable) {
       return;
     }
-
     /* КОСТЫЛЬНЫЙ */
     /* генерим новый 6-ти-значный код */
     const randomOTP = Math.floor(Math.random() * 900000 + 100000);
     console.log(randomOTP);
     setOTP(randomOTP);
     setDisable(true);
-    setTimerCount(5);
-
+    setTimerCount(60);
     /* ПРАВИЛЬНЫЙ СПОСОБ
       запрос на сервер 
         ..., {
@@ -48,7 +44,8 @@ function OTPPassword() {
     */
   }
 
-  function verfiyOTP(e) {
+  /* функция проверки корректности введеного пароля в инпут и фактически отправленного */
+  function handleVerfiyOTP(e) {
     e.preventDefault();
 
     if (parseInt(OTPinput.join(''), 10) === OTP) {
@@ -57,8 +54,6 @@ function OTPPassword() {
     }
     setIsValid(false);
     setCommonError('Некорректный код');
-    // eslint-disable-next-line no-useless-return
-    return;
   }
 
   /* USEEFFECT ДЛЯ НЕПРЕРЫВНОЙ РАБОТЫ ТАЙМЕРА ОБРАТНОГО ОТСЧЕТА И ОТСЛЕЖИВАНИЕ СОСТОЯНИИ КНОПКИ */
@@ -91,158 +86,46 @@ function OTPPassword() {
           <h3 className={styles.otp__formText}>
             Введите код, присланный на почту {email}
           </h3>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}`}
-            id='input1'
-            name='input1'
-            type='text'
-            pattern='[0-9]'
-            placeholder='-'
-            maxLength={1}
-            value={values.input1 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                e.target.value,
-                OTPinput[1],
-                OTPinput[2],
-                OTPinput[3],
-                OTPinput[4],
-                OTPinput[5],
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input1}</span>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}`}
-            id='input2'
-            name='input2'
-            type='text'
-            maxLength={1}
-            pattern='[0-9]'
-            placeholder='-'
-            value={values.input2 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                OTPinput[0],
-                e.target.value,
-                OTPinput[2],
-                OTPinput[3],
-                OTPinput[4],
-                OTPinput[5],
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input2}</span>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}`}
-            id='input3'
-            name='input3'
-            type='text'
-            maxLength={1}
-            pattern='[0-9]'
-            placeholder='-'
-            value={values.input3 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                OTPinput[0],
-                OTPinput[1],
-                e.target.value,
-                OTPinput[3],
-                OTPinput[4],
-                OTPinput[5],
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input3}</span>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}
-                  `}
-            id='input4'
-            name='input4'
-            type='text'
-            maxLength={1}
-            pattern='[0-9]'
-            placeholder='-'
-            value={values.input4 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                OTPinput[0],
-                OTPinput[1],
-                OTPinput[2],
-                e.target.value,
-                OTPinput[4],
-                OTPinput[5],
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input4}</span>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}`}
-            id='input5'
-            name='input5'
-            type='text'
-            maxLength={1}
-            pattern='[0-9]'
-            placeholder='-'
-            value={values.input5 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                OTPinput[0],
-                OTPinput[1],
-                OTPinput[2],
-                OTPinput[3],
-                e.target.value,
-                OTPinput[5],
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input5}</span>
-          <input
-            className={`
-                  ${styles.otp__formInput} 
-                  ${styles.otp__formInput_number}`}
-            id='input6'
-            name='input6'
-            type='text'
-            pattern='[0-9]'
-            maxLength={1}
-            placeholder='-'
-            value={values.input6 || ''}
-            onChange={(e) => {
-              handleChange(e);
-              setOTPinput([
-                OTPinput[0],
-                OTPinput[1],
-                OTPinput[2],
-                OTPinput[3],
-                OTPinput[4],
-                e.target.value,
-              ]);
-            }}
-            required
-          />
-          <span className={styles.otp__formInput_error}>{errors.input6}</span>
-          <span className={styles.otp__formInput_error}>{commonError}</span>
+          {OTPinput.map((value, index) => (
+            <input
+              // eslint-disable-next-line react/no-array-index-key
+              key={`input-${index}`}
+              className={`
+                ${styles.otp__formInput} 
+                ${styles.otp__formInput_number}
+              `}
+              id={`input${index + 1}`}
+              name={`input${index + 1}`}
+              type='text'
+              pattern='[0-9]'
+              placeholder='-'
+              maxLength={1}
+              value={values[`input${index + 1}`] || ''}
+              onChange={(e) => {
+                handleChange(e);
+                setOTPinput((prevInput) => {
+                  const updatedInput = [...prevInput];
+                  updatedInput[index] = e.target.value;
+                  return updatedInput;
+                });
+              }}
+              required
+            />
+          ))}
+          <div className={styles.otp__formInput_errorsContainer}>
+            {OTPinput.map((_, index) => (
+              <span
+                // eslint-disable-next-line react/no-array-index-key
+                key={`input-${index}`}
+                className={styles.otp__formInput_error}
+              >
+                {errors[`input${index + 1}`]}
+              </span>
+            ))}
+          </div>
+          <span className={styles.otp__formInput_error_commonError}>
+            {commonError}
+          </span>
           <button
             className={`${styles.otp__formButton}
             ${
@@ -252,7 +135,7 @@ function OTPPassword() {
             type='button'
             aria-label='Кнопка продолжить'
             disabled={!isValid}
-            onClick={verfiyOTP}
+            onClick={handleVerfiyOTP}
           >
             Продолжить
           </button>
@@ -262,7 +145,7 @@ function OTPPassword() {
           `}
             type='submit'
             aria-label='Кнопка отправить новый код'
-            onClick={(e) => resendOTP(e)}
+            onClick={handleResendOTP}
           >
             {disable
               ? `Отправить новый код (${timerCount})`

@@ -89,111 +89,45 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <div className={styles.page}>
+        <Header
+          isLoggedIn={isLoggedIn}
+          isLogOut={handleLogOut}
+          cartProducts={cartProducts}
+          deleteCartProduct={deleteCartProduct}
+        />
+
         <Routes>
           <Route
             path='/'
-            element={
-              <>
-                <Header
-                  isLoggedIn={isLoggedIn}
-                  isLogOut={handleLogOut}
-                  cartProducts={cartProducts}
-                />
-                <Main addProductToCart={addProductToCart} />
-                <Footer />
-              </>
-            }
+            element={<Main addProductToCart={addProductToCart} />}
           />
+
           <Route
             path='/cart'
             element={
-              <>
-                <Header
-                  isLoggedIn={isLoggedIn}
-                  isLogOut={handleLogOut}
-                  cartProducts={cartProducts}
-                />
-                <Cart
-                  isLoggedIn={isLoggedIn}
-                  cartProducts={cartProducts}
-                  deleteCartProduct={deleteCartProduct}
-                  increaseProductCount={increaseProductCount}
-                  decreaseProductCount={decreaseProductCount}
-                />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path='/botdetails/:botId'
-            element={
-              <>
-                <Header
-                  isLoggedIn={isLoggedIn}
-                  isLogOut={handleLogOut}
-                  cartProducts={cartProducts}
-                />
-                <BotDetails />
-                <Footer />
-              </>
+              <Cart
+                isLoggedIn={isLoggedIn}
+                cartProducts={cartProducts}
+                deleteCartProduct={deleteCartProduct}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+              />
             }
           />
 
-          <Route
-            path='/login'
-            element={
-              <>
-                <Header cartProducts={cartProducts} />
-                <Login />
-                <Footer />
-              </>
-            }
-          />
+          <Route path='/botdetails/:botId' element={<BotDetails />} />
 
-          <Route
-            path='/signup'
-            element={
-              <>
-                <Header cartProducts={cartProducts} />
-                <Register />
-                <Footer />
-              </>
-            }
-          />
+          <Route path='/login' element={<Login />} />
 
-          <Route
-            path='/reset-password'
-            element={
-              <>
-                <Header cartProducts={cartProducts} />
-                <ResetPassword />
-                <Footer />
-              </>
-            }
-          />
+          <Route path='/signup' element={<Register />} />
 
-          <Route
-            path='/OTP-password'
-            element={
-              <>
-                <Header cartProducts={cartProducts} />
-                <OTPPassword />
-                <Footer />
-              </>
-            }
-          />
+          <Route path='/reset-password' element={<ResetPassword />} />
 
-          <Route
-            path='/change-password'
-            element={
-              <>
-                <Header cartProducts={cartProducts} />
-                <ChangePassword />
-                <Footer />
-              </>
-            }
-          />
+          <Route path='/OTP-password' element={<OTPPassword />} />
+
+          <Route path='/change-password' element={<ChangePassword />} />
         </Routes>
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );

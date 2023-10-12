@@ -1,87 +1,50 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import * as data from '../../../utils/tempcards.json';
 import * as info from '../../../utils/infoUser.json';
 
 import styles from './Submenu.module.scss';
 
-function Submenu(props) {
-  const { isLoggedIn, isLogOut } = props;
-
-  const { bots } = data;
-  const { users } = info;
+function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
+  const { users } = info; // получаем временные данные пользователя
 
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [cartProducts, setCartProducts] = useState(bots);
-  const [userData, setUserData] = useState(users);
-
-  /* ЗАКРЫТИЕ САБМЕНЮ ПРИ КЛИКЕ ВНЕ ПОЛЯ */
-  const submenuBasketRef = useRef(null);
-  const submenuProfileRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        submenuBasketRef.current &&
-        !submenuBasketRef.current.contains(event.target)
-      ) {
-        setIsBasketOpen(false);
-      }
-      if (
-        submenuProfileRef.current &&
-        !submenuProfileRef.current.contains(event.target)
-      ) {
-        setIsProfileOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const [userData, setUserData] = useState(users); // состояние данных пользователя
+  const menuRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUserData(users);
   }, [users]);
 
-  useEffect(() => {
-    setCartProducts(bots);
-  }, [bots]);
-
-  /* СЧЕТЧИК ТОВАРОВ В КОРЗИНЕ */
-  const count = cartProducts.length;
-  let countText = '';
-  if (count === 1) {
-    countText = `${count} товар`;
-  } else if (count > 1 && count < 5) {
-    countText = `${count} товара`;
-  } else {
-    countText = `${count} товаров`;
-  }
-
-  /* ФУНКЦИЯ УДАЛЕНИЯ ТОВАРОВ В КОРЗИНЕ */
-  function handleDeleteClick(botId) {
-    setCartProducts((prevProducts) => {
-      const updatedProducts = prevProducts.filter((bot) => bot.id !== botId);
-      return updatedProducts;
-    });
-  }
-
-  /* функция закрытия сабменю поочередно */
-  const toggleSubmenu = (type) => {
-    if (type === 'basket') {
-      setIsProfileOpen(false);
-      setIsBasketOpen((prevState) => !prevState);
-    } else if (type === 'profile') {
-      setIsBasketOpen(false);
-      setIsProfileOpen((prevState) => !prevState);
-    }
+  /* функции закрытия сабменю поочередно */
+  const handleBasketClick = () => {
+    setIsBasketOpen(!isBasketOpen);
+    setIsProfileOpen(false); // Закрываем профиль при открытии корзины
   };
+
+  const handleProfileClick = () => {
+    setIsProfileOpen(!isProfileOpen);
+    setIsBasketOpen(false); // Закрываем корзину при открытии профиля
+  };
+
+  /* функция закрытия сабменю при клике на оверлей */
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsProfileOpen(false);
+        setIsBasketOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleDocumentClick);
+    return () => {
+      document.removeEventListener('mousedown', handleDocumentClick);
+    };
+  }, []);
 
   /* функция закрытия сабменю при нажатии на esc */
   useEffect(() => {
@@ -98,9 +61,27 @@ function Submenu(props) {
     };
   }, []);
 
+  /* СЧЕТЧИК ТОВАРОВ В КОРЗИНЕ */
+  const count = cartProducts.length;
+  let countText = '';
+  if (count === 1) {
+    countText = `${count} товар`;
+  } else if (count > 1 && count < 5) {
+    countText = `${count} товара`;
+  } else {
+    countText = `${count} товаров`;
+  }
+
+  /* функция закрытия сабменю при переходе на новую страницу */
+  const handelRedirect = (path) => {
+    setIsProfileOpen(false);
+    setIsBasketOpen(false);
+    navigate(path);
+  };
+
   return (
-    <section className={styles.submenu}>
-      <div className={styles.submenu__basket} ref={submenuBasketRef}>
+    <section className={styles.submenu} ref={menuRef}>
+      <div className={styles.submenu__basket}>
         <button
           className={`
             ${styles.submenu__button}
@@ -109,7 +90,7 @@ function Submenu(props) {
             `}
           type='button'
           aria-label='Открыть мини-корзину'
-          onClick={() => toggleSubmenu('basket')}
+          onClick={handleBasketClick}
         />
         {cartProducts.length > 0 ? (
           <p className={styles.submenu__basketCounter}>{count}</p>
@@ -119,11 +100,7 @@ function Submenu(props) {
       </div>
 
       {isBasketOpen && (
-        <div
-          className={styles.submenu__hidden}
-          id='parentScroll'
-          ref={submenuBasketRef}
-        >
+        <div className={styles.submenu__hidden} id='parentScroll'>
           <h3 className={styles.submenu__hidden_title}>Корзина</h3>
 
           {cartProducts.length > 0 ? (
@@ -163,7 +140,7 @@ function Submenu(props) {
                       type='button'
                       aria-label='Удалить товар'
                       onClick={() => {
-                        handleDeleteClick(bot.id);
+                        deleteCartProduct(bot.id);
                       }}
                     />
                   </div>
@@ -180,10 +157,9 @@ function Submenu(props) {
               className={styles.submenu__hidden_button}
               type='button'
               aria-label='Переход на страницу корзины'
+              onClick={() => handelRedirect('/cart')}
             >
-              <Link className={styles.submenu__hidden_button_link} to='/cart'>
-                Перейти к корзине
-              </Link>
+              Перейти к корзине
             </button>
           )}
           {!cartProducts.length > 0 && (
@@ -194,7 +170,7 @@ function Submenu(props) {
             >
               <ScrollLink
                 className={styles.submenu__hidden_button_link}
-                to='catalog'
+                to='bots'
                 smooth
                 duration={1000}
               >
@@ -205,7 +181,7 @@ function Submenu(props) {
         </div>
       )}
 
-      <div className={styles.submenu__profile} ref={submenuProfileRef}>
+      <div className={styles.submenu__profile}>
         <button
           className={`
           ${styles.submenu__button}
@@ -214,7 +190,7 @@ function Submenu(props) {
           `}
           type='button'
           aria-label='Открыть меню профиля'
-          onClick={() => toggleSubmenu('profile')}
+          onClick={handleProfileClick}
         />
       </div>
 
@@ -224,7 +200,6 @@ function Submenu(props) {
           ${styles.submenu__hidden}
           ${styles.submenu__profile_hidden}
           `}
-          ref={submenuProfileRef}
         >
           {isLoggedIn ? (
             <>
@@ -278,13 +253,9 @@ function Submenu(props) {
                 className={styles.submenu__hidden_button}
                 type='button'
                 aria-label='Войти в профиль'
+                onClick={() => handelRedirect('/login')}
               >
-                <Link
-                  className={styles.submenu__hidden_button_link}
-                  to='/login'
-                >
-                  Войти
-                </Link>
+                Войти
               </button>
             </>
           )}
