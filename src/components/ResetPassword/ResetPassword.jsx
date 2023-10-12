@@ -4,12 +4,12 @@ import CurrentUserContext from '../../context/CurrentUserContext'; /* време
 
 import styles from './ResetPassword.module.scss';
 
-import { useForm } from '../../utils/formValidator'; /* временное значение */
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function PasswordReset() {
   const navigate = useNavigate();
   const { setOTP, email, setEmail } = useContext(CurrentUserContext);
-  const { values, errors, handleChange, isValid } = useForm();
+  const { values, errors, handleChange, isValid } = useFormAndValidation();
 
   /* ФУНКЦИЯ ГЕНЕРАЦИИ РАНДОМНОГО КОДА С ОТПРАВКОЙ НА ПОЧТУ */
   function createOTP(e) {

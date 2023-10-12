@@ -3,9 +3,7 @@ import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
 
-function Header(props) {
-  const { isLoggedIn, isLogOut, cartProducts } = props;
-
+function Header({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -26,6 +24,7 @@ function Header(props) {
           isLoggedIn={isLoggedIn}
           isLogOut={isLogOut}
           cartProducts={cartProducts}
+          deleteCartProduct={deleteCartProduct}
         />
       </div>
     </header>

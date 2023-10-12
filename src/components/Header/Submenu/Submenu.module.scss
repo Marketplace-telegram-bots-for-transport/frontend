@@ -111,7 +111,14 @@
       margin: 0 20px 20px;
       border: none;
       border-radius: 10px;
-      padding: 0;
+      display: block;
+      padding: 15px 0 15px 0;
+      @include text(
+        $font-small-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
       background-color: $background-color-button-default;
       cursor: pointer;
       transition:
@@ -122,19 +129,6 @@
       }
       &:active {
         background-color: $background-color-button-pressed;
-      }
-      &_link {
-        display: block;
-        padding: 15px 0 15px 0;
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
-        @include text(
-          $font-small-14,
-          $weight-500,
-          $line-height-small-14,
-          $color-button-text
-        );
       }
     }
   }

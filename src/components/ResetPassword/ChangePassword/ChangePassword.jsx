@@ -5,7 +5,7 @@ import accepted from '../../../images/accepted-min.svg';
 
 import styles from './ChangePassword.module.scss';
 
-import { useForm } from '../../../utils/formValidator';
+import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 
 function ChangePassword() {
   const navigate = useNavigate();
@@ -17,16 +17,21 @@ function ChangePassword() {
     isValid,
     setIsValid,
     inputValidities,
-  } = useForm();
+  } = useFormAndValidation();
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // состояние просмотра пароля
+  const [isPasswordVisible, setIsPasswordVisible] = useState({
+    password: false,
+    repeat: false,
+  }); // состояние просмотра пароля
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
   /* ФУНКЦИЯ ИЗМЕНЕНИЯ ВИДИМОСТИ ПОЛЯ С ПАРОЛЕМ */
-  function handlePasswordVisibility(e) {
-    e.preventDefault();
-    setIsPasswordVisible((prev) => !prev);
+  function handlePasswordVisibility(field) {
+    setIsPasswordVisible((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
   }
 
   /* ФУНКЦИЯ ПРОВЕРКИ ПАРОЛЕЙ НА СОВПАДЕНИЕ */
@@ -55,7 +60,13 @@ function ChangePassword() {
   /* ПРОВЕРКА СОВПАДЕНИЙ ПАРОЛЕЙ ПРИ КАЖДОМ ВВОДИМОМ ЗНАЧЕНИИ */
   useEffect(() => {
     handleCheckMatchPassword();
-  }, [handleCheckMatchPassword, values.password, values.repeat]);
+  }, [
+    handleCheckMatchPassword,
+    values.password,
+    values.repeat,
+    inputValidities.password,
+    inputValidities.repeat,
+  ]);
 
   /* ФУНКЦИЯ ОТПРАВКИ НОВОГО ПАРОЛЯ НА СЕРВЕР И ОТОБРАЖЕНИЯ ОКНА С УСПЕХОМ СМЕНЫ ПАРОЛЯ */
   function sendNewPassword() {
@@ -80,7 +91,7 @@ function ChangePassword() {
               <img
                 className={styles.change__successPicture}
                 src={accepted}
-                alt='Информационное сообщение:'
+                alt='Глалочка'
               />
               <h3 className={styles.change__successTitle}>
                 Пароль успешно изменен!
@@ -111,64 +122,76 @@ function ChangePassword() {
               noValidate
               onSubmit={sendNewPassword}
             >
-              <div className={styles.change__formInput_container}>
-                <h3 className={styles.change__formInput_text}>Новый пароль</h3>
-                <input
-                  className={styles.change__formInput}
-                  id='password'
-                  name='password'
-                  type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder='Новый пароль (от 8 до 16 символов)'
-                  value={values.password || ''}
-                  minLength={8}
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  required
-                />
+              <fieldset className={styles.change__formInput_container}>
+                <label
+                  htmlFor='password'
+                  className={styles.change__formInput_text}
+                >
+                  Новый пароль
+                  <input
+                    className={styles.change__formInput}
+                    id='password'
+                    name='password'
+                    type={isPasswordVisible.password ? 'text' : 'password'}
+                    placeholder='Новый пароль (от 8 до 16 символов)'
+                    value={values.password || ''}
+                    minLength={8}
+                    maxLength={16}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                    required
+                  />
+                </label>
                 <button
                   className={`${styles.change__formButton_look} ${
-                    isPasswordVisible
+                    isPasswordVisible.password
                       ? styles.change__formButton_look_open
                       : styles.change__formButton_look_close
                   }`}
                   type='button'
                   aria-label='Кнопка скрыть/показать пароль'
-                  onClick={handlePasswordVisibility}
+                  onClick={() => handlePasswordVisibility('password')}
                 />
                 <span className={styles.change__formInput_error}>
                   {errors.password}
                 </span>
-              </div>
-              <div className={styles.change__formInput_container}>
-                <h3 className={styles.change__formInput_text}>Новый пароль</h3>
-                <input
-                  className={styles.change__formInput}
-                  id='repeat'
-                  name='repeat'
-                  type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder='Повторите пароль'
-                  minLength={8}
-                  value={values.repeat || ''}
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  required
-                />
+              </fieldset>
+              <fieldset className={styles.change__formInput_container}>
+                <label
+                  className={styles.change__formInput_text}
+                  htmlFor='repeat'
+                >
+                  Повторите пароль
+                  <input
+                    className={styles.change__formInput}
+                    id='repeat'
+                    name='repeat'
+                    type={isPasswordVisible.repeat ? 'text' : 'password'}
+                    placeholder='Повторите пароль'
+                    minLength={8}
+                    maxLength={16}
+                    value={values.repeat || ''}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                    required
+                  />
+                </label>
                 <button
                   className={`${styles.change__formButton_look} ${
-                    isPasswordVisible
+                    isPasswordVisible.repeat
                       ? styles.change__formButton_look_open
                       : styles.change__formButton_look_close
                   }`}
                   type='button'
                   aria-label='Кнопка скрыть/показать пароль'
-                  onClick={handlePasswordVisibility}
+                  onClick={() => handlePasswordVisibility('repeat')}
                 />
                 <span className={styles.change__formInput_error}>
                   {errors.repeat || errors.common}
                 </span>
-              </div>
+              </fieldset>
               <button
                 className={`${styles.change__formButton}
                   ${

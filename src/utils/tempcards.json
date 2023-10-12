@@ -8,7 +8,6 @@
       "author": "Автор бота 1",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 1",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 1"
@@ -21,7 +20,6 @@
       "author": "Автор бота 2",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 2",
       "count": 1,
       "category": "Грузы",
       "description": "Описание бота 2"
@@ -34,7 +32,6 @@
       "author": "Автор бота 3",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 3",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 3"
@@ -47,7 +44,6 @@
       "author": "Автор бота 4",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 4",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 4"
@@ -59,7 +55,6 @@
       "author": "Автор бота 5",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 5",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 5"
@@ -72,7 +67,6 @@
       "author": "Автор бота 6",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 6",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 6"
@@ -85,7 +79,6 @@
       "author": "Автор бота 7",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 7",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 7"
@@ -98,7 +91,6 @@
       "author": "Автор бота 8",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 8",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 8"
@@ -111,7 +103,6 @@
       "author": "Автор бота 9",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 9",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 9"
@@ -124,7 +115,6 @@
       "author": "Автор бота 10",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 10",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 10"
@@ -137,7 +127,6 @@
       "author": "Автор бота 11",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 11",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 11"
@@ -150,7 +139,6 @@
       "author": "Автор бота 12",
       "price": "7500.00",
       "categories": ["Доставка", "Грузы"],
-      "description": "Описание бота 12",
       "count": 1,
       "category": "Доставка",
       "description": "Описание бота 12"
