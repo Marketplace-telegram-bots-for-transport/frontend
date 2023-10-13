@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import styles from './BotCard.module.scss';
 
 const BotCard = ({
@@ -8,8 +9,19 @@ const BotCard = ({
   category,
   price,
   onBuyClick,
+  isProductInCart,
+  cartProducts,
   id,
 }) => {
+  const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
+
+  // Определить состояние кнопки купить в зависимости от наличия бота в корзине
+  useEffect(() => {
+    if (id && isProductInCart) {
+      setBotStatus(isProductInCart(id));
+    }
+  }, [id, isProductInCart, cartProducts]);
+
   return (
     <div className={styles.bot}>
       <div className={styles.bot__background}>
@@ -38,6 +50,7 @@ const BotCard = ({
           type='button'
           aria-label='Buy'
           onClick={onBuyClick}
+          disabled={botStatus}
         >
           Купить
         </button>
