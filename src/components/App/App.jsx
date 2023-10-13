@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
-import * as cartData from '../../utils/products.json';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import Header from '../Header/Header';
@@ -23,12 +22,6 @@ const App = () => {
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
-
-  // Временные товары корзины
-  useEffect(() => {
-    const { products } = cartData;
-    setCartProducts(products);
-  }, []);
 
   /* временные значения */
   const contextValue = useMemo(() => {
@@ -51,7 +44,7 @@ const App = () => {
     });
   };
 
-  // Функция увеличения количества товара
+  // Функция увеличения количества товаров
   const increaseProductCount = (id) => {
     setCartProducts(() => {
       return cartProducts.map((product) => {
@@ -66,7 +59,7 @@ const App = () => {
     });
   };
 
-  // Функция уменьшения количества товара
+  // Функция уменьшения количества товаров
   const decreaseProductCount = (id) => {
     setCartProducts(() => {
       return cartProducts.map((product) => {
@@ -86,6 +79,11 @@ const App = () => {
     setCartProducts([...cartProducts, newBot]);
   };
 
+  // Функция определяющая наличие данного бота в коризне
+  const isProductInCart = (id) => {
+    return cartProducts.some((product) => product.id === id);
+  };
+
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <div className={styles.page}>
@@ -99,7 +97,13 @@ const App = () => {
         <Routes>
           <Route
             path='/'
-            element={<Main addProductToCart={addProductToCart} />}
+            element={
+              <Main
+                cartProducts={cartProducts}
+                isProductInCart={isProductInCart}
+                addProductToCart={addProductToCart}
+              />
+            }
           />
 
           <Route
