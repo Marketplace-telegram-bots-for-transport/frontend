@@ -12,17 +12,26 @@ function Cart({
   increaseProductCount,
   decreaseProductCount,
 }) {
-  const [totalSum, setTotalSum] = useState(0.0);
-  const count = cartProducts.length;
+  const [totalSum, setTotalSum] = useState(0.0); // состояние для общей суммы заказа
+
+  // функция нахождения общего е=количнства товаров в корзине
+  const count = () => {
+    const val = cartProducts.reduce((previousValue, product) => {
+      return previousValue + product.count;
+    }, 0);
+    return val;
+  };
+
   let countText = '';
-  if (count === 1) {
-    countText = `${count} товар`;
-  } else if (count > 1 && count < 5) {
-    countText = `${count} товара`;
+  if (count() === 1) {
+    countText = `${count()} товар`;
+  } else if (count() > 1 && count() < 5) {
+    countText = `${count()} товара`;
   } else {
-    countText = `${count} товаров`;
+    countText = `${count()} товаров`;
   }
 
+  // функция расчета общей суммы заказа
   const findTotalSum = useCallback(() => {
     return cartProducts.reduce((previousValue, product) => {
       return (
@@ -33,7 +42,7 @@ function Cart({
 
   useEffect(() => {
     const sum = findTotalSum();
-    setTotalSum(sum);
+    setTotalSum(sum.toFixed(2));
   }, [cartProducts, findTotalSum]);
 
   return (
@@ -55,7 +64,7 @@ function Cart({
           <h3 className={styles.products__totalTitle}>Итог</h3>
           <div className={styles.products__totalContainer}>
             <p className={styles.products__count}>Всего: {countText}</p>
-            <p className={styles.products__sum}>{totalSum.toFixed(2)}₽</p>
+            <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
         </div>
       </div>
