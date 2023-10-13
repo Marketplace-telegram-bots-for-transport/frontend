@@ -31,7 +31,12 @@
   }
 
   &__totalTitle {
-    @include text($font-medium-24, $weight-600, $line-height-medium-24, $color-gray-text);
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-gray-text
+    );
   }
 
   &__totalContainer {
@@ -41,7 +46,12 @@
   }
 
   &__count {
-    @include text($font-medium-24, $weight-300, $line-height-medium-24, $color-gray-text);
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
   }
 
   &__sum {

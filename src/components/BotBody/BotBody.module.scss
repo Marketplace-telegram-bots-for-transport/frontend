@@ -29,12 +29,7 @@
 
   &__title {
     margin: 0;
-    @include text(
-      60px,
-      600,
-      75px,
-      #183357,
-    );
+    @include text(60px, 600, 75px, #183357);
   }
 
   &__linkLikeSection {
@@ -69,12 +64,7 @@
     display: flex;
     align-items: flex-start;
     margin: 15px 0 20px 0;
-    @include text(
-      24px,
-      300,
-      30px,
-      #35383B,
-    );
+    @include text(24px, 300, 30px, #35383b);
   }
 
   &__description {
@@ -90,12 +80,7 @@
     text-wrap: wrap;
     text-align: start;
     margin: 0;
-    @include text(
-      24px,
-      300,
-      30px,
-      #35383B,
-    );
+    @include text(24px, 300, 30px, #35383b);
   }
 
   &__descriptionExpanded {
@@ -109,11 +94,6 @@
     border: none;
     margin: 15px 0 0 auto;
     color: #3b7dd6;
-    @include text(
-      14px,
-      500,
-      17.5px,
-      #3B7DD6,
-    );
+    @include text(14px, 500, 17.5px, #3b7dd6);
   }
 }

@@ -13,7 +13,12 @@
   }
 
   &__title {
-    @include text($font-medium-24, $weight-300, $line-height-medium-24, $color-gray-text);
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
     text-align: center;
     margin-bottom: 20px;
   }
@@ -60,7 +65,12 @@
     padding: 10px 18px;
     margin-top: 5px;
     box-sizing: border-box;
-    @include text($font-small-14, $weight-300, $line-height-small-14, $color-gray-text);
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-gray-text
+    );
 
     &::placeholder {
       color: $color-blue-input-text;
@@ -68,7 +78,12 @@
   }
 
   &__inputHeading {
-    @include text($font-small-14, $weight-300, $line-height-small-14, $color-gray-text);
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-gray-text
+    );
     padding: 0 10px;
   }
 
@@ -81,13 +96,23 @@
   }
 
   &__cardDateSlash {
-    @include text($font-medium-24, $weight-300, $line-height-medium-24, $color-blue-input-text);
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-input-text
+    );
     margin: 0 10px;
     padding: 0;
   }
 
   &__totalCount {
-    @include text($font-payment-18, $weight-300, $line-height-payment-18, $color-gray-text);
+    @include text(
+      $font-payment-18,
+      $weight-300,
+      $line-height-payment-18,
+      $color-gray-text
+    );
     margin: 20px 0 10px;
   }
 
@@ -104,7 +129,12 @@
   }
 
   &__sum {
-    @include text($font-medium-24, $weight-600, $line-height-medium-24, $color-gray-text);
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-gray-text
+    );
     font-weight: 600;
   }
 
@@ -115,7 +145,12 @@
     padding: 10px 47px;
     background-color: $background-color-button-disable;
     border-radius: 15px;
-    @include text($font-medium-24, $weight-400, $line-height-medium-24, $color-button-text);
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
     transition: 0.3s;
 
     &_active {
@@ -131,6 +166,11 @@
     position: absolute;
     top: 60px;
     left: 10px;
-    @include text($font-small-14, $weight-300, $line-height-small-14, $color-red-errors);
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
   }
 }

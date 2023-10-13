@@ -18,22 +18,12 @@
   }
 
   &__mainTitle {
-    @include text(
-      14px,
-      500,
-      17.5px,
-      #3B7DD6,
-    );
+    @include text(14px, 500, 17.5px, #3b7dd6);
     margin: 10px auto 0 3px;
   }
 
   &__mainSubtitle {
     margin: 10px auto 0 5px;
-    @include text(
-      14px,
-      400,
-      17.5px,
-      #35383b,
-    );
+    @include text(14px, 400, 17.5px, #35383b);
   }
 }

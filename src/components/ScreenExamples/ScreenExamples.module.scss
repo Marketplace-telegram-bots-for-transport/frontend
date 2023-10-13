@@ -13,12 +13,7 @@
     width: 100%;
     margin: 0;
     text-align: start;
-    @include text(
-      36px,
-      600,
-      45px,
-      #35383B,
-    );
+    @include text(36px, 600, 45px, #35383b);
   }
 
   &__container {
