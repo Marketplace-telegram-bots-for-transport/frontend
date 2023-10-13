@@ -6,7 +6,7 @@ const Category = ({ name }) => {
       <div className={styles.category__img}>
         <div>img</div>
       </div>
-      <p>{name}</p>
+      <p className={styles.category__name}>{name}</p>
     </div>
   );
 };

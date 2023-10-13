@@ -1,18 +1,21 @@
+import { useRef } from 'react';
 import Carousel from 'react-multi-carousel';
 import Category from '../Category/Category';
 import styles from './Categories.module.scss';
 import 'react-multi-carousel/lib/styles.css';
+import CarouselCategoriesLeftBtn from '../UI/CategoriesLeftBtn/CarouselCategoriesLeftBtn';
 
 const Categories = ({ categories }) => {
+  const carouselRef = useRef(null);
+
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 4,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 10,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -26,29 +29,22 @@ const Categories = ({ categories }) => {
 
   return (
     <div className={styles.categories}>
-      <div style={{ position: 'relative' }}>
-        <Carousel
-          swipeable={false}
-          draggable={false}
-          showDots
-          responsive={responsive}
-          ssr // means to render carousel on server-side.
-          infinite
-          autoPlaySpeed={1000}
-          keyBoardControl
-          customTransition='all .5'
-          transitionDuration={500}
-          containerClass='carousel-container'
-          deviceType='desktop'
-          dotListClass='custom-dot-list-style'
-        >
-          {categories.map((category) => (
-            <div key={category.id}>
-              <Category name={category.name} />
-            </div>
-          ))}
-        </Carousel>
-      </div>
+      <Carousel
+        ref={carouselRef}
+        className={styles.categories__carousel}
+        renderArrowsWhenDisabled
+        infinite
+        responsive={responsive}
+        customLeftArrow={
+          <CarouselCategoriesLeftBtn carouselRef={carouselRef} />
+        }
+      >
+        {categories.map((category) => (
+          <div key={category.id}>
+            <Category name={category.name} />
+          </div>
+        ))}
+      </Carousel>
     </div>
   );
 };

@@ -1,5 +1,9 @@
-.carousel-container {
-  width: 100%;
-  background-color: red;
+.categories {
   min-width: 500px;
+  max-width: 1370px;
+  position: relative;
+
+  &__carousel {
+    position: unset;
+  }
 }
