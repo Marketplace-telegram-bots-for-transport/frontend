@@ -123,13 +123,21 @@
     right: 20px;
   }
 
+  &__input:focus+&__viewPassword {
+    background: url('../../images/eye-focus.svg');
+  }
+
   &__viewPasswordOn {
     position: absolute;
+    background: url('../../images/eye-off.svg');
     width: 20px;
     height: 20px;
-    background: url('../../images/eye-off.svg');
-    top: 15px;
+    top: 20px;
     right: 20px;
+  }
+
+  &__input:focus+&__viewPasswordOn {
+    background: url('../../images/eye-off-focus.svg');
   }
 
   &__button {
@@ -172,6 +180,6 @@
   }
 
   &__registrLink:hover {
-    color: #2F5E9D;
+    color: #2f5e9d;
   }
 }
