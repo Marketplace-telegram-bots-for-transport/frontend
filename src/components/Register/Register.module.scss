@@ -33,6 +33,10 @@
     cursor: pointer;
   }
 
+  &__back:hover {
+    background: url(../../images/back-left-lg-hover-min.svg);
+  }
+
   &__title {
     margin: 0 auto;
     color: var(
@@ -40,7 +44,7 @@
       var(--buttons-filled-pressed-button, #183357)
     );
     text-align: center;
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 24px;
     font-style: normal;
     font-weight: 300;
@@ -62,7 +66,7 @@
   &__inputName {
     margin: 10px 0 0;
     padding: 0 10px;
-    font-family: Geologica;
+    font-family: 'Geologica';
     color: #183357;
     font-size: 14px;
     font-style: normal;
@@ -80,12 +84,13 @@
       --web-main-color-dark,
       var(--buttons-filled-pressed-button, #183357)
     );
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
     width: -webkit-fill-available;
+    min-height: 50px;
   }
 
   &__input:focus {
@@ -95,7 +100,7 @@
 
   &__input::placeholder {
     color: var(--web-textbox-text, #84a7d5);
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -104,7 +109,7 @@
 
   &__error {
     color: var(--web-error, #e44f2f);
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -124,7 +129,7 @@
     width: 20px;
     height: 20px;
     background: url('../../images/eye.svg');
-    top: 15px;
+    top: 20px;
     right: 20px;
   }
 
@@ -133,13 +138,14 @@
     width: 20px;
     height: 20px;
     background: url('../../images/eye-off.svg');
-    top: 15px;
+    top: 20px;
     right: 20px;
   }
 
   &__approval {
     margin: 40px 0 0;
     display: flex;
+    align-items: center;
   }
 
   &__checkbox {
@@ -159,7 +165,7 @@
       --web-main-color-dark,
       var(--buttons-filled-pressed-button, #183357)
     );
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
@@ -172,7 +178,7 @@
     width: 100%;
     color: var(--web-white, #f8fafc);
     text-align: center;
-    font-family: Geologica;
+    font-family: 'Geologica';
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -181,6 +187,7 @@
     border: none;
     border-radius: 15px;
     background: var(--buttons-filled-default-button, #3b7dd6);
+    min-height: 50px;
   }
 
   &__button:hover {
