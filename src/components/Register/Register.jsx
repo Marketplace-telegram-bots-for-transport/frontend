@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
-// import back from '../../images/Logo.svg';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import CheckBox from '../CheckBox/CheckBox';
 
 function Register({ loggedIn, onRegister }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
@@ -156,17 +156,7 @@ function Register({ loggedIn, onRegister }) {
                 : 'Пароли не совпадают'
             }`}
           </span>
-          <div className={styles.register__approval}>
-            <input
-              className={styles.register__checkbox}
-              type='checkbox'
-              required
-              onChange={handleChange}
-            />
-            <span className={styles.register__label}>
-              Согласен на обработку персональных данных
-            </span>
-          </div>
+          <CheckBox onChange={handleChange} />
           <button
             className={styles.register__button}
             disabled={!isValid || isDisabled}

@@ -118,6 +118,10 @@
     min-height: 18px;
   }
 
+  &__error:last-of-type {
+    margin-bottom: 40px;
+  }
+
   &__password {
     margin: 0;
     border-radius: 10px;
@@ -133,6 +137,10 @@
     right: 20px;
   }
 
+  &__input:focus+&__viewPassword {
+    background: url('../../images/eye-focus.svg');
+  }
+
   &__viewPasswordOn {
     position: absolute;
     width: 20px;
@@ -142,35 +150,10 @@
     right: 20px;
   }
 
-  &__approval {
-    margin: 40px 0 0;
-    display: flex;
-    align-items: center;
+  &__input:focus+&__viewPasswordOn {
+    background: url('../../images/eye-off-focus.svg');
   }
 
-  &__checkbox {
-    display: flex;
-    width: 32px;
-    height: 32px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px solid var(--web-main-color, #3b7dd6);
-    background: var(--web-white, #f8fafc);
-  }
-
-  &__label {
-    margin: 0 0 0 15px;
-    color: var(
-      --web-main-color-dark,
-      var(--buttons-filled-pressed-button, #183357)
-    );
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-  }
 
   &__button {
     margin: 20px 0 0;
