@@ -4,7 +4,13 @@ import BotsList from '../BotsList/BotsList';
 import Categories from '../Categories/Categories';
 import * as cats from '../../utils/tempcats.json';
 
-const Main = ({ cartProducts, isProductInCart, addProductToCart }) => {
+const Main = ({
+  cartProducts,
+  isProductInCart,
+  addProductToCart,
+  increaseProductCount,
+  decreaseProductCount,
+}) => {
   const { categories } = cats;
 
   return (
@@ -15,6 +21,8 @@ const Main = ({ cartProducts, isProductInCart, addProductToCart }) => {
         cartProducts={cartProducts}
         isProductInCart={isProductInCart}
         addProductToCart={addProductToCart}
+        increaseProductCount={increaseProductCount}
+        decreaseProductCount={decreaseProductCount}
       />
     </main>
   );

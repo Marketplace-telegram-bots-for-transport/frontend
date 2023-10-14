@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Counter from '../Counter/Counter';
 import styles from './BotCard.module.scss';
 
 const BotCard = ({
@@ -12,6 +13,8 @@ const BotCard = ({
   isProductInCart,
   cartProducts,
   id,
+  increaseProductCount,
+  decreaseProductCount,
 }) => {
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
 
@@ -45,15 +48,23 @@ const BotCard = ({
           aria-label='Add-to-favourites'
           aria-hidden='true'
         />
-        <button
-          className={styles.bot__buyBtn}
-          type='button'
-          aria-label='Buy'
-          onClick={onBuyClick}
-          disabled={botStatus}
-        >
-          Купить
-        </button>
+        {!botStatus ? (
+          <button
+            className={styles.bot__buyBtn}
+            type='button'
+            aria-label='Buy'
+            onClick={onBuyClick}
+            disabled={botStatus}
+          >
+            Купить
+          </button>
+        ) : (
+          <Counter
+            product={cartProducts.find((obj) => obj.id === id)}
+            increaseProductCount={increaseProductCount}
+            decreaseProductCount={decreaseProductCount}
+          />
+        )}
       </div>
     </div>
   );
