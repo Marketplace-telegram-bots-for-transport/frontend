@@ -9,7 +9,10 @@
     display: inline-flex;
     align-items: center;
     user-select: none;
-    color: var(--web-main-color-dark, var(--buttons-filled-pressed-button, #183357));
+    color: var(
+      --web-main-color-dark,
+      var(--buttons-filled-pressed-button, #183357)
+    );
     font-family: 'Geologica';
     font-size: 14px;
     font-style: normal;
@@ -24,35 +27,35 @@
     height: 32px;
     flex-shrink: 0;
     flex-grow: 0;
-    border: 1px solid var(--web-main-color-light, #D3E2F7);
+    border: 1px solid var(--web-main-color-light, #d3e2f7);
     border-radius: 8px;
     margin-right: 15px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
-    background: var(--web-white, #F8FAFC);
+    background: var(--web-white, #f8fafc);
   }
 
-  &__input:not(:disabled):not(:checked)+&__text:hover::before {
-    border: 1px solid var(--web-main-color-light, #D3E2F7);
-    background-color: #F8FAFC;
+  &__input:not(:disabled):not(:checked) + &__text:hover::before {
+    border: 1px solid var(--web-main-color-light, #d3e2f7);
+    background-color: #f8fafc;
     background-image: url('../../images/checkmark-hover.svg');
     background-repeat: no-repeat;
     background-position: center;
   }
 
-  &__input:not(:disabled):active+&__text::before {
-    border: 1px solid var(--web-main-color, #3B7DD6);
+  &__input:not(:disabled):active + &__text::before {
+    border: 1px solid var(--web-main-color, #3b7dd6);
   }
 
-  &__input:checked+&__text::before {
-    border: 1px solid var(--web-main-color, #3B7DD6);
+  &__input:checked + &__text::before {
+    border: 1px solid var(--web-main-color, #3b7dd6);
     background-image: url('../../images/checkmark.svg');
     background-repeat: no-repeat;
     background-position: center;
   }
 
-  &__input:disabled+&__text::before {
-    background: var(--buttons-secondary-disabled-button, #E8F0FA);
+  &__input:disabled + &__text::before {
+    background: var(--buttons-secondary-disabled-button, #e8f0fa);
   }
 }

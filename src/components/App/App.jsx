@@ -81,7 +81,9 @@ const App = () => {
 
   // Функция определяющая наличие данного бота в коризне
   const isProductInCart = (id) => {
-    return cartProducts.some((product) => product.id === id);
+    const val = cartProducts.some((product) => product.id === id);
+    console.log(val);
+    return val;
   };
 
   return (
