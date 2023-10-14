@@ -38,7 +38,6 @@ const BotsList = ({
 
   const handleBuyClick = (bot) => {
     addProductToCart(bot);
-    console.log(cartProducts);
   };
 
   return (
