@@ -52,7 +52,7 @@ const BotCard = ({
           onClick={onBuyClick}
           disabled={botStatus}
         >
-          Купить
+          В корзину
         </button>
       </div>
     </div>
