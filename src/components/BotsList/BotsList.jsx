@@ -46,7 +46,7 @@ const BotsList = ({ cartProducts, isProductInCart, addProductToCart }) => {
               category={bot.category}
               price={bot.price}
               id={bot.id}
-              onBuyClick={handleBuyClick}
+              onBuyClick={() => handleBuyClick(bot)}
               isProductInCart={isProductInCart}
               cartProducts={cartProducts}
             />
