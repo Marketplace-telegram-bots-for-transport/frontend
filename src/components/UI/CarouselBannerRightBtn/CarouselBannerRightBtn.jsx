@@ -1,6 +1,6 @@
-import styles from './CarouselCatogoriesRightBtn.module.scss';
+import styles from './CarouselBannerRightBtn.module.scss';
 
-const CarouselCategoriesRightBtn = ({ carouselRef }) => {
+const CarouselBannerRightBtn = ({ carouselRef }) => {
   const handleRightArrowClick = () => {
     if (carouselRef.current) {
       carouselRef.current.next();
@@ -10,10 +10,10 @@ const CarouselCategoriesRightBtn = ({ carouselRef }) => {
   return (
     <button
       className={styles.btn}
-      aria-label='cats-right-arrow'
+      aria-label='banner-left-arrow'
       onClick={handleRightArrowClick}
     />
   );
 };
 
-export default CarouselCategoriesRightBtn;
+export default CarouselBannerRightBtn;
