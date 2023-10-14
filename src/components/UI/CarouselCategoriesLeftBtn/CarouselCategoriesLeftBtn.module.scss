@@ -1,0 +1,17 @@
+.btn {
+  background-image: url('../../../images/carousel-left-btn-categories.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 60px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 10px;
+  left: -95px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

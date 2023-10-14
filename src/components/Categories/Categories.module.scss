@@ -1,7 +1,12 @@
 .categories {
-  min-width: 500px;
-  max-width: 1370px;
-  position: relative;
+  max-width: 100%;
+
+  &__carouselWrapper {
+    min-width: 500px;
+    max-width: 1370px;
+    position: relative;
+    margin: 0 auto;
+  }
 
   &__carousel {
     position: unset;
