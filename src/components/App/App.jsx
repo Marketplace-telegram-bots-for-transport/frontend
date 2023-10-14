@@ -104,6 +104,8 @@ const App = () => {
                 cartProducts={cartProducts}
                 isProductInCart={isProductInCart}
                 addProductToCart={addProductToCart}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
               />
             }
           />

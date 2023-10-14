@@ -7,7 +7,13 @@ import {
 } from '../../utils/constants';
 import * as data from '../../utils/tempcards.json';
 
-const BotsList = ({ cartProducts, isProductInCart, addProductToCart }) => {
+const BotsList = ({
+  cartProducts,
+  isProductInCart,
+  addProductToCart,
+  increaseProductCount,
+  decreaseProductCount,
+}) => {
   const { bots } = data;
   const [displayedBots, setDisplayedBots] = useState([]);
   const [numberOfDisplayedBots, setNumerOfDisplayedBots] = useState(
@@ -49,6 +55,8 @@ const BotsList = ({ cartProducts, isProductInCart, addProductToCart }) => {
               onBuyClick={() => handleBuyClick(bot)}
               isProductInCart={isProductInCart}
               cartProducts={cartProducts}
+              increaseProductCount={increaseProductCount}
+              decreaseProductCount={decreaseProductCount}
             />
           </li>
         ))}
