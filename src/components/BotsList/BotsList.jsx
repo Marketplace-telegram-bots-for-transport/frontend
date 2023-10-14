@@ -35,51 +35,32 @@ const BotsList = ({ cartProducts, isProductInCart, addProductToCart }) => {
   };
 
   return (
-    <>
+    <div className={botsContainerClass} id='bots'>
       <ul className={styles.bots}>
-        {bots.map((bot) => (
+        {displayedBots.map((bot) => (
           <li key={bot.id}>
             <BotCard
               mainPhoto={bot.main_photo}
               name={bot.name}
               author={bot.author}
-              categories={bot.categories}
+              category={bot.category}
               price={bot.price}
               id={bot.id}
-              onBuyClick={() => handleBuyClick(bot)}
+              onBuyClick={handleBuyClick}
               isProductInCart={isProductInCart}
               cartProducts={cartProducts}
             />
           </li>
         ))}
       </ul>
-      <div className={botsContainerClass} id='bots'>
-        <ul className={styles.bots}>
-          {displayedBots.map((bot) => (
-            <li key={bot.id}>
-              <BotCard
-                mainPhoto={bot.main_photo}
-                name={bot.name}
-                author={bot.author}
-                category={bot.category}
-                price={bot.price}
-                id={bot.id}
-                onBuyClick={handleBuyClick}
-                isProductInCart={isProductInCart}
-                cartProducts={cartProducts}
-              />
-            </li>
-          ))}
-        </ul>
-        <button
-          className={moreBtnClass}
-          type='button'
-          onClick={handleDisplayMoreClick}
-        >
-          Показать еще ({NUMBER_OF_DISPLAYED_BOTS_1920})
-        </button>
-      </div>
-    </>
+      <button
+        className={moreBtnClass}
+        type='button'
+        onClick={handleDisplayMoreClick}
+      >
+        Показать еще ({NUMBER_OF_DISPLAYED_BOTS_1920})
+      </button>
+    </div>
   );
 };
 

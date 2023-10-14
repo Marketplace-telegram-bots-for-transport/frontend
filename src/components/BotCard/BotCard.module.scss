@@ -67,8 +67,11 @@
   }
 
   &__price {
+    font-family: 'Geologica', sans-serif;
     margin: 0;
     font-size: 24px;
+    font-weight: 400;
+    color: red;
   }
 
   &__buttons {
