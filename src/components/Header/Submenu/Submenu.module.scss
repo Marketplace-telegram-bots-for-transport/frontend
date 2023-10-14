@@ -144,11 +144,13 @@
       margin-right: 10px;
     }
     &_description {
-      max-width: 117px;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
       margin-right: 10px;
     }
     &_title {
-      max-width: 117px;
+      width: 117px;
       margin-bottom: 5px;
       overflow: hidden;
       text-overflow: ellipsis;

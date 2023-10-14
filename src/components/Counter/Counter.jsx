@@ -1,6 +1,10 @@
 import styles from './Counter.module.scss';
 
 function Counter({ product, increaseProductCount, decreaseProductCount }) {
+  if (!product) {
+    return <div>0</div>;
+  }
+
   function handleIncreaseProduct() {
     increaseProductCount(product.id);
   }
@@ -8,6 +12,7 @@ function Counter({ product, increaseProductCount, decreaseProductCount }) {
   function handleDecreaseProduct() {
     decreaseProductCount(product.id);
   }
+
   return (
     <div className={styles.product__count}>
       <button

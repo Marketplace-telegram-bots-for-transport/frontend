@@ -56,7 +56,7 @@ const BotCard = ({
             onClick={onBuyClick}
             disabled={botStatus}
           >
-            Купить
+            В корзину
           </button>
         ) : (
           <Counter

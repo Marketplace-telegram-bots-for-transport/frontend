@@ -1,3 +1,5 @@
+@import '../../vendor/_varibles';
+
 .bot {
   width: 240px;
   height: 458px;
@@ -41,6 +43,9 @@
   &__name {
     font-size: 24px;
     font-weight: 400;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__author {
@@ -97,12 +102,18 @@
     flex: 1;
     border: none;
     border-radius: 10px;
-    background-color: #3b7dd6;
     color: #f8fafc;
     font-size: 14px;
-
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     &:hover {
-      cursor: pointer;
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
     }
   }
 }
