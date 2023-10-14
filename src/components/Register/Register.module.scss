@@ -137,7 +137,7 @@
     right: 20px;
   }
 
-  &__input:focus+&__viewPassword {
+  &__input:focus + &__viewPassword {
     background: url('../../images/eye-focus.svg');
   }
 
@@ -150,10 +150,9 @@
     right: 20px;
   }
 
-  &__input:focus+&__viewPasswordOn {
+  &__input:focus + &__viewPasswordOn {
     background: url('../../images/eye-off-focus.svg');
   }
-
 
   &__button {
     margin: 20px 0 0;
