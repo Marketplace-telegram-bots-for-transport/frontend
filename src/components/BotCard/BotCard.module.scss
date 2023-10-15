@@ -30,6 +30,10 @@
     border-radius: 15px;
     width: 200px;
     height: 202px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__brief {

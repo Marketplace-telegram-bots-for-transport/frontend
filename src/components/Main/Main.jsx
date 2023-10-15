@@ -5,6 +5,7 @@ import Categories from '../Categories/Categories';
 import * as cats from '../../utils/tempcats.json';
 
 const Main = ({
+  apiBots,
   cartProducts,
   isProductInCart,
   addProductToCart,
@@ -18,6 +19,7 @@ const Main = ({
       <Banner />
       <Categories categories={categories} />
       <BotsList
+        apiBots={apiBots}
         cartProducts={cartProducts}
         isProductInCart={isProductInCart}
         addProductToCart={addProductToCart}
