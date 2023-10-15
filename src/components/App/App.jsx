@@ -89,14 +89,14 @@ const App = () => {
 
   // Функция добавления товара в корзину
   const addProductToCart = (newBot) => {
-    setCartProducts([...cartProducts, newBot]);
+    const updatedBot = { ...newBot, count: 1 };
+    setCartProducts([...cartProducts, updatedBot]);
   };
 
   // Функция определяющая наличие данного бота в коризне
   const isProductInCart = (id) => {
-    const val = cartProducts.some((product) => product.id === id);
-    console.log(val);
-    return val;
+    const productInCart = cartProducts.some((product) => product.id === id);
+    return productInCart;
   };
 
   return (
