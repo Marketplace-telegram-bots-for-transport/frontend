@@ -139,7 +139,19 @@ const App = () => {
             }
           />
 
-          <Route path='/botdetails/:botId' element={<BotDetails />} />
+          <Route
+            path='/botdetails/:botId'
+            element={
+              <BotDetails
+                apiBots={apiBots}
+                cartProducts={cartProducts}
+                isProductInCart={isProductInCart}
+                addProductToCart={addProductToCart}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+              />
+            }
+          />
 
           <Route path='/login' element={<Login />} />
 
