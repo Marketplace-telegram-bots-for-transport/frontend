@@ -1,30 +1,65 @@
 /* eslint-disable react/jsx-curly-brace-presence */
-import React from 'react';
-import { useParams } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
 import styles from './BotDetails.module.scss';
-import DetailsBasket from '../DetailsBasket/DetailsBasket';
+// import DetailsBasket from '../DetailsBasket/DetailsBasket';
 import BotHeader from '../BotHeader/BotHeader';
 import BotBody from '../BotBody/BotBody';
 import Rating from '../Rating/Rating';
 import ScreenExamples from '../ScreenExamples/ScreenExamples';
-import tempcards from '../../utils/tempcards.json'; // Импортируйте ваш JSON
+import Counter from '../Counter/Counter';
 
-function BotDetails() {
+function BotDetails({
+  apiBots,
+  cartProducts,
+  addProductToCart,
+  isProductInCart,
+  increaseProductCount,
+  decreaseProductCount,
+}) {
   // Используем useParams для извлечения параметра маршрута (botId)
-  // eslint-disable-next-line no-unused-vars
-  const { botId } = useParams();
-  console.log({ botId });
+  const botsArray = apiBots.results; // достаем массив с ботами с АПИ
+  const { botId } = useParams(); // достаем элементы карточки с ботом с главной страницы
+  const navigate = useNavigate();
+  const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
+  const botIdNumber = parseInt(botId, 10); // переделываем в число
+  const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
 
-  const botIdNumber = parseInt(botId, 10);
-  console.log({ botIdNumber });
+  // Определить состояние кнопки купить в зависимости от наличия бота в корзине
+  useEffect(() => {
+    if (bot.id && isProductInCart) {
+      setBotStatus(isProductInCart(bot.id));
+    }
+  }, [bot.id, isProductInCart, cartProducts]);
 
-  // Найдите бота с соответствующим id в вашем JSON-массиве
-  const bot = tempcards.bots.find((item) => item.id === botIdNumber);
-  console.log(bot);
+  // добавить в корзину
+  const handleBuyClick = (item) => {
+    addProductToCart(item);
+  };
+
+  const handelRedirect = (path) => {
+    navigate(path);
+  };
+
+  const counterStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    columnGap: '20px',
+    backgroundColor: '$background-white',
+    borderRadius: '10px',
+    border: '$border-main',
+    width: '60%',
+    height: '60px',
+    padding: '8px 80px',
+    boxSizing: 'border-box',
+    transition: '0.3s',
+    margin: '0 auto 0 65px',
+  };
 
   if (!bot) {
     // Если бот с заданным id не найден, можно отобразить сообщение об ошибке
-    return <div>Бот не найден</div>;
+    return console.log('бот не найден');
   }
   return (
     <section className={styles.details}>
@@ -36,10 +71,46 @@ function BotDetails() {
           botAuthor={bot.author}
           botDescription={bot.description}
         />
-        <ScreenExamples />
+        <ScreenExamples apiBots={apiBots} />
         <Rating />
       </div>
-      <DetailsBasket botPrice={bot.price} />
+      {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
+      <div className={styles.basketSection}>
+        <div className={styles.basketSection__basket}>
+          <h2 className={styles.basketSection__title}>Цена:</h2>
+          <p className={styles.basketSection__totalPrice}>
+            <span>{bot.price}</span>&#8381;
+          </p>
+          {!botStatus ? (
+            <button
+              className={styles.basketSection__button}
+              type='button'
+              aria-label='Buy'
+              onClick={() => handleBuyClick(bot)}
+              disabled={botStatus}
+            >
+              Добавить в корзину
+            </button>
+          ) : (
+            <>
+              <Counter
+                product={cartProducts.find((obj) => obj.id === bot.id)}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+                customStyles={counterStyles}
+              />
+              <button
+                className={styles.basketSection__button}
+                type='button'
+                aria-label='Cart redirect'
+                onClick={() => handelRedirect('/cart')}
+              >
+                Перейти в корзину
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </section>
   );
 }
