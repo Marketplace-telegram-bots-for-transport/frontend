@@ -61,23 +61,30 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
     };
   }, []);
 
-  /* СЧЕТЧИК ТОВАРОВ В КОРЗИНЕ */
-  const count = cartProducts.length;
-  let countText = '';
-  if (count === 1) {
-    countText = `${count} товар`;
-  } else if (count > 1 && count < 5) {
-    countText = `${count} товара`;
-  } else {
-    countText = `${count} товаров`;
-  }
-
   /* функция закрытия сабменю при переходе на новую страницу */
   const handelRedirect = (path) => {
     setIsProfileOpen(false);
     setIsBasketOpen(false);
     navigate(path);
   };
+
+  // функция нахождения общего е=количнства товаров в корзине
+  const count = () => {
+    const val = cartProducts.reduce((previousValue, product) => {
+      return previousValue + product.count;
+    }, 0);
+    return val;
+  };
+
+  /* СЧЕТЧИК ТОВАРОВ В КОРЗИНЕ */
+  let countText = '';
+  if (count() === 1) {
+    countText = `${count()} товар`;
+  } else if (count() > 1 && count() < 5) {
+    countText = `${count()} товара`;
+  } else {
+    countText = `${count()} товаров`;
+  }
 
   return (
     <section className={styles.submenu} ref={menuRef}>
@@ -93,7 +100,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
           onClick={handleBasketClick}
         />
         {cartProducts.length > 0 ? (
-          <p className={styles.submenu__basketCounter}>{count}</p>
+          <p className={styles.submenu__basketCounter}>{count()}</p>
         ) : (
           ''
         )}

@@ -2,71 +2,93 @@
   "categories": [
     {
       "id": 1,
-      "name": "Городской транспорт"
+      "name": "Все",
+      "imageUrl": "/images/categories/all.svg"
     },
     {
       "id": 2,
-      "name": "Метро"
+      "name": "Городской транспорт",
+      "imageUrl": "/images/categories/city-transport.svg"
     },
     {
       "id": 3,
-      "name": "Такси"
+      "name": "Метро",
+      "imageUrl": "/images/categories/metro.svg"
     },
     {
       "id": 4,
-      "name": "Оплата"
+      "name": "Такси",
+      "imageUrl": "/images/categories/taxi.svg"
     },
     {
       "id": 5,
-      "name": "Отзывы"
+      "name": "Оплата",
+      "imageUrl": "/images/categories/payment.svg"
     },
     {
       "id": 6,
-      "name": "Грузы"
+      "name": "Отзывы",
+      "imageUrl": "/images/categories/reviews.svg"
     },
     {
       "id": 7,
-      "name": "Доставка"
+      "name": "Грузы",
+      "imageUrl": "/images/categories/cargo.svg"
     },
     {
       "id": 8,
-      "name": "Паркинг"
+      "name": "Доставка",
+      "imageUrl": "/images/categories/delivery.svg"
     },
     {
       "id": 9,
-      "name": "Заправка"
+      "name": "Паркинг",
+      "imageUrl": "/images/categories/parking.svg"
     },
     {
       "id": 10,
-      "name": "Еще категория"
+      "name": "Заправка",
+      "imageUrl": "/images/categories/gas-station.svg"
     },
     {
       "id": 11,
-      "name": "И еще категория"
+      "name": "Еще категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 12,
-      "name": "И снова категория"
+      "name": "И еще категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 13,
-      "name": "И... категория"
+      "name": "И снова категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 14,
-      "name": "И еще рраз категория"
+      "name": "И... категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 15,
-      "name": "Иииии категория"
+      "name": "И еще рраз категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 16,
-      "name": "Да, и тут категория"
+      "name": "Иииии категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     },
     {
       "id": 17,
-      "name": "Хватит скроллить."
+      "name": "Да, и тут категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 18,
+      "name": "Хватит скроллить.",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
     }
   ]
 }

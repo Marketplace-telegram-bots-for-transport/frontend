@@ -17,6 +17,7 @@ function Payment({ totalSum }) {
     e.preventDefault();
     // Проверка валидности формы для отправки на сервер
     if (isValid) {
+      alert('Поздравляем, Вы совершили покупку!');
       // код для отправки данных
       resetForm();
     }

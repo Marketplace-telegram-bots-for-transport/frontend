@@ -9,12 +9,12 @@
 }
 
 .bots {
-  padding: 60px 165px 0 165px;
+  padding: 40px 165px 0 165px;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  justify-content: flex-start;
 
   &__moreBtn {
     width: 273px;

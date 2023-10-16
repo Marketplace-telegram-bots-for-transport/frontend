@@ -1,8 +1,15 @@
 // /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
+import getCategoryName from '../../utils/helpers';
 import styles from './BotBody.module.scss';
 
-function Botbody({ botName, botAuthor, botDescription, botImage }) {
+function Botbody({
+  botName,
+  botAuthor,
+  botCategory,
+  botDescription,
+  botImage,
+}) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
@@ -30,6 +37,9 @@ function Botbody({ botName, botAuthor, botDescription, botImage }) {
           </div>
         </div>
         <p className={styles.botBody__subtitle}>{botAuthor}</p>
+        <p className={styles.botBody__subtitle_category}>
+          {getCategoryName(botCategory)}
+        </p>
         <p
           className={`${styles.botBody__description} ${
             isDescriptionExpanded ? styles.botBody__descriptionExpanded : ''

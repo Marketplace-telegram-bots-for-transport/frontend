@@ -1,3 +1,5 @@
+@import '../../vendor/_varibles';
+
 .bot {
   width: 240px;
   height: 458px;
@@ -28,6 +30,11 @@
     border-radius: 15px;
     width: 200px;
     height: 202px;
+    object-fit: cover;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__brief {
@@ -41,6 +48,10 @@
   &__name {
     font-size: 24px;
     font-weight: 400;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    color: #183357;
   }
 
   &__author {
@@ -64,11 +75,17 @@
     color: #3b7dd6;
     background-color: #d3e2f7;
     border-radius: 5px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__price {
+    font-family: 'Geologica', sans-serif;
     margin: 0;
     font-size: 24px;
+    font-weight: 400;
+    color: #183357;
   }
 
   &__buttons {
@@ -95,12 +112,18 @@
     flex: 1;
     border: none;
     border-radius: 10px;
-    background-color: #3b7dd6;
     color: #f8fafc;
     font-size: 14px;
-
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     &:hover {
-      cursor: pointer;
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
     }
   }
 }

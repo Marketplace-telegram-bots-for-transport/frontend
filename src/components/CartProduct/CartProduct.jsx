@@ -15,7 +15,11 @@ function CartProduct({
   return (
     <li className={styles.product}>
       <Link className={styles.product__item} to={`/botdetails/${product.id}`}>
-        <div className={styles.product__img} />
+        <img
+          className={styles.product__img}
+          src={product.main_photo}
+          alt='изображение бота'
+        />
         <p className={styles.product__title}>{product.name}</p>
       </Link>
       <div className={styles.product__item}>

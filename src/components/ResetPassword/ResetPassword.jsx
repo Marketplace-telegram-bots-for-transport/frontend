@@ -6,7 +6,7 @@ import styles from './ResetPassword.module.scss';
 
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
-function PasswordReset() {
+function PasswordReset({ comeBack }) {
   const navigate = useNavigate();
   const { setOTP, email, setEmail } = useContext(CurrentUserContext);
   const { values, errors, handleChange, isValid } = useFormAndValidation();
@@ -46,7 +46,7 @@ function PasswordReset() {
             className={styles.reset__buttonTitle}
             type='button'
             aria-label='Кнопка назад'
-            onClick={() => navigate(-1)}
+            onClick={comeBack}
           />
           <h3 className={styles.reset__textTitle}>Восстановления пароля</h3>
         </div>

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Counter from '../Counter/Counter';
+import getCategoryName from '../../utils/helpers';
 import styles from './BotCard.module.scss';
 
 const BotCard = ({
@@ -12,6 +14,8 @@ const BotCard = ({
   isProductInCart,
   cartProducts,
   id,
+  increaseProductCount,
+  decreaseProductCount,
 }) => {
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
 
@@ -35,7 +39,7 @@ const BotCard = ({
         <p className={styles.bot__author}>{author}</p>
       </div>
       <div className={styles.bot__categories}>
-        <p className={styles.bot__category}>{category}</p>
+        <p className={styles.bot__category}>{getCategoryName(category)}</p>
       </div>
       <p className={styles.bot__price}>{price}₽</p>
       <div className={styles.bot__buttons}>
@@ -45,15 +49,23 @@ const BotCard = ({
           aria-label='Add-to-favourites'
           aria-hidden='true'
         />
-        <button
-          className={styles.bot__buyBtn}
-          type='button'
-          aria-label='Buy'
-          onClick={onBuyClick}
-          disabled={botStatus}
-        >
-          Купить
-        </button>
+        {!botStatus ? (
+          <button
+            className={styles.bot__buyBtn}
+            type='button'
+            aria-label='Buy'
+            onClick={onBuyClick}
+            disabled={botStatus}
+          >
+            В корзину
+          </button>
+        ) : (
+          <Counter
+            product={cartProducts.find((obj) => obj.id === id)}
+            increaseProductCount={increaseProductCount}
+            decreaseProductCount={decreaseProductCount}
+          />
+        )}
       </div>
     </div>
   );

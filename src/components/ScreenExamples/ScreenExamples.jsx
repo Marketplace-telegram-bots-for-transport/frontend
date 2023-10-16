@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import styles from './ScreenExamples.module.scss';
 import CardExample from '../CardExample/CardExample';
 import cardsData from './CardsArray';
-
+// заменить когда добавят в массив на сервере образцы экранов
 function ScreenExamples() {
+  // const bots = apiBots.results;
+  // console.log(bots);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevSlide = () => {
@@ -24,7 +26,7 @@ function ScreenExamples() {
         <button
           className={styles.screenExamples__sliderButtonLeft}
           onClick={handlePrevSlide}
-          aria-label='кнопка'
+          aria-label='button'
         />
         <div className={styles.screenExamples__cards}>
           {cardsData.slice(currentIndex, currentIndex + 4).map((card) => (
@@ -34,7 +36,7 @@ function ScreenExamples() {
         <button
           className={styles.screenExamples__sliderButtonRight}
           onClick={handleNextSlide}
-          aria-label='кнопка'
+          aria-label='button'
         />
       </div>
     </div>

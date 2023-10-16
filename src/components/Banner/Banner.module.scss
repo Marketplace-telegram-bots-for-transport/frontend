@@ -1,10 +1,34 @@
 .banner {
   width: 100%;
   height: 442px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: auto;
-  background-image: url('../../images/banner-background-new.png');
+  position: relative;
+
+  &__carousel {
+    position: unset;
+  }
+
+  &__dotList {
+    display: flex;
+    gap: 40px;
+    position: absolute;
+    bottom: 20px !important;
+  }
+
+  &__titlebox {
+    height: 442px;
+    background-image: url('../../images/banner-background-new.png');
+  }
+
+  &__dot {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+
+    &_active {
+      background-color: #3b7dd6;
+    }
+  }
 }

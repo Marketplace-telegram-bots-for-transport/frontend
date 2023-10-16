@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
@@ -15,6 +15,7 @@ import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
+import { fetchInitialBots } from '../../utils/api/getBots';
 
 const App = () => {
   const navigate = useNavigate();
@@ -22,6 +23,18 @@ const App = () => {
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+
+  // get api bots
+  const [apiBots, setApiBots] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const botData = await fetchInitialBots();
+      setApiBots(botData);
+    }
+
+    fetchData();
+  }, []);
 
   /* временные значения */
   const contextValue = useMemo(() => {
@@ -76,12 +89,19 @@ const App = () => {
 
   // Функция добавления товара в корзину
   const addProductToCart = (newBot) => {
-    setCartProducts([...cartProducts, newBot]);
+    const updatedBot = { ...newBot, count: 1 };
+    setCartProducts([...cartProducts, updatedBot]);
   };
 
   // Функция определяющая наличие данного бота в коризне
   const isProductInCart = (id) => {
-    return cartProducts.some((product) => product.id === id);
+    const productInCart = cartProducts.some((product) => product.id === id);
+    return productInCart;
+  };
+
+  // Функция, которая возвращает на предыдущую страницу
+  const handleGoBack = () => {
+    window.history.back();
   };
 
   return (
@@ -98,11 +118,16 @@ const App = () => {
           <Route
             path='/'
             element={
-              <Main
-                cartProducts={cartProducts}
-                isProductInCart={isProductInCart}
-                addProductToCart={addProductToCart}
-              />
+              apiBots !== null ? (
+                <Main
+                  apiBots={apiBots}
+                  cartProducts={cartProducts}
+                  isProductInCart={isProductInCart}
+                  addProductToCart={addProductToCart}
+                  increaseProductCount={increaseProductCount}
+                  decreaseProductCount={decreaseProductCount}
+                />
+              ) : null
             }
           />
 
@@ -115,21 +140,47 @@ const App = () => {
                 deleteCartProduct={deleteCartProduct}
                 increaseProductCount={increaseProductCount}
                 decreaseProductCount={decreaseProductCount}
+                comeBack={handleGoBack}
               />
             }
           />
 
-          <Route path='/botdetails/:botId' element={<BotDetails />} />
+          <Route
+            path='/botdetails/:botId'
+            element={
+              <BotDetails
+                apiBots={apiBots}
+                cartProducts={cartProducts}
+                isProductInCart={isProductInCart}
+                addProductToCart={addProductToCart}
+                increaseProductCount={increaseProductCount}
+                decreaseProductCount={decreaseProductCount}
+                comeBack={handleGoBack}
+              />
+            }
+          />
 
           <Route path='/login' element={<Login />} />
 
-          <Route path='/signup' element={<Register />} />
+          <Route
+            path='/signup'
+            element={<Register comeBack={handleGoBack} />}
+          />
 
-          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route
+            path='/reset-password'
+            element={<ResetPassword comeBack={handleGoBack} />}
+          />
 
-          <Route path='/OTP-password' element={<OTPPassword />} />
+          <Route
+            path='/OTP-password'
+            element={<OTPPassword comeBack={handleGoBack} />}
+          />
 
-          <Route path='/change-password' element={<ChangePassword />} />
+          <Route
+            path='/change-password'
+            element={<ChangePassword comeBack={handleGoBack} />}
+          />
         </Routes>
         <Footer />
       </div>
