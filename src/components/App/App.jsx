@@ -99,6 +99,11 @@ const App = () => {
     return productInCart;
   };
 
+  // Функция, которая возвращает на предыдущую страницу
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <div className={styles.page}>
@@ -135,6 +140,7 @@ const App = () => {
                 deleteCartProduct={deleteCartProduct}
                 increaseProductCount={increaseProductCount}
                 decreaseProductCount={decreaseProductCount}
+                comeBack={handleGoBack}
               />
             }
           />
@@ -149,19 +155,32 @@ const App = () => {
                 addProductToCart={addProductToCart}
                 increaseProductCount={increaseProductCount}
                 decreaseProductCount={decreaseProductCount}
+                comeBack={handleGoBack}
               />
             }
           />
 
           <Route path='/login' element={<Login />} />
 
-          <Route path='/signup' element={<Register />} />
+          <Route
+            path='/signup'
+            element={<Register comeBack={handleGoBack} />}
+          />
 
-          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route
+            path='/reset-password'
+            element={<ResetPassword comeBack={handleGoBack} />}
+          />
 
-          <Route path='/OTP-password' element={<OTPPassword />} />
+          <Route
+            path='/OTP-password'
+            element={<OTPPassword comeBack={handleGoBack} />}
+          />
 
-          <Route path='/change-password' element={<ChangePassword />} />
+          <Route
+            path='/change-password'
+            element={<ChangePassword comeBack={handleGoBack} />}
+          />
         </Routes>
         <Footer />
       </div>

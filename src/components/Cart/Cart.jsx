@@ -11,6 +11,7 @@ function Cart({
   deleteCartProduct,
   increaseProductCount,
   decreaseProductCount,
+  comeBack,
 }) {
   const [totalSum, setTotalSum] = useState(0.0); // состояние для общей суммы заказа
 
@@ -48,7 +49,7 @@ function Cart({
   return (
     <section className={styles.cart}>
       <div className={styles.products}>
-        <BackButton />
+        <BackButton comeBack={comeBack} />
         <ul className={styles.products__list}>
           {cartProducts.map((product) => (
             <CartProduct

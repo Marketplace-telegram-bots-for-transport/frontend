@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './BotHeader.module.scss';
 
@@ -29,3 +29,4 @@ function BotHeader({ botName }) {
   );
 }
 export default BotHeader;
+ */

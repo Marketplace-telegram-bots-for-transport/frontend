@@ -4,7 +4,7 @@ import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
 
-function Register({ loggedIn, onRegister }) {
+function Register({ loggedIn, onRegister, comeBack }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
   const navigate = useNavigate();
   const [type, setType] = React.useState('password');
@@ -56,10 +56,6 @@ function Register({ loggedIn, onRegister }) {
     }
   }
 
-  function goBack() {
-    navigate(-1);
-  }
-
   return (
     <main className={styles.register}>
       <div className={styles.register__registerContainer}>
@@ -67,7 +63,7 @@ function Register({ loggedIn, onRegister }) {
           <button
             aria-label='назад'
             className={styles.register__back}
-            onClick={goBack}
+            onClick={comeBack}
           />
           <h2 className={styles.register__title}>Регистрация</h2>
         </div>

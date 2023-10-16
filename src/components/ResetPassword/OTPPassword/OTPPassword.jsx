@@ -6,7 +6,7 @@ import styles from './OTPPassword.module.scss';
 
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 
-function OTPPassword() {
+function OTPPassword({ comeBack }) {
   const navigate = useNavigate();
 
   const { OTP, setOTP, email } = useContext(CurrentUserContext);
@@ -78,7 +78,7 @@ function OTPPassword() {
             className={styles.otp__buttonTitle}
             type='button'
             aria-label='Кнопка назад'
-            onClick={() => navigate(-1)}
+            onClick={comeBack}
           />
           <h3 className={styles.otp__textTitle}>Восстановления пароля</h3>
         </div>

@@ -7,7 +7,7 @@ import styles from './ChangePassword.module.scss';
 
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 
-function ChangePassword() {
+function ChangePassword({ comeBack }) {
   const navigate = useNavigate();
   const {
     values,
@@ -113,7 +113,7 @@ function ChangePassword() {
                 className={styles.change__buttonTitle}
                 type='button'
                 aria-label='Кнопка назад'
-                onClick={() => navigate(-1)}
+                onClick={comeBack}
               />
               <h3 className={styles.change__textTitle}>Введите новый пароль</h3>
             </div>

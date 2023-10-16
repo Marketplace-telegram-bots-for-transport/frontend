@@ -1,12 +1,13 @@
 @import './../../vendor/_varibles';
 
 .payment {
-  padding: 50px 165px 80px 135px;
+  padding: 50px 160px 80px 135px;
   background-image: url('../../images/Background-1.png');
 
   &__content {
     width: 415px;
     padding: 40px;
+    border-radius: 10px;
     box-sizing: border-box;
     background-color: $background-white;
     box-shadow: $box-shadow-main;

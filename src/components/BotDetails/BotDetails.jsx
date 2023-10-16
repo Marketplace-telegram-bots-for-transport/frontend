@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
 import styles from './BotDetails.module.scss';
 // import DetailsBasket from '../DetailsBasket/DetailsBasket';
-import BotHeader from '../BotHeader/BotHeader';
+// import BotHeader from '../BotHeader/BotHeader';
 import BotBody from '../BotBody/BotBody';
 import Rating from '../Rating/Rating';
 import ScreenExamples from '../ScreenExamples/ScreenExamples';
 import Counter from '../Counter/Counter';
+import BackButton from '../BackButton/BackButton';
 
 function BotDetails({
   apiBots,
@@ -16,6 +17,7 @@ function BotDetails({
   isProductInCart,
   increaseProductCount,
   decreaseProductCount,
+  comeBack,
 }) {
   // Используем useParams для извлечения параметра маршрута (botId)
   const botsArray = apiBots.results; // достаем массив с ботами с АПИ
@@ -64,11 +66,12 @@ function BotDetails({
   return (
     <section className={styles.details}>
       <div className={styles.details__mainSection}>
-        <BotHeader botName={bot.name} />
+        <BackButton botName={bot.name} comeBack={comeBack} />
         <BotBody
           botImage={bot.main_photo}
           botName={bot.name}
           botAuthor={bot.author}
+          botCategory={bot.category}
           botDescription={bot.description}
         />
         <ScreenExamples apiBots={apiBots} />
