@@ -9,6 +9,13 @@
     border: none;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
+    transition: background-image 0.3s ease;
+    &:hover {
+      background-image: url(../../images/back-icon-hover.svg);
+    }
+    &:active {
+      background-image: url(../../images/back-icon-pressed.svg);
+    }
   }
 
   &__title {
@@ -24,7 +31,10 @@
     transition: 0.3s;
 
     &:hover {
-      color: #2f5e9d;
+      color: $background-color-button-hover;
+    }
+    &:active {
+      color: $background-color-button-pressed;
     }
   }
 

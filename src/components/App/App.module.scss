@@ -2,5 +2,8 @@
   position: relative;
   z-index: 2;
   flex: 1;
-  font-family: 'Geologica';
+  width: 100vw;
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
 }
