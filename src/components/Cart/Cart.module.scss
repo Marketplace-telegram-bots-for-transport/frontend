@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   padding: 50px 125px 80px 165px;
-  border-right: 1px solid #d3e2f7;
+  border-right: $border-main;
   min-height: 100vh;
 
   &__list {
@@ -28,7 +28,7 @@
 
   &__total {
     padding-top: 30px;
-    border-top: 1px solid #d3e2f7;
+    border-top: $border-main;
   }
 
   &__totalTitle {
@@ -56,6 +56,6 @@
   }
 
   &__sum {
-    @include text($font-h2-60, $weight-600, $line-height-h2, $color-gray-text);
+    @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
   }
 }

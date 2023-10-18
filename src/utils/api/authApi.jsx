@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = 'http://80.87.96.7/api/users/';
 
 const handleResponse = (res) => {
   if (res.ok) {
@@ -38,7 +38,7 @@ export const login = (authData) => {
 };
 
 export const register = (authData) => {
-  return request('auth/token/register', 'POST', authData);
+  return request('', 'POST', authData);
 };
 
 export const logout = (authData) => {

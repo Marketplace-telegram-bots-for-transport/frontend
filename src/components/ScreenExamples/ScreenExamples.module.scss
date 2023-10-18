@@ -13,7 +13,10 @@
     width: 100%;
     margin: 0;
     text-align: start;
-    @include text(36px, 600, 45px, #35383b);
+    @include text($font-h2-36,
+    $weight-600,
+    $line-height-h2,
+    $color-gray-text);
   }
 
   &__container {

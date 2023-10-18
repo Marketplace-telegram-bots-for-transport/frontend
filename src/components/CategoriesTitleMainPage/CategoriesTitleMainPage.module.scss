@@ -1,8 +1,26 @@
-.title {
-  font-size: 60px;
-  font-weight: 600;
-  padding: 40px 0;
+@import './../../vendor/_varibles';
+
+.container {
+  position: absolute;
+  top: 515px;
+  left: 0;
   width: 100%;
+  max-width: 1920px;
+  margin: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 60px 0 0;
+  @include shadowBackground($background-white, $box-shadow-category);
+}
+
+.title {
+  margin: 0;
+  padding: 0;
   padding-left: 165px;
-  color: #183357;
+  @include text(
+    $font-h1-60,
+    $weight-600,
+    $line-height-h1,
+    $color-blue-dark-title
+  );
 }

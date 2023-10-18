@@ -1,3 +1,5 @@
+@import '../../vendor/varibles';
+
 .login {
   max-width: 415px;
   margin: 0 auto;
@@ -11,23 +13,17 @@
     flex-direction: column;
     box-sizing: border-box;
     border-radius: 20px;
-    background: #fff;
-    box-shadow:
-      0px 1px 3px 0px rgba(106, 141, 190, 0.1),
-      0px 6px 6px 0px rgba(106, 141, 190, 0.09),
-      0px 13px 8px 0px rgba(106, 141, 190, 0.05),
-      0px 23px 9px 0px rgba(106, 141, 190, 0.01),
-      0px 35px 10px 0px rgba(106, 141, 190, 0);
+    @include shadowBackground($background-white, $box-shadow-main);
   }
 
   &__title {
-    font-family: 'Geologica';
-    color: #183357;
     text-align: center;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
   }
 
   &__form {
@@ -46,66 +42,59 @@
   &__inputName {
     margin: 0;
     padding: 0 10px;
-    font-family: 'Geologica';
-    color: #183357;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
   }
 
   &__resetLink {
     margin: 0;
-    text-decoration: none;
-    color: var(--buttons-filled-default-button, #3b7dd6);
     text-align: right;
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
   }
 
   &__input {
     margin: 5px 0 0;
     padding: 10px 20px;
-    border-radius: 10px;
-    border: 1px solid var(--web-main-color-light, #d3e2f7);
-    background: #f8fafc;
-    color: var(
-      --web-main-color-dark,
-      var(--buttons-filled-pressed-button, #183357)
-    );
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
     width: -webkit-fill-available;
     min-height: 50px;
-  }
-
-  &__input:focus {
     outline: none;
-    border: 1px solid var(--web-main-color-dark, #183357);
-  }
-
-  &__input::placeholder {
-    color: var(--web-textbox-text, #84a7d5);
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+    @include input($border-main, $background-bots-main);
+    &:focus {
+      @include input($border-active, $background-bots-main);
+    }
+    &::placeholder {
+      color: $color-blue-input-text;
+    }
   }
 
   &__error {
-    color: var(--web-error, #e44f2f);
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
     margin: 5px 0 0;
   }
 
@@ -144,42 +133,45 @@
     margin: 63px 0 0;
     padding: 10px 30px;
     width: 100%;
-    color: var(--web-white, #f8fafc);
     text-align: center;
-    font-family: 'Geologica';
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
     cursor: pointer;
     border: none;
     border-radius: 15px;
-    background: var(--buttons-filled-default-button, #3b7dd6);
     min-height: 50px;
-  }
-
-  &__button:hover {
-    background: var(--buttons-filled-hovered-button, #2f5e9d);
-  }
-
-  &__button:disabled {
-    cursor: auto;
-    background: var(--buttons-filled-disabled-button, #9cbdea);
+    background-color: $background-color-button-default;
+    @include text(
+      $font-medium-button-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+    &:disabled {
+      margin: 43px 0 0;
+      background-color: $background-color-button-disable;
+    }
   }
 
   &__registrLink {
-    text-decoration: none;
-    margin: 21px 0 0;
-    color: #3b7dd6;
-    font-family: 'Geologica';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    margin: 10px 0 0;
+    padding: 11px 15px;
     text-align: center;
-  }
-
-  &__registrLink:hover {
-    color: #2f5e9d;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
   }
 }

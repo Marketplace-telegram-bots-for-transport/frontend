@@ -1,5 +1,5 @@
 @mixin text($size, $weight, $lineHeight, $color) {
-  font-family: 'Geologica';
+  font-family: 'Geologica Roman';
   font-style: normal;
   font-weight: $weight;
   font-size: $size;
@@ -28,7 +28,7 @@ $weight-600: 600;
 
 /* font size */
 $font-h1-60: 60px;
-$font-h2-60: 36px;
+$font-h2-36: 36px;
 $font-medium-24: 24px;
 $font-small-14: 14px;
 $font-footer-18: 18px;
@@ -41,10 +41,11 @@ $line-height-h1: 75px;
 $line-height-h2: 45px;
 $line-height-medium-24: 30px;
 $line-height-small-14: 17.5px;
-$line-height-footer: 22.5px;
+$line-height-footer-18: 22.5px;
 $line-height-payment-18: 22.5px;
 
 /* COLORS */
+$color-blue-text: #3b7dd6;
 $color-blue-dark-title: #183357;
 $color-gray-text: #35383b;
 $color-red-errors: #e44f2f;
@@ -75,6 +76,12 @@ $box-shadow-main:
   0px 13px 8px 0px rgba(106, 141, 190, 0.05),
   0px 23px 9px 0px rgba(106, 141, 190, 0.01),
   0px 35px 10px 0px rgba(106, 141, 190, 0);
+$box-shadow-category:
+  0px -5px 10px 0px rgba(142, 154, 169, 0.1),
+  0px -19px 19px 0px rgba(142, 154, 169, 0.09),
+  0px -42px 25px 0px rgba(142, 154, 169, 0.05),
+  0px -75px 30px 0px rgba(142, 154, 169, 0.01),
+  0px -116px 33px 0px rgba(142, 154, 169, 0);
 
 /* INPUTS */
 $border-main: 1px solid #d3e2f7;

@@ -40,12 +40,7 @@
     );
 
     &:hover {
-      @include text(
-        $font-medium-24,
-        $weight-500,
-        $line-height-medium-24,
-        $background-color-button-hover
-      );
+      color: $background-color-button-hover;
     }
   }
 }

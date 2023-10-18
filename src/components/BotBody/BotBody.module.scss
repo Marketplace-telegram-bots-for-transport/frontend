@@ -5,6 +5,7 @@
   flex-direction: row;
   column-gap: 41px;
   margin: 40px 0 auto 0;
+  max-width: 1141px;
   width: 100%;
   max-height: 100%;
 
@@ -20,6 +21,7 @@
   &__info {
     display: flex;
     flex-direction: column;
+    max-width: 901px;
     width: 100%;
   }
 
@@ -31,7 +33,12 @@
 
   &__title {
     margin: 0;
-    @include text(60px, 600, 75px, #183357);
+    @include text(
+      $font-h1-60,
+      $weight-600,
+      $line-height-h1,
+      $color-blue-dark-title
+    );
   }
 
   &__linkLikeSection {
@@ -43,58 +50,73 @@
   &__linkButton {
     width: 40px;
     height: 40px;
-    background-image: url('../../images/botDetails_images/Button_link.svg');
-    background-color: transparent;
-    background-size: cover;
+    border-radius: 100px;
+    background-image: url(../../images/botDetails_images/Button_link.svg);
+    background-color: #d3e2f7;
+    background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;
     border-style: none;
+    transition: background-image 0.3s ease;
+    &:hover {
+      background-image: url(../../images/botDetails_images/Button_link-hover.svg);
+    }
+    &:active {
+      background-image: url(../../images/botDetails_images/Button_link-pressed.svg);
+    }
   }
 
   &__favoritesButton {
     width: 40px;
     height: 40px;
-    background-image: url('../../images/botDetails_images/Button_like.svg');
-    background-color: transparent;
-    background-size: cover;
+    border-radius: 100px;
+    background-image: url(../../images/botDetails_images/Button_like.svg);
+    background-color: #d3e2f7;
+    background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;
     border-style: none;
+    transition: background-image 0.3s ease;
+    &:hover {
+      background-image: url(../../images/botDetails_images/Button_like-hover.svg);
+    }
+    &:active {
+      background-image: url(../../images/botDetails_images/Button_like-pressed.svg);
+    }
   }
 
   &__subtitle {
     display: flex;
     align-items: flex-start;
     margin: 15px 0 20px 0;
-    @include text(24px, 300, 30px, #35383b);
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
     &_category {
-      margin: 0;
+      margin: 0 0 20px 0;
       padding: 5px 10px;
       display: inline-block;
-      font-size: 10px;
-      font-weight: 400;
-      color: #3b7dd6;
       background-color: #d3e2f7;
       border-radius: 5px;
-      margin-bottom: 20px;
       width: fit-content;
+      @include text(10px, $weight-400, 12.5px, $color-blue-text);
     }
   }
 
   &__description {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
     max-height: 90px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    line-height: 1.5em;
     transition: max-height 0.3s ease;
-    text-wrap: wrap;
-    text-align: start;
     margin: 0;
-    @include text(24px, 300, 30px, #35383b);
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
   }
 
   &__descriptionExpanded {
@@ -103,11 +125,38 @@
   }
 
   &__showMoreButton {
-    color: #8ea1b5;
-    background: transparent;
-    border: none;
     margin: 15px 0 0 auto;
-    color: #3b7dd6;
-    @include text(14px, 500, 17.5px, #3b7dd6);
+    border: none;
+    padding-left: 20px;
+    background: transparent;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 10px 7px;
+    transition: background-image 0.3s ease;
+    cursor: pointer;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-blue-text
+    );
+    &_arrowUp {
+      background-image: url(../../images/botDetails_images/arrowUp.svg);
+      &:hover {
+        background-image: url(../../images/botDetails_images/arrowUp-hover.svg);
+      }
+      &:active {
+        background-image: url(../../images/botDetails_images/arrowUp-pressed.svg);
+      }
+    }
+    &_arrowDown {
+      background-image: url(../../images/botDetails_images/arrowDown.svg);
+      &:hover {
+        background-image: url(../../images/botDetails_images/arrowDown-hover.svg);
+      }
+      &:active {
+        background-image: url(../../images/botDetails_images/arrowDown-pressed.svg);
+      }
+    }
   }
 }

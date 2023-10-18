@@ -27,11 +27,11 @@ function Botbody({
           <h2 className={styles.botBody__title}>{botName}</h2>
           <div className={styles.botBody__linkLikeSection}>
             <button
-              className={styles.botBody__linkButton}
+              className={styles.botBody__favoritesButton}
               aria-label='кнопка'
             />
             <button
-              className={styles.botBody__favoritesButton}
+              className={styles.botBody__linkButton}
               aria-label='кнопка'
             />
           </div>
@@ -48,7 +48,13 @@ function Botbody({
           {botDescription}
         </p>
         <button
-          className={styles.botBody__showMoreButton}
+          className={`${styles.botBody__showMoreButton}
+          ${
+            isDescriptionExpanded
+              ? styles.botBody__showMoreButton_arrowUp
+              : styles.botBody__showMoreButton_arrowDown
+          }
+          `}
           onClick={toggleDescription}
         >
           {isDescriptionExpanded ? 'Скрыть описание' : 'Показать полный текст'}
