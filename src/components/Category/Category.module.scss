@@ -1,3 +1,5 @@
+@import './../../vendor/_varibles';
+
 .category {
   width: 115px;
   height: 141px;
@@ -16,11 +18,12 @@
     justify-content: center;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 45px;
   }
 
   &__name {
-    font-size: 18px;
+    margin: 0;
     text-align: center;
-    color: #183357;
+    @include text(18px, $weight-300, 21px, $color-blue-dark-title);
   }
 }

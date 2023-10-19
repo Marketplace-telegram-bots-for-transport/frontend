@@ -2,26 +2,25 @@
 
 .rating {
   display: flex;
-  padding: 20px 20px 20px 0;
+  padding: 0;
+  margin-top: 40px;
   width: 100%;
-  box-sizing: border-box;
-  column-gap: 15px;
 
   &__title {
     text-align: start;
-    font-size: 38px;
-    @include text(36px, 600, 45px, #35383b);
+    @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
   }
 }
 
 .left {
+  margin: 0;
+  margin-right: 30px;
+  padding: 0;
   text-align: center;
 }
 
 .averageRating {
-  font-size: 48px;
-  font-weight: bold;
-  color: #35383b;
+  @include text($font-h1-60, $weight-600, $line-height-h1, $color-gray-text);
 }
 
 .stars {
@@ -68,7 +67,7 @@
 
 .ratingBarInner {
   height: 100%;
-  background-color: #3b7dd6;
+  background-color: $background-color-button-default;
   border-radius: 5px;
   width: 0;
   transition: width 0.5s;

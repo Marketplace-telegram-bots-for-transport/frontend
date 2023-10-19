@@ -126,7 +126,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 0 0;
-    border-top: 1px solid #d3e2f7;
+    border-top: $border-main;
   }
 
   &__sum {
@@ -136,7 +136,6 @@
       $line-height-medium-24,
       $color-gray-text
     );
-    font-weight: 600;
   }
 
   &__button {

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import * as info from '../../../utils/infoUser.json';
+import info from '../../../utils/infoUser.json';
 
 import styles from './Submenu.module.scss';
 

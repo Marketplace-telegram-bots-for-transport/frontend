@@ -1,3 +1,5 @@
+@import './../../vendor/_varibles';
+
 .botsContainer {
   display: flex;
   flex-direction: column;
@@ -21,16 +23,23 @@
     height: 50px;
     border: none;
     margin-top: 60px;
-    background-color: #fff;
-    color: #3b7dd6;
-    font-size: 24px;
-
+    background-color: $background-white;
+    cursor: pointer;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
     &_hidden {
       display: none;
     }
 
     &:hover {
-      cursor: pointer;
+      color: $background-color-button-hover;
+    }
+    &:active {
+      color: $background-color-button-pressed;
     }
   }
 }

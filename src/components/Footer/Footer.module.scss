@@ -2,8 +2,6 @@
 
 .footer {
   flex-shrink: 0;
-  max-width: 1920px;
-  margin: 0 auto;
   border-top: 0.5px solid #3b7dd6;
   padding: 40px 0 40px;
   background-color: $background-white;
@@ -58,7 +56,7 @@
       @include text(
         $font-footer-18,
         $weight-300,
-        $line-height-footer,
+        $line-height-footer-18,
         $color-link-main
       );
       transition: color 0.3s ease;
@@ -80,7 +78,7 @@
       @include text(
         $font-footer-18,
         $weight-300,
-        $line-height-footer,
+        $line-height-footer-18,
         $color-link-main
       );
       transition: color 0.3s ease;
