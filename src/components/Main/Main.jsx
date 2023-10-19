@@ -2,7 +2,7 @@ import styles from './Main.module.scss';
 import Banner from '../Banner/Banner';
 import BotsList from '../BotsList/BotsList';
 import Categories from '../Categories/Categories';
-import * as cats from '../../utils/tempcats.json';
+import cats from '../../utils/tempcats.json';
 
 const Main = ({
   apiBots,
