@@ -165,7 +165,9 @@ const App = () => {
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
                 />
-              ) : null
+              ) : (
+                'пусто'
+              )
             }
           />
 

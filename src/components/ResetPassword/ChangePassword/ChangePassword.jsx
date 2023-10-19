@@ -25,6 +25,7 @@ function ChangePassword({ comeBack }) {
   }); // состояние просмотра пароля
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
 
   /* ФУНКЦИЯ ИЗМЕНЕНИЯ ВИДИМОСТИ ПОЛЯ С ПАРОЛЕМ */
   function handlePasswordVisibility(field) {
@@ -67,6 +68,20 @@ function ChangePassword({ comeBack }) {
     inputValidities.password,
     inputValidities.repeat,
   ]);
+
+  // Функция для валидации текущего поля при смене фокуса
+  const handleBlur = useCallback(() => {
+    if (focusedField === 'password') {
+      //
+    } else if (focusedField === 'repeat') {
+      //
+    }
+  }, [focusedField]);
+
+  // Эффект для запуска валидации при изменении состояния focusedField
+  useEffect(() => {
+    handleBlur();
+  }, [focusedField, handleBlur]);
 
   /* ФУНКЦИЯ ОТПРАВКИ НОВОГО ПАРОЛЯ НА СЕРВЕР И ОТОБРАЖЕНИЯ ОКНА С УСПЕХОМ СМЕНЫ ПАРОЛЯ */
   function sendNewPassword() {
@@ -134,11 +149,13 @@ function ChangePassword({ comeBack }) {
                     name='password'
                     type={isPasswordVisible.password ? 'text' : 'password'}
                     placeholder='Новый пароль (от 8 до 16 символов)'
-                    value={values.password || ''}
+                    defaultValue={values.password || ''}
                     minLength={8}
                     maxLength={16}
-                    onChange={(e) => {
+                    onFocus={() => setFocusedField('password')}
+                    onBlur={(e) => {
                       handleChange(e);
+                      handleBlur();
                     }}
                     required
                   />
@@ -171,9 +188,11 @@ function ChangePassword({ comeBack }) {
                     placeholder='Повторите пароль'
                     minLength={8}
                     maxLength={16}
-                    value={values.repeat || ''}
-                    onChange={(e) => {
+                    defaultValue={values.repeat || ''}
+                    onFocus={() => setFocusedField('repeat')}
+                    onBlur={(e) => {
                       handleChange(e);
+                      handleBlur();
                     }}
                     required
                   />
