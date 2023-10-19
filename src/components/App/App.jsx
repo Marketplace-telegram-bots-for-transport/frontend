@@ -16,10 +16,11 @@ import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots } from '../../utils/api/getBots';
+import * as authorizeApi from '../../utils/api/authorizeApi';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
@@ -35,6 +36,8 @@ const App = () => {
 
     fetchData();
   }, []);
+
+  // Здесь будет проверка токена
 
   /* временные значения */
   const contextValue = useMemo(() => {
@@ -104,6 +107,41 @@ const App = () => {
     window.history.back();
   };
 
+  //  Функция авторизации
+  const handleLogin = (values) => {
+    authorizeApi
+      .authorize(values.password, values.username)
+      .then((res) => {
+        if (res.auth_token) {
+          console.log('успешный вход');
+          localStorage.setItem('jwt', res.auth_token);
+          setIsLoggedIn(true);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //  Функция регистрации пользователя
+  const handleRegister = (values) => {
+    authorizeApi
+      .register(
+        values.email,
+        values.username,
+        values.password,
+        values.confirm_password
+      )
+      .then(() => {
+        console.log('регистрация успешна');
+        handleLogin(values);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={contextValue}>
       <div className={styles.page}>
@@ -160,11 +198,20 @@ const App = () => {
             }
           />
 
-          <Route path='/login' element={<Login />} />
+          <Route
+            path='/login'
+            element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
+          />
 
           <Route
             path='/signup'
-            element={<Register comeBack={handleGoBack} />}
+            element={
+              <Register
+                comeBack={handleGoBack}
+                loggedIn={isLoggedIn}
+                onRegister={handleRegister}
+              />
+            }
           />
 
           <Route

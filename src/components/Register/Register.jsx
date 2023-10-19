@@ -24,12 +24,12 @@ function Register({ loggedIn, onRegister, comeBack }) {
   }, [loggedIn, navigate]);
 
   React.useEffect(() => {
-    if (values.passwordrepeat === values.password) {
+    if (values.confirm_password === values.password) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [values.passwordrepeat, values.password]);
+  }, [values.confirm_password, values.password]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -77,16 +77,16 @@ function Register({ loggedIn, onRegister, comeBack }) {
             className={styles.register__input}
             placeholder='Введите логин'
             type='text'
-            id='register'
-            name='register'
+            id='username'
+            name='username'
             required
             pattern='^[a-zA-Zа-яА-Я\s\-]+$'
             maxLength='16'
             minLength='2'
-            value={values.register || ''}
+            value={values.username || ''}
             onChange={handleChange}
           />
-          <span className={styles.register__error}>{errors.register}</span>
+          <span className={styles.register__error}>{errors.username}</span>
           <h3 className={styles.register__inputName}>E-mail</h3>
           <input
             className={styles.register__input}
@@ -130,10 +130,10 @@ function Register({ loggedIn, onRegister, comeBack }) {
               className={styles.register__input}
               placeholder='Повторите пароль'
               type={typeRepeat}
-              id='passwordrepeat'
-              name='passwordrepeat'
+              id='confirm_password'
+              name='confirm_password'
               required
-              value={values.passwordrepeat || ''}
+              value={values.confirm_password || ''}
               onChange={handleChange}
             />
             <div
@@ -147,7 +147,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
           </div>
           <span className={styles.register__error}>
             {`${
-              values.passwordrepeat === values.password
+              values.confirm_password === values.password
                 ? ''
                 : 'Пароли не совпадают'
             }`}
