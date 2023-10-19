@@ -1,6 +1,5 @@
 // /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
-import getCategoryName from '../../utils/helpers';
 import styles from './BotBody.module.scss';
 
 function Botbody({
@@ -37,9 +36,7 @@ function Botbody({
           </div>
         </div>
         <p className={styles.botBody__subtitle}>{botAuthor}</p>
-        <p className={styles.botBody__subtitle_category}>
-          {getCategoryName(botCategory)}
-        </p>
+        <p className={styles.botBody__subtitle_category}>{botCategory}</p>
         <p
           className={`${styles.botBody__description} ${
             isDescriptionExpanded ? styles.botBody__descriptionExpanded : ''

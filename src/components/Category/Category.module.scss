@@ -23,11 +23,6 @@
 
   &__name {
     text-align: center;
-    @include text(
-      18px,
-      $weight-300,
-      21px,
-      $color-blue-dark-title
-    );
+    @include text(18px, $weight-300, 21px, $color-blue-dark-title);
   }
 }

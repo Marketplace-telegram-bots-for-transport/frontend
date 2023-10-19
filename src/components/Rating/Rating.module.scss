@@ -8,10 +8,7 @@
 
   &__title {
     text-align: start;
-    @include text($font-h2-36,
-    $weight-600,
-    $line-height-h2,
-    $color-gray-text);
+    @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
   }
 }
 
@@ -23,12 +20,7 @@
 }
 
 .averageRating {
-  @include text(
-    $font-h1-60,
-    $weight-600,
-    $line-height-h1,
-    $color-gray-text
-  );
+  @include text($font-h1-60, $weight-600, $line-height-h1, $color-gray-text);
 }
 
 .stars {

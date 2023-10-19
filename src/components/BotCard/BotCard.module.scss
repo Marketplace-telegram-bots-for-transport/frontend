@@ -53,12 +53,7 @@
 
   &__author {
     margin-bottom: 17px;
-    @include text(
-      $font-small-14,
-      $weight-300,
-      $line-height-small-14,
-      #84a7d5
-    );
+    @include text($font-small-14, $weight-300, $line-height-small-14, #84a7d5);
   }
 
   &__categories {
