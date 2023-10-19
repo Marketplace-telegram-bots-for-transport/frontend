@@ -42,14 +42,14 @@ function Login({ onLogin, loggedIn }) {
             className={styles.login__input}
             placeholder='Логин или email'
             type='text'
-            id='login'
-            name='login'
+            id='username'
+            name='username'
             required
-            value={values.login || ''}
+            value={values.username || ''}
             onChange={handleChange}
             minLength='2'
           />
-          <span className={styles.login__error}>{errors.login}</span>
+          <span className={styles.login__error}>{errors.username}</span>
           <div className={styles.login__inputNameContainer}>
             <h3 className={styles.login__inputName}>Пароль</h3>
             <Link to='/reset-password' className={styles.login__resetLink}>
