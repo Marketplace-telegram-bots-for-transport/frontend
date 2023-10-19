@@ -37,6 +37,8 @@ const App = () => {
     fetchData();
   }, []);
 
+  // Здесь будет проверка токена
+
   /* временные значения */
   const contextValue = useMemo(() => {
     return { OTP, setOTP, email, setEmail };
