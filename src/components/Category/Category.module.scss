@@ -22,6 +22,7 @@
   }
 
   &__name {
+    margin: 0;
     text-align: center;
     @include text(18px, $weight-300, 21px, $color-blue-dark-title);
   }
