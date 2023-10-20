@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../../context/CurrentUserContext'; /* временное значение */
 
@@ -10,13 +10,36 @@ function OTPPassword({ comeBack }) {
   const navigate = useNavigate();
 
   const { OTP, setOTP, email } = useContext(CurrentUserContext);
-  const { values, handleChange, isValid, setIsValid, errors } =
+  const { values, handleChange, setIsValid, errors, inputValidities, isValid } =
     useFormAndValidation();
 
-  const [timerCount, setTimerCount] = useState(60);
+  const inputRefs = useRef([...Array(6)].map(() => React.createRef()));
+  const [timerCount, setTimerCount] = useState(5);
   const [OTPinput, setOTPinput] = useState([0, 0, 0, 0, 0, 0]);
   const [disable, setDisable] = useState(true);
   const [commonError, setCommonError] = useState('');
+
+  /* функция проверки введеных данных и автоматического перехода 
+  к следующему инпуту для заполнения */
+  const handleInputChange = (e, index) => {
+    handleChange(e);
+    setOTPinput((prevInput) => {
+      const updatedInput = [...prevInput];
+      updatedInput[index] = e.target.value;
+      return updatedInput;
+    });
+
+    const allInputsFilled = OTPinput.every((input) => input !== 0);
+
+    // есть ли следующий инпут и не все ли инпуты уже заполнены
+    if (
+      e.target.value &&
+      index < inputRefs.current.length - 1 &&
+      !allInputsFilled
+    ) {
+      inputRefs.current[index + 1].current.focus();
+    }
+  };
 
   /* ФУНКЦИЯ ПОВТОРНОГО ЗАПРОСА ОДНОРАЗОВОГО ПАРОЛЯ + СБРОСА ТАЙМЕР */
   function handleResendOTP(e) {
@@ -30,7 +53,7 @@ function OTPPassword({ comeBack }) {
     console.log(randomOTP);
     setOTP(randomOTP);
     setDisable(true);
-    setTimerCount(60);
+    setTimerCount(5);
     /* ПРАВИЛЬНЫЙ СПОСОБ
       запрос на сервер 
         ..., {
@@ -56,6 +79,11 @@ function OTPPassword({ comeBack }) {
     setCommonError('Некорректный код');
   }
 
+  // Обнуляем общую ошибку commonError при изменении данных
+  useEffect(() => {
+    setCommonError('');
+  }, [values]);
+
   /* USEEFFECT ДЛЯ НЕПРЕРЫВНОЙ РАБОТЫ ТАЙМЕРА ОБРАТНОГО ОТСЧЕТА И ОТСЛЕЖИВАНИЕ СОСТОЯНИИ КНОПКИ */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,6 +97,31 @@ function OTPPassword({ comeBack }) {
     }, 1000);
     return () => clearInterval(interval);
   }, [disable]);
+
+  const inputElements = inputRefs.current.map((ref, index) => (
+    <input
+      // eslint-disable-next-line react/no-array-index-key
+      key={`input-${index}`}
+      className={`
+        ${styles.otp__formInput} 
+        ${styles.otp__formInput_number}
+      `}
+      id={`input${index + 1}`}
+      name={`input${index + 1}`}
+      type='text'
+      pattern='[0-9]'
+      placeholder='-'
+      maxLength={1}
+      defaultValue={values[`input${index + 1}`] || ''}
+      onChange={(e) => handleInputChange(e, index)}
+      onBlur={(e) => {
+        handleInputChange(e, index);
+        setIsValid(inputValidities[`input${index + 1}`]);
+      }}
+      required
+      ref={ref}
+    />
+  ));
 
   return (
     <section className={styles.otp}>
@@ -86,45 +139,23 @@ function OTPPassword({ comeBack }) {
           <h3 className={styles.otp__formText}>
             Введите код, присланный на почту {email}
           </h3>
-          {OTPinput.map((value, index) => (
-            <input
-              // eslint-disable-next-line react/no-array-index-key
-              key={`input-${index}`}
-              className={`
-                ${styles.otp__formInput} 
-                ${styles.otp__formInput_number}
-              `}
-              id={`input${index + 1}`}
-              name={`input${index + 1}`}
-              type='text'
-              pattern='[0-9]'
-              placeholder='-'
-              maxLength={1}
-              value={values[`input${index + 1}`] || ''}
-              onChange={(e) => {
-                handleChange(e);
-                setOTPinput((prevInput) => {
-                  const updatedInput = [...prevInput];
-                  updatedInput[index] = e.target.value;
-                  return updatedInput;
-                });
-              }}
-              required
-            />
-          ))}
+          {inputElements}
           <div className={styles.otp__formInput_errorsContainer}>
-            {OTPinput.map((_, index) => (
-              <span
-                // eslint-disable-next-line react/no-array-index-key
-                key={`input-${index}`}
-                className={styles.otp__formInput_error}
-              >
-                {errors[`input${index + 1}`]}
-              </span>
-            ))}
+            {OTPinput.map(
+              (_, index) =>
+                !inputValidities[`input${index + 1}`] && (
+                  <span
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`input-error-${index}`}
+                    className={styles.otp__formInput_error}
+                  >
+                    {errors[`input${index + 1}`]}
+                  </span>
+                )
+            )}
           </div>
           <span className={styles.otp__formInput_error_commonError}>
-            {commonError}
+            {commonError || ''}
           </span>
           <button
             className={`${styles.otp__formButton}

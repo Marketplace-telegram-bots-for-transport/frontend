@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Counter from '../Counter/Counter';
-import getCategoryName from '../../utils/helpers';
 import styles from './BotCard.module.scss';
 
 const BotCard = ({
@@ -39,7 +38,7 @@ const BotCard = ({
         <p className={styles.bot__author}>{author}</p>
       </div>
       <div className={styles.bot__categories}>
-        <p className={styles.bot__category}>{getCategoryName(category)}</p>
+        <p className={styles.bot__category}>{category}</p>
       </div>
       <p className={styles.bot__price}>{price}₽</p>
       <div className={styles.bot__buttons}>

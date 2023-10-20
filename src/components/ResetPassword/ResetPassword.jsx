@@ -8,19 +8,20 @@ import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function PasswordReset({ comeBack }) {
   const navigate = useNavigate();
-  const { setOTP, email, setEmail } = useContext(CurrentUserContext);
-  const { values, errors, handleChange, isValid } = useFormAndValidation();
+  const { setOTP, setEmail } = useContext(CurrentUserContext);
+  const { values, errors, setIsValid, inputValidities, handleChange } =
+    useFormAndValidation();
+
+  const handleBlur = () => {
+    setIsValid(inputValidities.email);
+  };
 
   /* ФУНКЦИЯ ГЕНЕРАЦИИ РАНДОМНОГО КОДА С ОТПРАВКОЙ НА ПОЧТУ */
   function createOTP(e) {
     e.preventDefault();
 
-    if (!isValid) {
-      return;
-    }
-
     /* генерим 6-ти-значный код */
-    if (email) {
+    if (inputValidities.email) {
       const randomOTP = Math.floor(Math.random() * 900000 + 100000);
       setOTP(randomOTP);
       console.log(randomOTP);
@@ -60,25 +61,30 @@ function PasswordReset({ comeBack }) {
             name='email'
             type='email'
             placeholder='Введите эл. почту'
-            value={values.email || ''}
-            onChange={(e) => {
+            defaultValue={values.email || ''}
+            onBlur={(e) => {
               handleChange(e);
               setEmail(e.target.value);
+              handleBlur();
             }}
             required
           />
-          <span className={styles.reset__formInput_error}>{errors.email}</span>
+          {!inputValidities.email && (
+            <span className={styles.reset__formInput_error}>
+              {errors.email}
+            </span>
+          )}
           <button
             className={`${styles.reset__formButton}
                 ${
-                  isValid
+                  inputValidities.email
                     ? styles.reset__formButton
                     : styles.reset__formButton_disabled
                 }
               `}
             type='submit'
             aria-label='Кнопка отправить'
-            disabled={!isValid}
+            disabled={!inputValidities.email}
           >
             Отправить код
           </button>
