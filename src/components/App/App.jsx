@@ -37,7 +37,25 @@ const App = () => {
     fetchData();
   }, []);
 
-  // Здесь будет проверка токена
+  // // Проверка токена
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
+      authorizeApi
+        .checkToken(jwt)
+        .then((res) => {
+          console.log('успешная проверка токена');
+          if (res) {
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          localStorage.removeItem('jwt');
+          navigate('/login', { replace: true });
+          console.log(err);
+        });
+    }
+  }, [isLoggedIn, navigate]);
 
   /* временные значения */
   const contextValue = useMemo(() => {
@@ -47,6 +65,7 @@ const App = () => {
   /* Функция для выхода из профиля, 
   должна будет стирать данные токена */
   const handleLogOut = () => {
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     navigate('/');
   };

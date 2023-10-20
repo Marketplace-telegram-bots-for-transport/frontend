@@ -38,13 +38,13 @@ export function authorize(password, username) {
 
 // eslint-disable-next-line camelcase
 export function checkToken(auth_token) {
-  return request(`${url}/api/users/me/`, {
+  return request(`${url}/users/me/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       // eslint-disable-next-line camelcase
-      Authorization: `Bearer ${auth_token}`,
+      Authorization: `Token ${auth_token}`,
     },
   });
 }
