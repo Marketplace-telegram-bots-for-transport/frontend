@@ -44,7 +44,7 @@ export function checkToken(auth_token) {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       // eslint-disable-next-line camelcase
-      Authorization: `Bearer ${auth_token}`,
+      Authorization: `Token ${auth_token}`,
     },
   });
 }
