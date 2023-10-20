@@ -38,7 +38,7 @@ export function authorize(password, username) {
 
 // eslint-disable-next-line camelcase
 export function checkToken(auth_token) {
-  return request(`${url}/api/users/me/`, {
+  return request(`${url}/users/me/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

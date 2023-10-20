@@ -37,7 +37,30 @@ const App = () => {
     fetchData();
   }, []);
 
-  // Здесь будет проверка токена
+  // // Проверка токена
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-use-before-define
+  //   handleCheckToken();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isLoggedIn]);
+
+  // const handleCheckToken = () => {
+  //   if (localStorage.getItem('jwt')) {
+  //     const jwt = localStorage.getItem('jwt');
+  //     authorizeApi
+  //       .checkToken(jwt)
+  //       .then((res) => {
+  //         if (res) {
+  //           setIsLoggedIn(true);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         localStorage.removeItem('jwt');
+  //         navigate('/login', { replace: true });
+  //         console.log(err);
+  //       });
+  //   }
+  // };
 
   /* временные значения */
   const contextValue = useMemo(() => {
