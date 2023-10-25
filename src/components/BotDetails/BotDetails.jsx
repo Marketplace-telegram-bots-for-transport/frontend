@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-curly-brace-presence */
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
@@ -9,6 +10,7 @@ import Rating from '../Rating/Rating';
 import ScreenExamples from '../ScreenExamples/ScreenExamples';
 import Counter from '../Counter/Counter';
 import BackButton from '../BackButton/BackButton';
+import { fetchBotById } from '../../utils/api/getBotByID';
 
 function BotDetails({
   apiBots,
@@ -21,11 +23,27 @@ function BotDetails({
 }) {
   // Используем useParams для извлечения параметра маршрута (botId)
   const botsArray = apiBots.results; // достаем массив с ботами с АПИ
+  console.log(botsArray);
   const { botId } = useParams(); // достаем элементы карточки с ботом с главной страницы
   const navigate = useNavigate();
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
   const botIdNumber = parseInt(botId, 10); // переделываем в число
   const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
+
+  console.log(botIdNumber);
+
+  // делаем запрос на получение конкретного бота
+  const [currentBotById, setCurrentBotById] = useState(null);
+
+  useEffect(() => {
+    async function fetchBotId() {
+      const botCardId = await fetchBotById(botIdNumber);
+      setCurrentBotById(botCardId);
+    }
+    fetchBotId(botIdNumber);
+  }, [botIdNumber]);
+
+  console.log(currentBotById);
 
   // Определить состояние кнопки купить в зависимости от наличия бота в корзине
   useEffect(() => {
@@ -75,8 +93,9 @@ function BotDetails({
           botCategory={bot.category}
           botDescription={bot.description}
         />
-        <ScreenExamples apiBots={apiBots} />
-        <Rating />
+        <ScreenExamples array={bot.photo_examples} />
+
+        <Rating currentBotById />
       </div>
       {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
       <div className={styles.basketSection}>
