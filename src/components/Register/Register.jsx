@@ -16,6 +16,11 @@ function Register({ loggedIn, onRegister, comeBack }) {
     `${styles.register__viewPassword}`
   );
   const [isDisabled, setIsDisabled] = React.useState(true);
+  const [isErrorLogin, setIsErrorLogin] = React.useState(false);
+  const [isErrorEmail, setIsErrorEmail] = React.useState(false);
+  const [isErrorPassward, setIsErrorPassward] = React.useState(false);
+  const [isErrorConfirmPassward, setIsErrorConfirmPassward] =
+    React.useState(false);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -85,8 +90,17 @@ function Register({ loggedIn, onRegister, comeBack }) {
             minLength='2'
             value={values.username || ''}
             onChange={handleChange}
+            onBlur={() => {
+              setIsErrorLogin(true);
+            }}
           />
-          <span className={styles.register__error}>{errors.username}</span>
+          <span
+            className={`${styles.register__error} ${
+              isErrorLogin && styles.register__errorVisible
+            }`}
+          >
+            {errors.username}
+          </span>
           <h3 className={styles.register__inputName}>E-mail</h3>
           <input
             className={styles.register__input}
@@ -98,8 +112,17 @@ function Register({ loggedIn, onRegister, comeBack }) {
             pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
             value={values.email || ''}
             onChange={handleChange}
+            onBlur={() => {
+              setIsErrorEmail(true);
+            }}
           />
-          <span className={styles.register__error}>{errors.email}</span>
+          <span
+            className={`${styles.register__error} ${
+              isErrorEmail && styles.register__errorVisible
+            }`}
+          >
+            {errors.email}
+          </span>
           <h3 className={styles.register__inputName}>Пароль</h3>
           <div className={styles.register__password}>
             <input
@@ -113,6 +136,9 @@ function Register({ loggedIn, onRegister, comeBack }) {
               maxLength='16'
               value={values.password || ''}
               onChange={handleChange}
+              onBlur={() => {
+                setIsErrorPassward(true);
+              }}
             />
             <div
               className={passwardEyeClass}
@@ -123,7 +149,13 @@ function Register({ loggedIn, onRegister, comeBack }) {
               aria-label='key'
             />
           </div>
-          <span className={styles.register__error}>{errors.password}</span>
+          <span
+            className={`${styles.register__error} ${
+              isErrorPassward && styles.register__errorVisible
+            }`}
+          >
+            {errors.password}
+          </span>
           <h3 className={styles.register__inputName}>Повторите пароль</h3>
           <div className={styles.register__password}>
             <input
@@ -135,6 +167,9 @@ function Register({ loggedIn, onRegister, comeBack }) {
               required
               value={values.confirm_password || ''}
               onChange={handleChange}
+              onBlur={() => {
+                setIsErrorConfirmPassward(true);
+              }}
             />
             <div
               className={passwardRepeatEyeClass}
@@ -145,7 +180,11 @@ function Register({ loggedIn, onRegister, comeBack }) {
               aria-label='key'
             />
           </div>
-          <span className={styles.register__error}>
+          <span
+            className={`${styles.register__error} ${
+              isErrorConfirmPassward && styles.register__errorVisible
+            }`}
+          >
             {`${
               values.confirm_password === values.password
                 ? ''

@@ -4,7 +4,17 @@ function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(res);
+  // return Promise.reject(res);
+  return res.text().then((text) => {
+    // eslint-disable-next-line prefer-promise-reject-errors
+    return Promise.reject({
+      status: res.status,
+      errorText:
+        JSON.parse(text).message === 'Validation failed'
+          ? JSON.parse(text).validation.body.message
+          : JSON.parse(text).message,
+    });
+  });
 }
 
 // eslint-disable-next-line no-shadow
