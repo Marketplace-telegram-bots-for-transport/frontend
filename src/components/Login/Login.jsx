@@ -10,6 +10,8 @@ function Login({ onLogin, loggedIn }) {
   const [passwardEyeClass, setPasswardEyeClass] = React.useState(
     `${styles.login__viewPassword}`
   );
+  const [isErrorLogin, setIsErrorLogin] = React.useState(false);
+  const [isErrorPassward, setIsErrorPassward] = React.useState(false);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -48,8 +50,17 @@ function Login({ onLogin, loggedIn }) {
             value={values.username || ''}
             onChange={handleChange}
             minLength='2'
+            onBlur={() => {
+              setIsErrorLogin(true);
+            }}
           />
-          <span className={styles.login__error}>{errors.username}</span>
+          <span
+            className={`${styles.login__error} ${
+              isErrorLogin && styles.login__errorVisible
+            }`}
+          >
+            {errors.username}
+          </span>
           <div className={styles.login__inputNameContainer}>
             <h3 className={styles.login__inputName}>Пароль</h3>
             <Link to='/reset-password' className={styles.login__resetLink}>
@@ -68,6 +79,9 @@ function Login({ onLogin, loggedIn }) {
               maxLength='16'
               value={values.password || ''}
               onChange={handleChange}
+              onBlur={() => {
+                setIsErrorPassward(true);
+              }}
             />
             <div
               className={passwardEyeClass}
@@ -78,7 +92,13 @@ function Login({ onLogin, loggedIn }) {
               aria-label='key'
             />
           </div>
-          <span className={styles.login__error}>{errors.password}</span>
+          <span
+            className={`${styles.login__error} ${
+              isErrorPassward && styles.login__errorVisible
+            }`}
+          >
+            {errors.password}
+          </span>
           <button className={styles.login__button} disabled={!isValid}>
             Войти
           </button>
