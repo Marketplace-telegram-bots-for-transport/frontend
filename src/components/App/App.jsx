@@ -15,8 +15,9 @@ import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
-import { fetchInitialBots } from '../../utils/api/getBots';
+import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
+import * as userApi from '../../utils/api/userApi';
 
 const App = () => {
   const navigate = useNavigate();
@@ -24,9 +25,14 @@ const App = () => {
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+  const [currentUser, setCurrentUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(''); // данные в поисковая строка
+  const [searchResult, setSearchResult] = useState([]); // результат поиска
+  const [apiBots, setApiBots] = useState(null); // get api bots
 
-  // get api bots
-  const [apiBots, setApiBots] = useState(null);
+  const contextValue = useMemo(() => {
+    return { OTP, setOTP, email, setEmail, currentUser };
+  }, [OTP, setOTP, email, setEmail, currentUser]);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,6 +42,33 @@ const App = () => {
 
     fetchData();
   }, []);
+
+  // фильтрация ботов через поисковую строку
+  useEffect(() => {
+    async function fetchSearch() {
+      const botsList = await fetchSearchBots(searchQuery);
+      console.log('botsList', botsList);
+
+      const filteredBots =
+        searchQuery.trim() === ''
+          ? botsList.results
+          : botsList.results.filter((bot) => {
+              const botNameLowerCase = bot.name.toLocaleLowerCase();
+              const botDescriptionLowerCase =
+                bot.description.toLocaleLowerCase();
+              const searchQueryLowerCase = searchQuery.toLocaleLowerCase();
+
+              return (
+                botNameLowerCase.includes(searchQueryLowerCase) ||
+                botDescriptionLowerCase.includes(searchQueryLowerCase)
+              );
+            });
+      console.log('filteredBots', filteredBots);
+      setSearchResult(filteredBots);
+    }
+
+    fetchSearch();
+  }, [searchQuery]);
 
   // // Проверка токена
   useEffect(() => {
@@ -57,15 +90,23 @@ const App = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  /* временные значения */
-  const contextValue = useMemo(() => {
-    return { OTP, setOTP, email, setEmail };
-  }, [OTP, setOTP, email, setEmail]);
+  // получение данных пользователя
+  useEffect(() => {
+    async function fetchUserData() {
+      const jwt = localStorage.getItem('jwt');
+      const userData = await userApi.getUserInfo(jwt);
+      console.log('userData', userData);
+      setCurrentUser(userData);
+    }
 
-  /* Функция для выхода из профиля, 
-  должна будет стирать данные токена */
+    fetchUserData();
+  }, []);
+
+  // Функция для выхода из профиля
   const handleLogOut = () => {
     localStorage.removeItem('jwt');
+    setCurrentUser('');
+    localStorage.clear();
     setIsLoggedIn(false);
     navigate('/');
   };
@@ -123,7 +164,7 @@ const App = () => {
 
   // Функция, которая возвращает на предыдущую страницу
   const handleGoBack = () => {
-    window.history.back();
+    navigate(-1);
   };
 
   //  Функция авторизации
@@ -162,13 +203,15 @@ const App = () => {
   };
 
   return (
-    <CurrentUserContext.Provider value={contextValue}>
-      <div className={styles.page}>
+    <div className={styles.page}>
+      <CurrentUserContext.Provider value={contextValue}>
         <Header
           isLoggedIn={isLoggedIn}
           isLogOut={handleLogOut}
           cartProducts={cartProducts}
           deleteCartProduct={deleteCartProduct}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
         />
 
         <Routes>
@@ -183,10 +226,9 @@ const App = () => {
                   addProductToCart={addProductToCart}
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
+                  searchResult={searchResult}
                 />
-              ) : (
-                'пусто'
-              )
+              ) : null
             }
           />
 
@@ -251,8 +293,8 @@ const App = () => {
           />
         </Routes>
         <Footer />
-      </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </div>
   );
 };
 

@@ -28,18 +28,43 @@
         background-color: $background-color-button-pressed;
       }
     }
-    &_profile {
+  }
+
+  &__buttonProfile {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 100px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    &_img {
       width: 60px;
       height: 60px;
-      margin-left: 20px;
-      background-image: url(../../../images/profile-min.svg);
-      background-size: 30px 36px;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-      &_open {
-        background-color: $background-color-button-pressed;
+      border-radius: 100px;
+      &:hover {
+        opacity: 0.8;
       }
+    }
+  }
+
+  &__buttonProfile_default {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 100px;
+    background: $background-color-button-default center no-repeat;
+    background-image: url(../../../images/profile-min.svg);
+    background-size: 30px 36px;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    cursor: pointer;
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &_open {
+      background-color: $background-color-button-pressed;
     }
   }
 

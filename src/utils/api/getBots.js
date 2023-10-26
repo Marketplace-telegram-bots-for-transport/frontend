@@ -22,3 +22,14 @@ export const fetchMoreBots = async (url) => {
     return null;
   }
 };
+
+export const fetchSearchBots = async (searchValue) => {
+  try {
+    const apiUrl = `${BASE_URL}?search=${searchValue}`;
+    const response = await axios.get(apiUrl);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
