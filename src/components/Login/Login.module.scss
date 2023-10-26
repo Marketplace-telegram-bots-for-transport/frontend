@@ -89,6 +89,7 @@
   }
 
   &__error {
+    display: none;
     @include text(
       $font-small-14,
       $weight-300,
@@ -96,6 +97,10 @@
       $color-red-errors
     );
     margin: 5px 0 0;
+  }
+
+  &__errorVisible {
+    display: inline;
   }
 
   &__password {
