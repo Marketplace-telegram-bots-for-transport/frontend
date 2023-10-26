@@ -1,0 +1,74 @@
+@import './../../vendor/_varibles';
+
+.rating {
+  display: flex;
+  padding: 0;
+  margin-top: 40px;
+  width: 100%;
+
+  &__title {
+    text-align: start;
+    @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
+  }
+}
+
+.left {
+  margin: 0;
+  margin-right: 30px;
+  padding: 0;
+  text-align: center;
+}
+
+.averageRating {
+  @include text($font-h1-60, $weight-600, $line-height-h1, $color-gray-text);
+}
+
+.stars {
+  margin-top: 10px;
+  display: flex;
+}
+
+.star {
+  font-size: 32px;
+  color: #345474;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.star:last-child {
+  margin-right: 0;
+}
+
+.star-5:hover ~ .star-5,
+.star-4:hover ~ .star-4,
+.star-3:hover ~ .star-3,
+.star-2:hover ~ .star-2,
+.star-1:hover ~ .star-1 {
+  color: #ccc;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.ratingsCount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  column-gap: 10px;
+}
+
+.ratingBar {
+  width: 450px;
+  height: 20px;
+  background-color: #d3e2f7;
+  border-radius: 5px;
+}
+
+.ratingBarInner {
+  height: 100%;
+  background-color: $background-color-button-default;
+  border-radius: 5px;
+  width: 0;
+  transition: width 0.5s;
+}

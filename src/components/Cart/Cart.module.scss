@@ -1,0 +1,61 @@
+@import './../../vendor/_varibles.scss';
+
+.cart {
+  display: flex;
+  justify-content: center;
+  max-width: 1920px;
+  width: 100%;
+  padding: 90px 0 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-color: $background-white;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 125px 80px 165px;
+  border-right: $border-main;
+  min-height: 100vh;
+
+  &__list {
+    padding: 60px 0 30px;
+    width: 915px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+  }
+
+  &__total {
+    padding-top: 30px;
+    border-top: $border-main;
+  }
+
+  &__totalTitle {
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-gray-text
+    );
+  }
+
+  &__totalContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__count {
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
+  }
+
+  &__sum {
+    @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
+  }
+}

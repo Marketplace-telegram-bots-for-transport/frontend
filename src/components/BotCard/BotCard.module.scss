@@ -1,0 +1,132 @@
+@import '../../vendor/_varibles';
+
+.bot {
+  width: 240px;
+  height: 458px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  @include shadowBackground($background-input, $box-shadow-main);
+
+  &__background {
+    background-image: url('../../images/bot-alt.svg');
+    background-color: #d3e2f7;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 15px;
+    width: 200px;
+    height: 202px;
+  }
+
+  &__img {
+    border-radius: 15px;
+    width: 200px;
+    height: 202px;
+    object-fit: cover;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__brief {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-bottom: 0.5px solid;
+    border-color: #d3e2f7;
+  }
+
+  &__name {
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__author {
+    margin-bottom: 17px;
+    @include text($font-small-14, $weight-300, $line-height-small-14, #84a7d5);
+  }
+
+  &__categories {
+    display: flex;
+    gap: 5px;
+  }
+
+  &__category {
+    margin: 0;
+    padding: 5px 10px;
+    display: inline-block;
+    background-color: #d3e2f7;
+    border-radius: 5px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    @include text(10px, $weight-400, 12.5px, $color-blue-text);
+  }
+
+  &__price {
+    margin: 0;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__favBtn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #d3e2f7;
+    background-image: url(../../images/add-to-favourites-btn.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.3s ease;
+    cursor: pointer;
+    &:hover {
+      background-image: url(../../images/add-to-favourites-btn-hover.svg);
+    }
+    &:active {
+      background-image: url(../../images/add-to-favourites-btn-pressed.svg);
+    }
+  }
+
+  &__buyBtn {
+    flex: 1;
+    border: none;
+    border-radius: 10px;
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+  }
+}

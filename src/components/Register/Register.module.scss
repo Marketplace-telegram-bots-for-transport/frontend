@@ -1,0 +1,182 @@
+@import './../../vendor/_varibles';
+
+.register {
+  max-width: 455px;
+  margin: 0 auto;
+  padding: 151px 0 64px;
+
+  &__registerContainer {
+    display: flex;
+    padding: 40px;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 20px;
+    @include shadowBackground($background-white, $box-shadow-main);
+  }
+
+  &__titleContainer {
+    margin: 0 0 0 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__back {
+    width: 24px;
+    height: 24px;
+    background: url(../../images/back-left-lg-min.svg);
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-image: url(../../images/back-left-lg-hover-min.svg);
+    }
+    &:active {
+      background-image: url(../../images/back-left-lg-pressed-min.svg);
+    }
+  }
+
+  &__title {
+    margin: 0 auto;
+    text-align: center;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__form {
+    margin: 30px 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__inputContainer {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__inputName {
+    margin: 10px 0 0;
+    padding: 0 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+  }
+
+  &__input {
+    margin: 5px 0 0;
+    padding: 10px 20px;
+    outline: none;
+    width: -webkit-fill-available;
+    min-height: 50px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+    @include input($border-main, $background-input);
+    &:focus {
+      @include input($border-active, $background-input);
+    }
+    &::placeholder {
+      color: $color-blue-input-text;
+    }
+  }
+
+  &__error {
+    margin: 5px 0 0;
+    min-height: 18px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__password {
+    margin: 0;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  &__viewPassword {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('../../images/eye.svg');
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPassword {
+    background: url('../../images/eye-focus.svg');
+  }
+
+  &__viewPasswordOn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('../../images/eye-off.svg');
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPasswordOn {
+    background: url('../../images/eye-off-focus.svg');
+  }
+
+  &__button {
+    margin: 20px 0 0;
+    padding: 10px 30px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    min-height: 50px;
+    background-color: $background-color-button-default;
+    @include text(
+      $font-medium-button-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+    &:disabled {
+      cursor: auto;
+      background-color: $background-color-button-disable;
+    }
+    @include text(
+      $font-medium-button-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+    &:disabled {
+      cursor: auto;
+      background-color: $background-color-button-disable;
+    }
+  }
+}

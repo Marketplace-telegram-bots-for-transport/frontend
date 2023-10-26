@@ -1,0 +1,76 @@
+@import './../../vendor/_varibles.scss';
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 20px;
+  width: 915px;
+  border-radius: 20px;
+  padding: 25px 40px;
+  @include shadowBackground($background-bots-main, $box-shadow-main);
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+    text-decoration: none;
+
+    &:last-child {
+      column-gap: 30px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+
+  &__img {
+    background-image: url('../../images/product-icon.svg');
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    max-width: 185px;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__price {
+    margin: 0;
+    padding: 0;
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__btnDelete {
+    width: 24px;
+    height: 24px;
+    background-image: url('../../images/delete-btn.svg');
+    background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-image: url('../../images/delete-btn-hover.svg');
+    }
+  }
+}

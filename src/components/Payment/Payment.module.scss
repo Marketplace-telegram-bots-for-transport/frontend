@@ -1,0 +1,176 @@
+@import './../../vendor/_varibles';
+
+.payment {
+  padding: 50px 160px 80px 135px;
+  background-image: url('../../images/Background-1.png');
+
+  &__content {
+    width: 415px;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: $background-white;
+    box-shadow: $box-shadow-main;
+  }
+
+  &__title {
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__cardInfo {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  &__cardDate {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__label {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  &__input {
+    border: none;
+    background-color: $background-input;
+    border-radius: 10px;
+    border: $border-main;
+    width: 100%;
+    height: 38px;
+    padding: 10px 18px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-gray-text
+    );
+
+    &::placeholder {
+      color: $color-blue-input-text;
+    }
+  }
+
+  &__inputHeading {
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-gray-text
+    );
+    padding: 0 10px;
+  }
+
+  &__inputDate {
+    width: 69px;
+  }
+
+  &__labelCode {
+    width: 144px;
+  }
+
+  &__cardDateSlash {
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-input-text
+    );
+    margin: 0 10px;
+    padding: 0;
+  }
+
+  &__totalCount {
+    @include text(
+      $font-payment-18,
+      $weight-300,
+      $line-height-payment-18,
+      $color-gray-text
+    );
+    margin: 20px 0 10px;
+  }
+
+  &__inputPromocode {
+    margin-bottom: 33px;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0 0;
+    border-top: $border-main;
+  }
+
+  &__sum {
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-medium-24,
+      $color-gray-text
+    );
+  }
+
+  &__button {
+    border: none;
+    width: 178px;
+    height: 50px;
+    padding: 10px 47px;
+    background-color: $background-color-button-disable;
+    border-radius: 15px;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    transition: 0.3s;
+
+    &_active {
+      background-color: $background-color-button-default;
+
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+    }
+  }
+
+  &__error {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
+  }
+}

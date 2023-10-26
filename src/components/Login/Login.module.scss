@@ -1,0 +1,177 @@
+@import '../../vendor/varibles';
+
+.login {
+  max-width: 415px;
+  margin: 0 auto;
+  padding: 222px 0 241px;
+
+  &__loginContainer {
+    display: flex;
+    margin: 0;
+    padding: 40px;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 20px;
+    @include shadowBackground($background-white, $box-shadow-main);
+  }
+
+  &__title {
+    text-align: center;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+
+  &__form {
+    margin: 40px 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__inputNameContainer {
+    margin: 33px 0 0;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+  }
+
+  &__inputName {
+    margin: 0;
+    padding: 0 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+  }
+
+  &__resetLink {
+    margin: 0;
+    text-align: right;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
+  }
+
+  &__input {
+    margin: 5px 0 0;
+    padding: 10px 20px;
+    width: -webkit-fill-available;
+    min-height: 50px;
+    outline: none;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+    @include input($border-main, $background-bots-main);
+    &:focus {
+      @include input($border-active, $background-bots-main);
+    }
+    &::placeholder {
+      color: $color-blue-input-text;
+    }
+  }
+
+  &__error {
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
+    margin: 5px 0 0;
+  }
+
+  &__password {
+    margin: 0;
+    position: relative;
+  }
+
+  &__viewPassword {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('../../images/eye.svg');
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPassword {
+    background: url('../../images/eye-focus.svg');
+  }
+
+  &__viewPasswordOn {
+    position: absolute;
+    background: url('../../images/eye-off.svg');
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPasswordOn {
+    background: url('../../images/eye-off-focus.svg');
+  }
+
+  &__button {
+    margin: 63px 0 0;
+    padding: 10px 30px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    min-height: 50px;
+    background-color: $background-color-button-default;
+    @include text(
+      $font-medium-button-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+    &:disabled {
+      margin: 43px 0 0;
+      background-color: $background-color-button-disable;
+    }
+  }
+
+  &__registrLink {
+    margin: 10px 0 0;
+    padding: 11px 15px;
+    text-align: center;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
+  }
+}

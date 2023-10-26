@@ -1,0 +1,46 @@
+@import './../../vendor/_varibles.scss';
+
+.product {
+  &__count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+    background-color: $background-white;
+    border-radius: 10px;
+    border: $border-main;
+    width: 135px;
+    height: 40px;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+
+  &__countProperity {
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-blue-button-text
+    );
+  }
+
+  &__btnCount {
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 14px;
+    cursor: pointer;
+    padding: 0;
+    @include text(
+      $font-medium-24,
+      $weight-500,
+      $line-height-medium-24,
+      $color-blue-button-text
+    );
+
+    &:hover {
+      color: $background-color-button-hover;
+    }
+  }
+}

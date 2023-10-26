@@ -1,0 +1,45 @@
+@import './../../vendor/_varibles';
+
+.botsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &_extraMargin {
+    margin-bottom: 60px;
+  }
+}
+
+.bots {
+  padding: 40px 165px 0 165px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: flex-start;
+
+  &__moreBtn {
+    width: 273px;
+    height: 50px;
+    border: none;
+    margin-top: 60px;
+    background-color: $background-white;
+    cursor: pointer;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
+    &_hidden {
+      display: none;
+    }
+
+    &:hover {
+      color: $background-color-button-hover;
+    }
+    &:active {
+      color: $background-color-button-pressed;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Все",
+      "imageUrl": "/images/categories/all.svg"
+    },
+    {
+      "id": 2,
+      "name": "Городской транспорт",
+      "imageUrl": "/images/categories/city-transport.svg"
+    },
+    {
+      "id": 3,
+      "name": "Метро",
+      "imageUrl": "/images/categories/metro.svg"
+    },
+    {
+      "id": 4,
+      "name": "Такси",
+      "imageUrl": "/images/categories/taxi.svg"
+    },
+    {
+      "id": 5,
+      "name": "Оплата",
+      "imageUrl": "/images/categories/payment.svg"
+    },
+    {
+      "id": 6,
+      "name": "Отзывы",
+      "imageUrl": "/images/categories/reviews.svg"
+    },
+    {
+      "id": 7,
+      "name": "Грузы",
+      "imageUrl": "/images/categories/cargo.svg"
+    },
+    {
+      "id": 8,
+      "name": "Доставка",
+      "imageUrl": "/images/categories/delivery.svg"
+    },
+    {
+      "id": 9,
+      "name": "Паркинг",
+      "imageUrl": "/images/categories/parking.svg"
+    },
+    {
+      "id": 10,
+      "name": "Заправка",
+      "imageUrl": "/images/categories/gas-station.svg"
+    },
+    {
+      "id": 11,
+      "name": "Еще категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 12,
+      "name": "И еще категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 13,
+      "name": "И снова категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 14,
+      "name": "И... категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 15,
+      "name": "И еще рраз категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 16,
+      "name": "Иииии категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 17,
+      "name": "Да, и тут категория",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    },
+    {
+      "id": 18,
+      "name": "Хватит скроллить.",
+      "imageUrl": "/images/categories/mock-placeholder.svg"
+    }
+  ]
+}

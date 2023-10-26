@@ -1,0 +1,69 @@
+@import './../../vendor/_varibles.scss';
+
+.modalAuth {
+  padding: 50px 125px 0;
+  background-image: url('../../images/Background-1.png');
+
+  &__content {
+    border-radius: 10px;
+    width: 415px;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    background-color: $background-white;
+    box-shadow: $box-shadow-main;
+  }
+
+  &__desc {
+    margin: 0;
+    padding: 0;
+    max-width: 319px;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-gray-text
+    );
+    text-align: center;
+  }
+
+  &__btn {
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 24px;
+    background-color: #3b7dd6;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text-white
+    );
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+  }
+
+  &__link {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text-white
+    );
+  }
+}
