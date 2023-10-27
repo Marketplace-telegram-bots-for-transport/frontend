@@ -26,8 +26,6 @@ const App = () => {
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
   const [currentUser, setCurrentUser] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(''); // данные в поисковая строка
-  const [searchResult, setSearchResult] = useState([]); // результат поиска
   const [apiBots, setApiBots] = useState(null); // get api bots
 
   const contextValue = useMemo(() => {
@@ -42,33 +40,6 @@ const App = () => {
 
     fetchData();
   }, []);
-
-  // фильтрация ботов через поисковую строку
-  useEffect(() => {
-    async function fetchSearch() {
-      const botsList = await fetchSearchBots(searchQuery);
-      console.log('botsList', botsList);
-
-      const filteredBots =
-        searchQuery.trim() === ''
-          ? botsList.results
-          : botsList.results.filter((bot) => {
-              const botNameLowerCase = bot.name.toLocaleLowerCase();
-              const botDescriptionLowerCase =
-                bot.description.toLocaleLowerCase();
-              const searchQueryLowerCase = searchQuery.toLocaleLowerCase();
-
-              return (
-                botNameLowerCase.includes(searchQueryLowerCase) ||
-                botDescriptionLowerCase.includes(searchQueryLowerCase)
-              );
-            });
-      console.log('filteredBots', filteredBots);
-      setSearchResult(filteredBots);
-    }
-
-    fetchSearch();
-  }, [searchQuery]);
 
   // // Проверка токена
   useEffect(() => {
@@ -101,6 +72,13 @@ const App = () => {
 
     fetchUserData();
   }, []);
+
+  // Функция поиска для хэдера
+  const handleSearch = async (query) => {
+    const botsData = await fetchSearchBots(query);
+
+    setApiBots(botsData);
+  };
 
   // Функция для выхода из профиля
   const handleLogOut = () => {
@@ -210,8 +188,7 @@ const App = () => {
           isLogOut={handleLogOut}
           cartProducts={cartProducts}
           deleteCartProduct={deleteCartProduct}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
+          onSearch={handleSearch}
         />
 
         <Routes>
@@ -226,7 +203,6 @@ const App = () => {
                   addProductToCart={addProductToCart}
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
-                  searchResult={searchResult}
                 />
               ) : null
             }

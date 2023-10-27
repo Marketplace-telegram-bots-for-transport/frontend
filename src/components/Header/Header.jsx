@@ -8,12 +8,11 @@ function Header({
   isLogOut,
   cartProducts,
   deleteCartProduct,
-  searchQuery,
-  setSearchQuery,
+  onSearch,
 }) {
   const handleChange = (e) => {
     const { value } = e.target;
-    setSearchQuery(value);
+    onSearch(value);
   };
   return (
     <header className={styles.header}>
@@ -29,7 +28,6 @@ function Header({
               className={styles.header__search_input}
               type='text'
               placeholder='Поиск'
-              value={searchQuery}
               onChange={(e) => handleChange(e)}
             />
           </form>
