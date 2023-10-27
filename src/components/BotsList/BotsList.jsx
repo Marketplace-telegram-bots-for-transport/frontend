@@ -72,7 +72,7 @@ const BotsList = ({
               mainPhoto={bot.main_photo}
               name={bot.name}
               author={bot.author}
-              category={bot.category}
+              category={bot.categories[0].name}
               price={bot.price}
               id={bot.id}
               onBuyClick={() => handleBuyClick(bot)}
