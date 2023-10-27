@@ -1,3 +1,11 @@
+@import '../../vendor/varibles';
+
+.categoriesWrapper {
+  position: relative;
+  width: 100%;
+  background-color: $background-white;
+}
+
 .categories {
   max-width: 100%;
   padding-top: 160px;

@@ -30,7 +30,7 @@ const Categories = ({ categories }) => {
   };
 
   return (
-    <>
+    <div className={styles.categoriesWrapper}>
       <CategoriesTitleMainPage />
       <section className={styles.categories}>
         <div className={styles.categories__carouselWrapper}>
@@ -52,7 +52,7 @@ const Categories = ({ categories }) => {
           <CarouselCategoriesRightBtn carouselRef={carouselRef} />
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
