@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Counter from '../Counter/Counter';
+import { wrapAuthorName } from '../../utils/helpers';
 import styles from './BotCard.module.scss';
 
 const BotCard = ({
@@ -35,7 +36,7 @@ const BotCard = ({
       </div>
       <div className={styles.bot__brief}>
         <p className={styles.bot__name}>{name}</p>
-        <p className={styles.bot__author}>{author}</p>
+        <p className={styles.bot__author}>{wrapAuthorName(author)}</p>
       </div>
       <div className={styles.bot__categories}>
         <p className={styles.bot__category}>{category}</p>

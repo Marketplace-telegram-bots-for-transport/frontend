@@ -1,3 +1,5 @@
+@import '../../vendor/varibles';
+
 .page {
   position: relative;
   z-index: 2;
@@ -5,4 +7,5 @@
   flex-direction: column;
   min-height: 100vh;
   margin: 0 auto;
+  background-color: $background-white;
 }

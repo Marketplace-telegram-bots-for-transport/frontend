@@ -4,11 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  // align-items: center;
-
-  &_extraMargin {
-    margin-bottom: 60px;
-  }
+  background-color: $background-white;
 }
 
 .bots {
