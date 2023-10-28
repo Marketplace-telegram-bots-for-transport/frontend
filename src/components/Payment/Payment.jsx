@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import styles from './Payment.module.scss';
+import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 
 function Payment({ totalSum }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  const [cardNumber, setCardNumber] = useState('');
+  const [isPaid, setPaidStatus] = useState(false);
   const buttonClassName = isValid
     ? `${styles.payment__button} ${styles.payment__button_active}`
     : styles.payment__button;
 
-  const [cardNumber, setCardNumber] = useState('');
   const formatCardNumber = (inputValue) => {
     // Удалите все нецифровые символы из ввода
     const numericValue = inputValue.replace(/\D/g, '');
@@ -35,9 +37,14 @@ function Payment({ totalSum }) {
     e.preventDefault();
     // Проверка валидности формы для отправки на сервер
     if (isValid) {
-      alert('Поздравляем, Вы совершили покупку!');
-      // код для отправки данных
+      setPaidStatus(true);
       resetForm();
+      // спустя три секунды
+      setTimeout(() => {
+        setPaidStatus(false);
+        // Код для отправки данных может быть добавлен здесь
+        resetForm();
+      }, 3000);
     }
   };
 
@@ -55,6 +62,7 @@ function Payment({ totalSum }) {
 
   return (
     <div className={styles.payment}>
+      <PopupWithInfo isPaid={isPaid} />
       <div className={styles.payment__content}>
         <h3 className={styles.payment__title}>Оплата картой</h3>
         <form
