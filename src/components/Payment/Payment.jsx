@@ -1,25 +1,50 @@
-import React, { useRef } from 'react'; // Добавим импорт useRef
-import InputMask from 'react-input-mask';
+import { useState } from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import styles from './Payment.module.scss';
+import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 
 function Payment({ totalSum }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
+  const [cardNumber, setCardNumber] = useState('');
+  const [isPaid, setPaidStatus] = useState(false);
   const buttonClassName = isValid
     ? `${styles.payment__button} ${styles.payment__button_active}`
     : styles.payment__button;
 
-  // реф для элемента InputMask
-  const inputMaskRef = useRef(null);
+  const formatCardNumber = (inputValue) => {
+    // Удалите все нецифровые символы из ввода
+    const numericValue = inputValue.replace(/\D/g, '');
+
+    // Разделите номер карты на группы по 4 цифры
+    const formattedValue = numericValue.match(/.{1,4}/g);
+
+    // Соедините группы цифр дефисами
+    if (formattedValue) {
+      return formattedValue.join('-');
+    }
+    return '';
+  };
+
+  const handlePreChange = (e) => {
+    handleChange(e);
+    const { value } = e.target;
+    const formattedValue = formatCardNumber(value);
+    setCardNumber(formattedValue);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Проверка валидности формы для отправки на сервер
     if (isValid) {
-      alert('Поздравляем, Вы совершили покупку!');
-      // код для отправки данных
+      setPaidStatus(true);
       resetForm();
+      // спустя три секунды
+      setTimeout(() => {
+        setPaidStatus(false);
+        // Код для отправки данных может быть добавлен здесь
+        resetForm();
+      }, 3000);
     }
   };
 
@@ -37,6 +62,7 @@ function Payment({ totalSum }) {
 
   return (
     <div className={styles.payment}>
+      <PopupWithInfo isPaid={isPaid} />
       <div className={styles.payment__content}>
         <h3 className={styles.payment__title}>Оплата картой</h3>
         <form
@@ -73,23 +99,20 @@ function Payment({ totalSum }) {
                 {' '}
                 Номер карты для оплаты
               </span>
-              <React.StrictMode>
-                <InputMask
-                  ref={inputMaskRef}
-                  className={`${styles.payment__input} ${styles.payment__inputNumber}`}
-                  name='number'
-                  value={values.number || ''}
-                  placeholder='____-____-____-____'
-                  autoComplete='cc-number'
-                  inputMode='numeric'
-                  type='text'
-                  id='number-input'
-                  mask='9999-9999-9999-9999'
-                  maskChar={null} // Установите maskChar в null
-                  required
-                  onChange={handleChange}
-                />
-              </React.StrictMode>
+              <input
+                className={`${styles.payment__input} ${styles.payment__inputNumber}`}
+                name='number'
+                value={cardNumber || ''}
+                placeholder='____-____-____-____'
+                autoComplete='cc-number'
+                inputMode='numeric'
+                type='text'
+                id='number-input'
+                minLength={19}
+                maxLength={19}
+                required
+                onChange={handlePreChange}
+              />
               {errors.number && (
                 <span className={styles.payment__error}>
                   {handleError(errors.number)}
@@ -188,5 +211,4 @@ function Payment({ totalSum }) {
     </div>
   );
 }
-
 export default Payment;

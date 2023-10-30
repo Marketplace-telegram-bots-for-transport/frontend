@@ -3,7 +3,17 @@ import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
 
-function Header({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
+function Header({
+  isLoggedIn,
+  isLogOut,
+  cartProducts,
+  deleteCartProduct,
+  onSearch,
+}) {
+  const handleChange = (e) => {
+    const { value } = e.target;
+    onSearch(value);
+  };
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -18,6 +28,7 @@ function Header({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
               className={styles.header__search_input}
               type='text'
               placeholder='Поиск'
+              onChange={(e) => handleChange(e)}
             />
           </form>
         </div>

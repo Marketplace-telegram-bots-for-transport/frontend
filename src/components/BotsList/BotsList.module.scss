@@ -1,13 +1,10 @@
 @import './../../vendor/_varibles';
 
 .botsContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  &_extraMargin {
-    margin-bottom: 60px;
-  }
+  background-color: $background-white;
 }
 
 .bots {
@@ -19,6 +16,7 @@
   justify-content: flex-start;
 
   &__moreBtn {
+    align-self: center;
     width: 273px;
     height: 50px;
     border: none;

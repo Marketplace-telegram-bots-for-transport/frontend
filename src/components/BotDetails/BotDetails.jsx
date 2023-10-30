@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
 import styles from './BotDetails.module.scss';
 // import DetailsBasket from '../DetailsBasket/DetailsBasket';
-// import BotHeader from '../BotHeader/BotHeader';
 import BotBody from '../BotBody/BotBody';
 import Rating from '../Rating/Rating';
 import ScreenExamples from '../ScreenExamples/ScreenExamples';

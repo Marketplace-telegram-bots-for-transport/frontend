@@ -15,18 +15,22 @@ import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
-import { fetchInitialBots } from '../../utils/api/getBots';
+import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
+import * as userApi from '../../utils/api/userApi';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+  const [currentUser, setCurrentUser] = useState(null);
+  const [apiBots, setApiBots] = useState(null); // get api bots
 
-  // get api bots
-  const [apiBots, setApiBots] = useState(null);
+  const contextValue = useMemo(() => {
+    return { OTP, setOTP, email, setEmail, currentUser };
+  }, [OTP, setOTP, email, setEmail, currentUser]);
 
   useEffect(() => {
     async function fetchData() {
@@ -57,15 +61,30 @@ const App = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  /* временные значения */
-  const contextValue = useMemo(() => {
-    return { OTP, setOTP, email, setEmail };
-  }, [OTP, setOTP, email, setEmail]);
+  // получение данных пользователя
+  useEffect(() => {
+    async function fetchUserData() {
+      const jwt = localStorage.getItem('jwt');
+      const userData = await userApi.getUserInfo(jwt);
+      console.log('userData', userData);
+      setCurrentUser(userData);
+    }
 
-  /* Функция для выхода из профиля, 
-  должна будет стирать данные токена */
+    fetchUserData();
+  }, []);
+
+  // Функция поиска для хэдера
+  const handleSearch = async (query) => {
+    const botsData = await fetchSearchBots(query);
+
+    setApiBots(botsData);
+  };
+
+  // Функция для выхода из профиля
   const handleLogOut = () => {
     localStorage.removeItem('jwt');
+    setCurrentUser('');
+    localStorage.clear();
     setIsLoggedIn(false);
     navigate('/');
   };
@@ -123,7 +142,7 @@ const App = () => {
 
   // Функция, которая возвращает на предыдущую страницу
   const handleGoBack = () => {
-    window.history.back();
+    navigate(-1);
   };
 
   //  Функция авторизации
@@ -162,13 +181,14 @@ const App = () => {
   };
 
   return (
-    <CurrentUserContext.Provider value={contextValue}>
-      <div className={styles.page}>
+    <div className={styles.page}>
+      <CurrentUserContext.Provider value={contextValue}>
         <Header
           isLoggedIn={isLoggedIn}
           isLogOut={handleLogOut}
           cartProducts={cartProducts}
           deleteCartProduct={deleteCartProduct}
+          onSearch={handleSearch}
         />
 
         <Routes>
@@ -184,9 +204,7 @@ const App = () => {
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
                 />
-              ) : (
-                'пусто'
-              )
+              ) : null
             }
           />
 
@@ -251,8 +269,8 @@ const App = () => {
           />
         </Routes>
         <Footer />
-      </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </div>
   );
 };
 
