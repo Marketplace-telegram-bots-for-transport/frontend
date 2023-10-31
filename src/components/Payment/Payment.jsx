@@ -6,44 +6,69 @@ import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 function Payment({ totalSum }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
-  const [cardNumber, setCardNumber] = useState('');
+  const [formPayment, setFormPayment] = useState({
+    number: '',
+    month: '',
+    year: '',
+    code: '',
+    promocode: '',
+  });
   const [isPaid, setPaidStatus] = useState(false);
   const buttonClassName = isValid
     ? `${styles.payment__button} ${styles.payment__button_active}`
     : styles.payment__button;
 
+  // Функця маски для номера карты
   const formatCardNumber = (inputValue) => {
-    // Удалите все нецифровые символы из ввода
     const numericValue = inputValue.replace(/\D/g, '');
-
-    // Разделите номер карты на группы по 4 цифры
     const formattedValue = numericValue.match(/.{1,4}/g);
-
-    // Соедините группы цифр дефисами
+    // Соединить группы цифр дефисами
     if (formattedValue) {
       return formattedValue.join('-');
     }
     return '';
   };
 
-  const handlePreChange = (e) => {
+  // Маска для полей карты
+  const handleCardChange = (e, fieldName) => {
     handleChange(e);
     const { value } = e.target;
-    const formattedValue = formatCardNumber(value);
-    setCardNumber(formattedValue);
+    const formattedValue =
+      fieldName === 'number' ? formatCardNumber(value) : value;
+    setFormPayment((prevData) => ({
+      ...prevData,
+      [fieldName]: formattedValue,
+    }));
   };
 
+  // Маска для промокода
+  const handlePromocodeChange = (e) => {
+    handleChange(e);
+    const value = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+    setFormPayment((prevCardInfo) => ({
+      ...prevCardInfo,
+      promocode: value,
+    }));
+  };
+
+  // Отправка формы
   const handleSubmit = (e) => {
     e.preventDefault();
     // Проверка валидности формы для отправки на сервер
     if (isValid) {
       setPaidStatus(true);
+      // Сбрасываем все поля
       resetForm();
-      // спустя три секунды
+      setFormPayment({
+        number: '',
+        month: '',
+        year: '',
+        code: '',
+        promocode: '',
+      });
+      // спустя три секунды убираем попап об успешной покупке
       setTimeout(() => {
         setPaidStatus(false);
-        // Код для отправки данных может быть добавлен здесь
-        resetForm();
       }, 3000);
     }
   };
@@ -83,7 +108,7 @@ function Payment({ totalSum }) {
               id='email-input'
               className={styles.payment__input}
               minLength='2'
-              maxLength='30'
+              maxLength='64'
               required
               onChange={handleChange}
             />
@@ -102,7 +127,7 @@ function Payment({ totalSum }) {
               <input
                 className={`${styles.payment__input} ${styles.payment__inputNumber}`}
                 name='number'
-                value={cardNumber || ''}
+                value={formPayment.number || ''}
                 placeholder='____-____-____-____'
                 autoComplete='cc-number'
                 inputMode='numeric'
@@ -111,7 +136,7 @@ function Payment({ totalSum }) {
                 minLength={19}
                 maxLength={19}
                 required
-                onChange={handlePreChange}
+                onChange={(e) => handleCardChange(e, 'number')}
               />
               {errors.number && (
                 <span className={styles.payment__error}>
@@ -128,7 +153,7 @@ function Payment({ totalSum }) {
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputDate}`}
                     name='month'
-                    value={values.month || ''}
+                    value={formPayment.month || ''}
                     placeholder='ММ'
                     autoComplete='cc-month'
                     inputMode='numeric'
@@ -137,13 +162,13 @@ function Payment({ totalSum }) {
                     minLength='2'
                     maxLength='2'
                     required
-                    onChange={handleChange}
+                    onChange={(e) => handleCardChange(e, 'month')}
                   />
                   <span className={styles.payment__cardDateSlash}>/</span>
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputDate}`}
                     name='year'
-                    value={values.year || ''}
+                    value={formPayment.year || ''}
                     placeholder='ГГГГ'
                     autoComplete='cc-year'
                     inputMode='numeric'
@@ -152,7 +177,7 @@ function Payment({ totalSum }) {
                     minLength='4'
                     maxLength='4'
                     required
-                    onChange={handleChange}
+                    onChange={(e) => handleCardChange(e, 'year')}
                   />
                 </div>
               </label>
@@ -166,7 +191,7 @@ function Payment({ totalSum }) {
                 <input
                   className={`${styles.payment__input} ${styles.payment__inputCode}`}
                   name='code'
-                  value={values.code || ''}
+                  value={formPayment.code || ''}
                   placeholder='CVC'
                   autoComplete='cc-number'
                   inputMode='numeric'
@@ -175,7 +200,7 @@ function Payment({ totalSum }) {
                   minLength='3'
                   maxLength='3'
                   required
-                  onChange={handleChange}
+                  onChange={(e) => handleCardChange(e, 'code')}
                 />
               </label>
               {(errors.month || errors.year || errors.code) && (
@@ -192,13 +217,13 @@ function Payment({ totalSum }) {
           <input
             className={`${styles.payment__input} ${styles.payment__inputPromocode}`}
             name='promocode'
-            value={values.promocode || ''}
+            value={formPayment.promocode || ''}
             placeholder='Промокод'
             type='text'
             id='promocode-input'
-            minLength='3'
-            maxLength='30'
-            onChange={handleChange}
+            minLength='2'
+            maxLength='6'
+            onChange={handlePromocodeChange}
           />
           <div className={styles.payment__total}>
             <p className={styles.payment__sum}>{totalSum}₽</p>
