@@ -66,7 +66,7 @@ function BotDetails({
   return (
     <section className={styles.details}>
       <div className={styles.details__mainSection}>
-        <BackButton botName={bot.name} comeBack={comeBack} />
+        <BackButton currentPageName={bot.name} comeBack={comeBack} />
         <BotBody
           botImage={bot.main_photo}
           botName={bot.name}
