@@ -18,10 +18,11 @@ import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import * as userApi from '../../utils/api/userApi';
+import RegisterSeller from '../RegisterSeller/RegisterSeller';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
@@ -266,6 +267,11 @@ const App = () => {
           <Route
             path='/change-password'
             element={<ChangePassword comeBack={handleGoBack} />}
+          />
+
+          <Route
+            path='/signup-seller'
+            element={<RegisterSeller comeBack={handleGoBack} />}
           />
         </Routes>
         <Footer />
