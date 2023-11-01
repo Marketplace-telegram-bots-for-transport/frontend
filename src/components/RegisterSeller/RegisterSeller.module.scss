@@ -15,7 +15,7 @@
   &__head {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 2fr 3fr 2fr;
   }
 
   &__headContainer {
@@ -56,6 +56,8 @@
     background-color: $background-white;
     box-shadow: $box-shadow-category;
     min-height: 50vh;
+    padding: 80px 135px;
+    box-sizing: border-box;
   }
 
   &__button {
