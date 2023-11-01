@@ -5,7 +5,7 @@ function RegisterSeller({ comeBack }) {
   return (
     <section className={styles.register}>
       <div className={styles.register__head}>
-        <BackButton currentPageName='Корзина' comeBack={comeBack} />
+        <BackButton comeBack={comeBack} />
         <div className={styles.register__headContainer}>
           <h2 className={styles.register__title}>Регистрация продавца</h2>
           <p className={styles.register__text}>

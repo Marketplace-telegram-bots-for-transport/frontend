@@ -35,14 +35,14 @@ export function register(email, username, password, confirm_password) {
   });
 }
 
-export function authorize(password, username) {
+export function authorize(password, email) {
   return request(`${url}/auth/token/login/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ password, username }),
+    body: JSON.stringify({ password, email }),
   });
 }
 

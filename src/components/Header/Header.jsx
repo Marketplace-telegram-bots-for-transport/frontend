@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
@@ -11,11 +11,12 @@ function Header({
   deleteCartProduct,
   onSearch,
 }) {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState(''); // данные в поисковой строке
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    navigate('/');
     onSearch(searchQuery);
   }
 

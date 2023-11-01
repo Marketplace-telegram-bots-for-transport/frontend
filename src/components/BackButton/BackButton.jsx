@@ -13,6 +13,7 @@ function BackButton({ botName, title, comeBack }) {
         Главная страница / {location.pathname === '/cart' ? 'Корзина' : ''}
         {location.pathname === `/special-offers/${id}` ? title : ''}
         {location.pathname === `/botdetails/${botId}` ? botName : ''}
+        {location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
       </p>
     </div>
   );

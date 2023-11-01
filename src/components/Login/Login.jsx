@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { PATTERN_EMAIL } from '../../utils/constants';
 
 function Login({ onLogin, loggedIn }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
@@ -47,6 +48,7 @@ function Login({ onLogin, loggedIn }) {
             id='username'
             name='username'
             required
+            pattern={PATTERN_EMAIL}
             value={values.username || ''}
             onChange={handleChange}
             minLength='2'

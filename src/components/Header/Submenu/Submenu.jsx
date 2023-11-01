@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CurrentUserContext from '../../../context/CurrentUserContext';
@@ -20,6 +20,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* функции закрытия сабменю поочередно */
   const handleBasketClick = () => {
@@ -89,6 +90,14 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   } else {
     countText = `${count()} ${TEXT_MORE_THAN_UP_TO_FIVE_GOODS}`;
   }
+
+  const handleScrollLinkClick = () => {
+    if (location.pathname === '/') {
+      document.getElementById('bots').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
 
   let profileImage = null;
 
@@ -216,6 +225,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 to='bots'
                 smooth
                 duration={1000}
+                onClick={handleScrollLinkClick}
               >
                 Перейти к каталогу
               </ScrollLink>

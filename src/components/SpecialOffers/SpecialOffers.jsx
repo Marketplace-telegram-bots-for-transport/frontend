@@ -17,9 +17,9 @@ function SpecialOffers({
 }) {
   // Используем useParams для извлечения параметра маршрута
   const { banners } = infoBanners;
-  const { id } = useParams(); // достаем элементы карточки с ботом с главной страницы
+  const { id } = useParams(); // достаем элементы
   const IdNumber = parseInt(id, 10); // переделываем в число
-  const banner = banners.find((item) => item.id === IdNumber); // Ищем с соответствующим id в JSON-массиве
+  const banner = banners.find((item) => item.id === IdNumber); // ищем баннер с соответствующим id в JSON-массиве
 
   const bots = apiBots.results;
   const [specialBot, setSpecialBot] = useState([]);

@@ -220,9 +220,7 @@ const App = () => {
                   apiBots={apiBots}
                   addProductToCart={addProductToCart}
                 />
-              ) : (
-                'Ничего не найдено'
-              )
+              ) : null
             }
           />
 
