@@ -22,7 +22,6 @@ function SpecialOffers({
   const banner = banners.find((item) => item.id === IdNumber); // Ищем с соответствующим id в JSON-массиве
 
   const bots = apiBots.results;
-  console.log(bots);
   const [specialBot, setSpecialBot] = useState([]);
 
   const backgroundStyle = {

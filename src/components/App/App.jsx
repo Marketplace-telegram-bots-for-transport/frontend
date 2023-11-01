@@ -69,7 +69,6 @@ const App = () => {
       if (isLoggedIn) {
         const jwt = localStorage.getItem('jwt');
         const userData = await userApi.getUserInfo(jwt);
-        console.log('userData', userData);
         setCurrentUser(userData);
       }
     }
