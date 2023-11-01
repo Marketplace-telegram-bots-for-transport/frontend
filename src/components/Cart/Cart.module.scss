@@ -5,6 +5,7 @@
   justify-content: center;
   max-width: 1920px;
   width: 100%;
+  min-height: 100vh;
   padding: 90px 0 0;
   box-sizing: border-box;
   margin: 0 auto;
@@ -16,7 +17,6 @@
   flex-direction: column;
   padding: 50px 125px 80px 165px;
   border-right: $border-main;
-  min-height: 100vh;
 
   &__list {
     padding: 60px 0 30px;
