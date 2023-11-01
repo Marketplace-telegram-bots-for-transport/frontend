@@ -1,0 +1,117 @@
+@import '../../vendor/varibles';
+
+.login {
+  &__subtitle {
+    margin-left: 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+  }
+
+  &__input {
+    margin-top: 5px;
+    padding: 16px 20px;
+    width: 100%;
+    outline: none;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      16px,
+      $color-blue-dark-title
+    );
+    @include input($border-main, $background-bots-main);
+    &:focus {
+      @include input($border-active, $background-bots-main);
+    }
+    &::placeholder {
+      color: $color-blue-input-text;
+    }
+  }
+
+  &__error {
+    margin: 5px 0 0 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
+  }
+
+  &__nameContainer {
+    margin: 33px 0 0;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+  }
+
+  &__resetLink {
+    transition: color 0.3s ease;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
+  }
+
+  &__password {
+    margin: 0;
+    position: relative;
+  }
+
+  &__viewPassword {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('../../images/eye.svg');
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPassword {
+    background: url('../../images/eye-focus.svg');
+  }
+
+  &__viewPasswordOn {
+    position: absolute;
+    background: url('../../images/eye-off.svg');
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    right: 20px;
+  }
+
+  &__input:focus + &__viewPasswordOn {
+    background: url('../../images/eye-off-focus.svg');
+  }
+
+  &__registrLink {
+    order: 2;
+    margin-top: 10px;
+    padding: 11px 15px;
+    text-align: center;
+    transition: color 0.3s ease;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
+      $color-link-main
+    );
+    &:hover {
+      color: $color-link-hover;
+    }
+    &:active {
+      color: $color-link-pressed;
+    }
+  }
+}

@@ -25,7 +25,7 @@ function BotDetails({
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
   const botIdNumber = parseInt(botId, 10); // переделываем в число
   const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
-
+  console.log(bot.name);
   // Определить состояние кнопки купить в зависимости от наличия бота в корзине
   useEffect(() => {
     if (bot.id && isProductInCart) {

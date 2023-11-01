@@ -1,0 +1,99 @@
+@import './../../vendor/_varibles';
+
+.formCommon {
+  max-width: 455px;
+  margin: 0 auto;
+
+  &__container {
+    padding: 40px;
+    border-radius: 20px;
+    @include shadowBackground($background-white, $box-shadow-main);
+  }
+
+  &__actionContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    &_button {
+      width: 24px;
+      height: 24px;
+      margin: 10px;
+      border: none;
+      background: url(../../images/back-left-lg-min.svg) center no-repeat;
+      cursor: pointer;
+      transition:
+        background-image 0.3s ease,
+        color 0.3s ease;
+      &:hover {
+        background-image: url(../../images/back-left-lg-hover-min.svg);
+      }
+      &:active {
+        background-image: url(../../images/back-left-lg-pressed-min.svg);
+      }
+    }
+    &_title {
+      @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__formButton {
+    order: 1;
+    width: 100%;
+    margin-top: 63px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 0;
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    @include text(
+      $font-medium-button-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+    &:disabled {
+      background-color: $background-color-button-disable;
+      cursor: not-allowed;
+      pointer-events: none;
+      margin-top: 40px;
+    }
+  }
+}
+
+.form_type_resetPassword {
+  padding: 260px 0 265px;
+}
+
+.form_type_OTPPassword {
+  padding: 260px 0 265px;
+}
+
+.form_type_changePassword {
+  padding: 260px 0 265px;
+}
+
+.form_type_login {
+  padding: 222px 0 241px;
+}
+
+.form_type_register {
+  padding: 151px 0 64px;
+}

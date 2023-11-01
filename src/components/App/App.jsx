@@ -10,6 +10,8 @@ import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import BotDetails from '../BotDetails/BotDetails';
 
+import SpecialOffers from '../SpecialOffers/SpecialOffers';
+
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
@@ -21,7 +23,7 @@ import * as userApi from '../../utils/api/userApi';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
@@ -64,14 +66,16 @@ const App = () => {
   // получение данных пользователя
   useEffect(() => {
     async function fetchUserData() {
-      const jwt = localStorage.getItem('jwt');
-      const userData = await userApi.getUserInfo(jwt);
-      console.log('userData', userData);
-      setCurrentUser(userData);
+      if (isLoggedIn) {
+        const jwt = localStorage.getItem('jwt');
+        const userData = await userApi.getUserInfo(jwt);
+        console.log('userData', userData);
+        setCurrentUser(userData);
+      }
     }
 
     fetchUserData();
-  }, []);
+  }, [isLoggedIn]);
 
   // Функция поиска для хэдера
   const handleSearch = async (query) => {
@@ -205,6 +209,20 @@ const App = () => {
                   decreaseProductCount={decreaseProductCount}
                 />
               ) : null
+            }
+          />
+
+          <Route
+            path='/special-offers/:id'
+            element={
+              apiBots !== null ? (
+                <SpecialOffers
+                  apiBots={apiBots}
+                  addProductToCart={addProductToCart}
+                />
+              ) : (
+                'Ничего не найдено'
+              )
             }
           />
 
