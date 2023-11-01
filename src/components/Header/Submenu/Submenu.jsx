@@ -181,12 +181,32 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                       alt='Изображение бота'
                     />
                     <div className={styles.submenu__mini_description}>
-                      <h3 className={styles.submenu__mini_title}>{bot.name}</h3>
+                      {bot.discount > 0 ? (
+                        <>
+                          <div className={styles.submenu__mini_iconDiscount} />
+                          <h3 className={styles.submenu__mini_title}>
+                            {bot.name}
+                          </h3>
+                        </>
+                      ) : (
+                        <h3 className={styles.submenu__mini_title}>
+                          {bot.name}
+                        </h3>
+                      )}
                       <p className={styles.submenu__mini_counter}>
                         {bot.count} шт.
                       </p>
                     </div>
-                    <h3 className={styles.submenu__mini_price}>{bot.price}₽</h3>
+                    {bot.discount > 0 ? (
+                      <h3 className={styles.submenu__mini_priceDiscount}>
+                        {bot.price}₽
+                      </h3>
+                    ) : (
+                      <h3 className={styles.submenu__mini_price}>
+                        {bot.price}₽
+                      </h3>
+                    )}
+
                     <button
                       className={styles.submenu__mini_button}
                       type='button'
