@@ -56,6 +56,11 @@ function Cart({
     setTotalSum(sum.toFixed(2));
   }, [cartProducts, findTotalSum]);
 
+  // прокрутка скролла наверх
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className={styles.cart}>
       <div className={styles.products}>

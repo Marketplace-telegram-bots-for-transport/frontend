@@ -19,6 +19,7 @@ import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
+import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
 
@@ -152,7 +153,7 @@ const App = () => {
   //  Функция авторизации
   const handleLogin = (values) => {
     authorizeApi
-      .authorize(values.password, values.username)
+      .authorize(values.password, values.email)
       .then((res) => {
         if (res.auth_token) {
           console.log('успешный вход');
@@ -173,7 +174,8 @@ const App = () => {
         values.email,
         values.username,
         values.password,
-        values.confirm_password
+        values.confirm_password,
+        null
       )
       .then(() => {
         console.log('регистрация успешна');
@@ -251,6 +253,7 @@ const App = () => {
                   decreaseProductCount={decreaseProductCount}
                   comeBack={handleGoBack}
                 />
+                // <Reviews />
               }
             />
 
@@ -269,6 +272,8 @@ const App = () => {
                 />
               }
             />
+
+            <Route path='/profile' element={<ProfileNavigation />} />
 
             <Route
               path='/reset-password'
