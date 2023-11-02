@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-curly-brace-presence */
 import React, { useState, useEffect } from 'react';
@@ -11,6 +12,7 @@ import ScreenExamples from '../ScreenExamples/ScreenExamples';
 import Counter from '../Counter/Counter';
 import BackButton from '../BackButton/BackButton';
 import { fetchBotById } from '../../utils/api/getBotByID';
+import Reviews from '../Reviews/Reviews';
 
 function BotDetails({
   apiBots,
@@ -27,9 +29,8 @@ function BotDetails({
   const { botId } = useParams(); // достаем элементы карточки с ботом с главной страницы
   const navigate = useNavigate();
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
-  const botIdNumber = parseInt(botId, 10); // переделываем в число
-  const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
-
+  const botIdNumber = parseInt(botId, 10); // конвертируем в число
+  // const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
   console.log(botIdNumber);
 
   // делаем запрос на получение конкретного бота
@@ -47,10 +48,10 @@ function BotDetails({
 
   // Определить состояние кнопки купить в зависимости от наличия бота в корзине
   useEffect(() => {
-    if (bot.id && isProductInCart) {
-      setBotStatus(isProductInCart(bot.id));
+    if (botIdNumber && isProductInCart) {
+      setBotStatus(isProductInCart(botIdNumber));
     }
-  }, [bot.id, isProductInCart, cartProducts]);
+  }, [botIdNumber, isProductInCart, cartProducts]);
 
   // добавить в корзину
   const handleBuyClick = (item) => {
@@ -78,38 +79,38 @@ function BotDetails({
     margin: '0 auto 0 65px',
   };
 
-  if (!bot) {
+  if (!currentBotById) {
     // Если бот с заданным id не найден, можно отобразить сообщение об ошибке
     return console.log('бот не найден');
   }
   return (
     <section className={styles.details}>
       <div className={styles.details__mainSection}>
-        <BackButton botName={bot.name} comeBack={comeBack} />
+        <BackButton botName={currentBotById.name} comeBack={comeBack} />
         <BotBody
-          botImage={bot.main_photo}
-          botName={bot.name}
-          botAuthor={bot.author}
-          botCategory={bot.category}
-          botDescription={bot.description}
+          botImage={currentBotById.main_photo}
+          botName={currentBotById.name}
+          botAuthor={currentBotById.author}
+          botCategory={currentBotById.category}
+          botDescription={currentBotById.description}
         />
-        <ScreenExamples array={bot.photo_examples} />
+        <ScreenExamples array={currentBotById.photo_examples} />
 
-        <Rating currentBotById />
+        <Rating currentBotById={currentBotById} />
       </div>
       {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
       <div className={styles.basketSection}>
         <div className={styles.basketSection__basket}>
           <h2 className={styles.basketSection__title}>Цена:</h2>
           <p className={styles.basketSection__totalPrice}>
-            <span>{bot.price}</span>&#8381;
+            <span>{currentBotById.price}</span>&#8381;
           </p>
           {!botStatus ? (
             <button
               className={styles.basketSection__button}
               type='button'
               aria-label='Buy'
-              onClick={() => handleBuyClick(bot)}
+              onClick={() => handleBuyClick(currentBotById)}
               disabled={botStatus}
             >
               Добавить в корзину
@@ -117,7 +118,9 @@ function BotDetails({
           ) : (
             <>
               <Counter
-                product={cartProducts.find((obj) => obj.id === bot.id)}
+                product={cartProducts.find(
+                  (obj) => obj.id === currentBotById.id
+                )}
                 increaseProductCount={increaseProductCount}
                 decreaseProductCount={decreaseProductCount}
                 customStyles={counterStyles}
@@ -134,6 +137,7 @@ function BotDetails({
           )}
         </div>
       </div>
+      <Reviews />
     </section>
   );
 }
