@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import styles from './ReviewsSection.module.scss';
 import ReviewCard from '../ReviewCard/ReviewCard';
