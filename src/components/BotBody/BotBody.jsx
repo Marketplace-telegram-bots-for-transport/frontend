@@ -13,6 +13,20 @@ function Botbody({
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
+  const [copied, setCopied] = useState(false);
+  const copyToClipboard = () => {
+    const currentURL = window.location.href;
+
+    const textArea = document.createElement('textarea');
+    textArea.value = currentURL;
+
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+
+    setCopied(true);
+  };
 
   return (
     <div className={styles.botBody}>
@@ -32,7 +46,9 @@ function Botbody({
             <button
               className={styles.botBody__linkButton}
               aria-label='кнопка'
+              onClick={copyToClipboard}
             />
+            {copied ? 'Ссылка скопирована!' : ''}
           </div>
         </div>
         <p className={styles.botBody__subtitle}>{botAuthor}</p>
