@@ -1,9 +1,9 @@
-import { useContext /* временное значение */ } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CurrentUserContext from '../../context/CurrentUserContext'; /* временное значение */
+import CurrentUserContext from '../../context/CurrentUserContext';
 
 import styles from './ResetPassword.module.scss';
-
+import { PATTERN_EMAIL } from '../../utils/constants';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function PasswordReset({ comeBack }) {
@@ -61,6 +61,7 @@ function PasswordReset({ comeBack }) {
             name='email'
             type='email'
             placeholder='Введите эл. почту'
+            pattern={PATTERN_EMAIL}
             defaultValue={values.email || ''}
             onBlur={(e) => {
               handleChange(e);

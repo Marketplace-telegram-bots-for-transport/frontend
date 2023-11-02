@@ -60,6 +60,11 @@ const BotsList = ({
 
   return (
     <div className={styles.botsContainer} id='bots'>
+      {displayedBots.length === 0 && (
+        <div className={styles.emptyList}>
+          По вашему запросу ничего не найдено
+        </div>
+      )}
       <ul className={styles.bots}>
         {displayedBots.map((bot) => (
           <li key={bot.id}>

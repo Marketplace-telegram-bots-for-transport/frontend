@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
+import { PATTERN_EMAIL } from '../../utils/constants';
 
 function Register({ loggedIn, onRegister, comeBack }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
@@ -109,7 +110,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
             id='email'
             name='email'
             required
-            pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            pattern={PATTERN_EMAIL}
             value={values.email || ''}
             onChange={handleChange}
             onBlur={() => {

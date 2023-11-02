@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
@@ -10,10 +11,19 @@ function Header({
   deleteCartProduct,
   onSearch,
 }) {
-  const handleChange = (e) => {
-    const { value } = e.target;
-    onSearch(value);
-  };
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState(''); // данные в поисковой строке
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate('/');
+    onSearch(searchQuery);
+  }
+
+  function handleСhange(e) {
+    setSearchQuery(e.target.value);
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -23,12 +33,22 @@ function Header({
           </Link>
         </div>
         <div className={styles.header__search}>
-          <form className={styles.header__search_form} noValidate>
+          <form
+            className={styles.header__search_form}
+            noValidate
+            onSubmit={handleSubmit}
+          >
             <input
               className={styles.header__search_input}
               type='text'
               placeholder='Поиск'
-              onChange={(e) => handleChange(e)}
+              value={searchQuery || ''}
+              onChange={handleСhange}
+            />
+            <button
+              className={styles.header__search_button}
+              type='submit'
+              aria-label='Отправить запрос поиска'
             />
           </form>
         </div>

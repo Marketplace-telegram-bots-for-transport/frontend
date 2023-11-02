@@ -41,3 +41,16 @@
     }
   }
 }
+
+.emptyList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 0;
+  @include text(
+    $font-medium-24,
+    $weight-400,
+    $line-height-medium-24,
+    $color-blue-text
+  );
+}

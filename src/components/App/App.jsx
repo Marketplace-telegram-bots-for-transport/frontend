@@ -10,6 +10,8 @@ import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import BotDetails from '../BotDetails/BotDetails';
 
+import SpecialOffers from '../SpecialOffers/SpecialOffers';
+
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
@@ -17,8 +19,9 @@ import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
-// import * as userApi from '../../utils/api/userApi';
 import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
+import * as userApi from '../../utils/api/userApi';
+import RegisterSeller from '../RegisterSeller/RegisterSeller';
 
 const App = () => {
   const navigate = useNavigate();
@@ -63,16 +66,17 @@ const App = () => {
   }, [isLoggedIn, navigate]);
 
   // получение данных пользователя
-  // useEffect(() => {
-  //   async function fetchUserData() {
-  //     const jwt = localStorage.getItem('jwt');
-  //     const userData = await userApi.getUserInfo(jwt);
-  //     console.log('userData', userData);
-  //     setCurrentUser(userData);
-  //   }
+  useEffect(() => {
+    async function fetchUserData() {
+      if (isLoggedIn) {
+        const jwt = localStorage.getItem('jwt');
+        const userData = await userApi.getUserInfo(jwt);
+        setCurrentUser(userData);
+      }
+    }
 
-  //   fetchUserData();
-  // }, []);
+    fetchUserData();
+  }, [isLoggedIn]);
 
   // Функция поиска для хэдера
   const handleSearch = async (query) => {
@@ -211,6 +215,18 @@ const App = () => {
           />
 
           <Route
+            path='/special-offers/:id'
+            element={
+              apiBots !== null ? (
+                <SpecialOffers
+                  apiBots={apiBots}
+                  addProductToCart={addProductToCart}
+                />
+              ) : null
+            }
+          />
+
+          <Route
             path='/cart'
             element={
               <Cart
@@ -270,6 +286,11 @@ const App = () => {
           <Route
             path='/change-password'
             element={<ChangePassword comeBack={handleGoBack} />}
+          />
+
+          <Route
+            path='/signup-seller'
+            element={<RegisterSeller comeBack={handleGoBack} />}
           />
         </Routes>
         <Footer />

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CurrentUserContext from '../../../context/CurrentUserContext';
@@ -20,6 +20,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* функции закрытия сабменю поочередно */
   const handleBasketClick = () => {
@@ -89,6 +90,14 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   } else {
     countText = `${count()} ${TEXT_MORE_THAN_UP_TO_FIVE_GOODS}`;
   }
+
+  const handleScrollLinkClick = () => {
+    if (location.pathname === '/') {
+      document.getElementById('bots').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
 
   let profileImage = null;
 
@@ -172,12 +181,32 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                       alt='Изображение бота'
                     />
                     <div className={styles.submenu__mini_description}>
-                      <h3 className={styles.submenu__mini_title}>{bot.name}</h3>
+                      {bot.discount > 0 ? (
+                        <>
+                          <div className={styles.submenu__mini_iconDiscount} />
+                          <h3 className={styles.submenu__mini_title}>
+                            {bot.name}
+                          </h3>
+                        </>
+                      ) : (
+                        <h3 className={styles.submenu__mini_title}>
+                          {bot.name}
+                        </h3>
+                      )}
                       <p className={styles.submenu__mini_counter}>
                         {bot.count} шт.
                       </p>
                     </div>
-                    <h3 className={styles.submenu__mini_price}>{bot.price}₽</h3>
+                    {bot.discount > 0 ? (
+                      <h3 className={styles.submenu__mini_priceDiscount}>
+                        {bot.price}₽
+                      </h3>
+                    ) : (
+                      <h3 className={styles.submenu__mini_price}>
+                        {bot.price}₽
+                      </h3>
+                    )}
+
                     <button
                       className={styles.submenu__mini_button}
                       type='button'
@@ -216,6 +245,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 to='bots'
                 smooth
                 duration={1000}
+                onClick={handleScrollLinkClick}
               >
                 Перейти к каталогу
               </ScrollLink>
