@@ -1,5 +1,6 @@
 import BackButton from '../BackButton/BackButton';
-import UserAgreement from '../UserAgreement/UserAgreement';
+import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
+// import UserAgreement from '../UserAgreement/UserAgreement';
 import styles from './RegisterSeller.module.scss';
 
 function RegisterSeller({ comeBack }) {
@@ -22,7 +23,8 @@ function RegisterSeller({ comeBack }) {
         </div>
       </div>
       <div className={styles.register__content}>
-        <UserAgreement />
+        {/* <UserAgreement /> */}
+        <SellerRegisterForm />
         <button className={styles.register__button}>Продолжить</button>
       </div>
     </section>
