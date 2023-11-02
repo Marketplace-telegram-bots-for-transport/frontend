@@ -17,11 +17,12 @@ import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
-import * as userApi from '../../utils/api/userApi';
+// import * as userApi from '../../utils/api/userApi';
+import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
   const [OTP, setOTP] = useState(''); // состояние одноразового пароля
@@ -62,16 +63,16 @@ const App = () => {
   }, [isLoggedIn, navigate]);
 
   // получение данных пользователя
-  useEffect(() => {
-    async function fetchUserData() {
-      const jwt = localStorage.getItem('jwt');
-      const userData = await userApi.getUserInfo(jwt);
-      console.log('userData', userData);
-      setCurrentUser(userData);
-    }
+  // useEffect(() => {
+  //   async function fetchUserData() {
+  //     const jwt = localStorage.getItem('jwt');
+  //     const userData = await userApi.getUserInfo(jwt);
+  //     console.log('userData', userData);
+  //     setCurrentUser(userData);
+  //   }
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
   // Функция поиска для хэдера
   const handleSearch = async (query) => {
@@ -148,7 +149,7 @@ const App = () => {
   //  Функция авторизации
   const handleLogin = (values) => {
     authorizeApi
-      .authorize(values.password, values.username)
+      .authorize(values.password, values.email)
       .then((res) => {
         if (res.auth_token) {
           console.log('успешный вход');
@@ -169,7 +170,8 @@ const App = () => {
         values.email,
         values.username,
         values.password,
-        values.confirm_password
+        values.confirm_password,
+        null
       )
       .then(() => {
         console.log('регистрация успешна');
@@ -252,6 +254,8 @@ const App = () => {
               />
             }
           />
+
+          <Route path='/profile' element={<ProfileNavigation />} />
 
           <Route
             path='/reset-password'
