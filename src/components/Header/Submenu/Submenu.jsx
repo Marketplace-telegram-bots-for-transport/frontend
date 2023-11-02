@@ -1,24 +1,26 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-import info from '../../../utils/infoUser.json';
+import CurrentUserContext from '../../../context/CurrentUserContext';
+import {
+  NUMBER_UNIT_OF_GOODS,
+  NUMBER_UP_TO_FIVE_GOODS,
+  TEXT_UNIT_OF_GOODS,
+  TEXT_UP_TO_FIVE_GOODS,
+  TEXT_MORE_THAN_UP_TO_FIVE_GOODS,
+  DEFAULT_PROFILE_IMAGE,
+} from '../../../utils/constants';
 
 import styles from './Submenu.module.scss';
 
 function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
-  const { users } = info; // получаем временные данные пользователя
-
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [userData, setUserData] = useState(users); // состояние данных пользователя
+  const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setUserData(users);
-  }, [users]);
+  const location = useLocation();
 
   /* функции закрытия сабменю поочередно */
   const handleBasketClick = () => {
@@ -78,12 +80,55 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
 
   /* СЧЕТЧИК ТОВАРОВ В КОРЗИНЕ */
   let countText = '';
-  if (count() === 1) {
-    countText = `${count()} товар`;
-  } else if (count() > 1 && count() < 5) {
-    countText = `${count()} товара`;
+  if (count() === NUMBER_UNIT_OF_GOODS) {
+    countText = `${count()} ${TEXT_UNIT_OF_GOODS}`;
+  } else if (
+    count() > NUMBER_UNIT_OF_GOODS &&
+    count() < NUMBER_UP_TO_FIVE_GOODS
+  ) {
+    countText = `${count()} ${TEXT_UP_TO_FIVE_GOODS}`;
   } else {
-    countText = `${count()} товаров`;
+    countText = `${count()} ${TEXT_MORE_THAN_UP_TO_FIVE_GOODS}`;
+  }
+
+  const handleScrollLinkClick = () => {
+    if (location.pathname === '/') {
+      document.getElementById('bots').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
+
+  let profileImage = null;
+
+  if (isLoggedIn) {
+    if (currentUser && currentUser.image) {
+      profileImage = (
+        <img
+          className={styles.submenu__buttonProfile_img}
+          src={currentUser.image}
+          alt='Аватар пользователя'
+        />
+      );
+    } else {
+      profileImage = (
+        <div
+          className={`
+          ${styles.submenu__buttonProfile_default}
+          ${isProfileOpen ? styles.submenu__buttonProfile_default_open : ''}
+        `}
+        />
+      );
+    }
+  } else {
+    profileImage = (
+      <div
+        className={`
+        ${styles.submenu__buttonProfile_default}
+        ${isProfileOpen ? styles.submenu__buttonProfile_default_open : ''}
+      `}
+      />
+    );
   }
 
   return (
@@ -136,12 +181,32 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                       alt='Изображение бота'
                     />
                     <div className={styles.submenu__mini_description}>
-                      <h3 className={styles.submenu__mini_title}>{bot.name}</h3>
+                      {bot.discount > 0 ? (
+                        <>
+                          <div className={styles.submenu__mini_iconDiscount} />
+                          <h3 className={styles.submenu__mini_title}>
+                            {bot.name}
+                          </h3>
+                        </>
+                      ) : (
+                        <h3 className={styles.submenu__mini_title}>
+                          {bot.name}
+                        </h3>
+                      )}
                       <p className={styles.submenu__mini_counter}>
                         {bot.count} шт.
                       </p>
                     </div>
-                    <h3 className={styles.submenu__mini_price}>{bot.price}₽</h3>
+                    {bot.discount > 0 ? (
+                      <h3 className={styles.submenu__mini_priceDiscount}>
+                        {bot.price}₽
+                      </h3>
+                    ) : (
+                      <h3 className={styles.submenu__mini_price}>
+                        {bot.price}₽
+                      </h3>
+                    )}
+
                     <button
                       className={styles.submenu__mini_button}
                       type='button'
@@ -180,6 +245,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 to='bots'
                 smooth
                 duration={1000}
+                onClick={handleScrollLinkClick}
               >
                 Перейти к каталогу
               </ScrollLink>
@@ -190,15 +256,13 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
 
       <div className={styles.submenu__profile}>
         <button
-          className={`
-          ${styles.submenu__button}
-          ${styles.submenu__button_profile}
-          ${isProfileOpen ? styles.submenu__button_profile_open : ''}
-          `}
+          className={styles.submenu__buttonProfile}
           type='button'
           aria-label='Открыть меню профиля'
           onClick={handleProfileClick}
-        />
+        >
+          {profileImage}
+        </button>
       </div>
 
       {isProfileOpen && (
@@ -210,19 +274,16 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
         >
           {isLoggedIn ? (
             <>
-              {userData.map((user) => (
-                <div
-                  className={styles.submenu__profile_description}
-                  key={user.id}
-                >
-                  <img
-                    className={styles.submenu__profile_img}
-                    src={user.avatar}
-                    alt='Изображение пользователя'
-                  />
-                  <h3 className={styles.submenu__profile_title}>{user.name}</h3>
-                </div>
-              ))}
+              <div className={styles.submenu__profile_description}>
+                <img
+                  className={styles.submenu__profile_img}
+                  src={currentUser.image || DEFAULT_PROFILE_IMAGE}
+                  alt='Стандартное изображение аватара'
+                />
+                <h3 className={styles.submenu__profile_title}>
+                  {currentUser.username}
+                </h3>
+              </div>
               <nav className={styles.submenu__profile_navigate}>
                 <Link className={styles.submenu__profile_link} to='/profile'>
                   Мой профиль

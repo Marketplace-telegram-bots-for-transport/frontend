@@ -1,6 +1,8 @@
 @import './../../vendor/_varibles';
 
 .returnElement {
+  display: inline-block;
+
   &__btn {
     background-image: url('../../images/back-icon.svg');
     background-repeat: no-repeat;

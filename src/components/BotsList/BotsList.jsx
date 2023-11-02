@@ -26,11 +26,6 @@ const BotsList = ({
     NUMBER_OF_DISPLAYED_BOTS_1920
   );
 
-  // add margin when button is hidden
-  const botsContainerClass = `${styles.botsContainer} ${
-    bots.length <= numberOfDisplayedBots && styles.botsContainer_extraMargin
-  }`;
-
   // button display/hide
   const moreBtnClass = `${styles.bots__moreBtn} ${
     totalBotsAmount <= numberOfDisplayedBots && styles.bots__moreBtn_hidden
@@ -64,7 +59,12 @@ const BotsList = ({
   };
 
   return (
-    <div className={botsContainerClass} id='bots'>
+    <div className={styles.botsContainer} id='bots'>
+      {displayedBots.length === 0 && (
+        <div className={styles.emptyList}>
+          По вашему запросу ничего не найдено
+        </div>
+      )}
       <ul className={styles.bots}>
         {displayedBots.map((bot) => (
           <li key={bot.id}>
@@ -72,7 +72,7 @@ const BotsList = ({
               mainPhoto={bot.main_photo}
               name={bot.name}
               author={bot.author}
-              category={bot.category}
+              category={bot.categories[0].name}
               price={bot.price}
               id={bot.id}
               onBuyClick={() => handleBuyClick(bot)}

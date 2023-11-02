@@ -28,18 +28,43 @@
         background-color: $background-color-button-pressed;
       }
     }
-    &_profile {
+  }
+
+  &__buttonProfile {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 100px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    &_img {
       width: 60px;
       height: 60px;
-      margin-left: 20px;
-      background-image: url(../../../images/profile-min.svg);
-      background-size: 30px 36px;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-      &_open {
-        background-color: $background-color-button-pressed;
+      border-radius: 100px;
+      &:hover {
+        opacity: 0.8;
       }
+    }
+  }
+
+  &__buttonProfile_default {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 100px;
+    background: $background-color-button-default center no-repeat;
+    background-image: url(../../../images/profile-min.svg);
+    background-size: 30px 36px;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    cursor: pointer;
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+    &_open {
+      background-color: $background-color-button-pressed;
     }
   }
 
@@ -150,6 +175,12 @@
         $color-blue-dark-title
       );
     }
+    &_iconDiscount {
+      margin-left: 7px;
+      width: 15px;
+      height: 15px;
+      background: url(../../../images/discount.svg) no-repeat center;
+    }
     &_counter {
       @include text(
         10px,
@@ -157,6 +188,9 @@
         $line-height-small-14,
         $color-blue-dark-title
       );
+    }
+    &_priceDiscount {
+      @include text($font-small-14, $weight-300, 21px, $color-red-errors);
     }
     &_price {
       margin-right: 10px;
@@ -189,7 +223,6 @@
     }
     &_description {
       display: flex;
-      justify-content: center;
       align-items: center;
       margin: 25px 20px 0 20px;
       border-bottom: 0.5px solid #d3e2f7;

@@ -4,6 +4,13 @@ import Payment from '../Payment/Payment';
 import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
 import BackButton from '../BackButton/BackButton';
 import styles from './Cart.module.scss';
+import {
+  NUMBER_UNIT_OF_GOODS,
+  NUMBER_UP_TO_FIVE_GOODS,
+  TEXT_UNIT_OF_GOODS,
+  TEXT_UP_TO_FIVE_GOODS,
+  TEXT_MORE_THAN_UP_TO_FIVE_GOODS,
+} from '../../utils/constants';
 
 function Cart({
   isLoggedIn,
@@ -24,12 +31,15 @@ function Cart({
   };
 
   let countText = '';
-  if (count() === 1) {
-    countText = `${count()} товар`;
-  } else if (count() > 1 && count() < 5) {
-    countText = `${count()} товара`;
+  if (count() === NUMBER_UNIT_OF_GOODS) {
+    countText = `${count()} ${TEXT_UNIT_OF_GOODS}`;
+  } else if (
+    count() > NUMBER_UNIT_OF_GOODS &&
+    count() < NUMBER_UP_TO_FIVE_GOODS
+  ) {
+    countText = `${count()} ${TEXT_UP_TO_FIVE_GOODS}`;
   } else {
-    countText = `${count()} товаров`;
+    countText = `${count()} ${TEXT_MORE_THAN_UP_TO_FIVE_GOODS}`;
   }
 
   // функция расчета общей суммы заказа

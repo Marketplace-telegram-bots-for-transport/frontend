@@ -46,6 +46,7 @@ $line-height-payment-18: 22.5px;
 
 /* COLORS */
 $color-blue-text: #3b7dd6;
+$color-white-text: #fff;
 $color-blue-dark-title: #183357;
 $color-gray-text: #35383b;
 $color-red-errors: #e44f2f;
@@ -86,11 +87,3 @@ $box-shadow-category:
 /* INPUTS */
 $border-main: 1px solid #d3e2f7;
 $border-active: 1px solid #183357;
-
-body {
-  background: url(../images/Background.jpg) no-repeat center center fixed;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
