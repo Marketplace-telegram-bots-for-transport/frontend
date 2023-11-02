@@ -72,3 +72,12 @@
   width: 0;
   transition: width 0.5s;
 }
+
+.countOfReviews {
+  @include text(
+    $font-footer-18,
+    $weight-300,
+    $line-height-footer-18,
+    $color-gray-text
+  );
+}
