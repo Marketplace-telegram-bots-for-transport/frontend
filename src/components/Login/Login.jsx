@@ -43,13 +43,13 @@ function Login({ onLogin, loggedIn }) {
           <h3 className={styles.login__inputName}>Логин или email</h3>
           <input
             className={styles.login__input}
-            placeholder='Логин или email'
+            placeholder='email'
             type='text'
-            id='username'
-            name='username'
+            id='email'
+            name='email'
             required
+            value={values.email || ''}
             pattern={PATTERN_EMAIL}
-            value={values.username || ''}
             onChange={handleChange}
             minLength='2'
             onBlur={() => {
@@ -61,7 +61,7 @@ function Login({ onLogin, loggedIn }) {
               isErrorLogin && styles.login__errorVisible
             }`}
           >
-            {errors.username}
+            {errors.email}
           </span>
           <div className={styles.login__inputNameContainer}>
             <h3 className={styles.login__inputName}>Пароль</h3>
