@@ -2,11 +2,11 @@
 @import url('./vendor/fonts/fonts.css');
 @import './vendor/_varibles.scss';
 
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 html,
 body {
@@ -16,4 +16,25 @@ body {
   margin: 0 auto;
   background: url(./images/Background.jpg) no-repeat center center fixed;
   background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+ul,
+ol,
+li,
+a,
+div,
+figure,
+input,
+main,
+section,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }

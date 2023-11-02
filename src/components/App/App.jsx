@@ -195,100 +195,102 @@ const App = () => {
           onSearch={handleSearch}
         />
 
-        <Routes>
-          <Route
-            path='/'
-            element={
-              apiBots !== null ? (
-                <Main
+        <div className={styles.content}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                apiBots !== null ? (
+                  <Main
+                    apiBots={apiBots}
+                    cartProducts={cartProducts}
+                    isProductInCart={isProductInCart}
+                    addProductToCart={addProductToCart}
+                    increaseProductCount={increaseProductCount}
+                    decreaseProductCount={decreaseProductCount}
+                  />
+                ) : null
+              }
+            />
+
+            <Route
+              path='/special-offers/:id'
+              element={
+                apiBots !== null ? (
+                  <SpecialOffers
+                    apiBots={apiBots}
+                    addProductToCart={addProductToCart}
+                  />
+                ) : null
+              }
+            />
+
+            <Route
+              path='/cart'
+              element={
+                <Cart
+                  isLoggedIn={isLoggedIn}
+                  cartProducts={cartProducts}
+                  deleteCartProduct={deleteCartProduct}
+                  increaseProductCount={increaseProductCount}
+                  decreaseProductCount={decreaseProductCount}
+                  comeBack={handleGoBack}
+                />
+              }
+            />
+
+            <Route
+              path='/botdetails/:botId'
+              element={
+                <BotDetails
                   apiBots={apiBots}
                   cartProducts={cartProducts}
                   isProductInCart={isProductInCart}
                   addProductToCart={addProductToCart}
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
+                  comeBack={handleGoBack}
                 />
-              ) : null
-            }
-          />
+              }
+            />
 
-          <Route
-            path='/special-offers/:id'
-            element={
-              apiBots !== null ? (
-                <SpecialOffers
-                  apiBots={apiBots}
-                  addProductToCart={addProductToCart}
+            <Route
+              path='/login'
+              element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
+            />
+
+            <Route
+              path='/signup'
+              element={
+                <Register
+                  comeBack={handleGoBack}
+                  loggedIn={isLoggedIn}
+                  onRegister={handleRegister}
                 />
-              ) : null
-            }
-          />
+              }
+            />
 
-          <Route
-            path='/cart'
-            element={
-              <Cart
-                isLoggedIn={isLoggedIn}
-                cartProducts={cartProducts}
-                deleteCartProduct={deleteCartProduct}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-                comeBack={handleGoBack}
-              />
-            }
-          />
+            <Route
+              path='/reset-password'
+              element={<ResetPassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/botdetails/:botId'
-            element={
-              <BotDetails
-                apiBots={apiBots}
-                cartProducts={cartProducts}
-                isProductInCart={isProductInCart}
-                addProductToCart={addProductToCart}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-                comeBack={handleGoBack}
-              />
-            }
-          />
+            <Route
+              path='/OTP-password'
+              element={<OTPPassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/login'
-            element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
-          />
+            <Route
+              path='/change-password'
+              element={<ChangePassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/signup'
-            element={
-              <Register
-                comeBack={handleGoBack}
-                loggedIn={isLoggedIn}
-                onRegister={handleRegister}
-              />
-            }
-          />
-
-          <Route
-            path='/reset-password'
-            element={<ResetPassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/OTP-password'
-            element={<OTPPassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/change-password'
-            element={<ChangePassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/signup-seller'
-            element={<RegisterSeller comeBack={handleGoBack} />}
-          />
-        </Routes>
+            <Route
+              path='/signup-seller'
+              element={<RegisterSeller comeBack={handleGoBack} />}
+            />
+          </Routes>
+        </div>
         <Footer />
       </CurrentUserContext.Provider>
     </div>

@@ -14,7 +14,6 @@ function BackButton({ botName, title, comeBack }) {
         {location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
         {location.pathname === `/special-offers/${id}` ? title : ''}
         {location.pathname === `/botdetails/${botId}` ? botName : ''}
-        {location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
       </p>
     </div>
   );

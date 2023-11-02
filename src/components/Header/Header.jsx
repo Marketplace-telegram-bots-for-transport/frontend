@@ -24,11 +24,19 @@ function Header({
     setSearchQuery(e.target.value);
   }
 
+  const handleLogoClick = () => {
+    setSearchQuery('');
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
         <div className={styles.header__logo}>
-          <Link className={styles.header__logo_link} to='/'>
+          <Link
+            className={styles.header__logo_link}
+            to='/'
+            onClick={handleLogoClick}
+          >
             <h2 className={styles.header__logo_title}>BotDepot</h2>
           </Link>
         </div>
