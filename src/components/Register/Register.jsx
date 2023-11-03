@@ -78,10 +78,10 @@ function Register({ loggedIn, onRegister, comeBack }) {
           noValidate
           onSubmit={handleSubmit}
         >
-          <h3 className={styles.register__inputName}>Логин</h3>
+          <h3 className={styles.register__inputName}>Имя пользователя</h3>
           <input
             className={styles.register__input}
-            placeholder='Введите логин'
+            placeholder='Введите имя пользователя'
             type='text'
             id='username'
             name='username'
