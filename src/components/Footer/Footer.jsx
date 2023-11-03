@@ -9,7 +9,7 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
-        <div className={styles.footer__addressСontainer}>
+        <div className={styles.footer__contactsСontainer}>
           <Link className={styles.footer__logoLink} to='/' />
           <address className={styles.footer__contacts}>
             <div className={styles.footer__contacts_container}>

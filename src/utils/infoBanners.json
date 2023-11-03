@@ -4,7 +4,8 @@
       "id": 1,
       "title": "Осенняя распродажа",
       "background": "linear-gradient(180deg, #b5d0f5 0%, #edf4ff 100%)",
-      "imageUrl": "/images/special-banner/special-banner2.svg"
+      "imageUrl": "/images/special-banner/special-banner2.svg",
+      "description": "Осенняя распродажа пока что пустая!"
     },
     {
       "id": 2,

@@ -163,6 +163,7 @@
       margin-right: 10px;
     }
     &_title {
+      display: flex;
       width: 117px;
       margin-bottom: 5px;
       overflow: hidden;
@@ -190,6 +191,7 @@
       );
     }
     &_priceDiscount {
+      margin-right: 10px;
       @include text($font-small-14, $weight-300, 21px, $color-red-errors);
     }
     &_price {
