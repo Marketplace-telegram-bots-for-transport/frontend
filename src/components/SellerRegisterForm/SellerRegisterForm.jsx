@@ -2,7 +2,7 @@ import styles from './SellerRegisterForm.module.scss';
 
 function SellerRegisterForm() {
   return (
-    <div className={styles.seller}>
+    <section className={styles.seller}>
       <h2 className={styles.seller__title}>Данные продавца/компании</h2>
       <form className={styles.form}>
         <label htmlFor='companyName' className={styles.form__label}>
@@ -69,7 +69,7 @@ function SellerRegisterForm() {
           />
         </label>
       </form>
-    </div>
+    </section>
   );
 }
 

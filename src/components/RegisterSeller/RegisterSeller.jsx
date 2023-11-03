@@ -1,3 +1,4 @@
+import AddNewBotsSection from '../AddNewBotsSection/AddNewBotsSection';
 import BackButton from '../BackButton/BackButton';
 import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
 // import UserAgreement from '../UserAgreement/UserAgreement';
@@ -25,6 +26,7 @@ function RegisterSeller({ comeBack }) {
       <div className={styles.register__content}>
         {/* <UserAgreement /> */}
         <SellerRegisterForm />
+        <AddNewBotsSection />
         <button className={styles.register__button}>Продолжить</button>
       </div>
     </section>
