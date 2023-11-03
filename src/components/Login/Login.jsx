@@ -40,10 +40,10 @@ function Login({ onLogin, loggedIn }) {
       <div className={styles.login__loginContainer}>
         <h2 className={styles.login__title}>Войдите, чтобы продолжить</h2>
         <form className={styles.login__form} noValidate onSubmit={handleSubmit}>
-          <h3 className={styles.login__inputName}>Логин или email</h3>
+          <h3 className={styles.login__inputName}>E-mail</h3>
           <input
             className={styles.login__input}
-            placeholder='email'
+            placeholder='Введите e-mail'
             type='text'
             id='email'
             name='email'
