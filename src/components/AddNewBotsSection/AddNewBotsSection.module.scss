@@ -1,111 +1,105 @@
 @import './../../vendor/_varibles.scss';
 
 .addition {
-    max-width: 1320px;
+  max-width: 1320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+
+  &__head {
+    display: grid;
+    grid-template-columns: minmax(365px, 1071px) minmax(100px, 239px);
+    gap: 10px;
+  }
+
+  &__title {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 40px;
+    margin: 0;
+    padding: 0;
+    @include text(
+      $font-h2-36,
+      $weight-600,
+      $line-height-h2,
+      $color-blue-dark-title
+    );
+  }
 
-    &__head {
-        display: grid;
-        grid-template-columns: minmax(365px, 1071px) minmax(100px, 239px);
-        gap: 10px;
-    }
+  &__info {
+    width: 100%;
+    grid-column-start: 1;
+    margin: 0;
+    padding: 0;
+    @include text($font-18, $weight-300, $line-height-18, $color-grey-text);
+  }
 
-    &__title {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        @include text(
-        $font-h2-36,
-        $weight-600,
-        $line-height-h2,
-        $color-blue-dark-title
-        );
-    }
-
-    &__info {
-        width: 100%;
-        grid-column-start: 1;
-        margin: 0;
-        padding: 0;
-        @include text(
-        $font-18,
-        $weight-300,
-        $line-height-18,
-        $color-grey-text
-        );
-    }
-
-    &__addButton {
-        grid-column-start: 2;
-        grid-row-start: 1;
-        width: 239px;
-        height: 50px;
-        border-radius: 15px;
-        background-color: $background-button-input-category;
-        border: none;
-        @include text(
-        $font-medium-24,
-        $weight-400,
-        $line-height-medium-24,
-        $color-blue-text
-        );
-    }
+  &__addButton {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    width: 239px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: $background-button-input-category;
+    border: none;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
+  }
 }
 
 .form {
-    max-width: 1320px;
+  max-width: 1320px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(40%, 510px)) minmax(20%, 239px);
+  column-gap: 30px;
+  row-gap: 20px;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding: 0 0 23px;
+  }
+
+  &__inputTitle {
+    padding: 0 0 0 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+  }
+
+  &__input {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(40%, 510px)) minmax(20%, 239px);
-    column-gap: 30px;
-    row-gap: 20px;
-  
-    &__label {
-      display: flex;
-      flex-direction: column;
-      row-gap: 5px;
-      padding: 0 0 23px;
-    }
-  
-    &__inputTitle {
-      padding: 0 0 0 10px;
+    height: 50px;
+    border: $border-main;
+    border-radius: 10px;
+    padding: 0 0 0 20px;
+    background-color: $background-input;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-input-text
+    );
+
+    &::placeholder {
       @include text(
         $font-small-14,
         $weight-300,
         $line-height-small-14,
-        $color-blue-dark-title
+        $input-placeholder
       );
     }
-  
-    &__input {
-      width: 100%;
-      height: 50px;
-      border: $border-main;
-      border-radius: 10px;
-      padding: 0 0 0 20px;
-      background-color: $background-input;
-      @include text(
-        $font-small-14,
-        $weight-300,
-        $line-height-small-14,
-        $color-blue-input-text
-      );
-  
-      &::placeholder {
-        @include text(
-          $font-small-14,
-          $weight-300,
-          $line-height-small-14,
-          $input-placeholder
-        );
-      }
-  
-      &:focus {
-        outline: none;
-      }
+
+    &:focus {
+      outline: none;
     }
   }
-  
+}
