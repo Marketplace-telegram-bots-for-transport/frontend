@@ -20,7 +20,7 @@ function Cart({
   decreaseProductCount,
   comeBack,
 }) {
-  const [totalSum, setTotalSum] = useState(0.0); // состояние для общей суммы заказа
+  const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
 
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
@@ -45,15 +45,13 @@ function Cart({
   // функция расчета общей суммы заказа
   const findTotalSum = useCallback(() => {
     return cartProducts.reduce((previousValue, product) => {
-      return (
-        previousValue + parseFloat(product.price).toFixed(2) * product.count
-      );
-    }, 0.0);
+      return previousValue + product.price * product.count;
+    }, 0);
   }, [cartProducts]);
 
   useEffect(() => {
     const sum = findTotalSum();
-    setTotalSum(sum.toFixed(2));
+    setTotalSum(sum);
   }, [cartProducts, findTotalSum]);
 
   // прокрутка скролла наверх
