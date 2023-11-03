@@ -182,12 +182,10 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                     />
                     <div className={styles.submenu__mini_description}>
                       {bot.discount > 0 ? (
-                        <>
+                        <h3 className={styles.submenu__mini_title}>
+                          {bot.name}
                           <div className={styles.submenu__mini_iconDiscount} />
-                          <h3 className={styles.submenu__mini_title}>
-                            {bot.name}
-                          </h3>
-                        </>
+                        </h3>
                       ) : (
                         <h3 className={styles.submenu__mini_title}>
                           {bot.name}
@@ -199,7 +197,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                     </div>
                     {bot.discount > 0 ? (
                       <h3 className={styles.submenu__mini_priceDiscount}>
-                        {bot.price}₽
+                        {bot.final_price}₽
                       </h3>
                     ) : (
                       <h3 className={styles.submenu__mini_price}>

@@ -2,6 +2,7 @@
 
 .header {
   position: fixed;
+  top: 0;
   left: 50%;
   transform: translate(-50%, 0%);
   max-width: 1920px;
@@ -95,6 +96,55 @@
       }
       &:active {
         background-image: url(../../images/search-min-pressed.svg);
+      }
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .header {
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    &__container {
+      margin: 12px 0;
+    }
+    &__logo {
+      margin-left: 35px;
+      &_link {
+        width: 40px;
+        height: 40px;
+        background-size: 40px 40px;
+      }
+      &_title {
+        display: none;
+      }
+    }
+    // TODO кнопку с выпадающем окном
+    &__search {
+      &_form {
+        min-width: 100%;
+      }
+      &_input {
+        display: none;
+      }
+      &_button {
+        background: url(../../images/images-for-mobile/search/search-sizeMobile.svg)
+          no-repeat center;
+        background-color: inherit;
+        border-radius: 100px;
+        margin-left: 97px;
+        margin-right: 18px;
+        &:hover {
+          background-image: url(../../images/images-for-mobile/search/search-sizeMobile-hover.svg);
+        }
+        &:active {
+          background-image: url(../../images/images-for-mobile/search/search-sizeMobile-pressed.svg);
+        }
       }
     }
   }

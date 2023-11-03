@@ -46,25 +46,24 @@
         opacity: 0.8;
       }
     }
-  }
-
-  &__buttonProfile_default {
-    width: 60px;
-    height: 60px;
-    border: none;
-    border-radius: 100px;
-    background: $background-color-button-default center no-repeat;
-    background-image: url(../../../images/profile-min.svg);
-    background-size: 30px 36px;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
-    cursor: pointer;
-    &:hover {
-      background-color: $background-color-button-hover;
-    }
-    &_open {
-      background-color: $background-color-button-pressed;
+    &_default {
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 100px;
+      background: $background-color-button-default center no-repeat;
+      background-image: url(../../../images/profile-min.svg);
+      background-size: 30px 36px;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+      cursor: pointer;
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+      &_open {
+        background-color: $background-color-button-pressed;
+      }
     }
   }
 
@@ -163,6 +162,7 @@
       margin-right: 10px;
     }
     &_title {
+      display: flex;
       width: 117px;
       margin-bottom: 5px;
       overflow: hidden;
@@ -190,6 +190,7 @@
       );
     }
     &_priceDiscount {
+      margin-right: 10px;
       @include text($font-small-14, $weight-300, 21px, $color-red-errors);
     }
     &_price {
@@ -269,6 +270,60 @@
       }
       &:active {
         color: $color-link-pressed;
+      }
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .submenu {
+    margin-right: 35px;
+    &__button {
+      background: #fff center no-repeat;
+      &:hover {
+        background-color: #fff;
+      }
+      &_basket {
+        background-image: url(../../../images/images-for-mobile/basket/basket-sizeMobile.svg);
+        &:hover {
+          background-image: url(../../../images/images-for-mobile/basket/basket-sizeMobile-hover.svg);
+        }
+        &_open {
+          background-color: #fff;
+          background-image: url(../../../images/images-for-mobile/basket/basket-sizeMobile-pressed.svg);
+        }
+      }
+    }
+    &__profile {
+      display: flex;
+    }
+    &__buttonProfile {
+      width: 40px;
+      height: 40px;
+      margin-left: 15px;
+      &_img {
+        width: 40px;
+        height: 40px;
+      }
+      &_default {
+        width: 40px;
+        height: 40px;
+        background: $mobile-header-background-button center no-repeat;
+        background-image: url(../../../images/images-for-mobile/profile/profile-sizeMobile.svg);
+        background-size: 20px 20px;
+        &:hover {
+          background-color: $mobile-header-background-button-hover;
+          background-image: url(../../../images/images-for-mobile/profile/profile-sizeMobile-hover.svg);
+        }
+        &_open {
+          background: $mobile-header-background-button-pressed center no-repeat;
+          background-image: url(../../../images/images-for-mobile/profile/profile-sizeMobile-pressed.svg);
+        }
       }
     }
   }

@@ -61,6 +61,11 @@ function BotDetails({
     navigate(path);
   };
 
+  // прокрутка скролла наверх
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const counterStyles = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -82,6 +87,7 @@ function BotDetails({
     // Если бот с заданным id не найден, можно отобразить сообщение об ошибке
     return console.log('бот не найден');
   }
+
   return (
     <section className={styles.details}>
       <div className={styles.details__mainSection}>
