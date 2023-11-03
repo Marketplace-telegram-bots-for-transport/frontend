@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './ProfileNavigation.module.scss';
 // import CurrentUserContext from '../../context/CurrentUserContext';
 import foto from '../../images/Logo.svg';
-import userActiv from '../../images/user-activ.svg';
-// import user from '../../images/user.svg';
 
 function ProfileNavigation() {
   // const currentUser = React.useContext(CurrentUserContext);
@@ -22,10 +20,12 @@ function ProfileNavigation() {
       </div>
       <nav className={styles.profileNavigation__navigation}>
         <Link to='/profile' className={styles.profileNavigation__link}>
-          <img
-            src={userActiv}
-            alt='личные данные'
-            className={styles.profileNavigation__icon}
+          <div
+            className={
+              pathname === '/profile'
+                ? `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_user} ${styles.profileNavigation__icon_user_activ}`
+                : `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_user}`
+            }
           />
           <p
             className={
@@ -37,20 +37,22 @@ function ProfileNavigation() {
             Личные данные
           </p>
         </Link>
-        <Link to='/profile' className={styles.profileNavigation__link}>
-          <img
-            src={userActiv}
-            alt='мои покупки'
-            className={styles.profileNavigation__icon}
+        <Link to='/purchases' className={styles.profileNavigation__link}>
+          <div
+            className={
+              pathname === '/purchases'
+                ? `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_purchases} ${styles.profileNavigation__icon_purchases_activ}`
+                : `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_purchases}`
+            }
           />
           <p
             className={
-              pathname === '/profile'
+              pathname === '/purchases'
                 ? `${styles.profileNavigation__textLink} ${styles.profileNavigation__textLink_activ}`
                 : `${styles.profileNavigation__textLink}`
             }
           >
-            Личные данные
+            Мои покупки
           </p>
         </Link>
       </nav>

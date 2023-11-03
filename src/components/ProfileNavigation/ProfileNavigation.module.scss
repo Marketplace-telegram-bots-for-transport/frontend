@@ -40,12 +40,28 @@
     margin: 0;
     display: flex;
     text-decoration: none;
+    align-items: center;
   }
 
   &__icon {
     width: 24px;
     height: 24px;
     margin: 0 15px 0 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &_user {
+      background-image: url('../../images/user.svg');
+      &_activ {
+        background-image: url('../../images/user-activ.svg');
+      }
+    }
+    &_purchases {
+      background-image: url('../../images/icon-purchases.svg');
+      &_activ {
+        background-image: url('../../images/icon-purchases-activ.svg');
+      }
+    }
   }
 
   &__textLink {
