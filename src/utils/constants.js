@@ -10,5 +10,8 @@ export const TEXT_MORE_THAN_UP_TO_FIVE_GOODS = 'товаров';
 
 export const DEFAULT_PROFILE_IMAGE = '/images/avatar/defaultIcon-mini.svg';
 
+export const CART_KEY = 'cartProducts';
+export const EXPIRATION_KEY = 'cartExpiration';
+
 // VALIDATION
 export const PATTERN_EMAIL = '[a-zA-Z0-9_.]+@[a-zA-Z0-9_]+\\.{1,1}[a-z]{2,}';
