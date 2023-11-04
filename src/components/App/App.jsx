@@ -22,6 +22,7 @@ import * as authorizeApi from '../../utils/api/authorizeApi';
 import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
+import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
 import { CART_KEY } from '../../utils/constants';
 import {
   updateCartWithLocalStorage,
@@ -305,6 +306,11 @@ const App = () => {
             <Route
               path='/signup-seller'
               element={<RegisterSeller comeBack={handleGoBack} />}
+            />
+
+            <Route
+              path='/add-new-bots'
+              element={<AddNewBotsPage comeBack={handleGoBack} />}
             />
           </Routes>
         </div>
