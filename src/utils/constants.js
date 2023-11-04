@@ -8,7 +8,7 @@ export const TEXT_UNIT_OF_GOODS = 'товар';
 export const TEXT_UP_TO_FIVE_GOODS = 'товара';
 export const TEXT_MORE_THAN_UP_TO_FIVE_GOODS = 'товаров';
 
-export const DEFAULT_PROFILE_IMAGE = '../../images/defaultImage.svg';
+export const DEFAULT_PROFILE_IMAGE = '/images/avatar/defaultIcon-mini.svg';
 
 export const CART_KEY = 'cartProducts';
 export const EXPIRATION_KEY = 'cartExpiration';

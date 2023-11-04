@@ -21,7 +21,6 @@ import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
-// import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
 import { CART_KEY } from '../../utils/constants';
 import {
   updateCartWithLocalStorage,
@@ -165,7 +164,7 @@ const App = () => {
   //  Функция авторизации
   const handleLogin = (values) => {
     authorizeApi
-      .authorize(values.password, values.username)
+      .authorize(values.password, values.email)
       .then((res) => {
         if (res.auth_token) {
           console.log('успешный вход');
@@ -186,7 +185,8 @@ const App = () => {
         values.email,
         values.username,
         values.password,
-        values.confirm_password
+        values.confirm_password,
+        null
       )
       .then(() => {
         console.log('регистрация успешна');
@@ -208,106 +208,103 @@ const App = () => {
           onSearch={handleSearch}
         />
 
-        <Routes>
-          <Route
-            path='/'
-            element={
-              apiBots !== null ? (
-                <Main
+        <div className={styles.content}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                apiBots !== null ? (
+                  <Main
+                    apiBots={apiBots}
+                    cartProducts={cartProducts}
+                    isProductInCart={isProductInCart}
+                    addProductToCart={addProductToCart}
+                    increaseProductCount={increaseProductCount}
+                    decreaseProductCount={decreaseProductCount}
+                  />
+                ) : null
+              }
+            />
+
+            <Route
+              path='/special-offers/:id'
+              element={
+                apiBots !== null ? (
+                  <SpecialOffers
+                    apiBots={apiBots}
+                    addProductToCart={addProductToCart}
+                  />
+                ) : null
+              }
+            />
+
+            <Route
+              path='/cart'
+              element={
+                <Cart
+                  isLoggedIn={isLoggedIn}
+                  cartProducts={cartProducts}
+                  deleteCartProduct={deleteCartProduct}
+                  increaseProductCount={increaseProductCount}
+                  decreaseProductCount={decreaseProductCount}
+                  comeBack={handleGoBack}
+                />
+              }
+            />
+
+            <Route
+              path='/botdetails/:botId'
+              element={
+                <BotDetails
                   apiBots={apiBots}
                   cartProducts={cartProducts}
                   isProductInCart={isProductInCart}
                   addProductToCart={addProductToCart}
                   increaseProductCount={increaseProductCount}
                   decreaseProductCount={decreaseProductCount}
+                  comeBack={handleGoBack}
                 />
-              ) : null
-            }
-          />
+                // <Reviews />
+              }
+            />
 
-          <Route
-            path='/special-offers/:id'
-            element={
-              apiBots !== null ? (
-                <SpecialOffers
-                  apiBots={apiBots}
-                  addProductToCart={addProductToCart}
+            <Route
+              path='/login'
+              element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
+            />
+
+            <Route
+              path='/signup'
+              element={
+                <Register
+                  comeBack={handleGoBack}
+                  loggedIn={isLoggedIn}
+                  onRegister={handleRegister}
                 />
-              ) : (
-                'Ничего не найдено'
-              )
-            }
-          />
+              }
+            />
 
-          <Route
-            path='/cart'
-            element={
-              <Cart
-                isLoggedIn={isLoggedIn}
-                cartProducts={cartProducts}
-                deleteCartProduct={deleteCartProduct}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-                comeBack={handleGoBack}
-              />
-            }
-          />
+            <Route
+              path='/reset-password'
+              element={<ResetPassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/botdetails/:botId'
-            element={
-              <BotDetails
-                apiBots={apiBots}
-                cartProducts={cartProducts}
-                isProductInCart={isProductInCart}
-                addProductToCart={addProductToCart}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-                comeBack={handleGoBack}
-              />
-            }
-          />
+            <Route
+              path='/OTP-password'
+              element={<OTPPassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/login'
-            element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
-          />
+            <Route
+              path='/change-password'
+              element={<ChangePassword comeBack={handleGoBack} />}
+            />
 
-          <Route
-            path='/signup'
-            element={
-              <Register
-                comeBack={handleGoBack}
-                loggedIn={isLoggedIn}
-                onRegister={handleRegister}
-              />
-            }
-          />
-
-          <Route
-            path='/reset-password'
-            element={<ResetPassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/OTP-password'
-            element={<OTPPassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/change-password'
-            element={<ChangePassword comeBack={handleGoBack} />}
-          />
-
-          <Route
-            path='/signup-seller'
-            element={<RegisterSeller comeBack={handleGoBack} />}
-          />
-          {/* <Route
-            path='/add-new-bots'
-            element={<AddNewBotsPage comeBack={handleGoBack} />}
-          /> */}
-        </Routes>
+            <Route
+              path='/signup-seller'
+              element={<RegisterSeller comeBack={handleGoBack} />}
+            />
+          </Routes>
+        </div>
         <Footer />
       </CurrentUserContext.Provider>
     </div>
