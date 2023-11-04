@@ -22,6 +22,11 @@ import * as authorizeApi from '../../utils/api/authorizeApi';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
 import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+import { CART_KEY } from '../../utils/constants';
+import {
+  updateCartWithLocalStorage,
+  checkAndRemoveExpiredData,
+} from '../../hooks/useCartInLocalStorage';
 
 const App = () => {
   const navigate = useNavigate();
@@ -94,15 +99,6 @@ const App = () => {
     navigate('/');
   };
 
-  // Функция удаления товара из коризны
-  const deleteCartProduct = (id) => {
-    setCartProducts(() => {
-      return cartProducts.filter((product) => {
-        return id !== product.id;
-      });
-    });
-  };
-
   // Функция увеличения количества товаров
   const increaseProductCount = (id) => {
     setCartProducts(() => {
@@ -133,10 +129,26 @@ const App = () => {
     });
   };
 
+  // Проверка localStorage и восстановление корзины
+  useEffect(() => {
+    checkAndRemoveExpiredData(isLoggedIn);
+    const storedCart = localStorage.getItem(CART_KEY);
+    if (storedCart) {
+      setCartProducts(JSON.parse(storedCart));
+    }
+  }, [isLoggedIn]);
+
   // Функция добавления товара в корзину
   const addProductToCart = (newBot) => {
     const updatedBot = { ...newBot, count: 1 };
-    setCartProducts([...cartProducts, updatedBot]);
+    const updatedCart = [...cartProducts, updatedBot];
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
+  };
+
+  // Функция удаления товара из корзины
+  const deleteCartProduct = (id) => {
+    const updatedCart = cartProducts.filter((product) => id !== product.id);
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
   };
 
   // Функция определяющая наличие данного бота в коризне
