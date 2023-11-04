@@ -1,4 +1,4 @@
-import AddNewBotsSection from '../AddNewBotsSection/AddNewBotsSection';
+import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import BackButton from '../BackButton/BackButton';
 import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
 // import UserAgreement from '../UserAgreement/UserAgreement';

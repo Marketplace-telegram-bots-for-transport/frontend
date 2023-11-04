@@ -41,65 +41,61 @@
     border-radius: 15px;
     background-color: $background-button-input-category;
     border: none;
+    cursor: pointer;
     @include text(
       $font-medium-24,
       $weight-400,
       $line-height-medium-24,
       $color-blue-text
     );
+    transition: .3s;
+
+    &:hover {
+      background-color: $background-color-button2-hover;
+    }
+
+    &:active {
+      background-color: $background-color-button2-pressed;
+      color: $color-white-text;
+    }
+
+    &:disabled {
+      background-color: $background-color-button2-disable;
+      color: $color-white-text;
+    }
   }
 }
 
 .form {
-  max-width: 1320px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(40%, 510px)) minmax(20%, 239px);
-  column-gap: 30px;
-  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
 
-  &__label {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    padding: 0 0 23px;
-  }
-
-  &__inputTitle {
-    padding: 0 0 0 10px;
-    @include text(
-      $font-small-14,
-      $weight-300,
-      $line-height-small-14,
-      $color-blue-dark-title
-    );
-  }
-
-  &__input {
-    width: 100%;
+  &__submit {
+    width: 239px;
     height: 50px;
-    border: $border-main;
-    border-radius: 10px;
-    padding: 0 0 0 20px;
-    background-color: $background-input;
+    margin: 0 auto;
+    border: none;
+    border-radius: 15px;
+    background-color: $background-color-button-default;
+    cursor: pointer;
     @include text(
-      $font-small-14,
-      $weight-300,
-      $line-height-small-14,
-      $color-blue-input-text
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-white-text
     );
+    transition: .3s;
 
-    &::placeholder {
-      @include text(
-        $font-small-14,
-        $weight-300,
-        $line-height-small-14,
-        $input-placeholder
-      );
+    &:hover {
+      background-color: $background-color-button-hover;
     }
 
-    &:focus {
-      outline: none;
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+
+    &:disabled {
+      background-color: $background-color-button-disable;
     }
   }
 }
