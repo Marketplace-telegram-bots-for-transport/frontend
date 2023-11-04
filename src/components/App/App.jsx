@@ -19,6 +19,7 @@ import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
+import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
 import { CART_KEY } from '../../utils/constants';
@@ -283,6 +284,8 @@ const App = () => {
                 />
               }
             />
+
+            <Route path='/profile' element={<ProfileNavigation />} />
 
             <Route
               path='/reset-password'
