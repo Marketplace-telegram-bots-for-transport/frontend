@@ -1,10 +1,18 @@
 import styles from './AddNewBotForm.module.scss';
-import defaultImage from '../../../images/default-image-input.png';
+// import defaultImage from '../../../images/default-image-input.png';
 
 function AddNewBotForm() {
   return (
     <div className={styles.form}>
-      <input name='botImage' type='image' src={defaultImage} alt='botImage' />
+      <label htmlFor='botImage' className={styles.form__label_type_image}>
+        <input
+          name='botImage'
+          id='botImage'
+          type='file'
+          accept='image/jpeg,image/png'
+          className={styles.form__input_type_image}
+        />
+      </label>
       <fieldset className={styles.form__inputGroup}>
         <label
           htmlFor='productName'
@@ -73,15 +81,22 @@ function AddNewBotForm() {
         className={`${styles.form__label} ${styles.form__label_type_exaples}`}
       >
         <span className={styles.form__inputTitle}>Примеры экранов</span>
-        <input
-          name='productExamples'
-          id='productExamples'
-          type='image'
-          alt='botImage'
-          placeholder=''
-          className={`${styles.form__input} ${styles.form__input_type_exaples}`}
-          required
-        />
+        <div
+          className={`${styles.form__input} ${styles.form__input_type_examplesContainer}`}
+        >
+          <span className={styles.form__examplesTitle}>
+            Прикрепить примеры экранов
+          </span>
+          <input
+            name='productExamples'
+            id='productExamples'
+            type='file'
+            accept='image/jpeg,image/png'
+            placeholder='+ Прикрепить примеры экранов'
+            className={`${styles.form__input} ${styles.form__input_type_examples}`}
+            required
+          />
+        </div>
       </label>
       <button type='button' className={styles.form__deleteBtn}>
         Удалить товар

@@ -8,11 +8,48 @@
   column-gap: 30px;
   row-gap: 20px;
 
+  &__examplesTitle{
+    margin: 0;
+    padding: 0;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
+
+    &::before{
+      content: '';
+      display: inline-block;
+      background-image: url('../../../images/add-icon-big.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 24px;
+      height: 24px;
+      padding-right: 5px;
+      // vertical-align: middle;
+    }
+  }
+
   &__label {
     display: flex;
     flex-direction: column;
     row-gap: 5px;
     padding: 0 0 23px;
+
+    &_type_image {
+      background-image: url('../../../images/default-image-input.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 240px;
+      height: 240px;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover {
+        opacity: .7;
+      }
+    }
 
     &_type_name {
       grid-column-start: 1;
@@ -64,12 +101,43 @@
       $color-blue-input-text
     );
 
+    &_type_image {
+      visibility: hidden;
+    }
+
     &_type_desc {
       height: 100%;
     }
 
-    &_type_exaples {
+    &_type_examplesContainer{
       height: 200px;
+      background-color: $background-button-input-category;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      transition: .3s;
+
+      &::placeholder{
+        @include text(
+        $font-small-14,
+        $weight-300,
+        $line-height-small-14,
+        $input-placeholder
+      );
+      }
+
+      &:hover{
+        opacity: .7;
+      }
+    }
+
+    &_type_examples {
+      visibility: hidden;
+      position: absolute;
+      width: 100%;
+      padding: 0;
     }
 
     &::placeholder {

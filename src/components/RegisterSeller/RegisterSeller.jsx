@@ -14,12 +14,12 @@ function RegisterSeller({ comeBack }) {
           <p className={styles.register__text}>
             Шаг 1. Пользовательское соглашение
           </p>
-          <div className={styles.slider}>
+          <div className={styles.progress}>
             <div
-              className={`${styles.slider__item} ${styles.slider__item_active}`}
+              className={`${styles.progress__item} ${styles.progress__item_active}`}
             />
-            <div className={`${styles.slider__item}`} />
-            <div className={`${styles.slider__item}`} />
+            <div className={`${styles.progress__item}`} />
+            <div className={`${styles.progress__item}`} />
           </div>
         </div>
       </div>
