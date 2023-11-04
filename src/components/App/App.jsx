@@ -21,7 +21,7 @@ import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
-import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+// import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
 import { CART_KEY } from '../../utils/constants';
 import {
   updateCartWithLocalStorage,
@@ -303,10 +303,10 @@ const App = () => {
             path='/signup-seller'
             element={<RegisterSeller comeBack={handleGoBack} />}
           />
-          <Route
+          {/* <Route
             path='/add-new-bots'
             element={<AddNewBotsPage comeBack={handleGoBack} />}
-          />
+          /> */}
         </Routes>
         <Footer />
       </CurrentUserContext.Provider>
