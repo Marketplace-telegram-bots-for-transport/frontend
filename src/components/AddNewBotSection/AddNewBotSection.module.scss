@@ -48,7 +48,7 @@
       $line-height-medium-24,
       $color-blue-text
     );
-    transition: .3s;
+    transition: 0.3s;
 
     &:hover {
       background-color: $background-color-button2-hover;
@@ -84,7 +84,7 @@
       $line-height-medium-24,
       $color-white-text
     );
-    transition: .3s;
+    transition: 0.3s;
 
     &:hover {
       background-color: $background-color-button-hover;
