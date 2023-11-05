@@ -1,6 +1,7 @@
-import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
+// import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import BackButton from '../BackButton/BackButton';
-import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
+import RegisterConfirmation from '../RegisterConfirmation/RegisterConfirmation';
+// import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
 // import UserAgreement from '../UserAgreement/UserAgreement';
 import styles from './RegisterSeller.module.scss';
 
@@ -25,8 +26,9 @@ function RegisterSeller({ comeBack }) {
       </div>
       <div className={styles.register__content}>
         {/* <UserAgreement /> */}
-        <SellerRegisterForm />
-        <AddNewBotsSection />
+        {/* <SellerRegisterForm /> */}
+        {/* <AddNewBotsSection /> */}
+        <RegisterConfirmation />
         <button className={styles.register__button}>Продолжить</button>
       </div>
     </section>
