@@ -9,12 +9,12 @@ import BackButton from '../BackButton/BackButton';
 
 function Payment({ comeBack, totalSum }) {
   const navigate = useNavigate();
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
+  const { handleChange, errors, isValid, resetForm } = useFormAndValidation();
   const [showButton, setShowButton] = useState(
     window.innerWidth <= WIDTH_SCREEN_768
   ); // позиции кнопок в мобильной версии
   const [formPayment, setFormPayment] = useState({
+    email: '',
     number: '',
     month: '',
     year: '',
@@ -40,8 +40,7 @@ function Payment({ comeBack, totalSum }) {
 
   // Маска для полей карты
   const handleCardChange = (e, fieldName) => {
-    handleChange(e);
-    const { value } = e.target;
+    const value = e.target.value.replace(/[^0-9]/g, '');
     const formattedValue =
       fieldName === 'number' ? formatCardNumber(value) : value;
     setFormPayment((prevData) => ({
@@ -156,7 +155,7 @@ function Payment({ comeBack, totalSum }) {
               </span>
               <input
                 name='email'
-                value={values.email || ''}
+                value={formPayment.email || ''}
                 placeholder='Введите email'
                 type='email'
                 id='email-input'
@@ -164,7 +163,13 @@ function Payment({ comeBack, totalSum }) {
                 minLength='2'
                 maxLength='64'
                 required
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormPayment((prevCardInfo) => ({
+                    ...prevCardInfo,
+                    email: e.target.value,
+                  }));
+                }}
+                onBlur={handleChange}
               />
               {errors.email && (
                 <span className={styles.payment__error}>
@@ -191,6 +196,7 @@ function Payment({ comeBack, totalSum }) {
                   maxLength={19}
                   required
                   onChange={(e) => handleCardChange(e, 'number')}
+                  onBlur={handleChange}
                 />
                 {errors.number && (
                   <span className={styles.payment__error}>
@@ -217,6 +223,7 @@ function Payment({ comeBack, totalSum }) {
                       maxLength='2'
                       required
                       onChange={(e) => handleCardChange(e, 'month')}
+                      onBlur={handleChange}
                     />
                     <span className={styles.payment__cardDateSlash}>/</span>
                     <input
@@ -232,6 +239,7 @@ function Payment({ comeBack, totalSum }) {
                       maxLength='4'
                       required
                       onChange={(e) => handleCardChange(e, 'year')}
+                      onBlur={handleChange}
                     />
                   </div>
                 </label>
@@ -255,6 +263,7 @@ function Payment({ comeBack, totalSum }) {
                     maxLength='3'
                     required
                     onChange={(e) => handleCardChange(e, 'code')}
+                    onBlur={handleChange}
                   />
                 </label>
                 {(errors.month || errors.year || errors.code) && (
