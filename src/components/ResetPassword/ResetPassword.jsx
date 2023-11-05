@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
 import styles from './ResetPassword.module.scss';
@@ -7,37 +6,13 @@ import { PATTERN_EMAIL } from '../../utils/constants';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 function PasswordReset({ comeBack }) {
-  const navigate = useNavigate();
-  const { setOTP, setEmail } = useContext(CurrentUserContext);
+  const { setEmail } = useContext(CurrentUserContext);
   const { values, errors, setIsValid, inputValidities, handleChange } =
     useFormAndValidation();
 
   const handleBlur = () => {
     setIsValid(inputValidities.email);
   };
-
-  /* ФУНКЦИЯ ГЕНЕРАЦИИ РАНДОМНОГО КОДА С ОТПРАВКОЙ НА ПОЧТУ */
-  function createOTP(e) {
-    e.preventDefault();
-
-    /* генерим 6-ти-значный код */
-    if (inputValidities.email) {
-      const randomOTP = Math.floor(Math.random() * 900000 + 100000);
-      setOTP(randomOTP);
-      console.log(randomOTP);
-      navigate('/OTP-password');
-
-      /* запрос POST на сервер 
-      ..., ({
-        OTP,
-        email: email
-      })
-      .then(() => navigate('/OTP'))
-      .catch(console.log)
-    */
-      /* return; */
-    }
-  }
 
   return (
     <section className={styles.reset}>
@@ -51,7 +26,7 @@ function PasswordReset({ comeBack }) {
           />
           <h3 className={styles.reset__textTitle}>Восстановления пароля</h3>
         </div>
-        <form className={styles.reset__form} noValidate onSubmit={createOTP}>
+        <form className={styles.reset__form} noValidate>
           <h3 className={styles.reset__formText}>
             Введите адрес электронной почты вашего аккаунта
           </h3>

@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CartProduct from '../CartProduct/CartProduct';
 import Payment from '../Payment/Payment';
 import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
 import BackButton from '../BackButton/BackButton';
 import styles from './Cart.module.scss';
 import {
+  WIDTH_SCREEN_768,
   NUMBER_UNIT_OF_GOODS,
   NUMBER_UP_TO_FIVE_GOODS,
   TEXT_UNIT_OF_GOODS,
@@ -20,8 +22,11 @@ function Cart({
   decreaseProductCount,
   comeBack,
 }) {
+  const navigate = useNavigate();
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
-
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  ); // кнопка купить в мобильной версии
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
     const val = cartProducts.reduce((previousValue, product) => {
@@ -59,10 +64,33 @@ function Cart({
     window.scrollTo(0, 0);
   }, []);
 
+  // отображение кнопки при размере экрана меньше 768px
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleBuyButtonClick = () => {
+    navigate('/pay-form');
+  };
+
   return (
     <section className={styles.cart}>
       <div className={styles.products}>
         <BackButton comeBack={comeBack} />
+        {/* {showButton ? (
+          <h3 className={styles.payment__title}>
+            <div className={styles.payment__buttonBack} />
+            Корзина
+          </h3>
+        ) : (
+          <BackButton comeBack={comeBack} />
+        )} */}
         <ul className={styles.products__list}>
           {cartProducts.map((product) => (
             <CartProduct
@@ -73,6 +101,35 @@ function Cart({
               decreaseProductCount={decreaseProductCount}
             />
           ))}
+          {showButton && !isLoggedIn && (
+            <div className={styles.products__containerFixedButtonMobile}>
+              <button className={styles.products__fixedButtonMobile}>
+                <Link
+                  className={styles.products__fixedButtonMobile_link}
+                  to='/login'
+                >
+                  Авторизуйтесь, чтобы купить
+                </Link>
+                <p className={styles.products__fixedButtonMobile_count}>
+                  {countText} — {totalSum}₽
+                </p>
+              </button>
+            </div>
+          )}
+          {showButton && isLoggedIn && (
+            <div className={styles.products__containerFixedButtonMobile}>
+              <button
+                className={styles.products__fixedButtonMobile}
+                onClick={handleBuyButtonClick}
+                aria-label='Открыть форму оплаты'
+              >
+                Купить
+                <p className={styles.products__fixedButtonMobile_count}>
+                  {totalSum}₽
+                </p>
+              </button>
+            </div>
+          )}
         </ul>
         <div className={styles.products__total}>
           <h3 className={styles.products__totalTitle}>Итог</h3>
@@ -80,9 +137,35 @@ function Cart({
             <p className={styles.products__count}>Всего: {countText}</p>
             <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
+          {showButton && isLoggedIn && (
+            <button
+              className={styles.products__buttonMobile}
+              onClick={handleBuyButtonClick}
+              aria-label='Открыть форму оплаты'
+            >
+              Купить
+            </button>
+          )}
+
+          {showButton && !isLoggedIn && (
+            <>
+              <p className={styles.products__textMobile}>
+                Авторизуйтесь, чтобы продолжить покупки
+              </p>
+              <button className={styles.products__buttonMobile}>
+                <Link
+                  className={styles.products__buttonMobile_link}
+                  to='/login'
+                >
+                  Перейти к авторизации
+                </Link>
+              </button>
+            </>
+          )}
         </div>
       </div>
-      {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
+      {isLoggedIn && !showButton && <Payment totalSum={totalSum} />}
+      {!isLoggedIn && !showButton && <ModalWithAuth />}
     </section>
   );
 }

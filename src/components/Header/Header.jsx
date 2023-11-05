@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
+import SearchPopup from './SearchPopup/SearchPopup';
 
 function Header({
   isLoggedIn,
@@ -13,6 +14,7 @@ function Header({
 }) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState(''); // данные в поисковой строке
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +29,11 @@ function Header({
   const handleLogoClick = () => {
     setSearchQuery('');
   };
+
+  function togglePopup(e) {
+    e.preventDefault();
+    setIsPopupOpen(!isPopupOpen);
+  }
 
   return (
     <header className={styles.header}>
@@ -60,12 +67,21 @@ function Header({
             />
           </form>
         </div>
-        <Submenu
-          isLoggedIn={isLoggedIn}
-          isLogOut={isLogOut}
-          cartProducts={cartProducts}
-          deleteCartProduct={deleteCartProduct}
-        />
+        <div className={styles.header__forMobileSize}>
+          <button
+            className={styles.header__openPopup}
+            type='button'
+            aria-label='Открыть попап поиска'
+            onClick={(e) => togglePopup(e)}
+          />
+          <Submenu
+            isLoggedIn={isLoggedIn}
+            isLogOut={isLogOut}
+            cartProducts={cartProducts}
+            deleteCartProduct={deleteCartProduct}
+          />
+          {isPopupOpen && <SearchPopup />}
+        </div>
       </div>
     </header>
   );

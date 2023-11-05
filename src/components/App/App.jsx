@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
@@ -15,8 +15,8 @@ import SpecialOffers from '../SpecialOffers/SpecialOffers';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
-import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
+import Payment from '../Payment/Payment';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
@@ -33,13 +33,13 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
-  const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+  const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
 
   const contextValue = useMemo(() => {
-    return { OTP, setOTP, email, setEmail, currentUser };
-  }, [OTP, setOTP, email, setEmail, currentUser]);
+    return { email, setEmail, currentUser };
+  }, [email, setEmail, currentUser]);
 
   useEffect(() => {
     async function fetchData() {
@@ -198,6 +198,18 @@ const App = () => {
       });
   };
 
+  // функция расчета общей суммы заказа
+  const findTotalSum = useCallback(() => {
+    return cartProducts.reduce((previousValue, product) => {
+      return previousValue + product.price * product.count;
+    }, 0);
+  }, [cartProducts]);
+
+  useEffect(() => {
+    const sum = findTotalSum();
+    setTotalSum(sum);
+  }, [cartProducts, findTotalSum]);
+
   return (
     <div className={styles.page}>
       <CurrentUserContext.Provider value={contextValue}>
@@ -293,11 +305,6 @@ const App = () => {
             />
 
             <Route
-              path='/OTP-password'
-              element={<OTPPassword comeBack={handleGoBack} />}
-            />
-
-            <Route
               path='/change-password'
               element={<ChangePassword comeBack={handleGoBack} />}
             />
@@ -305,6 +312,10 @@ const App = () => {
             <Route
               path='/signup-seller'
               element={<RegisterSeller comeBack={handleGoBack} />}
+            />
+            <Route
+              path='/pay-form'
+              element={<Payment totalSum={totalSum} comeBack={handleGoBack} />}
             />
           </Routes>
         </div>

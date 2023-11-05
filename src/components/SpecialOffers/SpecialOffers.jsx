@@ -51,7 +51,8 @@ function SpecialOffers({
       {banner.description ? (
         <div className={styles.emptyList}>
           <h3 className={styles.emptyList_title}>
-            Осенняя распродажа пока что пустая!
+            Данная акция еще не началась. Возвращайтесь сюда позже, чтобы купить
+            ботов по выгодной цене!
           </h3>
           <button
             className={styles.emptyList_button}
@@ -59,7 +60,7 @@ function SpecialOffers({
             aria-label='Переход на страницу каталога'
             onClick={() => navigate('/')}
           >
-            Перейти к каталогу
+            Вернуться в каталог
           </button>
         </div>
       ) : (

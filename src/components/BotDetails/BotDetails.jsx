@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom'; // Импортиру
 import styles from './BotDetails.module.scss';
 // import DetailsBasket from '../DetailsBasket/DetailsBasket';
 import BotBody from '../BotBody/BotBody';
-import Rating from '../Rating/Rating';
+/* import Rating from '../Rating/Rating'; */
 import ScreenExamples from '../ScreenExamples/ScreenExamples';
 import Counter from '../Counter/Counter';
 import BackButton from '../BackButton/BackButton';
@@ -101,7 +101,7 @@ function BotDetails({
         />
         <ScreenExamples array={currentBotById.photo_examples} />
 
-        <Rating currentBotById={currentBotById} />
+        {/* <Rating currentBotById={currentBotById} /> */}
       </div>
       {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
       <div className={styles.basketSection}>

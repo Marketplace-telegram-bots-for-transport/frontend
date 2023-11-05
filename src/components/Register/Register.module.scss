@@ -167,22 +167,6 @@
       cursor: auto;
       background-color: $background-color-button-disable;
     }
-    @include text(
-      $font-medium-button-24,
-      $weight-400,
-      $line-height-medium-24,
-      $color-button-text
-    );
-    &:hover {
-      background-color: $background-color-button-hover;
-    }
-    &:active {
-      background-color: $background-color-button-pressed;
-    }
-    &:disabled {
-      cursor: auto;
-      background-color: $background-color-button-disable;
-    }
   }
 }
 
