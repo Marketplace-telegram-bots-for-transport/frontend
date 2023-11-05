@@ -31,6 +31,7 @@ $font-h1-60: 60px;
 $font-h2-36: 36px;
 $font-medium-24: 24px;
 $font-small-14: 14px;
+$font-18: 18px;
 $font-footer-18: 18px;
 $font-payment-18: 18px;
 $font-medium-button-24: 24px;
@@ -44,6 +45,7 @@ $line-height-small-14: 17.5px;
 $line-height-footer-18: 22.5px;
 $line-height-payment-18: 22.5px;
 $line-height-normal: normal;
+$line-height-18: 22.5px;
 
 /* COLORS */
 $color-blue-text: #3b7dd6;
@@ -51,7 +53,9 @@ $color-white-text: #fff;
 $color-blue-dark-title: #183357;
 $color-gray-text: #35383b;
 $color-red-errors: #e44f2f;
+$color-red-delete: #e44f2f;
 $color-blue-input-text: #84a7d5;
+$color-grey-text: #8ea1b5;
 
 /* colors-link */
 $color-link-main: #3b7dd6;
@@ -63,6 +67,12 @@ $background-color-button-default: #3b7dd6;
 $background-color-button-hover: #2f5e9d;
 $background-color-button-pressed: #183357;
 $background-color-button-disable: #9cbdea;
+
+$background-color-button2-default: #d3e2f7;
+$background-color-button2-hover: #acc6eb;
+$background-color-button2-pressed: #5a8cd2;
+$background-color-button2-disable: #e8f0fa;
+
 $color-button-text: #f8fafc;
 $color-button-text-white: #fff;
 $color-blue-button-text: #3b7dd6;
@@ -88,6 +98,7 @@ $box-shadow-category:
 /* INPUTS */
 $border-main: 1px solid #d3e2f7;
 $border-active: 1px solid #183357;
+$input-placeholder: #84a7d5;
 
 /* SIZE MOBILE */
 /* font size */

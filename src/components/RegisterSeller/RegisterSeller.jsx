@@ -1,5 +1,7 @@
+import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import BackButton from '../BackButton/BackButton';
-import UserAgreement from '../UserAgreement/UserAgreement';
+import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
+// import UserAgreement from '../UserAgreement/UserAgreement';
 import styles from './RegisterSeller.module.scss';
 
 function RegisterSeller({ comeBack }) {
@@ -12,17 +14,19 @@ function RegisterSeller({ comeBack }) {
           <p className={styles.register__text}>
             Шаг 1. Пользовательское соглашение
           </p>
-          <div className={styles.slider}>
+          <div className={styles.progress}>
             <div
-              className={`${styles.slider__item} ${styles.slider__item_active}`}
+              className={`${styles.progress__item} ${styles.progress__item_active}`}
             />
-            <div className={`${styles.slider__item}`} />
-            <div className={`${styles.slider__item}`} />
+            <div className={`${styles.progress__item}`} />
+            <div className={`${styles.progress__item}`} />
           </div>
         </div>
       </div>
       <div className={styles.register__content}>
-        <UserAgreement />
+        {/* <UserAgreement /> */}
+        <SellerRegisterForm />
+        <AddNewBotsSection />
         <button className={styles.register__button}>Продолжить</button>
       </div>
     </section>
