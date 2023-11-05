@@ -53,7 +53,7 @@
   }
 
   &__label {
-    margin-bottom: 30px;
+    margin-bottom: 38px;
     position: relative;
   }
 
@@ -165,7 +165,7 @@
 
   &__error {
     position: absolute;
-    top: 60px;
+    top: 66px;
     left: 10px;
     @include text(
       $font-small-14,
