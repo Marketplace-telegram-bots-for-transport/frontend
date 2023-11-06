@@ -162,6 +162,7 @@
     }
     &__price {
       order: 2;
+      margin-left: 20px;
       @include text(
         $mobile-font-18,
         $weight-500,
@@ -175,6 +176,7 @@
 
     &__priceDiscount {
       order: 2;
+      margin-left: 20px;
       margin-right: 10px;
       @include text(
         $mobile-font-18,

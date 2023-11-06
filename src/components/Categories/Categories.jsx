@@ -31,7 +31,7 @@ const Categories = ({ categories }) => {
 
   return (
     <div className={styles.categoriesWrapper}>
-      <CategoriesTitleMainPage />
+      <CategoriesTitleMainPage categories={categories} />
       <section className={styles.categories}>
         <div className={styles.categories__carouselWrapper}>
           <Carousel

@@ -74,6 +74,34 @@
     @include text(10px, $weight-400, 12.5px, $color-blue-text);
   }
 
+  &__discountContainer {
+    display: flex;
+    align-items: center;
+  }
+  &__finalPrice {
+    flex: 1;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-red-errors
+    );
+  }
+  &__oldPrice {
+    margin-right: 10px;
+    @include text($font-small-14, $weight-300, 21px, $color-blue-dark-title);
+    text-decoration: line-through;
+    text-decoration-color: $color-red-errors;
+  }
+  &__discountSize {
+    width: 48px;
+    height: 31px;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: $color-red-errors;
+    @include text($font-small-14, $weight-300, 21px, #fff);
+  }
+
   &__price {
     margin: 0;
     @include text(
@@ -128,6 +156,104 @@
     }
     &:active {
       background-color: $background-color-button-pressed;
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .bot {
+    width: 143px;
+    height: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 0;
+    &__background {
+      background-color: #f8fafc;
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+    }
+    &__linkImg {
+      display: flex;
+    }
+    &__img {
+      border-radius: 10px;
+      width: 123px;
+      height: 123px;
+    }
+    &__brief {
+      margin-top: 10px;
+      border: none;
+      margin-bottom: 10px;
+    }
+    &__name {
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__author {
+      margin-bottom: 0;
+      @include text(10px, $weight-400, 12.5px, #84a7d5);
+    }
+    &__categories {
+      padding-bottom: 10px;
+      border-bottom: 0.3px solid #d3e2f7;
+    }
+    &__discountContainer {
+      margin-top: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    &__finalPrice {
+      flex: 1;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-red-errors
+      );
+    }
+    &__oldPrice {
+      margin-right: 5px;
+      @include text(10px, $weight-400, 12.5px, $color-blue-dark-title);
+      text-decoration: line-through;
+      text-decoration-color: $color-red-errors;
+    }
+    &__discountSize {
+      width: 31px;
+      height: 13px;
+      border-radius: 5px;
+      padding: 0 2px;
+      background-color: #e44f2f;
+      @include text(10px, $weight-400, 12.5px, #f8fafc);
+    }
+    &__price {
+      margin-top: 5px;
+      margin-bottom: 10px;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__buttons {
+      gap: 0;
+    }
+    &__favBtn {
+      display: none;
+    }
+    &__buyBtn {
+      height: 40px;
     }
   }
 }

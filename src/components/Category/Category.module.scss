@@ -27,3 +27,61 @@
     @include text(18px, $weight-300, 21px, $color-blue-dark-title);
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .category {
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    &__img {
+      width: 44px;
+      height: 44px;
+      background-color: inherit;
+      background-size: 24px;
+      border-radius: 0;
+    }
+    &__name {
+      width: 66%;
+      text-align: start;
+      text-wrap: nowrap;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+
+    &__input {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
+    &__wrapper {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+    }
+    &__wrapper::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: $border-main;
+      border-radius: 8px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background: $background-white;
+    }
+
+    &__input:not(:disabled):not(:checked) + &__wrapper:hover::before {
+      border: 1px solid #3b7dd6;
+      background: url(../../images/checkmark.svg) no-repeat center;
+    }
+  }
+}
