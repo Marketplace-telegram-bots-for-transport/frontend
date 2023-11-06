@@ -1,7 +1,7 @@
 import styles from './RegisterConfirmation.module.scss';
 import sellerImage from '../../images/seller-image.png';
 
-function RegisterConfirmation() {
+function RegisterConfirmation({ changeProgressBar }) {
   return (
     <section className={styles.confirm}>
       <h2 className={styles.confirm__title}>
@@ -28,6 +28,13 @@ function RegisterConfirmation() {
           </span>
         </p>
       </div>
+      <button
+        type='button'
+        className={styles.confirm__button}
+        onClick={changeProgressBar}
+      >
+        Продолжить
+      </button>
     </section>
   );
 }

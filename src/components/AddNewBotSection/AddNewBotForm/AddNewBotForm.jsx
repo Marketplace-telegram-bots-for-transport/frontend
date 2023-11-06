@@ -1,17 +1,61 @@
+import { useState, useEffect } from 'react';
 import styles from './AddNewBotForm.module.scss';
-// import defaultImage from '../../../images/default-image-input.png';
 
-function AddNewBotForm() {
+const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+function AddNewBotForm({ bot, deleteBotForm, fillBotForm }) {
+  const [file, setFile] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(bot.logo);
+
+  const changeHandler = (e) => {
+    const fileInput = e.target.files[0];
+    if (!fileInput.type.match(imageMimeType)) {
+      alert('Image mime type is not valid');
+      return;
+    }
+    setFile(fileInput);
+    fillBotForm(bot.id, 'logo', URL.createObjectURL(fileInput)); // Используйте URL.createObjectURL для отображения изображения
+  };
+
+  useEffect(() => {
+    let fileReader;
+    let isCancel = false;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result);
+          fillBotForm(bot.id, 'logo', result);
+        }
+      };
+      fileReader.readAsDataURL(file);
+    }
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [file, fillBotForm, bot.id]);
+
   return (
     <div className={styles.form}>
       <label htmlFor='botImage' className={styles.form__label_type_image}>
+        <span className={styles.form__logoTitle}>Добавить логотип</span>
         <input
-          name='botImage'
+          name='logo'
           id='botImage'
           type='file'
           accept='image/jpeg,image/png'
           className={styles.form__input_type_image}
+          onChange={changeHandler}
         />
+        {fileDataURL ? (
+          <div className={styles.form__logoWrapper}>
+            <img src={bot.logo} alt='logo' className={styles.form__logo} />
+          </div>
+        ) : null}
       </label>
       <fieldset className={styles.form__inputGroup}>
         <label
@@ -20,7 +64,7 @@ function AddNewBotForm() {
         >
           <span className={styles.form__inputTitle}>Название товара</span>
           <input
-            name='productName'
+            name='name'
             id='productyName'
             type='text'
             placeholder=''
@@ -34,7 +78,7 @@ function AddNewBotForm() {
         >
           <span className={styles.form__inputTitle}>Категории товара</span>
           <input
-            name='productCategory'
+            name='categories'
             id='productCategory'
             type='text'
             placeholder=''
@@ -45,7 +89,7 @@ function AddNewBotForm() {
         <label htmlFor='productPrice' className={styles.form__label}>
           <span className={styles.form__inputTitle}>Цена товара</span>
           <input
-            name='productPrice'
+            name='price'
             id='productPrice'
             type='text'
             placeholder=''
@@ -56,7 +100,7 @@ function AddNewBotForm() {
         <label htmlFor='productCount' className={styles.form__label}>
           <span className={styles.form__inputTitle}>Количество товара</span>
           <input
-            name='productCount'
+            name='count'
             id='productCount'
             type='text'
             placeholder=''
@@ -68,7 +112,7 @@ function AddNewBotForm() {
       <label htmlFor='productDesc' className={styles.form__label}>
         <span className={styles.form__inputTitle}>Описание товара</span>
         <input
-          name='productDesc'
+          name='description'
           id='productDesc'
           type='text'
           placeholder=''
@@ -88,7 +132,7 @@ function AddNewBotForm() {
             Прикрепить примеры экранов
           </span>
           <input
-            name='productExamples'
+            name='examples'
             id='productExamples'
             type='file'
             accept='image/jpeg,image/png'
@@ -98,7 +142,11 @@ function AddNewBotForm() {
           />
         </div>
       </label>
-      <button type='button' className={styles.form__deleteBtn}>
+      <button
+        type='button'
+        className={styles.form__deleteBtn}
+        onClick={() => deleteBotForm(bot.id)}
+      >
         Удалить товар
       </button>
     </div>

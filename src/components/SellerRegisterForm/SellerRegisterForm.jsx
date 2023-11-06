@@ -1,6 +1,7 @@
+import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import styles from './SellerRegisterForm.module.scss';
 
-function SellerRegisterForm() {
+function SellerRegisterForm({ changeProgressBar }) {
   return (
     <section className={styles.seller}>
       <h2 className={styles.seller__title}>Данные продавца/компании</h2>
@@ -69,6 +70,14 @@ function SellerRegisterForm() {
           />
         </label>
       </form>
+      <AddNewBotsSection />
+      <button
+        type='submit'
+        className={styles.seller__button}
+        onClick={changeProgressBar}
+      >
+        Продолжить
+      </button>
     </section>
   );
 }

@@ -10,10 +10,14 @@ function BackButton({ botName, title, comeBack }) {
         <p className={styles.returnElement__title}>Назад</p>
       </button>
       <p className={styles.returnElement__ref}>
-        Главная страница / {location.pathname === '/cart' ? 'Корзина' : ''}
-        {location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
-        {location.pathname === `/special-offers/${id}` ? title : ''}
-        {location.pathname === `/botdetails/${botId}` ? botName : ''}
+        {location.pathname === '/signup-seller'
+          ? `Профиль / Регистрация продавца / ${title}`
+          : `Главная страница / ${
+              location.pathname === '/cart' ? 'Корзина' : ''
+            }
+        ${location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
+        ${location.pathname === `/special-offers/${id}` ? title : ''}
+        ${location.pathname === `/botdetails/${botId}` ? botName : ''}`}
       </p>
     </div>
   );

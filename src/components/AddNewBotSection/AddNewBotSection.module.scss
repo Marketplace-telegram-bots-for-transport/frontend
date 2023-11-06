@@ -69,6 +69,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  row-gap: 40px;
 
   &__submit {
     width: 239px;
