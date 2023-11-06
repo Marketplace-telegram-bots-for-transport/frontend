@@ -99,10 +99,16 @@ const BotsList = ({
               author={bot.author}
               discount={bot.discount}
               finalPrice={bot.final_price}
-              /* category={bot.categories[0].name} */
+              category={
+                bot.categories && bot.categories.length > 0
+                  ? bot.categories[0].name
+                  : 'Нет категории'
+              }
               price={bot.price}
               id={bot.id}
-              onBuyClick={() => handleBuyClick(bot)}
+              onBuyClick={() => {
+                handleBuyClick(bot);
+              }}
               isProductInCart={isProductInCart}
               cartProducts={cartProducts}
               increaseProductCount={increaseProductCount}

@@ -197,11 +197,11 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                     </div>
                     {bot.discount > 0 ? (
                       <h3 className={styles.submenu__mini_priceDiscount}>
-                        {bot.final_price}₽
+                        {bot.count * bot.final_price}₽
                       </h3>
                     ) : (
                       <h3 className={styles.submenu__mini_price}>
-                        {bot.price}₽
+                        {bot.count * bot.price}₽
                       </h3>
                     )}
 

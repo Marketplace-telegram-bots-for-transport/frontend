@@ -67,6 +67,7 @@
       }
     }
     &__title {
+      text-align: start;
       @include text(
         $mobile-font-32,
         $weight-500,

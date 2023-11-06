@@ -20,7 +20,6 @@ const BotCard = ({
   decreaseProductCount,
 }) => {
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
-
   // Определить состояние кнопки купить в зависимости от наличия бота в корзине
   useEffect(() => {
     if (id && isProductInCart) {

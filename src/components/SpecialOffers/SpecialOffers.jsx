@@ -73,6 +73,8 @@ function SpecialOffers({
                   name={bot.name}
                   author={bot.author}
                   category={bot.category}
+                  discount={bot.discount}
+                  finalPrice={bot.final_price}
                   price={bot.price}
                   id={bot.id}
                   onBuyClick={() => handleBuyClick(bot)}

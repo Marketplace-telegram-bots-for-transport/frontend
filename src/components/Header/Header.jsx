@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
@@ -13,7 +13,7 @@ function Header({
   onSearch,
 }) {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState(''); // данные в поисковой строке
+  const [searchQuery, setSearchQuery] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   function handleSubmit(e) {
@@ -22,18 +22,24 @@ function Header({
     onSearch(searchQuery);
   }
 
+  useEffect(() => {
+    if (searchQuery === '') {
+      onSearch('');
+    }
+  }, [searchQuery, onSearch]);
+
   function handleСhange(e) {
     setSearchQuery(e.target.value);
   }
 
   const handleLogoClick = () => {
     setSearchQuery('');
+    navigate('/');
   };
 
-  function togglePopup(e) {
-    e.preventDefault();
+  const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
-  }
+  };
 
   return (
     <header className={styles.header}>
@@ -72,7 +78,7 @@ function Header({
             className={styles.header__openPopup}
             type='button'
             aria-label='Открыть попап поиска'
-            onClick={(e) => togglePopup(e)}
+            onClick={togglePopup}
           />
           <Submenu
             isLoggedIn={isLoggedIn}
@@ -80,7 +86,7 @@ function Header({
             cartProducts={cartProducts}
             deleteCartProduct={deleteCartProduct}
           />
-          {isPopupOpen && <SearchPopup />}
+          {isPopupOpen && <SearchPopup onToggle={togglePopup} />}
         </div>
       </div>
     </header>

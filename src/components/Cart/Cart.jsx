@@ -83,14 +83,6 @@ function Cart({
     <section className={styles.cart}>
       <div className={styles.products}>
         <BackButton comeBack={comeBack} />
-        {/* {showButton ? (
-          <h3 className={styles.payment__title}>
-            <div className={styles.payment__buttonBack} />
-            Корзина
-          </h3>
-        ) : (
-          <BackButton comeBack={comeBack} />
-        )} */}
         <ul className={styles.products__list}>
           {cartProducts.map((product) => (
             <CartProduct

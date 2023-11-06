@@ -299,6 +299,10 @@
         }
       }
     }
+    &__basketCounter {
+      bottom: 0;
+      @include text(10px, $weight-400, 12.5px, $color-button-text);
+    }
     &__profile {
       display: flex;
     }

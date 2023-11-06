@@ -77,3 +77,69 @@
     }
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .special {
+    padding: 114px 15px 50px;
+    &__title {
+      display: none;
+    }
+    &__banner {
+      position: static;
+      border-radius: 10px;
+      margin: 0 15px 0 20px;
+      height: 250px;
+      width: 305px;
+      background-position: 27% 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    &__listContainer {
+      margin-top: 50px;
+      padding: 15px;
+      border-radius: 20px;
+      background-color: $background-white;
+      box-shadow: $box-shadow-main;
+    }
+    &__list {
+      list-style: none;
+      gap: 19px;
+    }
+  }
+
+  .emptyList {
+    padding: 0;
+    margin: 50px 0 0;
+    background-color: $background-white;
+    box-shadow: $box-shadow-main;
+    border-radius: 20px;
+    &_title {
+      text-align: center;
+      padding: 25px 20px 0;
+      margin-bottom: 40px;
+      @include text(
+        $mobile-font-16,
+        $weight-300,
+        $mobile-lh-small-16,
+        $color-blue-dark-title
+      );
+    }
+    &_button {
+      margin: 0 0 25px;
+      padding: 11px 80px;
+      border-radius: 10px;
+      max-height: 40px;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
+    }
+  }
+}
