@@ -5,19 +5,22 @@
       "title": "Осенняя распродажа",
       "background": "linear-gradient(180deg, #b5d0f5 0%, #FEFEFF 100%)",
       "imageUrl": "/images/special-banner/special-banner2.svg",
+      "imageUrlMobile": "/images/special-banner/special-banner2.svg",
       "description": "Осенняя распродажа пока что пустая!"
     },
     {
       "id": 2,
       "title": "Акция на боты для бизнеса",
       "background": "#E9E6E6",
-      "imageUrl": "../images/special-banner/special-banner.svg"
+      "imageUrl": "../images/special-banner/special-banner.svg",
+      "imageUrlMobile": "../images/special-banner/special-banner.svg"
     },
     {
       "id": 3,
       "title": "Новогодняя распродажа",
       "background": "radial-gradient(circle, rgba(0,85,153,0.6643907563025211) 0%, rgba(174,208,238,1) 100%)",
-      "imageUrl": "https://images.unsplash.com/photo-1640336224253-0fe7f851fd78?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "imageUrl": "../images/special-banner/special-banner.svg",
+      "imageUrlMobile": "https://images.unsplash.com/photo-1640336224253-0fe7f851fd78?auto=format&fit=crop&q=80&w=2072&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "id": 4,

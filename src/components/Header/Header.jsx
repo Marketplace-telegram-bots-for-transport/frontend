@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
@@ -22,19 +22,20 @@ function Header({
     onSearch(searchQuery);
   }
 
-  useEffect(() => {
-    if (searchQuery === '') {
+  function handleСhange(e) {
+    const query = e.target.value;
+    if (query) setSearchQuery(query);
+
+    if (query === '') {
+      setSearchQuery('');
       onSearch('');
     }
-  }, [searchQuery, onSearch]);
-
-  function handleСhange(e) {
-    setSearchQuery(e.target.value);
   }
 
   const handleLogoClick = () => {
     setSearchQuery('');
     navigate('/');
+    onSearch('');
   };
 
   const togglePopup = () => {

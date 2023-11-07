@@ -12,7 +12,7 @@ function SearchPopup({ onToggle }) {
   const debouncedSearch = debounce(async (query) => {
     const botsData = await fetchSearchBots(query);
     setResultSearchQuery(botsData.results);
-  }, 500);
+  }, 1500);
 
   const handleChange = (e) => {
     const newSearch = e.target.value;
@@ -29,8 +29,6 @@ function SearchPopup({ onToggle }) {
     navigate(path);
     onToggle(path);
   };
-
-  /* function handleClosePopup() {} */
 
   return (
     <div className={styles.searchPopup}>
