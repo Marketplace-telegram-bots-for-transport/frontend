@@ -108,10 +108,14 @@
         border-bottom: none;
       }
     }
+
     &__search {
       display: flex;
       align-items: center;
       &_input {
+        min-height: 44px;
+        height: auto;
+        transition: height 0.3s ease;
         margin: 10px 4px 15px 10px;
         padding: 11px 20px 11px 50px;
         outline: none;
@@ -149,11 +153,31 @@
       }
     }
     &__listItem {
+      display: flex;
       height: 44px;
       margin-top: 5px;
       border-bottom: 0.5px solid #d3e2f7;
       padding: 5px 10px 5px 0;
       cursor: pointer;
+    }
+    &__input {
+      display: none;
+    }
+
+    .category__checkbox .category__icon {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: $border-main;
+      border-radius: 8px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background: $background-white;
+    }
+
+    .category__checkbox_checked .category__icon {
+      border: 1px solid #3b7dd6;
+      background: url(../../images/checkmark.svg) no-repeat center;
     }
   }
 }

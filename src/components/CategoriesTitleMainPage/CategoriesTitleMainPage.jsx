@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect /* , useRef */ } from 'react';
+/* import { fetchInitialBots } from '../../utils/api/getBots'; */
 import { WIDTH_SCREEN_768 } from '../../utils/constants';
 import styles from './CategoriesTitleMainPage.module.scss';
 import Category from '../Category/Category';
@@ -6,10 +7,39 @@ import Category from '../Category/Category';
 const CategoriesTitleMainPage = ({ categories }) => {
   const [showButton, setShowButton] = useState(
     window.innerWidth <= WIDTH_SCREEN_768
-  ); // кнопка купить в мобильной версии
+  );
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const filteredCategories = showAllCategories ? categories.slice(1) : [];
+  const [selectedCategories, setSelectedCategories] = useState([]); // сохраняем выбранные категории
+
+  const getCategoryName = (category) => {
+    if (category.name) {
+      return category.name;
+    }
+    return category;
+  };
+
+  const filteredCategories = categories.filter((c) =>
+    getCategoryName(c).toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(category)) {
+        return prev.filter((c) => c !== category);
+      }
+      return [...prev, category];
+    });
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    setSelectedCategories([]);
+  };
+
+  /* const handleDelete = (category) => {
+    setSelectedCategories(selectedCategories.filter((c) => c !== category));
+  }; */
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +50,12 @@ const CategoriesTitleMainPage = ({ categories }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleCategoryClick();
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -36,36 +72,67 @@ const CategoriesTitleMainPage = ({ categories }) => {
           </button>
           <ul className={styles.category__list}>
             {showAllCategories && (
-              <form
-                className={styles.category__search}
-                noValidate
-                /* onSubmit={handleSubmit} */
-              >
-                <input
-                  className={styles.category__search_input}
-                  type='text'
-                  placeholder='Поиск по категориям'
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button
-                  className={styles.category__search_button}
-                  type='submit'
-                  aria-label='Очистить поиск'
-                />
-              </form>
-            )}
-            {filteredCategories.map((category) => (
-              <div key={category.id}>
-                <li className={styles.category__listItem}>
-                  <Category
-                    key={category.id}
-                    name={category.name}
-                    imageUrl={category.imageUrl}
+              <>
+                <form className={styles.category__search} noValidate>
+                  <textarea
+                    className={styles.category__search_input}
+                    type='text-area'
+                    /* rows={1} */
+                    placeholder='Поиск по категориям'
+                    value={searchQuery || selectedCategories.join(' ')}
+                    onChange={handleSearch}
                   />
-                </li>
-              </div>
-            ))}
+                  <button
+                    className={styles.category__search_button}
+                    type='submit'
+                    aria-label='Очистить поиск'
+                    /* onClick={handleDelete} */
+                  />
+                </form>
+
+                {filteredCategories.slice(1).map((category) => (
+                  <div key={category.id}>
+                    <li className={styles.category__listItem}>
+                      <Category
+                        key={category.id}
+                        name={category.name}
+                        imageUrl={category.imageUrl}
+                      />
+                      {/* <img
+                        className={styles.botBody__image}
+                        src={category.imageUrl}
+                        alt='изображение логотипа бота'
+                      />
+                      <spane>{category.name}</spane> */}
+                      <div
+                        className={`
+                        ${styles.category__checkbox} ${
+                          selectedCategories.includes(category.name)
+                            ? styles.category__checkbox_checked
+                            : ''
+                        }
+                        `}
+                        onKeyPress={handleKeyPress}
+                        role='button'
+                        tabIndex={0}
+                        onClick={() => handleCategoryClick(category.name)}
+                      >
+                        <input
+                          className={styles.category__input}
+                          type='checkbox'
+                          checked={selectedCategories.includes(category.name)}
+                        />
+                        {/* <button
+                          onClick={() => handleDelete(category)}
+                          aria-label='вап'
+                        /> */}
+                        <span className={styles.category__icon} />
+                      </div>
+                    </li>
+                  </div>
+                ))}
+              </>
+            )}
           </ul>
         </div>
       )}

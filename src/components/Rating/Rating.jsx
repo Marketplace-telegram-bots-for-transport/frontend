@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Rating.module.scss';
+import { WIDTH_SCREEN_768 } from '../../utils/constants';
 
 function Rating({ currentBotById }) {
   const [ratings, setRatings] = useState([0, 0, 0, 0, 0]);
   const [totalRatings, setTotalRatings] = useState(0);
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  );
   const averageRating = currentBotById.ratings.value__avg.toFixed(1);
   const countOfValues = currentBotById.count_of_values;
 
@@ -68,6 +72,16 @@ function Rating({ currentBotById }) {
     setTotalRatings(totalRatings + 1);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.rating__main}>
       <h2 className={styles.rating__title}>Рейтинг</h2>
@@ -88,6 +102,11 @@ function Rating({ currentBotById }) {
               </span>
             ))}
           </div>
+          {showButton && (
+            <button className={styles.rating__readReviews}>
+              Читать отзывы
+            </button>
+          )}
           <p className={styles.countOfReviews}>{totalGradeValue} оценок</p>
         </div>
         <div className={styles.right}>{renderRatingBars()}</div>

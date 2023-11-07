@@ -167,6 +167,7 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .bot {
+    position: relative;
     width: 143px;
     height: 300px;
     padding: 10px;
@@ -234,6 +235,7 @@
       border-radius: 5px;
       padding: 0 2px;
       background-color: #e44f2f;
+      text-align: center;
       @include text(10px, $weight-400, 12.5px, #f8fafc);
     }
     &__price {
@@ -250,7 +252,20 @@
       gap: 0;
     }
     &__favBtn {
-      display: none;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+      background-color: inherit;
+      background-image: url(../../images/images-for-mobile/buttonLikeMain/buttonLike.svg);
+      &:hover {
+        opacity: 0.7;
+        background-image: url(../../images/images-for-mobile/buttonLikeMain/buttonLike-hover.svg);
+      }
+      &:active {
+        background-image: url(../../images/images-for-mobile/buttonLikeMain/buttonLike-pressed.svg);
+      }
     }
     &__buyBtn {
       height: 40px;

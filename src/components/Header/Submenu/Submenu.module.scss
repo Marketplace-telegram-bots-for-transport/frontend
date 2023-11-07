@@ -330,5 +330,89 @@
         }
       }
     }
+    &__mobileContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 50px 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+      overflow: scroll;
+    }
+    &__mobileProfile {
+      @include shadowBackground($background-bots-main, $box-shadow-main);
+      height: 253px;
+      border-radius: 20px;
+      min-width: 345px;
+      padding: 30px 20px;
+      position: absolute;
+      top: 50px;
+      &_subtitle {
+        text-align: center;
+        margin: 0 0 30px;
+        @include text(
+          $mobile-font-18,
+          $weight-500,
+          $mobile-lh-18,
+          $color-gray-text
+        );
+      }
+    }
+    &__mobileButton {
+      &_login {
+        margin-bottom: 10px;
+        height: 40px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 11px auto;
+        @include text($mobile-font-14, $weight-500, 17.5px, $color-button-text);
+        cursor: pointer;
+        background-color: $background-color-button-default;
+        &:hover {
+          background-color: $background-color-button-hover;
+        }
+        &:active {
+          background-color: $background-color-button-pressed;
+        }
+      }
+      &_auth {
+        margin-bottom: 10px;
+        height: 40px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 11px auto;
+        @include text($mobile-font-14, $weight-500, 17.5px, $color-blue-text);
+        cursor: pointer;
+        background-color: $background-color-button2-default;
+        &:hover {
+          background-color: $background-color-button2-hover;
+        }
+        &:active {
+          background-color: $background-color-button2-pressed;
+        }
+      }
+      &_back {
+        height: 40px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 11px auto;
+        @include text($mobile-font-14, $weight-500, 17.5px, $color-link-main);
+        cursor: pointer;
+        background-color: inherit;
+        &:hover {
+          color: $color-link-hover;
+        }
+        &:active {
+          color: $color-link-pressed;
+        }
+      }
+    }
   }
 }

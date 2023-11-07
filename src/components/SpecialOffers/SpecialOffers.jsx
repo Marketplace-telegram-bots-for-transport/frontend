@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'; // Импортиру
 import styles from './SpecialOffers.module.scss';
 import BackButton from '../BackButton/BackButton';
 import BotCard from '../BotCard/BotCard';
+import { WIDTH_SCREEN_768 } from '../../utils/constants';
 
 import infoBanners from '../../utils/infoBanners.json';
 
@@ -15,6 +16,9 @@ function SpecialOffers({
   increaseProductCount,
   decreaseProductCount,
 }) {
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  );
   const navigate = useNavigate();
   // Используем useParams для извлечения параметра маршрута
   const { banners } = infoBanners;
@@ -31,6 +35,9 @@ function SpecialOffers({
   const imgStyle = {
     backgroundImage: `url(${banner.imageUrl})`,
   };
+  const imgStyleMobile = {
+    backgroundImage: `url(${banner.imageUrlMobile})`,
+  };
 
   useEffect(() => {
     const specialBotsList = bots.filter((bot) => {
@@ -43,11 +50,25 @@ function SpecialOffers({
     addProductToCart(item);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <section className={styles.special} style={backgroundStyle}>
       <BackButton comeBack={comeBack} title={banner.title} />
       <h1 className={styles.special__title}>{banner.title}</h1>
-      <div className={styles.special__banner} style={imgStyle} />
+      {showButton ? (
+        <div className={styles.special__banner} style={imgStyleMobile} />
+      ) : (
+        <div className={styles.special__banner} style={imgStyle} />
+      )}
       {banner.description ? (
         <div className={styles.emptyList}>
           <h3 className={styles.emptyList_title}>
