@@ -54,41 +54,6 @@
       "id": 11,
       "name": "Еще категория",
       "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 12,
-      "name": "И еще категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 13,
-      "name": "И снова категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 14,
-      "name": "И... категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 15,
-      "name": "И еще рраз категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 16,
-      "name": "Иииии категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 17,
-      "name": "Да, и тут категория",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
-    },
-    {
-      "id": 18,
-      "name": "Хватит скроллить.",
-      "imageUrl": "/images/categories/mock-placeholder.svg"
     }
   ]
 }
