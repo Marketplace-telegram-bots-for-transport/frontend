@@ -125,8 +125,8 @@ function Register({ loggedIn, onRegister, comeBack }) {
               id='username'
               name='username'
               required
-              pattern='^[a-zA-Zа-яА-Я\s\-]+$'
-              maxLength='16'
+              pattern='^[a-zA-Zа-яА-Я\s]+$'
+              maxLength='30'
               minLength='2'
               value={values.username || ''}
               onChange={handleChange}

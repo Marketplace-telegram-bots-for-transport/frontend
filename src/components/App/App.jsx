@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
 import CurrentUserContext from '../../context/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -19,9 +20,13 @@ import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import Payment from '../Payment/Payment';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
-import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
+import Profile from '../Profile/Profile';
 import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
+import Purchases from '../Purchases/Purchases';
+import Favourites from '../Favourites/Favourites';
+import Faq from '../Faq/Faq';
+import Seller from '../Seller/Seller';
 import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
 import { CART_KEY } from '../../utils/constants';
 import {
@@ -298,7 +303,60 @@ const App = () => {
               }
             />
 
-            <Route path='/profile' element={<ProfileNavigation />} />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute
+                  element={Profile}
+                  onLogout={handleLogOut}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+
+            <Route
+              path='/purchases'
+              element={
+                <ProtectedRoute
+                  element={Purchases}
+                  onLogout={handleLogOut}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+
+            <Route
+              path='/favourites'
+              element={
+                <ProtectedRoute
+                  element={Favourites}
+                  onLogout={handleLogOut}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+
+            <Route
+              path='/faq'
+              element={
+                <ProtectedRoute
+                  element={Faq}
+                  onLogout={handleLogOut}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+
+            <Route
+              path='/seller'
+              element={
+                <ProtectedRoute
+                  element={Seller}
+                  onLogout={handleLogOut}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
 
             <Route
               path='/reset-password'
