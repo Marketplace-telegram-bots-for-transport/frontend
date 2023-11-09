@@ -346,7 +346,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
         <div className={styles.submenu__mobileContainer}>
           <div className={styles.submenu__mobileProfile}>
             <p className={styles.submenu__mobileProfile_subtitle}>
-              Вы не авторизованы!
+              Вы не вошли в систему!
             </p>
             <button
               className={styles.submenu__mobileButton_login}
@@ -365,13 +365,11 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
               Зарегистрироваться
             </button>
             <button
-              className={styles.submenu__mobileButton_back}
+              className={styles.submenu__mobileButton_close}
               type='button'
-              aria-label='Войти в профиль'
+              aria-label='Закрыть'
               onClick={() => setIsProfileOpen(false)}
-            >
-              Назад
-            </button>
+            />
           </div>
         </div>
       )}

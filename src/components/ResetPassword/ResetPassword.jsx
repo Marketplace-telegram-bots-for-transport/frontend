@@ -27,15 +27,14 @@ function PasswordReset({ comeBack }) {
           <h3 className={styles.reset__textTitle}>Восстановления пароля</h3>
         </div>
         <form className={styles.reset__form} noValidate>
-          <h3 className={styles.reset__formText}>
-            Введите адрес электронной почты вашего аккаунта
-          </h3>
+          <h3 className={styles.reset__formText}>Email</h3>
+
           <input
             className={styles.reset__formInput}
             id='email'
             name='email'
             type='email'
-            placeholder='Введите эл. почту'
+            placeholder='Введите email'
             pattern={PATTERN_EMAIL}
             defaultValue={values.email || ''}
             onBlur={(e) => {
@@ -62,7 +61,7 @@ function PasswordReset({ comeBack }) {
             aria-label='Кнопка отправить'
             disabled={!inputValidities.email}
           >
-            Отправить код
+            Восстановить пароль
           </button>
         </form>
       </div>

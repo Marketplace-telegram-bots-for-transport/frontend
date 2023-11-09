@@ -24,6 +24,7 @@ function Cart({
 }) {
   const navigate = useNavigate();
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
+  const [showFixedButton, setShowFixedButton] = useState(false);
   const [showButton, setShowButton] = useState(
     window.innerWidth <= WIDTH_SCREEN_768
   ); // кнопка купить в мобильной версии
@@ -79,6 +80,28 @@ function Cart({
     navigate('/pay-form');
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+
+      // Проверяем, если прокрутка достигла конца страницы
+      if (windowHeight + scrollTop >= docHeight) {
+        setShowFixedButton(true);
+      } else {
+        setShowFixedButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Удаление обработчика события при размонтировании компонента
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <section className={styles.cart}>
       <div className={styles.products}>
@@ -93,19 +116,22 @@ function Cart({
               decreaseProductCount={decreaseProductCount}
             />
           ))}
-          {showButton && !isLoggedIn && (
+          {showButton && showFixedButton && !isLoggedIn && (
             <div className={styles.products__containerFixedButtonMobile}>
               <button className={styles.products__fixedButtonMobile}>
                 <Link
                   className={styles.products__fixedButtonMobile_link}
                   to='/login'
                 >
-                  Авторизуйтесь, чтобы купить
+                  Войдите
                 </Link>
-                <p className={styles.products__fixedButtonMobile_count}>
-                  {countText} — {totalSum}₽
-                </p>
               </button>
+              <p className={styles.products__fixedButtonMobile_count}>
+                {countText}
+              </p>
+              <p className={styles.products__fixedButtonMobile_count}>
+                {totalSum}₽
+              </p>
             </div>
           )}
           {showButton && isLoggedIn && (
@@ -139,17 +165,17 @@ function Cart({
             </button>
           )}
 
-          {showButton && !isLoggedIn && (
+          {showButton && showFixedButton && !isLoggedIn && (
             <>
               <p className={styles.products__textMobile}>
-                Авторизуйтесь, чтобы продолжить покупки
+                Войдите, чтобы продолжить покупки
               </p>
               <button className={styles.products__buttonMobile}>
                 <Link
                   className={styles.products__buttonMobile_link}
                   to='/login'
                 >
-                  Перейти к авторизации
+                  Войти
                 </Link>
               </button>
             </>

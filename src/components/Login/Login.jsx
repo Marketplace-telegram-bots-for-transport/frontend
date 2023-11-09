@@ -40,10 +40,10 @@ function Login({ onLogin, loggedIn }) {
       <div className={styles.login__loginContainer}>
         <h2 className={styles.login__title}>Войдите, чтобы продолжить</h2>
         <form className={styles.login__form} noValidate onSubmit={handleSubmit}>
-          <h3 className={styles.login__inputName}>E-mail</h3>
+          <h3 className={styles.login__inputName}>Email</h3>
           <input
             className={styles.login__input}
-            placeholder='Введите e-mail'
+            placeholder='Введите email'
             type='text'
             id='email'
             name='email'
@@ -72,7 +72,7 @@ function Login({ onLogin, loggedIn }) {
           <div className={styles.login__password}>
             <input
               className={styles.login__input}
-              placeholder='Пароль'
+              placeholder='Введите пароль'
               type={type}
               id='password'
               name='password'

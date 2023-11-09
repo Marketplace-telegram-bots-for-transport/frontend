@@ -118,7 +118,7 @@ function ChangePassword({ comeBack }) {
               aria-label='Кнопка вернуться к авторизации'
               onClick={() => navigate('/login')}
             >
-              Назад к авторизации
+              Войти
             </button>
           </>
         ) : (
@@ -148,7 +148,7 @@ function ChangePassword({ comeBack }) {
                     id='password'
                     name='password'
                     type={isPasswordVisible.password ? 'text' : 'password'}
-                    placeholder='Новый пароль (от 8 до 16 символов)'
+                    placeholder='Введите новый пароль'
                     defaultValue={values.password || ''}
                     minLength={8}
                     maxLength={16}
@@ -185,7 +185,7 @@ function ChangePassword({ comeBack }) {
                     id='repeat'
                     name='repeat'
                     type={isPasswordVisible.repeat ? 'text' : 'password'}
-                    placeholder='Повторите пароль'
+                    placeholder='Повторите новый пароль'
                     minLength={8}
                     maxLength={16}
                     defaultValue={values.repeat || ''}

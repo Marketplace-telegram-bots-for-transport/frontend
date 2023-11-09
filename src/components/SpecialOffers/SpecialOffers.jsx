@@ -9,7 +9,7 @@ import infoBanners from '../../utils/infoBanners.json';
 
 function SpecialOffers({
   comeBack,
-  apiBots,
+  /* apiBots, */
   cartProducts,
   isProductInCart,
   addProductToCart,
@@ -26,7 +26,8 @@ function SpecialOffers({
   const IdNumber = parseInt(id, 10); // переделываем в число
   const banner = banners.find((item) => item.id === IdNumber); // ищем баннер с соответствующим id в JSON-массиве
 
-  const bots = apiBots.results;
+  /* const bots = apiBots.results; */
+  // eslint-disable-next-line no-unused-vars
   const [specialBot, setSpecialBot] = useState([]);
 
   const backgroundStyle = {
@@ -39,12 +40,12 @@ function SpecialOffers({
     backgroundImage: `url(${banner.imageUrlMobile})`,
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     const specialBotsList = bots.filter((bot) => {
       return bot.discount !== undefined && bot.discount > 0;
     });
     setSpecialBot(specialBotsList);
-  }, [bots]);
+  }, [bots]); */
 
   const handleBuyClick = (item) => {
     addProductToCart(item);

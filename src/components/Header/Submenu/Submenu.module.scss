@@ -344,14 +344,14 @@
       overflow: scroll;
     }
     &__mobileProfile {
+      position: relative;
       @include shadowBackground($background-bots-main, $box-shadow-main);
-      height: 253px;
+      height: 217px;
       border-radius: 20px;
       min-width: 345px;
-      padding: 30px 20px;
-      position: absolute;
-      top: 50px;
+      padding: 20px 20px 30px 20px;
       &_subtitle {
+        padding: 24px 0 0;
         text-align: center;
         margin: 0 0 30px;
         @include text(
@@ -381,7 +381,6 @@
         }
       }
       &_auth {
-        margin-bottom: 10px;
         height: 40px;
         width: 100%;
         border: none;
@@ -397,20 +396,23 @@
           background-color: $background-color-button2-pressed;
         }
       }
-      &_back {
-        height: 40px;
+      &_close {
         width: 100%;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        height: 24px;
+        width: 24px;
         border: none;
-        border-radius: 10px;
-        padding: 11px auto;
-        @include text($mobile-font-14, $weight-500, 17.5px, $color-link-main);
         cursor: pointer;
+        background: url(../../../images/images-for-mobile/buttonCloseSubmenu/closeButton.svg)
+          no-repeat center;
         background-color: inherit;
         &:hover {
-          color: $color-link-hover;
+          background: url(../../../images/images-for-mobile/buttonCloseSubmenu/closeButton-hover.svg);
         }
         &:active {
-          color: $color-link-pressed;
+          background: url(../../../images/images-for-mobile/buttonCloseSubmenu/closeButton-pressed.svg);
         }
       }
     }

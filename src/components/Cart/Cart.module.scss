@@ -126,6 +126,20 @@
       box-shadow: $box-shadow-category;
     }
     &__fixedButtonMobile {
+      position: fixed;
+      bottom: 0;
+      left: 50%; /* Размещаем кнопку по центру в горизонтальной плоскости */
+      transform: translateX(
+        -50%
+      ); /* Центрируем кнопку относительно ширины экрана */
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
+      display: flex;
       padding: 4px 15px;
       border-radius: 10px;
       min-height: 40px;
@@ -165,6 +179,19 @@
       @include text(10px, $weight-400, 12.5px, $color-blue-dark-title);
     }
     &__buttonMobile {
+      position: fixed;
+      bottom: 0;
+      left: 50%; /* Размещаем кнопку по центру в горизонтальной плоскости */
+      transform: translateX(
+        -50%
+      ); /* Центрируем кнопку относительно ширины экрана */
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
       margin: 10px 0 0;
       padding: 11px 15px;
       border-radius: 10px;

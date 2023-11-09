@@ -151,7 +151,7 @@ function Payment({ comeBack, totalSum }) {
             <label className={styles.payment__label} htmlFor='email-input'>
               {' '}
               <span className={styles.payment__inputHeading}>
-                E-mail для отправки бота и чека
+                Email для отправки бота и чека
               </span>
               <input
                 name='email'
@@ -187,7 +187,7 @@ function Payment({ comeBack, totalSum }) {
                   className={`${styles.payment__input} ${styles.payment__inputNumber}`}
                   name='number'
                   value={formPayment.number || ''}
-                  placeholder='____-____-____-____'
+                  placeholder='_ _ _ _   _ _ _ _   _ _ _ _   _ _ _ _'
                   autoComplete='cc-number'
                   inputMode='numeric'
                   type='text'
@@ -214,7 +214,7 @@ function Payment({ comeBack, totalSum }) {
                       className={`${styles.payment__input} ${styles.payment__inputDate}`}
                       name='month'
                       value={formPayment.month || ''}
-                      placeholder='ММ'
+                      placeholder='_ _'
                       autoComplete='cc-month'
                       inputMode='numeric'
                       type='text'
@@ -230,7 +230,7 @@ function Payment({ comeBack, totalSum }) {
                       className={`${styles.payment__input} ${styles.payment__inputDate}`}
                       name='year'
                       value={formPayment.year || ''}
-                      placeholder='ГГГГ'
+                      placeholder='_ _ _ _'
                       autoComplete='cc-year'
                       inputMode='numeric'
                       type='text'
@@ -247,14 +247,12 @@ function Payment({ comeBack, totalSum }) {
                   className={`${styles.payment__label} ${styles.payment__labelCode}`}
                   htmlFor='code-input'
                 >
-                  <span className={styles.payment__inputHeading}>
-                    Код на обороте
-                  </span>
+                  <span className={styles.payment__inputHeading}>CVV</span>
                   <input
                     className={`${styles.payment__input} ${styles.payment__inputCode}`}
                     name='code'
                     value={formPayment.code || ''}
-                    placeholder='CVC'
+                    placeholder='_ _ _'
                     autoComplete='cc-number'
                     inputMode='numeric'
                     type='text'

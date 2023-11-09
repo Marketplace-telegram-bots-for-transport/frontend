@@ -140,9 +140,7 @@ const BotsList = ({
               smooth
               duration={1000}
               onClick={handleScrollLinkClick}
-            >
-              Вернуться наверх
-            </ScrollLink>
+            />
           </button>
         </InfiniteScroll>
       ) : (

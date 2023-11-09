@@ -1,13 +1,17 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
-import { PATTERN_EMAIL } from '../../utils/constants';
+import accepted from '../../images/accepted-min.svg';
+import { WIDTH_SCREEN_768, PATTERN_EMAIL } from '../../utils/constants';
 
 function Register({ loggedIn, onRegister, comeBack }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
   const navigate = useNavigate();
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  );
   const [type, setType] = React.useState('password');
   const [typeRepeat, setTypeRepeat] = React.useState('password');
   const [passwardEyeClass, setPasswardEyeClass] = React.useState(
@@ -16,6 +20,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
   const [passwardRepeatEyeClass, setPasswardRepeatEyeClass] = React.useState(
     `${styles.register__viewPassword}`
   );
+  const [isSuccsess, setIsSuccsess] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(true);
   const [isErrorLogin, setIsErrorLogin] = React.useState(false);
   const [isErrorEmail, setIsErrorEmail] = React.useState(false);
@@ -40,6 +45,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
   function handleSubmit(e) {
     e.preventDefault();
     onRegister(values);
+    setIsSuccsess(true);
   }
 
   function togglePasswardEye() {
@@ -62,145 +68,213 @@ function Register({ loggedIn, onRegister, comeBack }) {
     }
   }
 
+  // отображение кнопки при размере экрана меньше 768px
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <main className={styles.register}>
-      <div className={styles.register__registerContainer}>
-        <div className={styles.register__titleContainer}>
-          <button
-            aria-label='назад'
-            className={styles.register__back}
-            onClick={comeBack}
-          />
-          <h2 className={styles.register__title}>Регистрация</h2>
-        </div>
-        <form
-          className={styles.register__form}
-          noValidate
-          onSubmit={handleSubmit}
-        >
-          <h3 className={styles.register__inputName}>Имя пользователя</h3>
-          <input
-            className={styles.register__input}
-            placeholder='Введите имя пользователя'
-            type='text'
-            id='username'
-            name='username'
-            required
-            pattern='^[a-zA-Zа-яА-Я\s\-]+$'
-            maxLength='16'
-            minLength='2'
-            value={values.username || ''}
-            onChange={handleChange}
-            onBlur={() => {
-              setIsErrorLogin(true);
-            }}
-          />
-          <span
-            className={`${styles.register__error} ${
-              isErrorLogin && styles.register__errorVisible
-            }`}
-          >
-            {errors.username}
-          </span>
-          <h3 className={styles.register__inputName}>E-mail</h3>
-          <input
-            className={styles.register__input}
-            placeholder='Введите e-mail'
-            type='email'
-            id='email'
-            name='email'
-            required
-            pattern={PATTERN_EMAIL}
-            value={values.email || ''}
-            onChange={handleChange}
-            onBlur={() => {
-              setIsErrorEmail(true);
-            }}
-          />
-          <span
-            className={`${styles.register__error} ${
-              isErrorEmail && styles.register__errorVisible
-            }`}
-          >
-            {errors.email}
-          </span>
-          <h3 className={styles.register__inputName}>Пароль</h3>
-          <div className={styles.register__password}>
-            <input
-              className={styles.register__input}
-              placeholder='Пароль (от 8 до 16 символов)'
-              type={type}
-              id='password'
-              name='password'
-              required
-              minLength='8'
-              maxLength='16'
-              value={values.password || ''}
-              onChange={handleChange}
-              onBlur={() => {
-                setIsErrorPassward(true);
-              }}
+      {isSuccsess ? (
+        <div className={styles.register__success}>
+          <div className={styles.register__successContainer}>
+            <img
+              className={styles.register__successPicture}
+              src={accepted}
+              alt='Глалочка'
             />
-            <div
-              className={passwardEyeClass}
-              onClick={togglePasswardEye}
-              onKeyDown={togglePasswardEye}
-              role='button'
-              tabIndex='0'
-              aria-label='key'
-            />
+            <h3 className={styles.register__successTitle}>
+              Регистрация прошла успешно!
+            </h3>
           </div>
-          <span
-            className={`${styles.register__error} ${
-              isErrorPassward && styles.register__errorVisible
-            }`}
-          >
-            {errors.password}
-          </span>
-          <h3 className={styles.register__inputName}>Повторите пароль</h3>
-          <div className={styles.register__password}>
-            <input
-              className={styles.register__input}
-              placeholder='Повторите пароль'
-              type={typeRepeat}
-              id='confirm_password'
-              name='confirm_password'
-              required
-              value={values.confirm_password || ''}
-              onChange={handleChange}
-              onBlur={() => {
-                setIsErrorConfirmPassward(true);
-              }}
-            />
-            <div
-              className={passwardRepeatEyeClass}
-              onClick={togglePasswardRepeatEye}
-              onKeyDown={togglePasswardRepeatEye}
-              role='button'
-              tabIndex='0'
-              aria-label='key'
-            />
-          </div>
-          <span
-            className={`${styles.register__error} ${
-              isErrorConfirmPassward && styles.register__errorVisible
-            }`}
-          >
-            {`${
-              values.confirm_password === values.password
-                ? ''
-                : 'Пароли не совпадают'
-            }`}
-          </span>
-          <CheckBox onChange={handleChange} />
           <button
-            className={styles.register__button}
-            disabled={!isValid || isDisabled}
+            className={styles.register__successButton}
+            type='button'
+            aria-label='Кнопка вернуться к авторизации'
+            onClick={() => navigate('/login')}
           >
-            Зарегистрироваться
+            Войти
           </button>
-        </form>
-      </div>
+        </div>
+      ) : (
+        <div className={styles.register__registerContainer}>
+          <div className={styles.register__titleContainer}>
+            <button
+              aria-label='назад'
+              className={styles.register__back}
+              onClick={comeBack}
+            />
+            <h2 className={styles.register__title}>Регистрация</h2>
+          </div>
+          <form
+            className={styles.register__form}
+            noValidate
+            onSubmit={handleSubmit}
+          >
+            <h3 className={styles.register__inputName}>Имя пользователя</h3>
+            <input
+              className={styles.register__input}
+              placeholder='Введите имя пользователя'
+              type='text'
+              id='username'
+              name='username'
+              required
+              pattern='^[a-zA-Zа-яА-Я\s\-]+$'
+              maxLength='16'
+              minLength='2'
+              value={values.username || ''}
+              onChange={handleChange}
+              onBlur={() => {
+                setIsErrorLogin(true);
+              }}
+            />
+            <span
+              className={`${styles.register__error} ${
+                isErrorLogin && styles.register__errorVisible
+              }`}
+            >
+              {errors.username}
+            </span>
+            <h3 className={styles.register__inputName}>Email</h3>
+            <input
+              className={styles.register__input}
+              placeholder='Введите email'
+              type='email'
+              id='email'
+              name='email'
+              required
+              pattern={PATTERN_EMAIL}
+              value={values.email || ''}
+              onChange={handleChange}
+              onBlur={() => {
+                setIsErrorEmail(true);
+              }}
+            />
+            <span
+              className={`${styles.register__error} ${
+                isErrorEmail && styles.register__errorVisible
+              }`}
+            >
+              {errors.email}
+            </span>
+            <div className={styles.register__inputNameContainer}>
+              <h3 className={styles.register__inputName}>Пароль</h3>
+              <Link to='/reset-password' className={styles.register__resetLink}>
+                Не помню пароль
+              </Link>
+            </div>
+            <div className={styles.register__password}>
+              {showButton ? (
+                <input
+                  className={`
+                  ${styles.register__input} 
+                  ${styles.register__input_password}
+                `}
+                  placeholder='Введите пароль'
+                  type={type}
+                  id='password'
+                  name='password'
+                  required
+                  minLength='8'
+                  maxLength='16'
+                  value={values.password || ''}
+                  onChange={handleChange}
+                  onBlur={() => {
+                    setIsErrorPassward(true);
+                  }}
+                />
+              ) : (
+                <input
+                  className={`
+                  ${styles.register__input} 
+                  ${styles.register__input_password}
+                `}
+                  placeholder='Введите пароль (от 8 до 16 символов)'
+                  type={type}
+                  id='password'
+                  name='password'
+                  required
+                  minLength='8'
+                  maxLength='16'
+                  value={values.password || ''}
+                  onChange={handleChange}
+                  onBlur={() => {
+                    setIsErrorPassward(true);
+                  }}
+                />
+              )}
+              <div
+                className={passwardEyeClass}
+                onClick={togglePasswardEye}
+                onKeyDown={togglePasswardEye}
+                role='button'
+                tabIndex='0'
+                aria-label='key'
+              />
+            </div>
+            <span
+              className={`${styles.register__error} ${
+                isErrorPassward && styles.register__errorVisible
+              }`}
+            >
+              {errors.password}
+            </span>
+            <div className={styles.register__inputNameContainer}>
+              <h3 className={styles.register__inputName}>Повторите пароль</h3>
+              <Link to='/reset-password' className={styles.register__resetLink}>
+                Не помню пароль
+              </Link>
+            </div>
+            <div className={styles.register__password}>
+              <input
+                className={styles.register__input}
+                placeholder='Введите пароль ещё раз'
+                type={typeRepeat}
+                id='confirm_password'
+                name='confirm_password'
+                required
+                value={values.confirm_password || ''}
+                onChange={handleChange}
+                onBlur={() => {
+                  setIsErrorConfirmPassward(true);
+                }}
+              />
+              <div
+                className={passwardRepeatEyeClass}
+                onClick={togglePasswardRepeatEye}
+                onKeyDown={togglePasswardRepeatEye}
+                role='button'
+                tabIndex='0'
+                aria-label='key'
+              />
+            </div>
+            <span
+              className={`${styles.register__error} ${
+                isErrorConfirmPassward && styles.register__errorVisible
+              }`}
+            >
+              {`${
+                values.confirm_password === values.password
+                  ? ''
+                  : 'Пароли не совпадают'
+              }`}
+            </span>
+            <CheckBox onChange={handleChange} />
+            <button
+              className={styles.register__button}
+              disabled={!isValid || isDisabled}
+            >
+              Зарегистрироваться
+            </button>
+          </form>
+        </div>
+      )}
     </main>
   );
 }

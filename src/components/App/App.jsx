@@ -227,28 +227,28 @@ const App = () => {
             <Route
               path='/'
               element={
-                apiBots !== null ? (
-                  <Main
-                    apiBots={apiBots}
-                    cartProducts={cartProducts}
-                    isProductInCart={isProductInCart}
-                    addProductToCart={addProductToCart}
-                    increaseProductCount={increaseProductCount}
-                    decreaseProductCount={decreaseProductCount}
-                  />
-                ) : null
+                /* apiBots !== null ? ( */
+                <Main
+                  apiBots={apiBots}
+                  cartProducts={cartProducts}
+                  isProductInCart={isProductInCart}
+                  addProductToCart={addProductToCart}
+                  increaseProductCount={increaseProductCount}
+                  decreaseProductCount={decreaseProductCount}
+                />
+                /*  ) : null */
               }
             />
 
             <Route
               path='/special-offers/:id'
               element={
-                apiBots !== null ? (
-                  <SpecialOffers
-                    apiBots={apiBots}
-                    addProductToCart={addProductToCart}
-                  />
-                ) : null
+                /* apiBots !== null ? ( */
+                <SpecialOffers
+                  apiBots={apiBots}
+                  addProductToCart={addProductToCart}
+                />
+                /* ) : null */
               }
             />
 

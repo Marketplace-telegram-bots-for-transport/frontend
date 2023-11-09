@@ -1,5 +1,6 @@
-import { useState, useEffect /* , useRef */ } from 'react';
-/* import { fetchInitialBots } from '../../utils/api/getBots'; */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useState, useEffect } from 'react';
 import { WIDTH_SCREEN_768 } from '../../utils/constants';
 import styles from './CategoriesTitleMainPage.module.scss';
 import Category from '../Category/Category';
@@ -23,6 +24,14 @@ const CategoriesTitleMainPage = ({ categories }) => {
     getCategoryName(c).toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleSearch = (filter) => {
+    setSearchQuery(filter);
+
+    if (!filter || filter === '') {
+      setSearchQuery('');
+    }
+  };
+
   const handleCategoryClick = (category) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category)) {
@@ -30,16 +39,8 @@ const CategoriesTitleMainPage = ({ categories }) => {
       }
       return [...prev, category];
     });
+    setSearchQuery('');
   };
-
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    setSelectedCategories([]);
-  };
-
-  /* const handleDelete = (category) => {
-    setSelectedCategories(selectedCategories.filter((c) => c !== category));
-  }; */
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,15 +52,10 @@ const CategoriesTitleMainPage = ({ categories }) => {
     };
   }, []);
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handleCategoryClick();
-    }
-  };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Категории</h2>
+
       {showButton && (
         <div className={styles.category}>
           <button
@@ -68,43 +64,37 @@ const CategoriesTitleMainPage = ({ categories }) => {
             onClick={() => setShowAllCategories(!showAllCategories)}
           >
             <div className={styles.category__image} />
-            Все категории
+            Выбрать категории
           </button>
-          <ul className={styles.category__list}>
-            {showAllCategories && (
-              <>
-                <form className={styles.category__search} noValidate>
-                  <textarea
-                    className={styles.category__search_input}
-                    type='text-area'
-                    /* rows={1} */
-                    placeholder='Поиск по категориям'
-                    value={searchQuery || selectedCategories.join(' ')}
-                    onChange={handleSearch}
-                  />
-                  <button
-                    className={styles.category__search_button}
-                    type='submit'
-                    aria-label='Очистить поиск'
-                    /* onClick={handleDelete} */
-                  />
-                </form>
 
-                {filteredCategories.slice(1).map((category) => (
-                  <div key={category.id}>
-                    <li className={styles.category__listItem}>
-                      <Category
-                        key={category.id}
-                        name={category.name}
-                        imageUrl={category.imageUrl}
-                      />
-                      {/* <img
-                        className={styles.botBody__image}
-                        src={category.imageUrl}
-                        alt='изображение логотипа бота'
-                      />
-                      <spane>{category.name}</spane> */}
-                      <div
+          <div className={styles.category__inputContainer}>
+            <ul className={styles.category__list}>
+              {showAllCategories && (
+                <>
+                  <div className={styles.category__search}>
+                    <textarea
+                      className={styles.category__search_input}
+                      type='text'
+                      rows={1}
+                      placeholder={
+                        selectedCategories.join('; ') || 'Поиск по категориям'
+                      }
+                      value={searchQuery}
+                      onChange={(e) => handleSearch(e.target.value)}
+                    />
+                    <button
+                      className={styles.category__search_button}
+                      type='submit'
+                      aria-label='Очистить поиск'
+                    />
+                  </div>
+
+                  {filteredCategories.map((category) => (
+                    <div
+                      key={category.id}
+                      className={styles.category__listItem}
+                    >
+                      <li
                         className={`
                         ${styles.category__checkbox} ${
                           selectedCategories.includes(category.name)
@@ -112,28 +102,34 @@ const CategoriesTitleMainPage = ({ categories }) => {
                             : ''
                         }
                         `}
-                        onKeyPress={handleKeyPress}
-                        role='button'
-                        tabIndex={0}
+                        style={{
+                          backgroundColor: selectedCategories.includes(
+                            category.name
+                          ),
+                        }}
+                        value={category.name}
                         onClick={() => handleCategoryClick(category.name)}
                       >
+                        <Category
+                          key={category.id}
+                          name={category.name}
+                          imageUrl={category.imageUrl}
+                        />
                         <input
                           className={styles.category__input}
                           type='checkbox'
-                          checked={selectedCategories.includes(category.name)}
+                          defaultChecked={selectedCategories.includes(
+                            category.name
+                          )}
                         />
-                        {/* <button
-                          onClick={() => handleDelete(category)}
-                          aria-label='вап'
-                        /> */}
                         <span className={styles.category__icon} />
-                      </div>
-                    </li>
-                  </div>
-                ))}
-              </>
-            )}
-          </ul>
+                      </li>
+                    </div>
+                  ))}
+                </>
+              )}
+            </ul>
+          </div>
         </div>
       )}
     </div>

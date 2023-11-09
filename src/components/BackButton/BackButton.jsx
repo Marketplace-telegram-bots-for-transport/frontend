@@ -28,6 +28,9 @@ function BackButton({ botName, title, comeBack }) {
           <p className={styles.returnElement__title}>
             {location.pathname === '/cart' ? 'Корзина' : ''}
             {location.pathname === '/pay-form' ? 'Оплата картой' : ''}
+            {location.pathname === '/signup-seller'
+              ? 'Регистрация продавца'
+              : ''}
             {location.pathname === `/special-offers/${id}` ? title : ''}
             {location.pathname === `/botdetails/${botId}` ? botName : ''}
           </p>

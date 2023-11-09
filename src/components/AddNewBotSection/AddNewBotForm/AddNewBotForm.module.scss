@@ -89,7 +89,7 @@
 
   &__input {
     width: 100%;
-    height: 50px;
+    min-height: 48px;
     border: $border-main;
     border-radius: 10px;
     padding: 0 0 0 20px;
@@ -110,7 +110,7 @@
     }
 
     &_type_examplesContainer {
-      height: 200px;
+      min-height: 200px;
       background-color: $background-button-input-category;
       position: relative;
       display: flex;
@@ -180,6 +180,97 @@
 
     &:hover {
       opacity: 0.7;
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .form {
+    border-top: 1px solid #d3e2f7;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+    &__label {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      padding: 0 0 28px;
+      &:first-child {
+        margin-top: 30px;
+      }
+      &_type_image {
+        margin-top: 81px;
+        width: 100px;
+        height: 100px;
+      }
+    }
+    &__inputGroup {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0;
+    }
+    &__inputTitle {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 18px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-input-text
+      );
+      &_type_desc {
+        min-height: 125px;
+      }
+      &_type_examplesContainer {
+        min-height: 56px;
+      }
+    }
+    &__examplesTitle {
+      display: flex;
+      align-items: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
+      &::before {
+        margin-right: 10px;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__deleteBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-red-delete
+      );
+      &::before {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
