@@ -12,6 +12,7 @@ import Counter from '../Counter/Counter';
 import BackButton from '../BackButton/BackButton';
 import { fetchBotById } from '../../utils/api/getBotByID';
 import Reviews from '../Reviews/Reviews';
+import { WIDTH_SCREEN_768 } from '../../utils/constants';
 
 function BotDetails({
   apiBots,
@@ -22,6 +23,9 @@ function BotDetails({
   decreaseProductCount,
   comeBack,
 }) {
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  );
   // Используем useParams для извлечения параметра маршрута (botId)
   const botsArray = apiBots.results; // достаем массив с ботами с АПИ
   console.log(botsArray);
@@ -83,6 +87,33 @@ function BotDetails({
     margin: '0 auto 0 65px',
   };
 
+  const counterStylesMobile = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    columnGap: '10px',
+    backgroundColor: '$background-white',
+    borderRadius: '10px',
+    border: '$border-main',
+    maxWidth: '205px',
+    width: '125px',
+    height: '40px',
+    padding: '10px',
+    boxSizing: 'border-box',
+    transition: '0.3s',
+    margin: '0',
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   if (!currentBotById) {
     // Если бот с заданным id не найден, можно отобразить сообщение об ошибке
     return console.log('бот не найден');
@@ -90,59 +121,176 @@ function BotDetails({
 
   return (
     <section className={styles.details}>
-      <div className={styles.details__mainSection}>
-        <BackButton botName={currentBotById.name} comeBack={comeBack} />
-        <BotBody
-          botImage={currentBotById.main_photo}
-          botName={currentBotById.name}
-          botAuthor={currentBotById.author}
-          botCategory={currentBotById.category}
-          botDescription={currentBotById.description}
-        />
-        <ScreenExamples array={currentBotById.photo_examples} />
-
-        <Rating currentBotById={currentBotById} />
-      </div>
-      {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
-      <div className={styles.basketSection}>
-        <div className={styles.basketSection__basket}>
-          <h2 className={styles.basketSection__title}>Цена:</h2>
-          <p className={styles.basketSection__totalPrice}>
-            <span>{currentBotById.price}</span>&#8381;
-          </p>
+      {showButton ? (
+        <div className={styles.details__mainSection}>
+          <BotBody
+            botImage={currentBotById.main_photo}
+            botName={currentBotById.name}
+            botAuthor={currentBotById.author}
+            botCategory={currentBotById.category}
+            botDescription={currentBotById.description}
+            comeBack={comeBack}
+          />
           {!botStatus ? (
-            <button
-              className={styles.basketSection__button}
-              type='button'
-              aria-label='Buy'
-              onClick={() => handleBuyClick(currentBotById)}
-              disabled={botStatus}
-            >
-              Добавить в корзину
-            </button>
-          ) : (
-            <>
-              <Counter
-                product={cartProducts.find(
-                  (obj) => obj.id === currentBotById.id
-                )}
-                increaseProductCount={increaseProductCount}
-                decreaseProductCount={decreaseProductCount}
-                customStyles={counterStyles}
-              />
+            <div className={styles.basketSection__containerFixedButtonMobile}>
               <button
-                className={styles.basketSection__button}
+                className={styles.basketSection__buttonAddTo}
+                type='button'
+                aria-label='Buy'
+                onClick={() => handleBuyClick(currentBotById)}
+                disabled={botStatus}
+              >
+                Добавить в корзину
+              </button>
+            </div>
+          ) : (
+            <div className={styles.basketSection__containerFixedButtonMobile}>
+              <button
+                className={styles.basketSection__buttonAddTo}
                 type='button'
                 aria-label='Cart redirect'
                 onClick={() => handelRedirect('/cart')}
               >
                 Перейти в корзину
               </button>
-            </>
+            </div>
           )}
+          <ScreenExamples array={currentBotById.photo_examples} />
+          {/* <Rating currentBotById={currentBotById} /> */}
+
+          <div className={styles.basketSection}>
+            <div className={styles.basketSection__basket}>
+              <h2 className={styles.basketSection__title}>Цена:</h2>
+
+              {currentBotById.discount > 0 ? (
+                <div className={styles.basketSection__discountContainer}>
+                  <p className={styles.basketSection__finalPrice}>
+                    {currentBotById.final_price}₽
+                  </p>
+                  <p className={styles.basketSection__oldPrice}>
+                    {currentBotById.price}₽
+                  </p>
+                  <span className={styles.basketSection__discountSize}>
+                    -{currentBotById.discount}%
+                  </span>
+                </div>
+              ) : (
+                <p className={styles.basketSection__totalPrice}>
+                  <span>{currentBotById.price}</span>&#8381;
+                </p>
+              )}
+              <div className={styles.basketSection__basketButton}>
+                {!botStatus ? (
+                  <button
+                    className={styles.basketSection__buttonAddTo}
+                    type='button'
+                    aria-label='Buy'
+                    onClick={() => handleBuyClick(currentBotById)}
+                    disabled={botStatus}
+                  >
+                    Добавить в корзину
+                  </button>
+                ) : (
+                  <>
+                    <Counter
+                      product={cartProducts.find(
+                        (obj) => obj.id === currentBotById.id
+                      )}
+                      increaseProductCount={increaseProductCount}
+                      decreaseProductCount={decreaseProductCount}
+                      customStyles={
+                        showButton ? counterStylesMobile : counterStyles
+                      }
+                    />
+                    <button
+                      className={styles.basketSection__button}
+                      type='button'
+                      aria-label='Cart redirect'
+                      onClick={() => handelRedirect('/cart')}
+                    >
+                      Перейти в корзину
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <Reviews />
+      ) : (
+        <>
+          <div className={styles.details__mainSection}>
+            <BackButton botName={currentBotById.name} comeBack={comeBack} />
+            <BotBody
+              botImage={currentBotById.main_photo}
+              botName={currentBotById.name}
+              botAuthor={currentBotById.author}
+              botCategory={currentBotById.category}
+              botDescription={currentBotById.description}
+            />
+            <ScreenExamples array={currentBotById.photo_examples} />
+
+            {/* <Rating currentBotById={currentBotById} /> */}
+          </div>
+
+          {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}
+          <div className={styles.basketSection}>
+            <div className={styles.basketSection__basket}>
+              <h2 className={styles.basketSection__title}>Цена:</h2>
+              {currentBotById.discount > 0 ? (
+                <>
+                  <p className={styles.basketSection__finalPrice}>
+                    {currentBotById.final_price}₽
+                  </p>
+                  <div className={styles.basketSection__discountContainer}>
+                    <p className={styles.basketSection__oldPrice}>
+                      {currentBotById.price}₽
+                    </p>
+                    <span className={styles.basketSection__discountSize}>
+                      -{currentBotById.discount}%
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <p className={styles.basketSection__totalPrice}>
+                  <span>{currentBotById.price}</span>&#8381;
+                </p>
+              )}
+              {!botStatus ? (
+                <button
+                  className={styles.basketSection__button}
+                  type='button'
+                  aria-label='Buy'
+                  onClick={() => handleBuyClick(currentBotById)}
+                  disabled={botStatus}
+                >
+                  Добавить в корзину
+                </button>
+              ) : (
+                <>
+                  <Counter
+                    product={cartProducts.find(
+                      (obj) => obj.id === currentBotById.id
+                    )}
+                    increaseProductCount={increaseProductCount}
+                    decreaseProductCount={decreaseProductCount}
+                    customStyles={counterStyles}
+                  />
+                  <button
+                    className={styles.basketSection__button}
+                    type='button'
+                    aria-label='Cart redirect'
+                    onClick={() => handelRedirect('/cart')}
+                  >
+                    Перейти в корзину
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          <Reviews />
+        </>
+      )}
     </section>
   );
 }

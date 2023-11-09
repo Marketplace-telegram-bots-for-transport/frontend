@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 import Submenu from './Submenu/Submenu';
+import SearchPopup from './SearchPopup/SearchPopup';
 
 function Header({
   isLoggedIn,
@@ -12,7 +13,8 @@ function Header({
   onSearch,
 }) {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState(''); // данные в поисковой строке
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,11 +23,23 @@ function Header({
   }
 
   function handleСhange(e) {
-    setSearchQuery(e.target.value);
+    const query = e.target.value;
+    if (query) setSearchQuery(query);
+
+    if (query === '') {
+      setSearchQuery('');
+      onSearch('');
+    }
   }
 
   const handleLogoClick = () => {
     setSearchQuery('');
+    navigate('/');
+    onSearch('');
+  };
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
   };
 
   return (
@@ -60,12 +74,21 @@ function Header({
             />
           </form>
         </div>
-        <Submenu
-          isLoggedIn={isLoggedIn}
-          isLogOut={isLogOut}
-          cartProducts={cartProducts}
-          deleteCartProduct={deleteCartProduct}
-        />
+        <div className={styles.header__forMobileSize}>
+          <button
+            className={styles.header__openPopup}
+            type='button'
+            aria-label='Открыть попап поиска'
+            onClick={togglePopup}
+          />
+          <Submenu
+            isLoggedIn={isLoggedIn}
+            isLogOut={isLogOut}
+            cartProducts={cartProducts}
+            deleteCartProduct={deleteCartProduct}
+          />
+          {isPopupOpen && <SearchPopup onToggle={togglePopup} />}
+        </div>
       </div>
     </header>
   );

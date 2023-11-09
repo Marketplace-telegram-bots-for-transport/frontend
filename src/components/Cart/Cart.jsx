@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CartProduct from '../CartProduct/CartProduct';
 import Payment from '../Payment/Payment';
 import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
 import BackButton from '../BackButton/BackButton';
 import styles from './Cart.module.scss';
 import {
+  WIDTH_SCREEN_768,
   NUMBER_UNIT_OF_GOODS,
   NUMBER_UP_TO_FIVE_GOODS,
   TEXT_UNIT_OF_GOODS,
@@ -20,8 +22,12 @@ function Cart({
   decreaseProductCount,
   comeBack,
 }) {
+  const navigate = useNavigate();
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
-
+  const [showFixedButton, setShowFixedButton] = useState(false);
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  ); // кнопка купить в мобильной версии
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
     const val = cartProducts.reduce((previousValue, product) => {
@@ -59,6 +65,43 @@ function Cart({
     window.scrollTo(0, 0);
   }, []);
 
+  // отображение кнопки при размере экрана меньше 768px
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleBuyButtonClick = () => {
+    navigate('/pay-form');
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+
+      // Проверяем, если прокрутка достигла конца страницы
+      if (windowHeight + scrollTop >= docHeight) {
+        setShowFixedButton(true);
+      } else {
+        setShowFixedButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Удаление обработчика события при размонтировании компонента
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <section className={styles.cart}>
       <div className={styles.products}>
@@ -73,6 +116,38 @@ function Cart({
               decreaseProductCount={decreaseProductCount}
             />
           ))}
+          {showButton && showFixedButton && !isLoggedIn && (
+            <div className={styles.products__containerFixedButtonMobile}>
+              <button className={styles.products__fixedButtonMobile}>
+                <Link
+                  className={styles.products__fixedButtonMobile_link}
+                  to='/login'
+                >
+                  Войдите
+                </Link>
+              </button>
+              <p className={styles.products__fixedButtonMobile_count}>
+                {countText}
+              </p>
+              <p className={styles.products__fixedButtonMobile_count}>
+                {totalSum}₽
+              </p>
+            </div>
+          )}
+          {showButton && isLoggedIn && (
+            <div className={styles.products__containerFixedButtonMobile}>
+              <button
+                className={styles.products__fixedButtonMobile}
+                onClick={handleBuyButtonClick}
+                aria-label='Открыть форму оплаты'
+              >
+                Купить
+                <p className={styles.products__fixedButtonMobile_count}>
+                  {totalSum}₽
+                </p>
+              </button>
+            </div>
+          )}
         </ul>
         <div className={styles.products__total}>
           <h3 className={styles.products__totalTitle}>Итог</h3>
@@ -80,9 +155,35 @@ function Cart({
             <p className={styles.products__count}>Всего: {countText}</p>
             <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
+          {showButton && isLoggedIn && (
+            <button
+              className={styles.products__buttonMobile}
+              onClick={handleBuyButtonClick}
+              aria-label='Открыть форму оплаты'
+            >
+              Купить
+            </button>
+          )}
+
+          {showButton && showFixedButton && !isLoggedIn && (
+            <>
+              <p className={styles.products__textMobile}>
+                Войдите, чтобы продолжить покупки
+              </p>
+              <button className={styles.products__buttonMobile}>
+                <Link
+                  className={styles.products__buttonMobile_link}
+                  to='/login'
+                >
+                  Войти
+                </Link>
+              </button>
+            </>
+          )}
         </div>
       </div>
-      {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
+      {isLoggedIn && !showButton && <Payment totalSum={totalSum} />}
+      {!isLoggedIn && !showButton && <ModalWithAuth />}
     </section>
   );
 }

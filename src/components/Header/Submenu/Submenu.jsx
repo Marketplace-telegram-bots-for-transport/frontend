@@ -4,6 +4,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CurrentUserContext from '../../../context/CurrentUserContext';
 import {
+  WIDTH_SCREEN_768,
   NUMBER_UNIT_OF_GOODS,
   NUMBER_UP_TO_FIVE_GOODS,
   TEXT_UNIT_OF_GOODS,
@@ -17,6 +18,9 @@ import styles from './Submenu.module.scss';
 function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showButton, setShowButton] = useState(
+    window.innerWidth <= WIDTH_SCREEN_768
+  );
   const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -69,6 +73,16 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
     setIsBasketOpen(false);
     navigate(path);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
@@ -197,11 +211,11 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                     </div>
                     {bot.discount > 0 ? (
                       <h3 className={styles.submenu__mini_priceDiscount}>
-                        {bot.final_price}₽
+                        {bot.count * bot.final_price}₽
                       </h3>
                     ) : (
                       <h3 className={styles.submenu__mini_price}>
-                        {bot.price}₽
+                        {bot.count * bot.price}₽
                       </h3>
                     )}
 
@@ -270,7 +284,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
           ${styles.submenu__profile_hidden}
           `}
         >
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <div className={styles.submenu__profile_description}>
                 <img
@@ -305,7 +319,8 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 Выйти
               </button>
             </>
-          ) : (
+          )}
+          {!isLoggedIn && !showButton && (
             <>
               <p
                 className={`
@@ -325,6 +340,37 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
               </button>
             </>
           )}
+        </div>
+      )}
+      {isProfileOpen && showButton && !isLoggedIn && (
+        <div className={styles.submenu__mobileContainer}>
+          <div className={styles.submenu__mobileProfile}>
+            <p className={styles.submenu__mobileProfile_subtitle}>
+              Вы не вошли в систему!
+            </p>
+            <button
+              className={styles.submenu__mobileButton_login}
+              type='button'
+              aria-label='Войти в профиль'
+              onClick={() => handelRedirect('/login')}
+            >
+              Войти
+            </button>
+            <button
+              className={styles.submenu__mobileButton_auth}
+              type='button'
+              aria-label='Зарегистрироваться'
+              onClick={() => handelRedirect('/signup')}
+            >
+              Зарегистрироваться
+            </button>
+            <button
+              className={styles.submenu__mobileButton_close}
+              type='button'
+              aria-label='Закрыть'
+              onClick={() => setIsProfileOpen(false)}
+            />
+          </div>
         </div>
       )}
     </section>

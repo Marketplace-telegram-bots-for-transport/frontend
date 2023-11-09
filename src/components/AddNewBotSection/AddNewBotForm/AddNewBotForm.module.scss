@@ -1,0 +1,276 @@
+@import './../../../vendor/_varibles.scss';
+
+.form {
+  max-width: 1320px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(150px, 240px) repeat(2, minmax(325px, 510px));
+  column-gap: 30px;
+  row-gap: 20px;
+
+  &__examplesTitle {
+    margin: 0;
+    padding: 0;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
+
+    &::before {
+      content: '';
+      display: inline-block;
+      background-image: url('../../../images/add-icon-big.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 24px;
+      height: 24px;
+      padding-right: 5px;
+      // vertical-align: middle;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding: 0 0 23px;
+
+    &_type_image {
+      background-image: url('../../../images/default-image-input.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 240px;
+      height: 240px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &_type_name {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    &_type_category {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    &_type_exaples {
+      grid-column-start: 1;
+      grid-column-end: 5;
+    }
+  }
+
+  &__inputTitle {
+    padding: 0 0 0 10px;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-dark-title
+    );
+  }
+
+  &__inputGroup {
+    padding: 0;
+    border: none;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 32px;
+    row-gap: 20px;
+  }
+
+  &__input {
+    width: 100%;
+    min-height: 48px;
+    border: $border-main;
+    border-radius: 10px;
+    padding: 0 0 0 20px;
+    background-color: $background-input;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-input-text
+    );
+
+    &_type_image {
+      visibility: hidden;
+    }
+
+    &_type_desc {
+      height: 100%;
+    }
+
+    &_type_examplesContainer {
+      min-height: 200px;
+      background-color: $background-button-input-category;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      transition: 0.3s;
+
+      &::placeholder {
+        @include text(
+          $font-small-14,
+          $weight-300,
+          $line-height-small-14,
+          $input-placeholder
+        );
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &_type_examples {
+      visibility: hidden;
+      position: absolute;
+      width: 100%;
+      padding: 0;
+    }
+
+    &::placeholder {
+      @include text(
+        $font-small-14,
+        $weight-300,
+        $line-height-small-14,
+        $input-placeholder
+      );
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__deleteBtn {
+    border: none;
+    background-color: $background-white;
+    text-align: start;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-red-delete
+    );
+    cursor: pointer;
+    transition: opacity 0.3s;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-image: url('../../../images/trash-icon.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      padding-right: 10px;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .form {
+    border-top: 1px solid #d3e2f7;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+    &__label {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      padding: 0 0 28px;
+      &:first-child {
+        margin-top: 30px;
+      }
+      &_type_image {
+        margin-top: 81px;
+        width: 100px;
+        height: 100px;
+      }
+    }
+    &__inputGroup {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0;
+    }
+    &__inputTitle {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 18px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-input-text
+      );
+      &_type_desc {
+        min-height: 125px;
+      }
+      &_type_examplesContainer {
+        min-height: 56px;
+      }
+    }
+    &__examplesTitle {
+      display: flex;
+      align-items: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
+      &::before {
+        margin-right: 10px;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__deleteBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-red-delete
+      );
+      &::before {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

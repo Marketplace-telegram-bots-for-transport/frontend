@@ -29,3 +29,14 @@
     opacity: 1;
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .popup {
+    display: none;
+  }
+}

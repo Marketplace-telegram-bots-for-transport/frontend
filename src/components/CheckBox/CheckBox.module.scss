@@ -58,3 +58,21 @@
     background: #e8f0fa;
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .checkbox {
+    &__text {
+      @include text($mobile-font-16, $weight-300, $mobile-lh-small-16, #000);
+    }
+    &__text::before {
+      content: '';
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

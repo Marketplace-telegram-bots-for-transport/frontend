@@ -59,3 +59,168 @@
     @include text($font-h2-36, $weight-600, $line-height-h2, $color-gray-text);
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .cart {
+    background-color: inherit;
+    padding: 114px 15px 50px;
+    flex-direction: column;
+  }
+  .products {
+    padding: 25px 20px;
+    border-right: none;
+    border-radius: 20px;
+    background-color: $background-white;
+    box-shadow: $box-shadow-main;
+    &__list {
+      padding: 0;
+      width: 100%;
+      row-gap: 20px;
+    }
+    &__total {
+      padding-top: 50px;
+    }
+    &__totalTitle {
+      @include text(
+        $mobile-font-32,
+        $weight-500,
+        $mobile-lh-32,
+        $color-gray-text
+      );
+    }
+    &__totalContainer {
+      margin-top: 30px;
+    }
+    &__count {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-gray-text
+      );
+    }
+    &__sum {
+      margin-bottom: 20px;
+      @include text(
+        $mobile-font-24,
+        $weight-500,
+        $mobile-lh-24,
+        $color-gray-text
+      );
+    }
+
+    &__containerFixedButtonMobile {
+      position: absolute;
+      top: 555px;
+      left: 0;
+      width: 100%;
+      padding: 15px 35px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      background-color: $background-white;
+      box-shadow: $box-shadow-category;
+    }
+    &__fixedButtonMobile {
+      position: fixed;
+      bottom: 0;
+      left: 50%; /* Размещаем кнопку по центру в горизонтальной плоскости */
+      transform: translateX(
+        -50%
+      ); /* Центрируем кнопку относительно ширины экрана */
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
+      display: flex;
+      padding: 4px 15px;
+      border-radius: 10px;
+      min-height: 40px;
+      width: 100%;
+      text-align: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
+      cursor: pointer;
+      border: none;
+      background-color: $background-color-button-default;
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+      &:active {
+        background-color: $background-color-button-pressed;
+      }
+      &_link {
+        @include text(
+          $mobile-font-14,
+          $weight-500,
+          $line-height-small-14,
+          $color-button-text
+        );
+      }
+      &_count {
+        text-align: center;
+        @include text(10px, $weight-400, 12.5px, #f8fafc);
+      }
+    }
+
+    &__textMobile {
+      text-align: center;
+      @include text(10px, $weight-400, 12.5px, $color-blue-dark-title);
+    }
+    &__buttonMobile {
+      position: fixed;
+      bottom: 0;
+      left: 50%; /* Размещаем кнопку по центру в горизонтальной плоскости */
+      transform: translateX(
+        -50%
+      ); /* Центрируем кнопку относительно ширины экрана */
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
+      margin: 10px 0 0;
+      padding: 11px 15px;
+      border-radius: 10px;
+      min-height: 40px;
+      width: 100%;
+      text-align: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
+      cursor: pointer;
+      border: none;
+      background-color: $background-color-button-default;
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+      &:active {
+        background-color: $background-color-button-pressed;
+      }
+      &_link {
+        @include text(
+          $mobile-font-14,
+          $weight-500,
+          $line-height-small-14,
+          $color-button-text
+        );
+      }
+    }
+  }
+}

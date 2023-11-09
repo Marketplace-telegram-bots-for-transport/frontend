@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
@@ -16,8 +16,8 @@ import SpecialOffers from '../SpecialOffers/SpecialOffers';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
-import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
+import Payment from '../Payment/Payment';
 import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import Profile from '../Profile/Profile';
@@ -27,19 +27,25 @@ import Purchases from '../Purchases/Purchases';
 import Favourites from '../Favourites/Favourites';
 import Faq from '../Faq/Faq';
 import Seller from '../Seller/Seller';
+import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+import { CART_KEY } from '../../utils/constants';
+import {
+  updateCartWithLocalStorage,
+  checkAndRemoveExpiredData,
+} from '../../hooks/useCartInLocalStorage';
 
 const App = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
-  const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+  const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
 
   const contextValue = useMemo(() => {
-    return { OTP, setOTP, email, setEmail, currentUser };
-  }, [OTP, setOTP, email, setEmail, currentUser]);
+    return { email, setEmail, currentUser };
+  }, [email, setEmail, currentUser]);
 
   useEffect(() => {
     async function fetchData() {
@@ -99,15 +105,6 @@ const App = () => {
     navigate('/');
   };
 
-  // Функция удаления товара из коризны
-  const deleteCartProduct = (id) => {
-    setCartProducts(() => {
-      return cartProducts.filter((product) => {
-        return id !== product.id;
-      });
-    });
-  };
-
   // Функция увеличения количества товаров
   const increaseProductCount = (id) => {
     setCartProducts(() => {
@@ -138,10 +135,26 @@ const App = () => {
     });
   };
 
+  // Проверка localStorage и восстановление корзины
+  useEffect(() => {
+    checkAndRemoveExpiredData(isLoggedIn);
+    const storedCart = localStorage.getItem(CART_KEY);
+    if (storedCart) {
+      setCartProducts(JSON.parse(storedCart));
+    }
+  }, [isLoggedIn]);
+
   // Функция добавления товара в корзину
   const addProductToCart = (newBot) => {
     const updatedBot = { ...newBot, count: 1 };
-    setCartProducts([...cartProducts, updatedBot]);
+    const updatedCart = [...cartProducts, updatedBot];
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
+  };
+
+  // Функция удаления товара из корзины
+  const deleteCartProduct = (id) => {
+    const updatedCart = cartProducts.filter((product) => id !== product.id);
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
   };
 
   // Функция определяющая наличие данного бота в коризне
@@ -190,6 +203,18 @@ const App = () => {
         console.log(err);
       });
   };
+
+  // функция расчета общей суммы заказа
+  const findTotalSum = useCallback(() => {
+    return cartProducts.reduce((previousValue, product) => {
+      return previousValue + product.price * product.count;
+    }, 0);
+  }, [cartProducts]);
+
+  useEffect(() => {
+    const sum = findTotalSum();
+    setTotalSum(sum);
+  }, [cartProducts, findTotalSum]);
 
   return (
     <div className={styles.page}>
@@ -339,11 +364,6 @@ const App = () => {
             />
 
             <Route
-              path='/OTP-password'
-              element={<OTPPassword comeBack={handleGoBack} />}
-            />
-
-            <Route
               path='/change-password'
               element={<ChangePassword comeBack={handleGoBack} />}
             />
@@ -351,6 +371,14 @@ const App = () => {
             <Route
               path='/signup-seller'
               element={<RegisterSeller comeBack={handleGoBack} />}
+            />
+            <Route
+              path='/pay-form'
+              element={<Payment totalSum={totalSum} comeBack={handleGoBack} />}
+            />
+            <Route
+              path='/add-new-bots'
+              element={<AddNewBotsPage comeBack={handleGoBack} />}
             />
           </Routes>
         </div>

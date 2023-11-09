@@ -98,6 +98,9 @@
         background-image: url(../../images/search-min-pressed.svg);
       }
     }
+    &__openPopup {
+      display: none;
+    }
   }
 }
 
@@ -119,6 +122,15 @@
         width: 40px;
         height: 40px;
         background-size: 40px 40px;
+        margin-right: 0;
+        background: url(../../images/images-for-mobile/logo/logoMobile.svg)
+          center no-repeat;
+        &:hover {
+          background-image: url(../../images/images-for-mobile/logo/logoMobile-hover.svg);
+        }
+        &:active {
+          background-image: url(../../images/images-for-mobile/logo/logoMobile-pressed.svg);
+        }
       }
       &_title {
         display: none;
@@ -127,24 +139,33 @@
     // TODO кнопку с выпадающем окном
     &__search {
       &_form {
-        min-width: 100%;
-      }
-      &_input {
         display: none;
       }
-      &_button {
-        background: url(../../images/images-for-mobile/search/search-sizeMobile.svg)
-          no-repeat center;
-        background-color: inherit;
-        border-radius: 100px;
-        margin-left: 97px;
-        margin-right: 18px;
-        &:hover {
-          background-image: url(../../images/images-for-mobile/search/search-sizeMobile-hover.svg);
-        }
-        &:active {
-          background-image: url(../../images/images-for-mobile/search/search-sizeMobile-pressed.svg);
-        }
+    }
+
+    &__forMobileSize {
+      display: flex;
+    }
+
+    &__openPopup {
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      outline: none;
+      background: url(../../images/images-for-mobile/search/search-sizeMobile.svg)
+        no-repeat center;
+      background-color: inherit;
+      border-radius: 100px;
+      margin-right: 18px;
+      cursor: pointer;
+      transition: background-image 0.3s ease;
+      &:hover {
+        background-image: url(../../images/images-for-mobile/search/search-sizeMobile-hover.svg);
+      }
+      &:active {
+        background-image: url(../../images/images-for-mobile/search/search-sizeMobile-pressed.svg);
       }
     }
   }
