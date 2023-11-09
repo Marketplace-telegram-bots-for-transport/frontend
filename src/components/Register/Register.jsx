@@ -86,7 +86,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
             id='username'
             name='username'
             required
-            pattern='^[a-zA-Zа-яА-Я\s\-]+$'
+            pattern='^[a-zA-Zа-яА-Я\s]+$'
             maxLength='16'
             minLength='2'
             value={values.username || ''}
@@ -192,7 +192,10 @@ function Register({ loggedIn, onRegister, comeBack }) {
                 : 'Пароли не совпадают'
             }`}
           </span>
-          <CheckBox onChange={handleChange} />
+          <CheckBox
+            onChange={handleChange}
+            title='Согласен на обработку персональных данных'
+          />
           <button
             className={styles.register__button}
             disabled={!isValid || isDisabled}

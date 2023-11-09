@@ -286,10 +286,10 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 <Link className={styles.submenu__profile_link} to='/profile'>
                   Мой профиль
                 </Link>
-                <Link className={styles.submenu__profile_link} to='/like'>
+                <Link className={styles.submenu__profile_link} to='/favourites'>
                   Избранное
                 </Link>
-                <Link className={styles.submenu__profile_link} to='/FAQ'>
+                <Link className={styles.submenu__profile_link} to='/faq'>
                   FAQ
                 </Link>
               </nav>

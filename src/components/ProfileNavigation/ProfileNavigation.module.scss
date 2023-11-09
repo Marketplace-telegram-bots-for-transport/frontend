@@ -1,7 +1,9 @@
 @import '../../vendor/varibles';
 
 .profileNavigation {
-  margin-top: 150px;
+  min-width: 330px;
+  margin-top: 0;
+  padding: 200px 40px 230px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,6 +63,27 @@
       &_activ {
         background-image: url('../../images/icon-purchases-activ.svg');
       }
+    }
+    &_favourites {
+      background-image: url('../../images/icon-love.svg');
+      &_activ {
+        background-image: url('../../images/icon-love-activ.svg');
+      }
+    }
+    &_faq {
+      background-image: url('../../images/icon-faq.svg');
+      &_activ {
+        background-image: url('../../images/icon-faq-activ.svg');
+      }
+    }
+    &_seller {
+      background-image: url('../../images/icon-seller.svg');
+      &_activ {
+        background-image: url('../../images/icon-seller-activ.svg');
+      }
+    }
+    &_exit {
+      background-image: url('../../images/icon-exit.svg');
     }
   }
 
