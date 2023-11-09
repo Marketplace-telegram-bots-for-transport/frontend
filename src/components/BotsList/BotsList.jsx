@@ -156,11 +156,7 @@ const BotsList = ({
                   author={bot.author}
                   discount={bot.discount}
                   finalPrice={bot.final_price}
-                  category={
-                    bot.categories && bot.categories.length > 0
-                      ? bot.categories[0].name
-                      : 'Нет категории'
-                  }
+                  categories={bot.categories}
                   price={bot.price}
                   id={bot.id}
                   onBuyClick={() => {
