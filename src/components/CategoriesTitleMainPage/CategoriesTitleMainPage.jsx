@@ -1,6 +1,8 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { WIDTH_SCREEN_768 } from '../../utils/constants';
 import styles from './CategoriesTitleMainPage.module.scss';
 import Category from '../Category/Category';
@@ -12,6 +14,7 @@ const CategoriesTitleMainPage = ({ categories }) => {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]); // сохраняем выбранные категории
+  const inputRef = useRef(null);
 
   const getCategoryName = (category) => {
     if (category.name) {
@@ -52,6 +55,31 @@ const CategoriesTitleMainPage = ({ categories }) => {
     };
   }, []);
 
+  // фильтр для отображения выбранных категорий
+  const filteredOptions = categories.filter(
+    (category) =>
+      selectedCategories.includes(getCategoryName(category)) &&
+      getCategoryName(category)
+        .toLowerCase()
+        .startsWith(searchQuery.toLowerCase())
+  );
+
+  // функция удаления всех выбранных категорий
+  const removeCategory = (categoryName) => {
+    const updatedOptions = selectedCategories.filter(
+      (option) => option !== categoryName
+    );
+    setSelectedCategories(updatedOptions);
+  };
+
+  // функция удаления всех выбранных категорий
+  const removeCategories = (value) => {
+    const updatedOptions = selectedCategories.filter(
+      (option) => option.value !== value
+    );
+    setSelectedCategories(updatedOptions);
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Категории</h2>
@@ -63,29 +91,51 @@ const CategoriesTitleMainPage = ({ categories }) => {
             aria-label='Открыть весь список категорий'
             onClick={() => setShowAllCategories(!showAllCategories)}
           >
-            <div className={styles.category__image} />
             Выбрать категории
+            {showAllCategories ? (
+              <div
+                className={`${styles.category__button_img} ${styles.category__button_img_up}`}
+              />
+            ) : (
+              <div
+                className={`${styles.category__button_img} ${styles.category__button_img_down}`}
+              />
+            )}
           </button>
 
           <div className={styles.category__inputContainer}>
             <ul className={styles.category__list}>
               {showAllCategories && (
                 <>
-                  <div className={styles.category__search}>
-                    <textarea
+                  <div className={styles.inputContainerfor2}>
+                    <div className={styles.inputContainer2}>
+                      {filteredOptions.map((category) => (
+                        <div className={styles.itemContainer} key={category.id}>
+                          <div className={styles.itemLabel}>
+                            {category.name}
+                          </div>
+                          <button
+                            className={styles.itemCloseSvg}
+                            aria-label='Удалить категорию'
+                            onClick={() => removeCategory(category.name)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      className={styles.itemDeleteCategories}
+                      aria-label='Удалить выбранные категории'
+                      onClick={() => removeCategories()}
+                    />
+                  </div>
+
+                  <div className={styles.category__search} ref={inputRef}>
+                    <input
                       className={styles.category__search_input}
                       type='text'
-                      rows={1}
-                      placeholder={
-                        selectedCategories.join('; ') || 'Поиск по категориям'
-                      }
+                      placeholder='Поиск по категориям'
                       value={searchQuery}
                       onChange={(e) => handleSearch(e.target.value)}
-                    />
-                    <button
-                      className={styles.category__search_button}
-                      type='submit'
-                      aria-label='Очистить поиск'
                     />
                   </div>
 
