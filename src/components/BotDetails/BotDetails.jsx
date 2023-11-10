@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-curly-brace-presence */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для доступа к параметрам маршрута
 import styles from './BotDetails.module.scss';
 // import DetailsBasket from '../DetailsBasket/DetailsBasket';
@@ -29,6 +29,8 @@ function BotDetails({
   console.log(botsArray);
   const { botId } = useParams(); // достаем элементы карточки с ботом с главной страницы
   const navigate = useNavigate();
+  const [showFixedButton, setShowFixedButton] = useState(false);
+  const bottomRef = useRef(null);
   const [botStatus, setBotStatus] = useState(false); // состояние наличия бота в корзине
   const botIdNumber = parseInt(botId, 10); // конвертируем в число
   // const bot = botsArray.find((item) => item.id === botIdNumber); // Ищем бота с соответствующим id в JSON-массиве
@@ -66,6 +68,25 @@ function BotDetails({
   // прокрутка скролла наверх
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // автоматическое скрытие зафиксированного блока купить на мобилке
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottomElem = bottomRef.current;
+
+      if (!bottomElem) {
+        return;
+      }
+      if (bottomElem.getBoundingClientRect().top < window.innerHeight) {
+        setShowFixedButton(false);
+      } else {
+        setShowFixedButton(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const counterStyles = {
@@ -120,7 +141,13 @@ function BotDetails({
             comeBack={comeBack}
           />
           {!botStatus ? (
-            <div className={styles.basketSection__containerFixedButtonMobile}>
+            <div
+              className={`${styles.basketSection__containerFixedButtonMobile} ${
+                showFixedButton
+                  ? ''
+                  : styles.basketSection__containerFixedButtonMobile_hidden
+              }`}
+            >
               <button
                 className={styles.basketSection__buttonAddTo}
                 type='button'
@@ -132,7 +159,13 @@ function BotDetails({
               </button>
             </div>
           ) : (
-            <div className={styles.basketSection__containerFixedButtonMobile}>
+            <div
+              className={`${styles.basketSection__containerFixedButtonMobile} ${
+                showFixedButton
+                  ? ''
+                  : styles.basketSection__containerFixedButtonMobile_hidden
+              }`}
+            >
               <button
                 className={styles.basketSection__buttonAddTo}
                 type='button'
@@ -170,6 +203,7 @@ function BotDetails({
               <div className={styles.basketSection__basketButton}>
                 {!botStatus ? (
                   <button
+                    ref={bottomRef}
                     className={styles.basketSection__buttonAddTo}
                     type='button'
                     aria-label='Buy'
@@ -191,6 +225,7 @@ function BotDetails({
                       }
                     />
                     <button
+                      ref={bottomRef}
                       className={styles.basketSection__button}
                       type='button'
                       aria-label='Cart redirect'

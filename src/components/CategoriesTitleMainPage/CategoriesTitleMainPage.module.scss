@@ -177,6 +177,7 @@
     }
 
     .category__checkbox_checked .category__icon {
+      cursor: pointer;
       border: 1px solid #3b7dd6;
       background: url(../../images/checkmark.svg) no-repeat center;
     }

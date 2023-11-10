@@ -46,9 +46,9 @@ const BotCard = ({
             ? categories[0]
             : 'Нет категории'}
         </p>
-        {categories.length > 1 && (
+        {/* {categories.length > 1 && (
           <p className={styles.bot__category}>+{categories.length - 1}</p>
-        )}
+        )} */}
       </div>
       {discountAuthor || discountCategory > 0 ? (
         <div className={styles.bot__discountContainer}>

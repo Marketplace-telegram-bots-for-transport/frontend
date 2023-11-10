@@ -34,7 +34,7 @@ const Category = ({
       onClick={() => onFilter(name)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          onFilter();
+          onFilter(name);
         }
       }}
       role='button'
