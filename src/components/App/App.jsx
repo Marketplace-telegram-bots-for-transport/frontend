@@ -18,7 +18,11 @@ import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import Payment from '../Payment/Payment';
-import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
+import {
+  fetchInitialBots,
+  fetchSearchBots,
+  filterBotsByCategory,
+} from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import Profile from '../Profile/Profile';
 import * as userApi from '../../utils/api/userApi';
@@ -42,6 +46,7 @@ const App = () => {
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
+  const [mainPageActiveCategory, setMainPageActiveCategory] = useState('Все');
 
   const contextValue = useMemo(() => {
     return { email, setEmail, currentUser };
@@ -93,6 +98,14 @@ const App = () => {
   const handleSearch = async (query) => {
     const botsData = await fetchSearchBots(query);
 
+    setApiBots(botsData);
+  };
+
+  // Функция фильтрации по имени категории на главной
+  const handleFilterByCategory = async (category) => {
+    const botsData = await filterBotsByCategory(category);
+
+    setMainPageActiveCategory(category);
     setApiBots(botsData);
   };
 
@@ -235,6 +248,8 @@ const App = () => {
                 apiBots !== null ? (
                   <Main
                     apiBots={apiBots}
+                    mainPageActiveCategory={mainPageActiveCategory}
+                    onFilter={handleFilterByCategory}
                     cartProducts={cartProducts}
                     isProductInCart={isProductInCart}
                     addProductToCart={addProductToCart}

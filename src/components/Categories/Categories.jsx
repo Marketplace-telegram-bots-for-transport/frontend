@@ -7,7 +7,7 @@ import CarouselCategoriesLeftBtn from '../UI/CarouselCategoriesLeftBtn/CarouselC
 import CarouselCategoriesRightBtn from '../UI/CarouselCategoriesRightBtn/CarouselCategoriesRightBtn';
 import CategoriesTitleMainPage from '../CategoriesTitleMainPage/CategoriesTitleMainPage';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, onFilter, mainPageActiveCategory }) => {
   const carouselRef = useRef(null);
 
   const responsive = {
@@ -44,7 +44,14 @@ const Categories = ({ categories }) => {
           >
             {categories.map((category) => (
               <div key={category.id}>
-                <Category name={category.name} imageUrl={category.imageUrl} />
+                <Category
+                  name={category.name}
+                  onFilter={onFilter}
+                  mainPageActiveCategory={mainPageActiveCategory}
+                  imageUrl={category.imageUrl}
+                  imageUrlHover={category.imageUrlHover}
+                  imageUrlActive={category.imageUrlActive}
+                />
               </div>
             ))}
           </Carousel>

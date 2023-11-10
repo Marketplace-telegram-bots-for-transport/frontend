@@ -8,6 +8,10 @@
   align-items: center;
   gap: 10px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &__img {
     width: 85px;
     height: 85px;
@@ -18,7 +22,7 @@
     justify-content: center;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 45px;
+    // background-size: 45px;
   }
 
   &__name {
