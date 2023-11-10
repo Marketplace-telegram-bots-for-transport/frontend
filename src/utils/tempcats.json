@@ -40,14 +40,14 @@
       "name": "Отзывы",
       "imageUrl": "/images/categories/reviews/reviews.svg",
       "imageUrlHover": "/images/categories/reviews/reviews_hover.svg",
-      "imageUrlActive": "/images/categories/payment/reviews_active.svg"
+      "imageUrlActive": "/images/categories/reviews/reviews_active.svg"
     },
     {
       "id": 7,
       "name": "Грузы",
       "imageUrl": "/images/categories/cargo/cargo.svg",
       "imageUrlHover": "/images/categories/cargo/cargo_hover.svg",
-      "imageUrlActive": "/images/categories/payment/cargo_active.svg"
+      "imageUrlActive": "/images/categories/cargo/cargo_active.svg"
     },
     {
       "id": 8,
