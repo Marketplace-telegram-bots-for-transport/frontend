@@ -1,7 +1,11 @@
+// import { useState, useEffect } from 'react';
 import styles from './AddNewBotForm.module.scss';
-// import defaultImage from '../../../images/default-image-input.png';
+// import CategoriesCheckbox from './CategoriesCheckbox/CategoriesCheckbox';
+// import categories from '../../../utils/categories.json';
 
-function AddNewBotForm() {
+// const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+function AddNewBotForm({ bot, deleteBotForm }) {
   return (
     <div className={styles.form}>
       <label htmlFor='botImage' className={styles.form__label_type_image}>
@@ -67,7 +71,7 @@ function AddNewBotForm() {
       </fieldset>
       <label htmlFor='productDesc' className={styles.form__label}>
         <span className={styles.form__inputTitle}>Описание товара</span>
-        <input
+        <textarea
           name='productDesc'
           id='productDesc'
           type='text'
@@ -98,7 +102,13 @@ function AddNewBotForm() {
           />
         </div>
       </label>
-      <button type='button' className={styles.form__deleteBtn}>
+      <button
+        type='button'
+        className={styles.form__deleteBtn}
+        onClick={() => {
+          deleteBotForm(bot.id);
+        }}
+      >
         Удалить товар
       </button>
     </div>

@@ -4,13 +4,26 @@ import { WIDTH_SCREEN_768 } from '../../utils/constants';
 import styles from './AddNewBotSection.module.scss';
 import AddNewBotForm from './AddNewBotForm/AddNewBotForm';
 
-function AddNewBotsSection() {
+function AddNewBotsSection({ changeProgressBar }) {
   const location = useLocation();
   const [nextPageAddNewBot, setNextPageAddNewBot] = useState(false);
   const [nextPageContinue, setNextPageContinue] = useState(false);
   const [showButton, setShowButton] = useState(
     window.innerWidth <= WIDTH_SCREEN_768
   );
+
+  const [botsFormInfo, setBotsFormInfo] = useState([
+    {
+      id: 0,
+      logo: '',
+      name: '',
+      categories: [],
+      price: '',
+      count: '',
+      description: '',
+      examples: [],
+    },
+  ]); // Состояние для данных ботов
 
   // отображение кнопки при размере экрана меньше 768px
   useEffect(() => {
@@ -34,6 +47,45 @@ function AddNewBotsSection() {
 
   const togglePageContinue = () => {
     setNextPageContinue(!nextPageContinue);
+  };
+
+  // функция загрузки логотипа
+  const fillBotForm = (id, name, value) => {
+    setBotsFormInfo(() => {
+      return botsFormInfo.map((bot) => {
+        if (bot.id === id) {
+          return {
+            ...bot,
+            [name]: value,
+          };
+        }
+        return bot;
+      });
+    });
+  };
+
+  // Функция добавления новой формы для бота
+  const addBotForm = () => {
+    setBotsFormInfo((prevValue) => [
+      ...prevValue,
+      {
+        id: botsFormInfo.length,
+        logo: '',
+        name: '',
+        categories: [],
+        price: '',
+        count: '',
+        description: '',
+        examples: [],
+      },
+    ]);
+  };
+
+  // Функция удаления формы для бота
+  const deleteBotForm = (id) => {
+    setBotsFormInfo(() => {
+      return botsFormInfo.filter((bot) => bot.id !== id);
+    });
   };
 
   return (
@@ -72,24 +124,40 @@ function AddNewBotsSection() {
         <>
           <div className={styles.addition__head}>
             <h2 className={styles.addition__title}>Добавление товара</h2>
-            {location.pathname === 'register-seller' && (
+            {location.pathname === '/signup-seller' && (
               <p className={styles.addition__info}>
                 Данный этап можно пропустить. Для этого нажмите кнопку
                 “Продолжить”, оставив поля незаполненными.
+                <span className={styles.addition__required}>
+                  * - обязательные поля
+                </span>
               </p>
             )}
-            <button type='button' className={styles.addition__addButton}>
-              + Новый товар
+            <button
+              type='button'
+              className={styles.addition__addButton}
+              onClick={addBotForm}
+            >
+              Новый товар
             </button>
           </div>
           <form className={styles.form}>
-            <AddNewBotForm />
-            {location.pathname === 'add-new-bots' && (
-              <button type='submit' className={styles.form__submit}>
-                Продолжить
-              </button>
-            )}
-          </form>{' '}
+            {botsFormInfo.map((bot) => (
+              <AddNewBotForm
+                key={bot.id}
+                bot={bot}
+                deleteBotForm={deleteBotForm}
+                fillBotForm={fillBotForm}
+              />
+            ))}
+            <button
+              type='button'
+              className={styles.form__submit}
+              onClick={changeProgressBar}
+            >
+              Продолжить
+            </button>
+          </form>
         </>
       )}
     </section>
