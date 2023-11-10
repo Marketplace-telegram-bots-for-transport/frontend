@@ -194,7 +194,6 @@
       padding: 25px 20px;
     }
     &__title {
-      text-wrap: nowrap;
       @include text(
         $mobile-font-18,
         $weight-500,

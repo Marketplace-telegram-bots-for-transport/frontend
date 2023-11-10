@@ -4,6 +4,7 @@ import styles from './Banner.module.scss';
 import 'react-multi-carousel/lib/styles.css';
 import CarouselBannerLeftBtn from '../UI/CarouselBannerLeftBtn/CarouselBannerLeftBtn';
 import CarouselBannerRightBtn from '../UI/CarouselBannerRightBtn/CarouselBannerRightBtn';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 const CustomDot = ({ index, onClick, active }) => {
   const dotClass = `${styles.banner__dot} ${
@@ -25,6 +26,7 @@ const CustomDot = ({ index, onClick, active }) => {
 };
 
 const Banner = () => {
+  const isMobile = useWindowSize();
   const carouselRef = useRef(null);
 
   const responsive = {
@@ -48,23 +50,29 @@ const Banner = () => {
 
   return (
     <div className={styles.banner}>
-      <Carousel
-        ref={carouselRef}
-        renderArrowsWhenDisabled
-        showDots
-        infinite
-        responsive={responsive}
-        className={styles.banner__carousel}
-        dotListClass={styles.banner__dotList}
-        customLeftArrow={<CarouselBannerLeftBtn carouselRef={carouselRef} />}
-        customRightArrow={<CarouselBannerRightBtn carouselRef={carouselRef} />}
-        customDot={<CustomDot />}
-      >
-        <div className={styles.banner__titlebox} />
-        <div className={styles.banner__titlebox} />
-        <div className={styles.banner__titlebox} />
-        <div className={styles.banner__titlebox} />
-      </Carousel>
+      {isMobile ? (
+        <div className={styles.banner__carousel} />
+      ) : (
+        <Carousel
+          ref={carouselRef}
+          renderArrowsWhenDisabled
+          showDots
+          infinite
+          responsive={responsive}
+          className={styles.banner__carousel}
+          dotListClass={styles.banner__dotList}
+          customLeftArrow={<CarouselBannerLeftBtn carouselRef={carouselRef} />}
+          customRightArrow={
+            <CarouselBannerRightBtn carouselRef={carouselRef} />
+          }
+          customDot={<CustomDot />}
+        >
+          <div className={styles.banner__titlebox} />
+          <div className={styles.banner__titlebox} />
+          <div className={styles.banner__titlebox} />
+          <div className={styles.banner__titlebox} />
+        </Carousel>
+      )}
     </div>
   );
 };

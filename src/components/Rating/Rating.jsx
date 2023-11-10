@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Rating.module.scss';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function Rating({ currentBotById }) {
+  const isMobile = useWindowSize();
   const [ratings, setRatings] = useState([0, 0, 0, 0, 0]);
   const [totalRatings, setTotalRatings] = useState(0);
   const averageRating = currentBotById.ratings.value__avg.toFixed(1);
@@ -88,6 +90,11 @@ function Rating({ currentBotById }) {
               </span>
             ))}
           </div>
+          {isMobile && (
+            <button className={styles.rating__readReviews}>
+              Читать отзывы
+            </button>
+          )}
           <p className={styles.countOfReviews}>{totalGradeValue} оценок</p>
         </div>
         <div className={styles.right}>{renderRatingBars()}</div>

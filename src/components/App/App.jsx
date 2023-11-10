@@ -1,7 +1,8 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import styles from './App.module.scss';
+import WindowSizeProvider from '../../context/WindowSizeContext';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -10,36 +11,46 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import BotDetails from '../BotDetails/BotDetails';
-
 import SpecialOffers from '../SpecialOffers/SpecialOffers';
-
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
-import OTPPassword from '../ResetPassword/OTPPassword/OTPPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
-import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
-import * as authorizeApi from '../../utils/api/authorizeApi';
-import Profile from '../Profile/Profile';
-import * as userApi from '../../utils/api/userApi';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
+import Payment from '../Payment/Payment';
+import Profile from '../Profile/Profile';
 import Purchases from '../Purchases/Purchases';
 import Favourites from '../Favourites/Favourites';
 import Faq from '../Faq/Faq';
 import Seller from '../Seller/Seller';
+import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+
+import {
+  fetchInitialBots,
+  fetchSearchBots,
+  filterBotsByCategory,
+} from '../../utils/api/getBots';
+import * as authorizeApi from '../../utils/api/authorizeApi';
+import * as userApi from '../../utils/api/userApi';
+import { CART_KEY } from '../../utils/constants';
+import {
+  updateCartWithLocalStorage,
+  checkAndRemoveExpiredData,
+} from '../../hooks/useCartInLocalStorage';
 
 const App = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartProducts, setCartProducts] = useState([]); // состояние товаров в корзине
   const [email, setEmail] = useState(''); // состояние электронной почты для фиксации вводимый почты
-  const [OTP, setOTP] = useState(''); // состояние одноразового пароля
+  const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
+  const [mainPageActiveCategory, setMainPageActiveCategory] = useState('Все');
 
   const contextValue = useMemo(() => {
-    return { OTP, setOTP, email, setEmail, currentUser };
-  }, [OTP, setOTP, email, setEmail, currentUser]);
+    return { email, setEmail, currentUser };
+  }, [email, setEmail, currentUser]);
 
   useEffect(() => {
     async function fetchData() {
@@ -57,7 +68,6 @@ const App = () => {
       authorizeApi
         .checkToken(jwt)
         .then((res) => {
-          console.log('успешная проверка токена');
           if (res) {
             setIsLoggedIn(true);
           }
@@ -90,6 +100,14 @@ const App = () => {
     setApiBots(botsData);
   };
 
+  // Функция фильтрации по имени категории на главной
+  const handleFilterByCategory = async (category) => {
+    const botsData = await filterBotsByCategory(category);
+
+    setMainPageActiveCategory(category);
+    setApiBots(botsData);
+  };
+
   // Функция для выхода из профиля
   const handleLogOut = () => {
     localStorage.removeItem('jwt');
@@ -97,15 +115,6 @@ const App = () => {
     localStorage.clear();
     setIsLoggedIn(false);
     navigate('/');
-  };
-
-  // Функция удаления товара из коризны
-  const deleteCartProduct = (id) => {
-    setCartProducts(() => {
-      return cartProducts.filter((product) => {
-        return id !== product.id;
-      });
-    });
   };
 
   // Функция увеличения количества товаров
@@ -138,10 +147,26 @@ const App = () => {
     });
   };
 
+  // Проверка localStorage и восстановление корзины
+  useEffect(() => {
+    checkAndRemoveExpiredData(isLoggedIn);
+    const storedCart = localStorage.getItem(CART_KEY);
+    if (storedCart) {
+      setCartProducts(JSON.parse(storedCart));
+    }
+  }, [isLoggedIn]);
+
   // Функция добавления товара в корзину
   const addProductToCart = (newBot) => {
     const updatedBot = { ...newBot, count: 1 };
-    setCartProducts([...cartProducts, updatedBot]);
+    const updatedCart = [...cartProducts, updatedBot];
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
+  };
+
+  // Функция удаления товара из корзины
+  const deleteCartProduct = (id) => {
+    const updatedCart = cartProducts.filter((product) => id !== product.id);
+    updateCartWithLocalStorage(updatedCart, setCartProducts);
   };
 
   // Функция определяющая наличие данного бота в коризне
@@ -161,7 +186,6 @@ const App = () => {
       .authorize(values.password, values.email)
       .then((res) => {
         if (res.auth_token) {
-          console.log('успешный вход');
           localStorage.setItem('jwt', res.auth_token);
           setIsLoggedIn(true);
           navigate('/', { replace: true });
@@ -183,7 +207,6 @@ const App = () => {
         null
       )
       .then(() => {
-        console.log('регистрация успешна');
         handleLogin(values);
       })
       .catch((err) => {
@@ -191,170 +214,191 @@ const App = () => {
       });
   };
 
+  // функция расчета общей суммы заказа
+  const findTotalSum = useCallback(() => {
+    return cartProducts.reduce((previousValue, product) => {
+      return previousValue + product.price * product.count;
+    }, 0);
+  }, [cartProducts]);
+
+  useEffect(() => {
+    const sum = findTotalSum();
+    setTotalSum(sum);
+  }, [cartProducts, findTotalSum]);
+
   return (
     <div className={styles.page}>
       <CurrentUserContext.Provider value={contextValue}>
-        <Header
-          isLoggedIn={isLoggedIn}
-          isLogOut={handleLogOut}
-          cartProducts={cartProducts}
-          deleteCartProduct={deleteCartProduct}
-          onSearch={handleSearch}
-        />
+        <WindowSizeProvider>
+          <Header
+            isLoggedIn={isLoggedIn}
+            isLogOut={handleLogOut}
+            cartProducts={cartProducts}
+            deleteCartProduct={deleteCartProduct}
+            onSearch={handleSearch}
+          />
 
-        <div className={styles.content}>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                apiBots !== null ? (
-                  <Main
+          <div className={styles.content}>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  apiBots !== null ? (
+                    <Main
+                      apiBots={apiBots}
+                      mainPageActiveCategory={mainPageActiveCategory}
+                      onFilter={handleFilterByCategory}
+                      cartProducts={cartProducts}
+                      isProductInCart={isProductInCart}
+                      addProductToCart={addProductToCart}
+                      increaseProductCount={increaseProductCount}
+                      decreaseProductCount={decreaseProductCount}
+                    />
+                  ) : null
+                }
+              />
+
+              <Route
+                path='/special-offers/:id'
+                element={
+                  apiBots !== null ? (
+                    <SpecialOffers
+                      apiBots={apiBots}
+                      addProductToCart={addProductToCart}
+                    />
+                  ) : null
+                }
+              />
+
+              <Route
+                path='/cart'
+                element={
+                  <Cart
+                    isLoggedIn={isLoggedIn}
+                    cartProducts={cartProducts}
+                    deleteCartProduct={deleteCartProduct}
+                    increaseProductCount={increaseProductCount}
+                    decreaseProductCount={decreaseProductCount}
+                    comeBack={handleGoBack}
+                  />
+                }
+              />
+
+              <Route
+                path='/botdetails/:botId'
+                element={
+                  <BotDetails
                     apiBots={apiBots}
                     cartProducts={cartProducts}
                     isProductInCart={isProductInCart}
                     addProductToCart={addProductToCart}
                     increaseProductCount={increaseProductCount}
                     decreaseProductCount={decreaseProductCount}
+                    comeBack={handleGoBack}
                   />
-                ) : null
-              }
-            />
+                  // <Reviews />
+                }
+              />
 
-            <Route
-              path='/special-offers/:id'
-              element={
-                apiBots !== null ? (
-                  <SpecialOffers
-                    apiBots={apiBots}
-                    addProductToCart={addProductToCart}
+              <Route
+                path='/login'
+                element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
+              />
+
+              <Route
+                path='/signup'
+                element={
+                  <Register
+                    comeBack={handleGoBack}
+                    loggedIn={isLoggedIn}
+                    onRegister={handleRegister}
                   />
-                ) : null
-              }
-            />
+                }
+              />
 
-            <Route
-              path='/cart'
-              element={
-                <Cart
-                  isLoggedIn={isLoggedIn}
-                  cartProducts={cartProducts}
-                  deleteCartProduct={deleteCartProduct}
-                  increaseProductCount={increaseProductCount}
-                  decreaseProductCount={decreaseProductCount}
-                  comeBack={handleGoBack}
-                />
-              }
-            />
+              <Route
+                path='/profile'
+                element={
+                  <ProtectedRoute
+                    element={Profile}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
-            <Route
-              path='/botdetails/:botId'
-              element={
-                <BotDetails
-                  apiBots={apiBots}
-                  cartProducts={cartProducts}
-                  isProductInCart={isProductInCart}
-                  addProductToCart={addProductToCart}
-                  increaseProductCount={increaseProductCount}
-                  decreaseProductCount={decreaseProductCount}
-                  comeBack={handleGoBack}
-                />
-                // <Reviews />
-              }
-            />
+              <Route
+                path='/purchases'
+                element={
+                  <ProtectedRoute
+                    element={Purchases}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
-            <Route
-              path='/login'
-              element={<Login loggedIn={isLoggedIn} onLogin={handleLogin} />}
-            />
+              <Route
+                path='/favourites'
+                element={
+                  <ProtectedRoute
+                    element={Favourites}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
-            <Route
-              path='/signup'
-              element={
-                <Register
-                  comeBack={handleGoBack}
-                  loggedIn={isLoggedIn}
-                  onRegister={handleRegister}
-                />
-              }
-            />
+              <Route
+                path='/faq'
+                element={
+                  <ProtectedRoute
+                    element={Faq}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
-            <Route
-              path='/profile'
-              element={
-                <ProtectedRoute
-                  element={Profile}
-                  onLogout={handleLogOut}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
+              <Route
+                path='/seller'
+                element={
+                  <ProtectedRoute
+                    element={Seller}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
-            <Route
-              path='/purchases'
-              element={
-                <ProtectedRoute
-                  element={Purchases}
-                  onLogout={handleLogOut}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
+              <Route
+                path='/reset-password'
+                element={<ResetPassword comeBack={handleGoBack} />}
+              />
 
-            <Route
-              path='/favourites'
-              element={
-                <ProtectedRoute
-                  element={Favourites}
-                  onLogout={handleLogOut}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
+              <Route
+                path='/change-password'
+                element={<ChangePassword comeBack={handleGoBack} />}
+              />
 
-            <Route
-              path='/faq'
-              element={
-                <ProtectedRoute
-                  element={Faq}
-                  onLogout={handleLogOut}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
-
-            <Route
-              path='/seller'
-              element={
-                <ProtectedRoute
-                  element={Seller}
-                  onLogout={handleLogOut}
-                  isLoggedIn={isLoggedIn}
-                />
-              }
-            />
-
-            <Route
-              path='/reset-password'
-              element={<ResetPassword comeBack={handleGoBack} />}
-            />
-
-            <Route
-              path='/OTP-password'
-              element={<OTPPassword comeBack={handleGoBack} />}
-            />
-
-            <Route
-              path='/change-password'
-              element={<ChangePassword comeBack={handleGoBack} />}
-            />
-
-            <Route
-              path='/signup-seller'
-              element={<RegisterSeller comeBack={handleGoBack} />}
-            />
-          </Routes>
-        </div>
-        <Footer />
+              <Route
+                path='/signup-seller'
+                element={<RegisterSeller comeBack={handleGoBack} />}
+              />
+              <Route
+                path='/pay-form'
+                element={
+                  <Payment totalSum={totalSum} comeBack={handleGoBack} />
+                }
+              />
+              <Route
+                path='/add-new-bots'
+                element={<AddNewBotsPage comeBack={handleGoBack} />}
+              />
+            </Routes>
+          </div>
+          <Footer />
+        </WindowSizeProvider>
       </CurrentUserContext.Provider>
     </div>
   );

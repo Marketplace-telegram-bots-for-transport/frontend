@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartProduct from '../CartProduct/CartProduct';
 import Payment from '../Payment/Payment';
-import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
-import BackButton from '../BackButton/BackButton';
+/* import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
+ */ import BackButton from '../BackButton/BackButton';
 import styles from './Cart.module.scss';
 import {
   NUMBER_UNIT_OF_GOODS,
@@ -11,6 +12,7 @@ import {
   TEXT_UP_TO_FIVE_GOODS,
   TEXT_MORE_THAN_UP_TO_FIVE_GOODS,
 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function Cart({
   isLoggedIn,
@@ -20,7 +22,11 @@ function Cart({
   decreaseProductCount,
   comeBack,
 }) {
+  const isMobile = useWindowSize();
+  const navigate = useNavigate();
+  const bottomRef = useRef(null);
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
+  const [showFixedButton, setShowFixedButton] = useState(false);
 
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
@@ -59,6 +65,29 @@ function Cart({
     window.scrollTo(0, 0);
   }, []);
 
+  const handleBuyButtonClick = () => {
+    navigate('/pay-form');
+  };
+
+  // автоматическое скрытие зафиксированного блока купить на мобилке
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottomElem = bottomRef.current;
+
+      if (!bottomElem) {
+        return;
+      }
+      if (bottomElem.getBoundingClientRect().top < window.innerHeight) {
+        setShowFixedButton(false);
+      } else {
+        setShowFixedButton(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className={styles.cart}>
       <div className={styles.products}>
@@ -73,6 +102,31 @@ function Cart({
               decreaseProductCount={decreaseProductCount}
             />
           ))}
+          {isMobile ? (
+            <div
+              className={`${styles.products__containerFixedButtonMobile} ${
+                showFixedButton
+                  ? ''
+                  : styles.products__containerFixedButtonMobile_hidden
+              }`}
+            >
+              <div className={styles.products__containerFix}>
+                <p className={styles.products__containerFix_count}>
+                  {countText}
+                </p>
+                <p className={styles.products__containerFix_price}>
+                  {totalSum}₽
+                </p>
+              </div>
+              <button
+                className={styles.products__fixedButtonMobile}
+                onClick={handleBuyButtonClick}
+                aria-label='Открыть форму оплаты'
+              >
+                Купить
+              </button>
+            </div>
+          ) : null}
         </ul>
         <div className={styles.products__total}>
           <h3 className={styles.products__totalTitle}>Итог</h3>
@@ -80,9 +134,26 @@ function Cart({
             <p className={styles.products__count}>Всего: {countText}</p>
             <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
+          {isMobile && (
+            <button
+              className={styles.products__buttonMobile}
+              onClick={handleBuyButtonClick}
+              aria-label='Открыть форму оплаты'
+              ref={bottomRef}
+            >
+              Купить
+            </button>
+          )}
         </div>
       </div>
-      {isLoggedIn ? <Payment totalSum={totalSum} /> : <ModalWithAuth />}
+      {!isMobile && (
+        <Payment
+          totalSum={totalSum}
+          isLoggedIn={isLoggedIn}
+          countText={countText}
+        />
+      )}
+      {/* {!isLoggedIn && !showButton && <ModalWithAuth />} */}
     </section>
   );
 }

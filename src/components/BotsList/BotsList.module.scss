@@ -54,3 +54,17 @@
     $color-blue-text
   );
 }
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .botsContainer {
+    padding: 0 15px;
+    background-color: inherit;
+  }
+  .bots {
+    border-radius: 20px;
+    padding: 15px;
+    @include shadowBackground($background-white, $mobile-box-shadow-category);
+    gap: 19px;
+  }
+}

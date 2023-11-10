@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CurrentUserContext from '../../../context/CurrentUserContext';
+import { useWindowSize } from '../../../context/WindowSizeContext';
 import {
   NUMBER_UNIT_OF_GOODS,
   NUMBER_UP_TO_FIVE_GOODS,
@@ -19,6 +20,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
+  const isMobile = useWindowSize();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -158,8 +160,10 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
           {cartProducts.length > 0 ? (
             <>
               <p className={styles.submenu__hidden_subtitle}>
-                В вашей корзине: {countText}
+                В вашей корзине:
+                <p className={styles.submenu__hidden_countText}>{countText}</p>
               </p>
+
               <InfiniteScroll
                 className={styles.submenu__hidden_scroll}
                 dataLength={cartProducts.length}
@@ -175,44 +179,50 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                     key={bot.id}
                     tabIndex={index + 1}
                   >
-                    <img
-                      className={styles.submenu__mini_img}
-                      src={bot.main_photo}
-                      alt='Изображение бота'
-                    />
-                    <div className={styles.submenu__mini_description}>
-                      {bot.discount > 0 ? (
-                        <h3 className={styles.submenu__mini_title}>
-                          {bot.name}
-                          <div className={styles.submenu__mini_iconDiscount} />
+                    <div className={styles.submenu__mini_left}>
+                      <img
+                        className={styles.submenu__mini_img}
+                        src={bot.main_photo}
+                        alt='Изображение бота'
+                      />
+                      <div className={styles.submenu__mini_description}>
+                        {bot.discount_category || bot.discount_author > 0 ? (
+                          <h3 className={styles.submenu__mini_title}>
+                            {bot.name}
+                            <div
+                              className={styles.submenu__mini_iconDiscount}
+                            />
+                          </h3>
+                        ) : (
+                          <h3 className={styles.submenu__mini_title}>
+                            {bot.name}
+                          </h3>
+                        )}
+                        <p className={styles.submenu__mini_counter}>
+                          {bot.count} шт.
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.submenu__mini_right}>
+                      {bot.discount_category || bot.discount_author > 0 ? (
+                        <h3 className={styles.submenu__mini_priceDiscount}>
+                          {bot.count * bot.final_price}₽
                         </h3>
                       ) : (
-                        <h3 className={styles.submenu__mini_title}>
-                          {bot.name}
+                        <h3 className={styles.submenu__mini_price}>
+                          {bot.count * bot.price}₽
                         </h3>
                       )}
-                      <p className={styles.submenu__mini_counter}>
-                        {bot.count} шт.
-                      </p>
-                    </div>
-                    {bot.discount > 0 ? (
-                      <h3 className={styles.submenu__mini_priceDiscount}>
-                        {bot.final_price}₽
-                      </h3>
-                    ) : (
-                      <h3 className={styles.submenu__mini_price}>
-                        {bot.price}₽
-                      </h3>
-                    )}
 
-                    <button
-                      className={styles.submenu__mini_button}
-                      type='button'
-                      aria-label='Удалить товар'
-                      onClick={() => {
-                        deleteCartProduct(bot.id);
-                      }}
-                    />
+                      <button
+                        className={styles.submenu__mini_button}
+                        type='button'
+                        aria-label='Удалить товар'
+                        onClick={() => {
+                          deleteCartProduct(bot.id);
+                        }}
+                      />
+                    </div>
                   </div>
                 ))}
               </InfiniteScroll>
@@ -270,7 +280,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
           ${styles.submenu__profile_hidden}
           `}
         >
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <div className={styles.submenu__profile_description}>
                 <img
@@ -305,7 +315,8 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 Выйти
               </button>
             </>
-          ) : (
+          )}
+          {!isLoggedIn && !isMobile && (
             <>
               <p
                 className={`
@@ -313,7 +324,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 ${styles.submenu__hidden_subtitle_profile}
                 `}
               >
-                Вы не авторизованы
+                Вы не вошли в систему
               </p>
               <button
                 className={styles.submenu__hidden_button}
@@ -323,8 +334,47 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
               >
                 Войти
               </button>
+              <button
+                className={`${styles.submenu__hidden_button} ${styles.submenu__hidden_button_reg}`}
+                type='button'
+                aria-label='Войти в профиль'
+                onClick={() => handelRedirect('/signup')}
+              >
+                Зарегистрироваться
+              </button>
             </>
           )}
+        </div>
+      )}
+      {isProfileOpen && isMobile && !isLoggedIn && (
+        <div className={styles.submenu__mobileContainer}>
+          <div className={styles.submenu__mobileProfile}>
+            <p className={styles.submenu__mobileProfile_subtitle}>
+              Вы не вошли в систему!
+            </p>
+            <button
+              className={styles.submenu__mobileButton_login}
+              type='button'
+              aria-label='Войти в профиль'
+              onClick={() => handelRedirect('/login')}
+            >
+              Войти
+            </button>
+            <button
+              className={styles.submenu__mobileButton_auth}
+              type='button'
+              aria-label='Зарегистрироваться'
+              onClick={() => handelRedirect('/signup')}
+            >
+              Зарегистрироваться
+            </button>
+            <button
+              className={styles.submenu__mobileButton_close}
+              type='button'
+              aria-label='Закрыть'
+              onClick={() => setIsProfileOpen(false)}
+            />
+          </div>
         </div>
       )}
     </section>

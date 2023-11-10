@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'; // Импортиру
 import styles from './SpecialOffers.module.scss';
 import BackButton from '../BackButton/BackButton';
 import BotCard from '../BotCard/BotCard';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 import infoBanners from '../../utils/infoBanners.json';
 
@@ -15,6 +16,7 @@ function SpecialOffers({
   increaseProductCount,
   decreaseProductCount,
 }) {
+  const isMobile = useWindowSize();
   const navigate = useNavigate();
   // Используем useParams для извлечения параметра маршрута
   const { banners } = infoBanners;
@@ -31,10 +33,13 @@ function SpecialOffers({
   const imgStyle = {
     backgroundImage: `url(${banner.imageUrl})`,
   };
+  const imgStyleMobile = {
+    backgroundImage: `url(${banner.imageUrlMobile})`,
+  };
 
   useEffect(() => {
     const specialBotsList = bots.filter((bot) => {
-      return bot.discount !== undefined && bot.discount > 0;
+      return bot.discount_category !== undefined && bot.discount_category > 0;
     });
     setSpecialBot(specialBotsList);
   }, [bots]);
@@ -47,11 +52,16 @@ function SpecialOffers({
     <section className={styles.special} style={backgroundStyle}>
       <BackButton comeBack={comeBack} title={banner.title} />
       <h1 className={styles.special__title}>{banner.title}</h1>
-      <div className={styles.special__banner} style={imgStyle} />
+      {isMobile ? (
+        <div className={styles.special__banner} style={imgStyleMobile} />
+      ) : (
+        <div className={styles.special__banner} style={imgStyle} />
+      )}
       {banner.description ? (
         <div className={styles.emptyList}>
           <h3 className={styles.emptyList_title}>
-            Осенняя распродажа пока что пустая!
+            Данная акция еще не началась. Возвращайтесь сюда позже, чтобы купить
+            ботов по выгодной цене!
           </h3>
           <button
             className={styles.emptyList_button}
@@ -59,7 +69,7 @@ function SpecialOffers({
             aria-label='Переход на страницу каталога'
             onClick={() => navigate('/')}
           >
-            Перейти к каталогу
+            Вернуться в каталог
           </button>
         </div>
       ) : (
@@ -72,6 +82,9 @@ function SpecialOffers({
                   name={bot.name}
                   author={bot.author}
                   category={bot.category}
+                  discountAuthor={bot.discount_author}
+                  discountCategory={bot.discount_category}
+                  finalPrice={bot.final_price}
                   price={bot.price}
                   id={bot.id}
                   onBuyClick={() => handleBuyClick(bot)}

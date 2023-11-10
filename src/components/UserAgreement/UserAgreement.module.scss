@@ -3,6 +3,9 @@
 .agreement {
   max-width: 1320px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &__title {
     margin: 0 auto 40px;
@@ -124,5 +127,114 @@
 
   &__input:disabled + &__text::before {
     background: #e8f0fa;
+  }
+
+  &__button {
+    width: 212px;
+    height: 50px;
+    margin: 40px 0 0;
+    border: none;
+    border-radius: 15px;
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition: linear 0.3s;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+
+    &:disabled {
+      background-color: $background-color-button-disable;
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .agreement {
+    &__title {
+      margin: 30px 0;
+      max-width: 100%;
+      @include text(
+        $mobile-font-18,
+        $weight-500,
+        $mobile-lh-18,
+        $color-blue-dark-title
+      );
+    }
+    &__content {
+      row-gap: 0;
+    }
+    &__info {
+      margin: 0 0 20px;
+      padding: 0 20px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__list {
+      margin: 0 0 30px;
+    }
+    &__item {
+      margin: 0;
+      padding: 0 20px;
+    }
+    &__itemTitle {
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__itemDesc {
+      margin: 10px 0;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+
+    &__text {
+      @include text($mobile-font-16, $weight-300, $mobile-lh-small-16, #000);
+      &::before {
+        align-self: center;
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+    }
+    &__button {
+      width: 100%;
+      height: 40px;
+      margin: 30px 0 25px;
+      border: none;
+      border-radius: 10px;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
+    }
   }
 }
