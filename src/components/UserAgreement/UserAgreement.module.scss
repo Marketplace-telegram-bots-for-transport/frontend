@@ -3,6 +3,9 @@
 .agreement {
   max-width: 1320px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &__title {
     margin: 0 auto 40px;
@@ -124,5 +127,34 @@
 
   &__input:disabled + &__text::before {
     background: #e8f0fa;
+  }
+
+  &__button {
+    width: 212px;
+    height: 50px;
+    margin: 40px 0 0;
+    border: none;
+    border-radius: 15px;
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition: linear 0.3s;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+
+    &:disabled {
+      background-color: $background-color-button-disable;
+    }
   }
 }

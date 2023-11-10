@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import styles from './UserAgreement.module.scss';
 import {
   userAgreementTitle,
   userAgreementText,
 } from '../../utils/userAgreementText';
 
-function UserAgreement() {
+function UserAgreement({ changeProgressBar }) {
+  const [checkbox, setCheckbox] = useState(false);
+
+  // Проверка состояния чекбокса
+  const handleChange = (e) => {
+    setCheckbox(e.target.checked);
+  };
   return (
     <div className={styles.agreement}>
       <h3 className={styles.agreement__title}>{userAgreementTitle.title}</h3>
@@ -35,6 +42,7 @@ function UserAgreement() {
             className={styles.agreement__input}
             id='agreementCheckbox'
             type='checkbox'
+            onChange={handleChange}
           />
           <span className={styles.agreement__text}>
             Продолжая регистрацию аккаунта продавца и/или использование Сервиса,
@@ -43,6 +51,14 @@ function UserAgreement() {
           </span>
         </label>
       </div>
+      <button
+        type='button'
+        className={styles.agreement__button}
+        onClick={changeProgressBar}
+        disabled={!checkbox}
+      >
+        Продолжить
+      </button>
     </div>
   );
 }

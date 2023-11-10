@@ -44,6 +44,9 @@ function AddNewBotsSection() {
           <p className={styles.addition__info}>
             Данный этап можно пропустить. Для этого нажмите кнопку “Продолжить”,
             оставив поля незаполненными.
+            <span className={styles.addition__required}>
+              * - обязательные поля
+            </span>
           </p>
           <button
             className={styles.addition__addButton}

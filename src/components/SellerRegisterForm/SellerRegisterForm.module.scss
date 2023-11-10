@@ -20,13 +20,21 @@
 }
 
 .form {
-  max-width: 1320px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(239px, 510px)) minmax(100px, 239px);
-  column-gap: 30px;
-  row-gap: 20px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 50px;
+
+  &__container {
+    max-width: 1320px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(239px, 510px)) minmax(100px, 239px);
+    column-gap: 30px;
+    row-gap: 20px;
+    box-sizing: border-box;
+    border: none;
+  }
 
   &__label {
     width: 100%;
@@ -71,6 +79,35 @@
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &__button {
+    width: 212px;
+    height: 50px;
+    margin: 50px auto 0;
+    border: none;
+    border-radius: 15px;
+    background-color: $background-color-button-default;
+    cursor: pointer;
+    transition: linear 0.3s;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-button-text
+    );
+
+    &:hover {
+      background-color: $background-color-button-hover;
+    }
+
+    &:active {
+      background-color: $background-color-button-pressed;
+    }
+
+    &:disabled {
+      background-color: $background-color-button-disable;
     }
   }
 }
