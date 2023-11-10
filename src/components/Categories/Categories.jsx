@@ -44,7 +44,11 @@ const Categories = ({ categories }) => {
           >
             {categories.map((category) => (
               <div key={category.id}>
-                <Category name={category.name} imageUrl={category.imageUrl} />
+                <Category
+                  name={category.name}
+                  imageUrl={category.imageUrl}
+                  imageUrlHover={category.imageUrlHover}
+                />
               </div>
             ))}
           </Carousel>

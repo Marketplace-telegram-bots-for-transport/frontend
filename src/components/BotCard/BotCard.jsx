@@ -42,7 +42,7 @@ const BotCard = ({
       <div className={styles.bot__categories}>
         <p className={styles.bot__category}>
           {categories && categories.length > 0
-            ? categories[0].name
+            ? categories[0]
             : 'Нет категории'}
         </p>
         {categories.length > 1 && (
