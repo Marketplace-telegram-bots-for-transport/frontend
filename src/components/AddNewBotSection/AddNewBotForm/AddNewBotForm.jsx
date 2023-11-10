@@ -1,29 +1,60 @@
+// import { useState, useEffect } from 'react';
 import styles from './AddNewBotForm.module.scss';
-// import defaultImage from '../../../images/default-image-input.png';
+import { useWindowSize } from '../../../context/WindowSizeContext';
 
-function AddNewBotForm() {
+// import CategoriesCheckbox from './CategoriesCheckbox/CategoriesCheckbox';
+// import categories from '../../../utils/categories.json';
+
+// const imageMimeType = /image\/(png|jpg|jpeg)/i;
+
+function AddNewBotForm({ bot, deleteBotForm, changeProgressBar }) {
+  const isMobile = useWindowSize();
   return (
     <div className={styles.form}>
-      <label htmlFor='botImage' className={styles.form__label_type_image}>
-        <input
-          name='botImage'
-          id='botImage'
-          type='file'
-          accept='image/jpeg,image/png'
-          className={styles.form__input_type_image}
-        />
-      </label>
+      {isMobile ? (
+        <>
+          <span className={styles.form__required}>* - обязательные поля</span>
+          <div className={styles.form__imgContainer}>
+            <label htmlFor='botImage' className={styles.form__label_type_image}>
+              <input
+                name='botImage'
+                id='botImage'
+                type='file'
+                accept='image/jpeg,image/png'
+                className={styles.form__input_type_image}
+              />
+            </label>
+            <p className={styles.form__text}>
+              Добавить изображение
+              <span className={styles.form__required}>*</span>
+            </p>
+          </div>
+        </>
+      ) : (
+        <label htmlFor='botImage' className={styles.form__label_type_image}>
+          <input
+            name='botImage'
+            id='botImage'
+            type='file'
+            accept='image/jpeg,image/png'
+            className={styles.form__input_type_image}
+          />
+        </label>
+      )}
       <fieldset className={styles.form__inputGroup}>
         <label
           htmlFor='productName'
           className={`${styles.form__label} ${styles.form__label_type_name}`}
         >
-          <span className={styles.form__inputTitle}>Название товара</span>
+          <span className={styles.form__inputTitle}>
+            Название товара
+            {isMobile && <span className={styles.form__required}>*</span>}
+          </span>
           <input
             name='productName'
             id='productyName'
             type='text'
-            placeholder=''
+            placeholder='Укажите название вашего товара'
             className={styles.form__input}
             required
           />
@@ -32,7 +63,10 @@ function AddNewBotForm() {
           htmlFor='productCategory'
           className={`${styles.form__label} ${styles.form__label_type_category}`}
         >
-          <span className={styles.form__inputTitle}>Категории товара</span>
+          <span className={styles.form__inputTitle}>
+            Категории товара
+            {isMobile && <span className={styles.form__required}>*</span>}
+          </span>
           <input
             name='productCategory'
             id='productCategory'
@@ -43,35 +77,44 @@ function AddNewBotForm() {
           />
         </label>
         <label htmlFor='productPrice' className={styles.form__label}>
-          <span className={styles.form__inputTitle}>Цена товара</span>
+          <span className={styles.form__inputTitle}>
+            Цена товара
+            {isMobile && <span className={styles.form__required}>*</span>}
+          </span>
           <input
             name='productPrice'
             id='productPrice'
             type='text'
-            placeholder=''
+            placeholder='₽'
             className={styles.form__input}
             required
           />
         </label>
         <label htmlFor='productCount' className={styles.form__label}>
-          <span className={styles.form__inputTitle}>Количество товара</span>
+          <span className={styles.form__inputTitle}>
+            Количество товара
+            {isMobile && <span className={styles.form__required}>*</span>}
+          </span>
           <input
             name='productCount'
             id='productCount'
             type='text'
-            placeholder=''
+            placeholder='шт.'
             className={styles.form__input}
             required
           />
         </label>
       </fieldset>
       <label htmlFor='productDesc' className={styles.form__label}>
-        <span className={styles.form__inputTitle}>Описание товара</span>
-        <input
+        <span className={styles.form__inputTitle}>
+          Описание товара
+          {isMobile && <span className={styles.form__required}>*</span>}
+        </span>
+        <textarea
           name='productDesc'
           id='productDesc'
           type='text'
-          placeholder=''
+          placeholder='Введите описание товара, опишите принцип действия бота и т.п.'
           className={`${styles.form__input} ${styles.form__input_type_desc}`}
           required
         />
@@ -80,7 +123,10 @@ function AddNewBotForm() {
         htmlFor='productExamples'
         className={`${styles.form__label} ${styles.form__label_type_exaples}`}
       >
-        <span className={styles.form__inputTitle}>Примеры экранов</span>
+        <span className={styles.form__inputTitle}>
+          Примеры экранов
+          {isMobile && <span className={styles.form__required}>*</span>}
+        </span>
         <div
           className={`${styles.form__input} ${styles.form__input_type_examplesContainer}`}
         >
@@ -98,7 +144,23 @@ function AddNewBotForm() {
           />
         </div>
       </label>
-      <button type='button' className={styles.form__deleteBtn}>
+      {isMobile && (
+        <button
+          className={styles.form__continueButton}
+          type='button'
+          aria-label='Открыть следующую страницу'
+          onClick={changeProgressBar}
+        >
+          Продолжить
+        </button>
+      )}
+      <button
+        type='button'
+        className={styles.form__deleteBtn}
+        onClick={() => {
+          deleteBotForm(bot.id);
+        }}
+      >
         Удалить товар
       </button>
     </div>

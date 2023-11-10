@@ -1,7 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './SuccessBlock.module.scss';
 import accepted from '../../images/accepted-min.svg';
 
-function SuccessBlock({ title, textButton }) {
+function SuccessBlock({ title, textButton, path }) {
+  const navigate = useNavigate();
+
+  const handelRedirect = () => {
+    navigate(path);
+  };
+
   return (
     <div className={styles.success}>
       <div className={styles.success__container}>
@@ -12,6 +19,7 @@ function SuccessBlock({ title, textButton }) {
         className={styles.success__button}
         type='button'
         aria-label={`Кнопка ${textButton}`}
+        onClick={() => handelRedirect(path)}
       >
         {textButton}
       </button>

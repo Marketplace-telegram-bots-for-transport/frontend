@@ -3,9 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
-import accepted from '../../images/accepted-min.svg';
 import { PATTERN_EMAIL } from '../../utils/constants';
 import { useWindowSize } from '../../context/WindowSizeContext';
+import SuccessBlock from '../SuccessBlock/SuccessBlock';
 
 function Register({ loggedIn, onRegister, comeBack }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
@@ -71,26 +71,11 @@ function Register({ loggedIn, onRegister, comeBack }) {
   return (
     <main className={styles.register}>
       {isSuccsess ? (
-        <div className={styles.register__success}>
-          <div className={styles.register__successContainer}>
-            <img
-              className={styles.register__successPicture}
-              src={accepted}
-              alt='Глалочка'
-            />
-            <h3 className={styles.register__successTitle}>
-              Регистрация прошла успешно!
-            </h3>
-          </div>
-          <button
-            className={styles.register__successButton}
-            type='button'
-            aria-label='Кнопка вернуться к авторизации'
-            onClick={() => navigate('/login')}
-          >
-            Войти
-          </button>
-        </div>
+        <SuccessBlock
+          title='Регистрация прошла успешно!'
+          textButton='Назад к авторизации'
+          path='/login'
+        />
       ) : (
         <div className={styles.register__registerContainer}>
           <div className={styles.register__titleContainer}>
@@ -114,8 +99,8 @@ function Register({ loggedIn, onRegister, comeBack }) {
               id='username'
               name='username'
               required
-              pattern='^[a-zA-Zа-яА-Я\s\-]+$'
-              maxLength='16'
+              pattern='^[a-zA-Zа-яА-Я\s]+$'
+              maxLength='30'
               minLength='2'
               value={values.username || ''}
               onChange={handleChange}
@@ -254,7 +239,10 @@ function Register({ loggedIn, onRegister, comeBack }) {
                   : 'Пароли не совпадают'
               }`}
             </span>
-            <CheckBox onChange={handleChange} />
+            <CheckBox
+              onChange={handleChange}
+              title='Согласен на обработку персональных данных'
+            />
             <button
               className={styles.register__button}
               disabled={!isValid || isDisabled}

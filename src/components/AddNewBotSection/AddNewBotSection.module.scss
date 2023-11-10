@@ -28,9 +28,21 @@
   &__info {
     width: 100%;
     grid-column-start: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
     margin: 0;
     padding: 0;
     @include text($font-18, $weight-300, $line-height-18, $color-grey-text);
+  }
+
+  &__required {
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
   }
 
   &__addButton {
@@ -38,25 +50,29 @@
     grid-row-start: 1;
     width: 239px;
     height: 50px;
+    padding: 0 0 0 23px;
     border-radius: 15px;
-    background-color: $background-button-input-category;
+    background-color: $background-color-button-default;
+    background-image: url('../../images/add-bracket-icon.png');
+    background-repeat: no-repeat;
+    background-position: 24px;
+    background-size: 24px 24px;
     border: none;
     cursor: pointer;
     @include text(
       $font-medium-24,
       $weight-400,
       $line-height-medium-24,
-      $color-blue-text
+      $background-color-button2-default
     );
     transition: 0.3s;
 
     &:hover {
-      background-color: $background-color-button2-hover;
+      background-color: $background-color-button-hover;
     }
 
     &:active {
-      background-color: $background-color-button2-pressed;
-      color: $color-white-text;
+      background-color: $background-color-button-pressed;
     }
 
     &:disabled {
@@ -69,6 +85,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  row-gap: 40px;
 
   &__submit {
     width: 239px;
@@ -126,14 +143,19 @@
         $color-blue-dark-title
       );
     }
-    &__addButton {
-      margin: 20px 0;
+    &__required {
+      display: none;
+    }
+    &__continue {
+      padding-bottom: 30px;
+      border-bottom: 1px solid #d3e2f7;
+    }
+    &__continueButton {
+      margin: 20px 0 0;
+      border: none;
       width: 100%;
       height: 40px;
       border-radius: 10px;
-      background: url(../../images/images-for-mobile/buttonAddSeller/buttonAddSeller.svg)
-        no-repeat;
-      background-position: 20%;
       background-color: $background-color-button-default;
       @include text(
         $mobile-font-14,
@@ -148,11 +170,14 @@
         background-color: $background-color-button-pressed;
       }
     }
-    &__continueButton {
-      border: none;
+    &__addButton {
+      margin: 30px 0 25px;
       width: 100%;
       height: 40px;
       border-radius: 10px;
+      background: url(../../images/images-for-mobile/buttonAddSeller/buttonAddSeller.svg)
+        no-repeat;
+      background-position: 20%;
       background-color: $background-button-input-category;
       @include text(
         $mobile-font-14,
@@ -166,6 +191,11 @@
       &:active {
         background-color: $background-color-button2-pressed;
         color: $color-white-text;
+      }
+
+      &_hidden {
+        visibility: hidden;
+        opacity: 0;
       }
     }
   }

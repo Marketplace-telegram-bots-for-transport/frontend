@@ -39,7 +39,7 @@ function SpecialOffers({
 
   useEffect(() => {
     const specialBotsList = bots.filter((bot) => {
-      return bot.discount !== undefined && bot.discount > 0;
+      return bot.discount_category !== undefined && bot.discount_category > 0;
     });
     setSpecialBot(specialBotsList);
   }, [bots]);
@@ -82,7 +82,8 @@ function SpecialOffers({
                   name={bot.name}
                   author={bot.author}
                   category={bot.category}
-                  discount={bot.discount}
+                  discountAuthor={bot.discount_author}
+                  discountCategory={bot.discount_category}
                   finalPrice={bot.final_price}
                   price={bot.price}
                   id={bot.id}

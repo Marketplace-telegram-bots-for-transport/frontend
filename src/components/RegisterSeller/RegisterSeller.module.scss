@@ -55,8 +55,8 @@
     margin: 60px 0 0;
     background-color: $background-white;
     box-shadow: $box-shadow-category;
-    border-radius: 20px 20px 0px 0px;
-    min-height: 50vh;
+    border-radius: 20px /*  20px 0 0 */;
+    /* min-height: 50vh; */
     padding: 80px 135px;
     box-sizing: border-box;
   }
@@ -102,25 +102,21 @@
   .register {
     padding: 118px 15px 50px;
     background: none;
-    &__content {
-      margin: 0;
-      border-radius: 20px;
-      padding: 25px 20px;
-    }
     &__head {
+      padding: 25px 20px 0;
       width: 100%;
       display: flex;
       flex-direction: column;
+      background-color: $background-white;
+      box-shadow: $box-shadow-category;
+      border-radius: 20px 20px 0 0;
     }
-    /* &__title {
-      margin: 0;
-      @include text(
-        $mobile-font-14,
-        $weight-600,
-        $mobile-lh-small-14,
-        $color-blue-dark-title
-      );
-    } */
+    &__headContainer {
+      margin-top: 30px;
+    }
+    &__title {
+      display: none;
+    }
     &__text {
       margin: 0;
       @include text(
@@ -129,6 +125,12 @@
         $mobile-lh-small-14,
         $color-blue-dark-title
       );
+    }
+    &__content {
+      margin: 0;
+      border-radius: 0 0 20px 20px;
+      padding: 0 20px;
+      @include shadowBackground($background-white, $mobile-box-shadow-category);
     }
 
     &__button {
@@ -158,6 +160,11 @@
     &__item {
       width: 15px;
       height: 15px;
+      border: none;
+      background: rgba(211, 226, 247, 1);
+      &_active {
+        background-color: #5a8cd2;
+      }
     }
   }
 }

@@ -8,8 +8,9 @@ const BotCard = ({
   mainPhoto,
   name,
   author,
-  category,
-  discount,
+  categories,
+  discountAuthor,
+  discountCategory,
   finalPrice,
   price,
   onBuyClick,
@@ -40,13 +41,22 @@ const BotCard = ({
         <p className={styles.bot__author}>{wrapAuthorName(author)}</p>
       </div>
       <div className={styles.bot__categories}>
-        <p className={styles.bot__category}>{category}</p>
+        <p className={styles.bot__category}>
+          {categories && categories.length > 0
+            ? categories[0]
+            : 'Нет категории'}
+        </p>
+        {categories.length > 1 && (
+          <p className={styles.bot__category}>+{categories.length - 1}</p>
+        )}
       </div>
-      {discount > 0 ? (
+      {discountAuthor || discountCategory > 0 ? (
         <div className={styles.bot__discountContainer}>
           <p className={styles.bot__finalPrice}>{finalPrice}₽</p>
           <p className={styles.bot__oldPrice}>{price}₽</p>
-          <span className={styles.bot__discountSize}>-{discount}%</span>
+          <span className={styles.bot__discountSize}>
+            -{discountAuthor || discountCategory}%
+          </span>
         </div>
       ) : (
         <p className={styles.bot__price}>{price}₽</p>

@@ -74,6 +74,13 @@
       background-image: url('../../images/delete-btn-hover.svg');
     }
   }
+
+  &__priceOld {
+    @include text($font-small-14, $weight-300, 21px, #183357);
+    text-decoration: line-through;
+    text-decoration-color: $color-red-errors;
+  }
+
   &__priceDiscount {
     /* margin-right: 10px; */
     @include text(

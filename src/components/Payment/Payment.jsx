@@ -5,6 +5,7 @@ import styles from './Payment.module.scss';
 import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 import BackButton from '../BackButton/BackButton';
 import SuccessBlock from '../SuccessBlock/SuccessBlock';
+import Register from '../Register/Register';
 
 function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
   const isMobile = useWindowSize();
@@ -58,10 +59,6 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
   // Отправка формы
   const handleSubmit = (e) => {
     e.preventDefault();
-    // для мобилки
-    if (isValid && isMobile) {
-      setPaidStatusMobile(true);
-    }
 
     // Проверка валидности формы для отправки на сервер
     if (isValid) {
@@ -75,10 +72,16 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
         code: '',
         promocode: '',
       });
-      // спустя три секунды убираем попап об успешной покупке
-      setTimeout(() => {
-        setPaidStatus(false);
-      }, 3000);
+      // спустя три секунды убираем попап об успешной покупке, если пользователь авторизован
+      if (isLoggedIn) {
+        setTimeout(() => {
+          setPaidStatus(false);
+        }, 3000);
+      }
+    }
+    // для мобилки
+    if (isValid && !isLoggedIn) {
+      setPaidStatusMobile(true);
     }
   };
 
@@ -101,17 +104,17 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
 
   return (
     <div className={styles.payment}>
-      <PopupWithInfo isPaid={isPaid} />
       {isPaid && !isLoggedIn && (
-        <SuccessBlock title='Оплата прошла успешно!' textButton='Назад' />
-        // @TODO логику попапа с регистарцией
+        <div className={styles.payment__popap}>
+          <div className={styles.payment__popap_container}>
+            <div className={styles.payment__popap_register}>
+              <Register />
+            </div>
+            <SuccessBlock title='Оплата прошла успешно!' textButton='Назад' />
+          </div>
+        </div>
       )}
-      {isPaid && isLoggedIn && (
-        <SuccessBlock
-          title='Оплата прошла успешно!'
-          textButton='На главную страницу'
-        />
-      )}
+      {isPaid && isLoggedIn && <PopupWithInfo isPaid={isPaid} />}
       <div className={styles.payment__content}>
         {isMobile ? (
           <BackButton comeBack={comeBack} />
@@ -186,7 +189,7 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
                 </span>
                 <div className={styles.payment__cardDate}>
                   <input
-                    className={`${styles.payment__input} ${styles.payment__inputDate}`}
+                    className={`${styles.payment__input} ${styles.payment__inputDate_mm}`}
                     name='month'
                     value={formPayment.month || ''}
                     placeholder='_ _'
@@ -202,7 +205,7 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
                   />
                   <span className={styles.payment__cardDateSlash}>/</span>
                   <input
-                    className={`${styles.payment__input} ${styles.payment__inputDate}`}
+                    className={`${styles.payment__input} ${styles.payment__inputDate_gg}`}
                     name='year'
                     value={formPayment.year || ''}
                     placeholder='_ _ _ _'

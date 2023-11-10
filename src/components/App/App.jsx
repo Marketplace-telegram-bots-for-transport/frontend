@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import styles from './App.module.scss';
 import WindowSizeProvider from '../../context/WindowSizeContext';
 import CurrentUserContext from '../../context/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -15,12 +16,20 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
-import Payment from '../Payment/Payment';
-import ProfileNavigation from '../ProfileNavigation/ProfileNavigation';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
+import Payment from '../Payment/Payment';
+import Profile from '../Profile/Profile';
+import Purchases from '../Purchases/Purchases';
+import Favourites from '../Favourites/Favourites';
+import Faq from '../Faq/Faq';
+import Seller from '../Seller/Seller';
 import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
 
-import { fetchInitialBots, fetchSearchBots } from '../../utils/api/getBots';
+import {
+  fetchInitialBots,
+  fetchSearchBots,
+  filterBotsByCategory,
+} from '../../utils/api/getBots';
 import * as authorizeApi from '../../utils/api/authorizeApi';
 import * as userApi from '../../utils/api/userApi';
 import { CART_KEY } from '../../utils/constants';
@@ -37,6 +46,7 @@ const App = () => {
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
+  const [mainPageActiveCategory, setMainPageActiveCategory] = useState('Все');
 
   const contextValue = useMemo(() => {
     return { email, setEmail, currentUser };
@@ -87,6 +97,14 @@ const App = () => {
   const handleSearch = async (query) => {
     const botsData = await fetchSearchBots(query);
 
+    setApiBots(botsData);
+  };
+
+  // Функция фильтрации по имени категории на главной
+  const handleFilterByCategory = async (category) => {
+    const botsData = await filterBotsByCategory(category);
+
+    setMainPageActiveCategory(category);
     setApiBots(botsData);
   };
 
@@ -228,6 +246,8 @@ const App = () => {
                   apiBots !== null ? (
                     <Main
                       apiBots={apiBots}
+                      mainPageActiveCategory={mainPageActiveCategory}
+                      onFilter={handleFilterByCategory}
                       cartProducts={cartProducts}
                       isProductInCart={isProductInCart}
                       addProductToCart={addProductToCart}
@@ -296,7 +316,60 @@ const App = () => {
                 }
               />
 
-              <Route path='/profile' element={<ProfileNavigation />} />
+              <Route
+                path='/profile'
+                element={
+                  <ProtectedRoute
+                    element={Profile}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route
+                path='/purchases'
+                element={
+                  <ProtectedRoute
+                    element={Purchases}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route
+                path='/favourites'
+                element={
+                  <ProtectedRoute
+                    element={Favourites}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route
+                path='/faq'
+                element={
+                  <ProtectedRoute
+                    element={Faq}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route
+                path='/seller'
+                element={
+                  <ProtectedRoute
+                    element={Seller}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
 
               <Route
                 path='/reset-password'

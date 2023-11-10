@@ -1,33 +1,37 @@
 @import './../../vendor/_varibles.scss';
 
 .success {
+  max-width: 445px;
+  max-height: 350px;
   border-radius: 20px;
-  padding: 25px 20px;
+  padding: 40px;
+  margin: 335px auto 0;
   @include shadowBackground($background-white, $box-shadow-main);
 
-  &__successContainer {
+  &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 40px;
   }
-  &__successPicture {
+  &__img {
     width: 130px;
     height: 130px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
-  &__successTitle {
+  &__title {
     text-wrap: nowrap;
     @include text(
-      $mobile-font-18,
-      $weight-500,
-      $mobile-lh-18,
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
       $color-blue-dark-title
     );
   }
-  &__successButton {
+  &__button {
     width: 100%;
     border: none;
+    height: 50px;
     border-radius: 10px;
     padding: 11px 15px;
     background-color: $background-color-button-default;
@@ -36,9 +40,9 @@
       color 0.3s ease;
     cursor: pointer;
     @include text(
-      $mobile-font-14,
-      $weight-500,
-      $line-height-small-14,
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
       $color-button-text
     );
     &:hover {
@@ -46,6 +50,63 @@
     }
     &:active {
       background-color: $background-color-button-pressed;
+    }
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .success {
+    border-radius: 20px;
+    padding: 25px 20px;
+    @include shadowBackground($background-white, $box-shadow-main);
+
+    &__successContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    &__successPicture {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 40px;
+    }
+    &__successTitle {
+      text-wrap: nowrap;
+      @include text(
+        $mobile-font-18,
+        $weight-500,
+        $mobile-lh-18,
+        $color-blue-dark-title
+      );
+    }
+    &__successButton {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 15px;
+      background-color: $background-color-button-default;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+      cursor: pointer;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-button-text
+      );
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+      &:active {
+        background-color: $background-color-button-pressed;
+      }
     }
   }
 }

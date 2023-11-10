@@ -24,7 +24,7 @@ function CartProduct({
             src={product.main_photo}
             alt='изображение бота'
           />
-          {product.discount > 0 ? (
+          {product.discount_category || product.discount_author > 0 ? (
             <p className={styles.product__title}>
               {product.name}
               <div className={styles.product__iconDiscountTitle} />
@@ -42,8 +42,9 @@ function CartProduct({
         )}
       </div>
       <div className={styles.product__item}>
-        {product.discount > 0 ? (
+        {product.discount_category || product.discount_author > 0 ? (
           <>
+            <h3 className={styles.product__priceOld}>{product.price}₽</h3>
             <h3 className={styles.product__priceDiscount}>
               {product.final_price * product.count}₽
             </h3>

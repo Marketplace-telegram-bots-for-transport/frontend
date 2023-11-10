@@ -69,7 +69,7 @@ function Cart({
     navigate('/pay-form');
   };
 
-  // автоматическое скрытие зафиксированного блока купить
+  // автоматическое скрытие зафиксированного блока купить на мобилке
   useEffect(() => {
     const handleScroll = () => {
       const bottomElem = bottomRef.current;
@@ -134,15 +134,16 @@ function Cart({
             <p className={styles.products__count}>Всего: {countText}</p>
             <p className={styles.products__sum}>{totalSum}₽</p>
           </div>
-
-          <button
-            className={styles.products__buttonMobile}
-            onClick={handleBuyButtonClick}
-            aria-label='Открыть форму оплаты'
-            ref={bottomRef}
-          >
-            Купить
-          </button>
+          {isMobile && (
+            <button
+              className={styles.products__buttonMobile}
+              onClick={handleBuyButtonClick}
+              aria-label='Открыть форму оплаты'
+              ref={bottomRef}
+            >
+              Купить
+            </button>
+          )}
         </div>
       </div>
       {!isMobile && (
