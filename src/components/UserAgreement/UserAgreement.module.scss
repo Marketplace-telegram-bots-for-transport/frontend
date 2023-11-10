@@ -137,7 +137,7 @@
     border-radius: 15px;
     background-color: $background-color-button-default;
     cursor: pointer;
-    transition: linear .3s;
+    transition: linear 0.3s;
     @include text(
       $font-medium-24,
       $weight-400,

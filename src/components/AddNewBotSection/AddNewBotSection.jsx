@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom';
 import styles from './AddNewBotSection.module.scss';
 import AddNewBotForm from './AddNewBotForm/AddNewBotForm';
 
-function AddNewBotsSection() {
+function AddNewBotsSection({ changeProgressBar }) {
   const location = useLocation();
   const [botsFormInfo, setBotsFormInfo] = useState([
     {
       id: 0,
       logo: '',
       name: '',
-      categories: '',
+      categories: [],
       price: '',
       count: '',
       description: '',
@@ -26,7 +26,7 @@ function AddNewBotsSection() {
         id: botsFormInfo.length,
         logo: '',
         name: '',
-        categories: '',
+        categories: [],
         price: '',
         count: '',
         description: '',
@@ -62,10 +62,13 @@ function AddNewBotsSection() {
     <section className={styles.addition}>
       <div className={styles.addition__head}>
         <h2 className={styles.addition__title}>Добавление товара</h2>
-        {location.pathname === 'register-seller' && (
+        {location.pathname === '/signup-seller' && (
           <p className={styles.addition__info}>
             Данный этап можно пропустить. Для этого нажмите кнопку “Продолжить”,
             оставив поля незаполненными.
+            <span className={styles.addition__required}>
+              * - обязательные поля
+            </span>
           </p>
         )}
         <button
@@ -73,7 +76,7 @@ function AddNewBotsSection() {
           className={styles.addition__addButton}
           onClick={addBotForm}
         >
-          + Новый товар
+          Новый товар
         </button>
       </div>
       <form className={styles.form}>
@@ -85,11 +88,13 @@ function AddNewBotsSection() {
             fillBotForm={fillBotForm}
           />
         ))}
-        {location.pathname === '/add-new-bots' && (
-          <button type='submit' className={styles.form__submit}>
-            Продолжить
-          </button>
-        )}
+        <button
+          type='button'
+          className={styles.form__submit}
+          onClick={changeProgressBar}
+        >
+          Продолжить
+        </button>
       </form>
     </section>
   );

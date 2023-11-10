@@ -3,6 +3,7 @@ import BackButton from '../BackButton/BackButton';
 import RegisterConfirmation from '../RegisterConfirmation/RegisterConfirmation';
 import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
 import UserAgreement from '../UserAgreement/UserAgreement';
+import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import styles from './RegisterSeller.module.scss';
 
 function RegisterSeller({ comeBack }) {
@@ -10,7 +11,7 @@ function RegisterSeller({ comeBack }) {
 
   // Увеличение шага прогресса
   const changeProgressBar = () => {
-    if (countProgress < 4) {
+    if (countProgress < 5) {
       setCountProgress(countProgress + 1);
     }
   };
@@ -26,7 +27,8 @@ function RegisterSeller({ comeBack }) {
               `Шаг ${countProgress}. Пользовательское соглашение`}
             {countProgress === 2 &&
               `Шаг ${countProgress}. Информация о продавце`}
-            {countProgress === 3 &&
+            {countProgress === 3 && `Шаг ${countProgress}. Добавление товара`}
+            {countProgress === 4 &&
               `Шаг ${countProgress}. Завершение регистрации`}
           </p>
           <div className={styles.progress}>
@@ -45,6 +47,11 @@ function RegisterSeller({ comeBack }) {
                 countProgress === 3 && styles.progress__item_active
               }`}
             />
+            <div
+              className={`${styles.progress__item} ${
+                countProgress === 4 && styles.progress__item_active
+              }`}
+            />
           </div>
         </div>
       </div>
@@ -55,7 +62,10 @@ function RegisterSeller({ comeBack }) {
         {countProgress === 2 && (
           <SellerRegisterForm changeProgressBar={changeProgressBar} />
         )}
-        {countProgress === 3 && <RegisterConfirmation />}
+        {countProgress === 3 && (
+          <AddNewBotsSection changeProgressBar={changeProgressBar} />
+        )}
+        {countProgress === 4 && <RegisterConfirmation />}
       </div>
     </section>
   );

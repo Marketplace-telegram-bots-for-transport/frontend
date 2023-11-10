@@ -53,9 +53,9 @@
     display: flex;
     align-items: center;
     @include text(
-      $font-medium-24,
-      $weight-400,
-      $line-height-medium-24,
+      $font-small-14,
+      $weight-500,
+      $line-height-small-14,
       $color-blue-text
     );
 
@@ -70,6 +70,10 @@
       padding-right: 5px;
       // vertical-align: middle;
     }
+  }
+
+  &__required {
+    @include text($font-small-14, $weight-300, $line-height-small-14, $color-red-errors);
   }
 
   &__label {
@@ -103,6 +107,7 @@
     &_type_category {
       grid-column-start: 1;
       grid-column-end: 3;
+      position: relative;
     }
 
     &_type_exaples {
@@ -154,6 +159,9 @@
 
     &_type_desc {
       height: 100%;
+      width: 100%;
+      padding: 10px 20px;
+      box-sizing: border-box;
     }
 
     &_type_examplesContainer {
@@ -205,7 +213,9 @@
   &__deleteBtn {
     border: none;
     background-color: $background-white;
-    text-align: start;
+    text-align: end;
+    grid-column-start: 3;
+    grid-column-end: 4;
     @include text(
       $font-medium-24,
       $weight-400,
@@ -229,5 +239,132 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+}
+
+.categories {
+  position: relative;
+  padding: 0 20px;
+  box-sizing: border-box;
+  width: 100%;
+  border: $border-main;
+  border-radius: 10px;
+  background-color: $background-input;
+  z-index: 1;
+  @include text(
+    $font-small-14,
+    $weight-300,
+    $line-height-small-14,
+    $color-blue-input-text
+  );
+
+  &_type_notChosen {
+    height: 50px;
+    @include text(
+    $font-small-14,
+    $weight-300,
+    $line-height-small-14,
+    $color-blue-input-text
+    );
+  }
+
+  &_type_open {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+    position: absolute;
+    top: 22px;
+    left: 0;
+  }
+
+  &_type_chosen {
+
+  }
+
+  &__button {
+    cursor: pointer;
+    text-align: start;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    border: $border-main;
+    border-radius: 10px;
+    background-color: $background-input;
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-blue-input-text
+    );
+
+    &_type_open{
+      border: none;
+      padding: 16px 0;
+      color: $color-blue-dark-title;
+    }
+  }
+
+  &__buttonIcon {
+    background-image: url('../../../images/categories-open-btn-icon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    width: 10px;
+    height: 7px;
+    position: absolute;
+    top: 42px;
+    right: 20px;
+    transition: transform linear .3s;
+
+    &_type_open {
+      transform: rotate(180deg);
+      position: absolute;
+      top: 21px;
+      right: 20px;
+    }
+  }
+
+  &__label {
+    width: 100%;
+    height: 41px;
+    margin: 0;
+    background-color: $background-input;
+    position: relative;
+  }
+
+  &__search {
+    width: 100%;
+    padding: 10px 20px 10px 50px;
+    box-sizing: border-box;
+    border: $border-main;
+    border-radius: 10px;
+    background-color: $background-input;
+    @include text(
+    $font-small-14,
+    $weight-300,
+    $line-height-small-14,
+    $color-blue-input-text
+    );
+  }
+
+  &__searchBtn {
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-image: url('../../../images/search-icon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background-color: transparent;
+  }
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
   }
 }
