@@ -1,11 +1,29 @@
 import { useState } from 'react';
 import styles from './Category.module.scss';
 
-const Category = ({ name, onFilter, imageUrl, imageUrlHover }) => {
+const Category = ({
+  name,
+  onFilter,
+  mainPageActiveCategory,
+  imageUrl,
+  imageUrlHover,
+  imageUrlActive,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const isCategoryActive = name === mainPageActiveCategory;
+
+  let backgroundImage;
+  if (isCategoryActive) {
+    backgroundImage = imageUrlActive;
+  } else if (isHovered) {
+    backgroundImage = imageUrlHover;
+  } else {
+    backgroundImage = imageUrl;
+  }
+
   const imgStyle = {
-    backgroundImage: `url(${isHovered ? imageUrlHover : imageUrl})`,
+    backgroundImage: `url(${backgroundImage})`,
   };
 
   return (

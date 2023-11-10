@@ -6,6 +6,7 @@ import cats from '../../utils/tempcats.json';
 
 const Main = ({
   apiBots,
+  mainPageActiveCategory,
   onFilter,
   cartProducts,
   isProductInCart,
@@ -18,7 +19,11 @@ const Main = ({
   return (
     <main className={styles.main}>
       <Banner />
-      <Categories categories={categories} onFilter={onFilter} />
+      <Categories
+        categories={categories}
+        onFilter={onFilter}
+        mainPageActiveCategory={mainPageActiveCategory}
+      />
       <BotsList
         apiBots={apiBots}
         cartProducts={cartProducts}

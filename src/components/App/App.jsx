@@ -41,7 +41,7 @@ const App = () => {
   const [totalSum, setTotalSum] = useState(0); // состояние для общей суммы заказа
   const [currentUser, setCurrentUser] = useState(null);
   const [apiBots, setApiBots] = useState(null); // get api bots
-  // const [mainPageActiveCategory, setMainPageActiveCategory] = useState('Все');
+  const [mainPageActiveCategory, setMainPageActiveCategory] = useState('Все');
 
   const contextValue = useMemo(() => {
     return { email, setEmail, currentUser };
@@ -100,7 +100,7 @@ const App = () => {
   const handleFilterByCategory = async (category) => {
     const botsData = await filterBotsByCategory(category);
 
-    // setMainPageActiveCategory(category);
+    setMainPageActiveCategory(category);
     setApiBots(botsData);
   };
 
@@ -243,6 +243,7 @@ const App = () => {
                 apiBots !== null ? (
                   <Main
                     apiBots={apiBots}
+                    mainPageActiveCategory={mainPageActiveCategory}
                     onFilter={handleFilterByCategory}
                     cartProducts={cartProducts}
                     isProductInCart={isProductInCart}
