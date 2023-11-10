@@ -37,7 +37,12 @@
   }
 
   &__required {
-    @include text($font-small-14, $weight-300, $line-height-small-14, $color-red-errors);
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
   }
 
   &__addButton {

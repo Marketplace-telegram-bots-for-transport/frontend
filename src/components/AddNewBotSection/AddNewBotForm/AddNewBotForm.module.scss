@@ -73,7 +73,12 @@
   }
 
   &__required {
-    @include text($font-small-14, $weight-300, $line-height-small-14, $color-red-errors);
+    @include text(
+      $font-small-14,
+      $weight-300,
+      $line-height-small-14,
+      $color-red-errors
+    );
   }
 
   &__label {
@@ -242,129 +247,93 @@
   }
 }
 
-.categories {
-  position: relative;
-  padding: 0 20px;
-  box-sizing: border-box;
-  width: 100%;
-  border: $border-main;
-  border-radius: 10px;
-  background-color: $background-input;
-  z-index: 1;
-  @include text(
-    $font-small-14,
-    $weight-300,
-    $line-height-small-14,
-    $color-blue-input-text
-  );
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
 
-  &_type_notChosen {
-    height: 50px;
-    @include text(
-    $font-small-14,
-    $weight-300,
-    $line-height-small-14,
-    $color-blue-input-text
-    );
-  }
-
-  &_type_open {
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .form {
+    border-top: 1px solid #d3e2f7;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
-    width: 100%;
-    position: absolute;
-    top: 22px;
-    left: 0;
-  }
-
-  &_type_chosen {
-
-  }
-
-  &__button {
-    cursor: pointer;
-    text-align: start;
-    padding: 15px 20px;
-    box-sizing: border-box;
-    width: 100%;
-    border: $border-main;
-    border-radius: 10px;
-    background-color: $background-input;
-    @include text(
-      $font-small-14,
-      $weight-300,
-      $line-height-small-14,
-      $color-blue-input-text
-    );
-
-    &_type_open{
-      border: none;
-      padding: 16px 0;
-      color: $color-blue-dark-title;
+    row-gap: 0;
+    &__label {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      padding: 0 0 28px;
+      &:first-child {
+        margin-top: 30px;
+      }
+      &_type_image {
+        margin-top: 81px;
+        width: 100px;
+        height: 100px;
+      }
     }
-  }
-
-  &__buttonIcon {
-    background-image: url('../../../images/categories-open-btn-icon.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: transparent;
-    width: 10px;
-    height: 7px;
-    position: absolute;
-    top: 42px;
-    right: 20px;
-    transition: transform linear .3s;
-
-    &_type_open {
-      transform: rotate(180deg);
-      position: absolute;
-      top: 21px;
-      right: 20px;
+    &__inputGroup {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0;
     }
-  }
+    &__inputTitle {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+    &__input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 18px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-input-text
+      );
+      &_type_desc {
+        min-height: 125px;
+      }
+      &_type_examplesContainer {
+        min-height: 56px;
+      }
+    }
+    &__examplesTitle {
+      display: flex;
+      align-items: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
+      &::before {
+        margin-right: 10px;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+      }
+    }
 
-  &__label {
-    width: 100%;
-    height: 41px;
-    margin: 0;
-    background-color: $background-input;
-    position: relative;
-  }
-
-  &__search {
-    width: 100%;
-    padding: 10px 20px 10px 50px;
-    box-sizing: border-box;
-    border: $border-main;
-    border-radius: 10px;
-    background-color: $background-input;
-    @include text(
-    $font-small-14,
-    $weight-300,
-    $line-height-small-14,
-    $color-blue-input-text
-    );
-  }
-
-  &__searchBtn {
-    border: none;
-    width: 20px;
-    height: 20px;
-    background-image: url('../../../images/search-icon.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    background-color: transparent;
-  }
-
-  &__list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    &__deleteBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-red-delete
+      );
+      &::before {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 }

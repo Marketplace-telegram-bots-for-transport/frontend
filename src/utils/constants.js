@@ -2,6 +2,7 @@ export const NUMBER_OF_DISPLAYED_BOTS_1920 = 12;
 export const NUMBER_OF_ADDED_DISPLAYED_BOTS_1920 = 12;
 export const BASE_URL = 'http://80.87.96.7/api/bots/';
 
+export const WIDTH_SCREEN_768 = 768;
 export const NUMBER_UNIT_OF_GOODS = 1;
 export const NUMBER_UP_TO_FIVE_GOODS = 5;
 export const TEXT_UNIT_OF_GOODS = 'товар';
