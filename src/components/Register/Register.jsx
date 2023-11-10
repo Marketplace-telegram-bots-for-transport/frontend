@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
 import accepted from '../../images/accepted-min.svg';
-import { WIDTH_SCREEN_768, PATTERN_EMAIL } from '../../utils/constants';
+import { PATTERN_EMAIL } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function Register({ loggedIn, onRegister, comeBack }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation({});
   const navigate = useNavigate();
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
+
   const [type, setType] = React.useState('password');
   const [typeRepeat, setTypeRepeat] = React.useState('password');
   const [passwardEyeClass, setPasswardEyeClass] = React.useState(
@@ -67,17 +67,6 @@ function Register({ loggedIn, onRegister, comeBack }) {
       setPasswardRepeatEyeClass(`${styles.register__viewPassword}`);
     }
   }
-
-  // отображение кнопки при размере экрана меньше 768px
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <main className={styles.register}>
@@ -170,7 +159,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
               </Link>
             </div>
             <div className={styles.register__password}>
-              {showButton ? (
+              {isMobile ? (
                 <input
                   className={`
                   ${styles.register__input} 

@@ -71,7 +71,7 @@
     margin: 5px 0 0;
     padding: 10px 20px;
     width: -webkit-fill-available;
-    max-height: 50px;
+    min-height: 50px;
     outline: none;
     @include text(
       $font-small-14,

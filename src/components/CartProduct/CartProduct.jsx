@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CartProduct.module.scss';
 import Counter from '../Counter/Counter';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function CartProduct({
   product,
@@ -10,23 +9,11 @@ function CartProduct({
   increaseProductCount,
   decreaseProductCount,
 }) {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  ); // кнопка купить в мобильной версии
+  const isMobile = useWindowSize();
 
   function handleDeleteCartProduct() {
     deleteCartProduct(product.id);
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <li className={styles.product}>
@@ -46,7 +33,7 @@ function CartProduct({
             <p className={styles.product__title}>{product.name}</p>
           )}
         </Link>
-        {showButton && (
+        {isMobile && (
           <button
             className={styles.product__btnDeleteMobile}
             aria-label='delete button'

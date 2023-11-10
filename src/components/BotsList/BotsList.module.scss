@@ -64,18 +64,7 @@
   .bots {
     border-radius: 20px;
     padding: 15px;
-    background-color: $background-white;
-    box-shadow: $box-shadow-main;
+    @include shadowBackground($background-white, $mobile-box-shadow-category);
     gap: 19px;
-    &__backUpBtn {
-      border: none;
-      width: 40px;
-      height: 40px;
-      margin-top: 50px;
-      background-color: #d3e2f7;
-      border-radius: 100px;
-      background: url(../../images/images-for-mobile/buttonUpMain/buttonUpMain.svg)
-        no-repeat center;
-    }
   }
 }

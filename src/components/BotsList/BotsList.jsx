@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Link as ScrollLink } from 'react-scroll';
 import BotCard from '../BotCard/BotCard';
+import ButtonUp from '../ButtonUp/ButtonUp';
+
 import styles from './BotsList.module.scss';
+import { useWindowSize } from '../../context/WindowSizeContext';
 import {
-  WIDTH_SCREEN_768,
   NUMBER_OF_DISPLAYED_BOTS_1920,
   NUMBER_OF_ADDED_DISPLAYED_BOTS_1920,
 } from '../../utils/constants';
@@ -19,15 +19,11 @@ const BotsList = ({
   increaseProductCount,
   decreaseProductCount,
 }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   // initial api bots
+  const isMobile = useWindowSize();
   const bots = apiBots.results;
   const totalBotsAmount = apiBots.count;
   const [nextBotsUrl, setNextBotsUrl] = useState(apiBots.next);
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
   const [hasMore, setHasMore] = useState(true);
   // displayed bots
   const [displayedBots, setDisplayedBots] = useState([]);
@@ -69,24 +65,6 @@ const BotsList = ({
     addProductToCart(bot);
   };
 
-  const handleScrollLinkClick = () => {
-    if (location.pathname === '/') {
-      document.getElementById('bots').scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/');
-    }
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <div className={styles.botsContainer} id='bots'>
       {displayedBots.length === 0 && (
@@ -94,7 +72,7 @@ const BotsList = ({
           По вашему запросу ничего не найдено
         </div>
       )}
-      {showButton ? (
+      {isMobile ? (
         <InfiniteScroll
           dataLength={displayedBots.length}
           next={handleDisplayMoreClick}
@@ -129,19 +107,7 @@ const BotsList = ({
               );
             })}
           </ul>
-          <button
-            className={styles.bots__backUpBtn}
-            type='button'
-            aria-label='Вернуться наверх каталога'
-          >
-            <ScrollLink
-              className={styles.submenu__hidden_button_link}
-              to='bots'
-              smooth
-              duration={1000}
-              onClick={handleScrollLinkClick}
-            />
-          </button>
+          <ButtonUp />
         </InfiniteScroll>
       ) : (
         <>

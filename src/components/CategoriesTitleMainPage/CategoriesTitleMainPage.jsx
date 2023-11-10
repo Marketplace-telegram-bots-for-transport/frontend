@@ -2,15 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState, useEffect, useRef } from 'react';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useState, useRef } from 'react';
+import { useWindowSize } from '../../context/WindowSizeContext';
 import styles from './CategoriesTitleMainPage.module.scss';
 import Category from '../Category/Category';
 
 const CategoriesTitleMainPage = ({ categories }) => {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]); // сохраняем выбранные категории
@@ -45,16 +43,6 @@ const CategoriesTitleMainPage = ({ categories }) => {
     setSearchQuery('');
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   // фильтр для отображения выбранных категорий
   const filteredOptions = categories.filter(
     (category) =>
@@ -84,7 +72,7 @@ const CategoriesTitleMainPage = ({ categories }) => {
     <div className={styles.container}>
       <h2 className={styles.title}>Категории</h2>
 
-      {showButton && (
+      {isMobile && (
         <div className={styles.category}>
           <button
             className={styles.category__button}

@@ -12,7 +12,7 @@ import Counter from '../Counter/Counter';
 import BackButton from '../BackButton/BackButton';
 import { fetchBotById } from '../../utils/api/getBotByID';
 import Reviews from '../Reviews/Reviews';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function BotDetails({
   apiBots,
@@ -23,9 +23,7 @@ function BotDetails({
   decreaseProductCount,
   comeBack,
 }) {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
   // Используем useParams для извлечения параметра маршрута (botId)
   const botsArray = apiBots.results; // достаем массив с ботами с АПИ
   console.log(botsArray);
@@ -104,16 +102,6 @@ function BotDetails({
     margin: '0',
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   if (!currentBotById) {
     // Если бот с заданным id не найден, можно отобразить сообщение об ошибке
     return console.log('бот не найден');
@@ -121,7 +109,7 @@ function BotDetails({
 
   return (
     <section className={styles.details}>
-      {showButton ? (
+      {isMobile ? (
         <div className={styles.details__mainSection}>
           <BotBody
             botImage={currentBotById.main_photo}
@@ -199,7 +187,7 @@ function BotDetails({
                       increaseProductCount={increaseProductCount}
                       decreaseProductCount={decreaseProductCount}
                       customStyles={
-                        showButton ? counterStylesMobile : counterStyles
+                        isMobile ? counterStylesMobile : counterStyles
                       }
                     />
                     <button

@@ -129,9 +129,11 @@
     transition: background-image 0.3s ease;
     cursor: pointer;
     &:hover {
+      background-color: #acc6eb;
       background-image: url(../../images/add-to-favourites-btn-hover.svg);
     }
     &:active {
+      background-color: #5a8cd2;
       background-image: url(../../images/add-to-favourites-btn-pressed.svg);
     }
   }

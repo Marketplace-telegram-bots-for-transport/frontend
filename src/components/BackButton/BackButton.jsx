@@ -1,29 +1,15 @@
-import { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import styles from './BackButton.module.scss';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function BackButton({ botName, title, comeBack }) {
   const location = useLocation();
   const { id, botId } = useParams();
-
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  ); // кнопка купить в мобильной версии
-
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const isMobile = useWindowSize();
 
   return (
     <div className={styles.returnElement}>
-      {showButton ? (
+      {isMobile ? (
         <button className={styles.returnElement__btn} onClick={comeBack}>
           <p className={styles.returnElement__title}>
             {location.pathname === '/cart' ? 'Корзина' : ''}

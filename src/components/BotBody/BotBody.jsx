@@ -1,7 +1,7 @@
 // /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './BotBody.module.scss';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 function Botbody({
   botName,
@@ -11,9 +11,7 @@ function Botbody({
   botImage,
   comeBack,
 }) {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
@@ -33,19 +31,9 @@ function Botbody({
     setCopied(true);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <div className={styles.botBody}>
-      {showButton ? (
+      {isMobile ? (
         <>
           <div className={styles.botBody__buttonSection}>
             <button

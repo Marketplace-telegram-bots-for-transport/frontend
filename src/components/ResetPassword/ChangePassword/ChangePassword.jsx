@@ -1,10 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import accepted from '../../../images/accepted-min.svg';
-
 import styles from './ChangePassword.module.scss';
-
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 
 function ChangePassword({ comeBack }) {

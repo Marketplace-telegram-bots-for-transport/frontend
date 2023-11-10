@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
@@ -8,25 +8,12 @@ import styles from './SellerRegisterForm.module.scss';
 function SellerRegisterForm() {
   const { /* handleChange, errors, */ isValid /* , resetForm  */ } =
     useFormAndValidation();
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
   const [nextPageOpen, setNextPageOpen] = useState(false);
 
   const buttonClassName = isValid
     ? `${styles.seller__button} ${styles.seller__button_active}`
     : styles.seller__button;
-
-  // отображение кнопки при размере экрана меньше 768px
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // прокрутка скролла наверх
   useEffect(() => {
@@ -123,7 +110,7 @@ function SellerRegisterForm() {
               required
             />
           </label>
-          {showButton && (
+          {isMobile && (
             <button
               className={buttonClassName}
               /* disabled={!isValid} */

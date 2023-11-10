@@ -191,35 +191,6 @@
       padding: 25px 20px;
       border-radius: 20px;
     }
-    /* &__title {
-      display: flex;
-      align-items: center;
-      margin-bottom: 50px;
-      @include text(
-        $mobile-font-32,
-        $weight-500,
-        $mobile-lh-32,
-        $color-blue-dark-title
-      );
-    }
-    &__buttonBack {
-      width: 40px;
-      height: 40px;
-      padding: 10px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      border: none;
-      cursor: pointer;
-      transition: background-image 0.3s ease;
-      background-image: url(../../images/back-left-lg-min.svg);
-      &:hover {
-        background-image: url(../../images/back-left-lg-hover-min.svg);
-      }
-      &:active {
-        background-image: url(../../images/back-left-lg-pressed-min.svg);
-      }
-    } */
     &__input {
       outline: none;
       min-height: 41px;

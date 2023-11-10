@@ -1,29 +1,16 @@
-import { useState, useEffect } from 'react';
 import AddNewBotsSection from '../AddNewBotSection/AddNewBotSection';
 import BackButton from '../BackButton/BackButton';
 import SellerRegisterForm from '../SellerRegisterForm/SellerRegisterForm';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 // import UserAgreement from '../UserAgreement/UserAgreement';
 import styles from './RegisterSeller.module.scss';
 
 function RegisterSeller({ comeBack }) {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
+  const isMobile = useWindowSize();
 
-  // отображение кнопки при размере экрана меньше 768px
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
   return (
     <section className={styles.register}>
-      {showButton ? (
+      {isMobile ? (
         <div className={styles.register__content}>
           <div className={styles.register__head}>
             <BackButton comeBack={comeBack} />

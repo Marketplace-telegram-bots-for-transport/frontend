@@ -1,10 +1,10 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import Carousel from 'react-multi-carousel';
 import styles from './Banner.module.scss';
 import 'react-multi-carousel/lib/styles.css';
 import CarouselBannerLeftBtn from '../UI/CarouselBannerLeftBtn/CarouselBannerLeftBtn';
 import CarouselBannerRightBtn from '../UI/CarouselBannerRightBtn/CarouselBannerRightBtn';
-import { WIDTH_SCREEN_768 } from '../../utils/constants';
+import { useWindowSize } from '../../context/WindowSizeContext';
 
 const CustomDot = ({ index, onClick, active }) => {
   const dotClass = `${styles.banner__dot} ${
@@ -26,9 +26,7 @@ const CustomDot = ({ index, onClick, active }) => {
 };
 
 const Banner = () => {
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  ); // кнопка купить в мобильной версии
+  const isMobile = useWindowSize();
   const carouselRef = useRef(null);
 
   const responsive = {
@@ -50,35 +48,10 @@ const Banner = () => {
     },
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <div className={styles.banner}>
-      {showButton ? (
-        <Carousel
-          ref={carouselRef}
-          renderArrowsWhenDisabled
-          showDots
-          infinite
-          responsive={responsive}
-          className={styles.banner__carousel}
-          dotListClass={styles.banner__dotList}
-          customLeftArrow={<CarouselBannerLeftBtn carouselRef={carouselRef} />}
-          customRightArrow={
-            <CarouselBannerRightBtn carouselRef={carouselRef} />
-          }
-          customDot={<CustomDot />}
-        >
-          <div className={styles.banner__titleboxMobile} />
-        </Carousel>
+      {isMobile ? (
+        <div className={styles.banner__carousel} />
       ) : (
         <Carousel
           ref={carouselRef}

@@ -3,8 +3,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CurrentUserContext from '../../../context/CurrentUserContext';
+import { useWindowSize } from '../../../context/WindowSizeContext';
 import {
-  WIDTH_SCREEN_768,
   NUMBER_UNIT_OF_GOODS,
   NUMBER_UP_TO_FIVE_GOODS,
   TEXT_UNIT_OF_GOODS,
@@ -18,11 +18,9 @@ import styles from './Submenu.module.scss';
 function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [showButton, setShowButton] = useState(
-    window.innerWidth <= WIDTH_SCREEN_768
-  );
   const { currentUser } = useContext(CurrentUserContext);
   const menuRef = useRef(null);
+  const isMobile = useWindowSize();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -73,16 +71,6 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
     setIsBasketOpen(false);
     navigate(path);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setShowButton(window.innerWidth <= WIDTH_SCREEN_768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // функция нахождения общего е=количнства товаров в корзине
   const count = () => {
@@ -320,7 +308,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
               </button>
             </>
           )}
-          {!isLoggedIn && !showButton && (
+          {!isLoggedIn && !isMobile && (
             <>
               <p
                 className={`
@@ -342,7 +330,7 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
           )}
         </div>
       )}
-      {isProfileOpen && showButton && !isLoggedIn && (
+      {isProfileOpen && isMobile && !isLoggedIn && (
         <div className={styles.submenu__mobileContainer}>
           <div className={styles.submenu__mobileProfile}>
             <p className={styles.submenu__mobileProfile_subtitle}>
