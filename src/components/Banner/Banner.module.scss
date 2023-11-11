@@ -16,8 +16,32 @@
 
   &__titlebox {
     height: 442px;
-    background-image: url('../../images/banner-background-new.png');
     text-decoration: none;
+    background-image: url('../../images/banner-background-new.png');
+  }
+
+  &__specialOne {
+    background-image: url('../../images/special-1.png');
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__specialTwo {
+    background-image: url('../../images/special-2.png');
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__specialThree {
+    background-image: url('../../images/special-3.png');
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__dot {
@@ -29,6 +53,10 @@
 
     &_active {
       background-color: #3b7dd6;
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
