@@ -177,7 +177,7 @@ function BotDetails({
             </div>
           )}
           <ScreenExamples array={currentBotById.photo_examples} />
-          {/* <Rating currentBotById={currentBotById} /> */}
+          <Rating currentBotById={currentBotById} />
 
           <div className={styles.basketSection}>
             <div className={styles.basketSection__basket}>
@@ -252,7 +252,7 @@ function BotDetails({
             />
             <ScreenExamples array={currentBotById.photo_examples} />
 
-            {/* <Rating currentBotById={currentBotById} /> */}
+            <Rating currentBotById={currentBotById} />
           </div>
 
           {/* <DetailsBasket botPrice={bot.price} onClick={} disabled={} /> */}

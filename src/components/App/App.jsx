@@ -296,7 +296,6 @@ const App = () => {
                     decreaseProductCount={decreaseProductCount}
                     comeBack={handleGoBack}
                   />
-                  // <Reviews />
                 }
               />
 
