@@ -9,6 +9,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Cart from '../Cart/Cart';
 import BotDetails from '../BotDetails/BotDetails';
+// import Reviews from '../Reviews/Reviews';
 
 import SpecialOffers from '../SpecialOffers/SpecialOffers';
 
@@ -250,7 +251,6 @@ const App = () => {
                 decreaseProductCount={decreaseProductCount}
                 comeBack={handleGoBack}
               />
-              // <Reviews />
             }
           />
 
