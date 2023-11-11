@@ -183,7 +183,8 @@ function BotDetails({
             <div className={styles.basketSection__basket}>
               <h2 className={styles.basketSection__title}>Цена:</h2>
 
-              {currentBotById.discount > 0 ? (
+              {currentBotById.discount_author ||
+              currentBotById.discount_category > 0 ? (
                 <div className={styles.basketSection__discountContainer}>
                   <p className={styles.basketSection__finalPrice}>
                     {currentBotById.final_price}₽
@@ -192,7 +193,10 @@ function BotDetails({
                     {currentBotById.price}₽
                   </p>
                   <span className={styles.basketSection__discountSize}>
-                    -{currentBotById.discount}%
+                    -
+                    {currentBotById.discount_author ||
+                      currentBotById.discount_category}
+                    %
                   </span>
                 </div>
               ) : (
@@ -259,7 +263,8 @@ function BotDetails({
           <div className={styles.basketSection}>
             <div className={styles.basketSection__basket}>
               <h2 className={styles.basketSection__title}>Цена:</h2>
-              {currentBotById.discount > 0 ? (
+              {currentBotById.discount_author ||
+              currentBotById.discount_category > 0 ? (
                 <>
                   <p className={styles.basketSection__finalPrice}>
                     {currentBotById.final_price}₽
@@ -269,7 +274,10 @@ function BotDetails({
                       {currentBotById.price}₽
                     </p>
                     <span className={styles.basketSection__discountSize}>
-                      -{currentBotById.discount}%
+                      -
+                      {currentBotById.discount_category ||
+                        currentBotById.discount_author}
+                      %
                     </span>
                   </div>
                 </>

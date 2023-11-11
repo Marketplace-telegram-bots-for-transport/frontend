@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Register.module.scss';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import CheckBox from '../CheckBox/CheckBox';
@@ -139,12 +139,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
             >
               {errors.email}
             </span>
-            <div className={styles.register__inputNameContainer}>
-              <h3 className={styles.register__inputName}>Пароль</h3>
-              <Link to='/reset-password' className={styles.register__resetLink}>
-                Не помню пароль
-              </Link>
-            </div>
+            <h3 className={styles.register__inputName}>Пароль</h3>
             <div className={styles.register__password}>
               {isMobile ? (
                 <input
@@ -201,12 +196,7 @@ function Register({ loggedIn, onRegister, comeBack }) {
             >
               {errors.password}
             </span>
-            <div className={styles.register__inputNameContainer}>
-              <h3 className={styles.register__inputName}>Повторите пароль</h3>
-              <Link to='/reset-password' className={styles.register__resetLink}>
-                Не помню пароль
-              </Link>
-            </div>
+            <h3 className={styles.register__inputName}>Повторите пароль</h3>
             <div className={styles.register__password}>
               <input
                 className={styles.register__input}

@@ -18,6 +18,7 @@ import ResetPassword from '../ResetPassword/ResetPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
 import Payment from '../Payment/Payment';
+import SuccessPayment from '../Payment/SuccessPayment/SuccessPayment';
 import Profile from '../Profile/Profile';
 import Purchases from '../Purchases/Purchases';
 import Favourites from '../Favourites/Favourites';
@@ -391,6 +392,9 @@ const App = () => {
                   <Payment totalSum={totalSum} comeBack={handleGoBack} />
                 }
               />
+
+              <Route path='/success-singup' element={<SuccessPayment />} />
+
               <Route
                 path='/add-new-bots'
                 element={<AddNewBotsPage comeBack={handleGoBack} />}

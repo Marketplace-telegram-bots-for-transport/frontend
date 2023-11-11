@@ -50,7 +50,9 @@ function SpecialOffers({
 
   return (
     <section className={styles.special} style={backgroundStyle}>
-      <BackButton comeBack={comeBack} title={banner.title} />
+      <div className={styles.special__backButton}>
+        <BackButton comeBack={comeBack} title={banner.title} />
+      </div>
       <h1 className={styles.special__title}>{banner.title}</h1>
       {isMobile ? (
         <div className={styles.special__banner} style={imgStyleMobile} />

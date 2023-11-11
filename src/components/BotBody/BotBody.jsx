@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './BotBody.module.scss';
 import { useWindowSize } from '../../context/WindowSizeContext';
+import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 
 function Botbody({
   botName,
@@ -51,7 +52,7 @@ function Botbody({
                 aria-label='кнопка'
                 onClick={copyToClipboard}
               />
-              {copied ? 'Ссылка скопирована!' : ''}
+              {copied ? <PopupWithInfo copied={copied} /> : ''}
             </div>
           </div>
           <img

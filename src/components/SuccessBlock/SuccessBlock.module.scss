@@ -82,5 +82,21 @@
         $color-button-text
       );
     }
+    &__buttonPayment {
+      height: 40px;
+      background-color: $background-color-button2-default;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
+      &:hover {
+        background-color: $background-color-button2-hover;
+      }
+      &:active {
+        background-color: $background-color-button2-pressed;
+      }
+    }
   }
 }

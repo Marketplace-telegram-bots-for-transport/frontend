@@ -293,13 +293,25 @@ function Submenu({ isLoggedIn, isLogOut, cartProducts, deleteCartProduct }) {
                 </h3>
               </div>
               <nav className={styles.submenu__profile_navigate}>
-                <Link className={styles.submenu__profile_link} to='/profile'>
+                <Link
+                  className={styles.submenu__profile_link}
+                  to='/profile'
+                  onClick={() => handelRedirect('/profile')}
+                >
                   Мой профиль
                 </Link>
-                <Link className={styles.submenu__profile_link} to='/favourites'>
+                <Link
+                  className={styles.submenu__profile_link}
+                  to='/favourites'
+                  onClick={() => handelRedirect('/favourites')}
+                >
                   Избранное
                 </Link>
-                <Link className={styles.submenu__profile_link} to='/faq'>
+                <Link
+                  className={styles.submenu__profile_link}
+                  to='/faq'
+                  onClick={() => handelRedirect('/faq')}
+                >
                   FAQ
                 </Link>
               </nav>

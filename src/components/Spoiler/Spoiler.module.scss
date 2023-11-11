@@ -81,3 +81,52 @@
     padding-left: 2px;
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .spoiler {
+    &__topic {
+      padding: 20px 0;
+      border-bottom: 0.5px solid #84a7d5;
+    }
+
+    &__title {
+      padding-right: 0;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+      &:before {
+        content: ' ';
+        top: 5px;
+        right: -10px;
+        background-size: 12px 8px;
+      }
+    }
+
+    &__text {
+      padding-top: 10px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+
+    &__list {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+  }
+}
