@@ -2,15 +2,6 @@
   border: 1px solid red;
 } */
 
-body {
-  width: 100%;
-  max-width: 1920px;
-  height: 100vh;
-  margin: 0 auto;
-  background: url(../../images/Background.jpg) no-repeat center center fixed;
-  background-size: cover;
-}
-
 h1,
 h2,
 h3,
@@ -40,6 +31,10 @@ button {
   flex-direction: column;
   min-height: 100vh;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
+  background: url(../../images/Background.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 .content {

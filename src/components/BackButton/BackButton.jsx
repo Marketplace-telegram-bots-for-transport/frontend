@@ -33,6 +33,7 @@ function BackButton({ botName, title, comeBack }) {
               location.pathname === '/cart' ? 'Корзина' : ''
             }
         ${location.pathname === '/signup-seller' ? 'Регистрация продавца' : ''}
+        ${location.pathname === '/faq-common' ? 'FAQ' : ''}
         ${location.pathname === `/special-offers/${id}` ? title : ''}
         ${location.pathname === `/botdetails/${botId}` ? botName : ''}`}
       </p>

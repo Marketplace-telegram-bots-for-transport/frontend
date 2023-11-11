@@ -25,6 +25,7 @@ import Favourites from '../Favourites/Favourites';
 import Faq from '../Faq/Faq';
 import Seller from '../Seller/Seller';
 import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+import FAQCommon from '../Faq/FAQCommon/FAQCommon';
 
 import {
   fetchInitialBots,
@@ -391,6 +392,8 @@ const App = () => {
                   <Payment totalSum={totalSum} comeBack={handleGoBack} />
                 }
               />
+
+              <Route path='/faq-common' element={<FAQCommon />} />
 
               <Route path='/success-singup' element={<SuccessPayment />} />
 
