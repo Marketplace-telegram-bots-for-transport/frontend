@@ -73,31 +73,35 @@ function ReviewCard({ userName, reviewDate, feedbackText }) {
         </button>
       </div>
       <div className={styles.reviewCard__inputSection}>
-        <img
-          className={styles.reviewCard__userImgSmall}
-          src={userImgSmall}
-          alt='Фото пользователя'
-        />
-        <textarea
-          className={styles.reviewCard__textarea}
-          value={reviewText}
-          onChange={handleReviewChange}
-          placeholder='Написать комментарий'
-        />
-        <button
-          className={styles.reviewCard__addButton}
-          type='button'
-          aria-label='add button'
-        >
-          <img src={clipIcon} alt='кнопка закрепить' />
-        </button>
-        <button
-          className={styles.reviewCard__sendReviewButton}
-          type='button'
-          aria-label='send button'
-        >
-          Отправить
-        </button>
+        <div className={styles.reviewCard__containerimg}>
+          <img
+            className={styles.reviewCard__userImgSmall}
+            src={userImgSmall}
+            alt='Фото пользователя'
+          />
+          <textarea
+            className={styles.reviewCard__textarea}
+            value={reviewText}
+            onChange={handleReviewChange}
+            placeholder='Написать комментарий'
+          />
+        </div>
+        <div className={styles.reviewCard__containerButton}>
+          <button
+            className={styles.reviewCard__addButton}
+            type='button'
+            aria-label='add button'
+          >
+            <img src={clipIcon} alt='кнопка закрепить' />
+          </button>
+          <button
+            className={styles.reviewCard__sendReviewButton}
+            type='button'
+            aria-label='send button'
+          >
+            Отправить
+          </button>
+        </div>
       </div>
     </div>
   );

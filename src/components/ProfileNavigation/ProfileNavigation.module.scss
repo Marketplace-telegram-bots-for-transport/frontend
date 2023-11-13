@@ -170,13 +170,16 @@
   .profileNavigation {
     min-width: 375px;
     width: 100%;
-    padding: 114px 0 50px;
+    padding: 114px 15px 50px;
     position: relative;
     &__profileContainer {
       position: absolute;
       top: 114px;
       left: 50%;
       transform: translate(-50%, 0%);
+    }
+    &__avatarContainer {
+      height: 100%;
     }
     &__image {
       width: 120px;

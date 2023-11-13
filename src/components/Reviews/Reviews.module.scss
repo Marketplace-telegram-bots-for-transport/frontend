@@ -94,3 +94,91 @@
     @include text(14px, 500, 17.5px, #fff);
   }
 }
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .reviews {
+    margin: 50px 0;
+    padding: 0 15px;
+    &__header {
+      margin-bottom: 30px;
+      @include text(
+        $mobile-font-32,
+        $weight-500,
+        $mobile-font-32,
+        $color-gray-text
+      );
+    }
+
+    &__section {
+      display: flex;
+      column-gap: 0;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+    &__avatar {
+      margin: 0 10px 0 20px;
+      width: 40px;
+      height: 40px;
+    }
+
+    &__feedbackSection {
+      width: 100%;
+      height: 100%;
+      padding: 30px 20px;
+      &_title {
+        margin-bottom: 30px;
+        @include text(
+          $mobile-font-24,
+          $weight-500,
+          $mobile-lh-24,
+          $color-gray-text
+        );
+      }
+      &_img {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &__header_mini {
+      display: none;
+    }
+
+    &__textarea {
+      height: 41px;
+      width: 100%;
+      background-color: inherit;
+      padding-top: 0;
+      &::placeholder {
+        @include text(14px, 300, 21px, #84a7d5);
+        padding-left: 20px;
+        line-height: 1.5;
+        color: #84a7d5;
+      }
+    }
+
+    &__buttonsSection {
+      margin-top: 10px;
+      border-top: none;
+      min-height: 40px;
+      column-gap: 5px;
+    }
+
+    &__addButton {
+      margin: 0;
+      background-color: inherit;
+    }
+
+    &__sendReviewButton {
+      width: 108px;
+      padding: 11px 15px;
+      margin: 0;
+      background-color: #3b7dd6;
+    }
+  }
+}

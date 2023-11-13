@@ -6,7 +6,6 @@
   min-height: 490px;
   border-radius: 20px;
   @include shadowBackground($background-white, $box-shadow-main);
-  background-color: #fff;
   margin-top: 40px;
   margin-bottom: 30px;
 
@@ -123,11 +122,14 @@
     margin: 30px 60px 40px 60px;
     border-top: 1px solid #d3e2f7;
     column-gap: 5px;
-    justify-content: space-between;
   }
 
+  &__containerimg {
+    display: flex;
+  }
   &__userImgSmall {
     margin-top: 50px;
+    margin-right: 20px;
     margin-left: 80px;
     width: 40px;
     height: 40px;
@@ -135,8 +137,8 @@
   }
 
   &__textarea {
-    max-width: 594px;
-    width: 100%;
+    margin-right: 20px;
+    width: 594px;
     min-height: 41px;
     background-color: #d3e2f7;
     border: none;
@@ -155,6 +157,9 @@
     @include text($font-small-14, $weight-300, 21px, #84a7d5);
   }
 
+  &__containerButton {
+    display: flex;
+  }
   &__addButton {
     margin-top: 50px;
     width: 40px;
@@ -166,6 +171,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 10px;
   }
 
   &__sendReviewButton {
@@ -177,5 +183,129 @@
     border-radius: 10px;
     // color: #fff;
     @include text(14px, 500, 17.5px, #fff);
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .reviewCard {
+    min-height: 100%;
+    margin: 30px 0 30px;
+    padding: 30px 20px;
+
+    &__headerSection {
+      column-gap: 10px;
+      margin: 0;
+      align-items: center;
+    }
+    &__userImg {
+      margin: 0 10px 0 0;
+      width: 40px;
+      height: 40px;
+    }
+    &__nameSection {
+      margin-top: 0;
+    }
+    &__userName {
+      margin-bottom: 5px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-gray-text
+      );
+    }
+    &__userDate {
+      @include text(10px, $weight-400, 12.5px, $color-gray-text);
+    }
+    &__stars {
+      margin-top: 8px;
+    }
+
+    &__reviewText {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5; // количество строк
+      -webkit-box-orient: vertical;
+      max-height: 105px;
+      height: 100%;
+      margin: 20px 0 0;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-gray-text
+      );
+    }
+
+    &__likeFeedbackSection {
+      width: 100%;
+      margin: 20px 0;
+      column-gap: 0;
+    }
+    &__likeButton {
+      background-color: inherit;
+    }
+    &__feedbackButton {
+      background-color: inherit;
+    }
+
+    &__inputSection {
+      width: 100%;
+      min-height: 91px;
+      margin: 0;
+      border-top: none;
+      flex-direction: column;
+    }
+
+    &__containerimg {
+      display: flex;
+    }
+
+    &__userImgSmall {
+      margin: 0 10px 0 0;
+      width: 40px;
+      height: 40px;
+    }
+
+    &__textarea {
+      margin-right: 0;
+      min-height: 41px;
+      background-color: inherit;
+      border: 1px solid #84a7d5;
+      margin-top: 0;
+    }
+
+    &__textarea::placeholder {
+      padding-top: 10px;
+      padding-left: 15px;
+      line-height: 1.5;
+      color: #84a7d5;
+      @include text($font-small-14, $weight-300, 21px, #84a7d5);
+    }
+
+    &__containerButton {
+      margin-top: 10px;
+      display: flex;
+      justify-content: end;
+    }
+    &__addButton {
+      margin: 0;
+      background-color: inherit;
+    }
+
+    &__sendReviewButton {
+      width: 108px;
+      padding: 11px 15px;
+      margin: 0;
+      background-color: #3b7dd6;
+      @include text(14px, 500, 17.5px, #fff);
+    }
   }
 }

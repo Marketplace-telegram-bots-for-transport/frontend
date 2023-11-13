@@ -95,19 +95,19 @@
       width: 305px;
       height: 250px;
       background-size: cover;
-      background-position: center;
+      background-position: 61%;
       border-radius: 10px;
       margin: 0 15px 0 18px;
     }
 
     &__specialOne {
-      background-image: url(../../images/images-for-mobile/banners/banner2.svg);
+      background-image: url(../../images/images-for-mobile/banners/banner1.svg);
     }
     &__specialTwo {
-      background-image: url(../../images/images-for-mobile/banners/banner3.svg);
+      background-image: url(../../images/images-for-mobile/banners/banner2.svg);
     }
     &__specialThree {
-      background-image: url(../../images/images-for-mobile/banners/banner1.svg);
+      background-image: url(../../images/images-for-mobile/banners/banner3.svg);
     }
   }
 }

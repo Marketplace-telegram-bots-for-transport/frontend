@@ -183,6 +183,7 @@
       background: url(../../images/back-left-lg-min.svg) no-repeat center;
     }
     &__image {
+      align-self: center;
       border-radius: 10px;
       margin: 10px 0 30px 0;
       max-width: 305px;
@@ -204,12 +205,15 @@
     }
     &__subtitle {
       margin: 5px 0 0;
-      @include text(
-        $mobile-font-16,
-        $weight-300,
-        $mobile-lh-small-16,
-        $color-gray-text
-      );
+      @include text($mobile-font-16, $weight-300, $mobile-lh-small-16, #84a7d5);
+    }
+    &__category {
+      margin-top: 20px;
+      background-color: #d3e2f7;
+      max-width: fit-content;
+      padding: 5px 10px;
+      border-radius: 5px;
+      @include text(10px, $weight-300, 12.5px, #3b7dd6);
     }
     &__description {
       margin-top: 30px;
