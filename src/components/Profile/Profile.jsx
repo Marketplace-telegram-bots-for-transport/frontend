@@ -218,6 +218,7 @@ function Profile({ onLogout }) {
                 </span>
               </div>
             </form>
+
             <div className={styles.user__titleContainer_notification}>
               <h2 className={styles.user__subtitle}>Уведомления</h2>
               {!editButtonNotifications ? (
@@ -233,7 +234,6 @@ function Profile({ onLogout }) {
                 />
               )}
             </div>
-
             <form className={styles.user__formNotifications}>
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Получать на почту</label>
@@ -438,6 +438,7 @@ function Profile({ onLogout }) {
               </button>
             )}
           </form>
+
           <div
             className={`${styles.user__titleContainer} ${styles.user__titleContainer_notification}`}
           >

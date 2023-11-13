@@ -138,12 +138,15 @@
     position: relative;
     background-color: inherit;
     padding: 114px 15px 50px;
+    &__container {
+      padding: 0;
+      border-radius: 20px;
+    }
     &__mainSection {
       display: flex;
       flex-direction: column;
       padding: 25px 20px;
       border-radius: 20px;
-      @include shadowBackground($background-white, $mobile-box-shadow-category);
     }
   }
   .basketSection {
