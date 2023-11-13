@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './BotBody.module.scss';
 import { useWindowSize } from '../../context/WindowSizeContext';
+import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 
 function Botbody({
   botName,
@@ -29,6 +30,9 @@ function Botbody({
     document.body.removeChild(textArea);
 
     setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
   };
 
   return (
@@ -51,7 +55,7 @@ function Botbody({
                 aria-label='кнопка'
                 onClick={copyToClipboard}
               />
-              {copied ? 'Ссылка скопирована!' : ''}
+              {copied ? <PopupWithInfo copied={copied} /> : ''}
             </div>
           </div>
           <img
@@ -60,7 +64,8 @@ function Botbody({
             alt='изображение логотипа бота'
           />
           <h2 className={styles.botBody__title}>{botName}</h2>
-          <p className={styles.botBody__subtitle}>{botAuthor}</p>
+          <p className={styles.botBody__subtitle}>@{botAuthor}</p>
+          <p className={styles.botBody__category}>{botCategory}</p>
           <p
             className={`${styles.botBody__description} ${
               isDescriptionExpanded ? styles.botBody__descriptionExpanded : ''

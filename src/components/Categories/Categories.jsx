@@ -31,7 +31,7 @@ const Categories = ({ categories, onFilter, mainPageActiveCategory }) => {
 
   return (
     <div className={styles.categoriesWrapper}>
-      <CategoriesTitleMainPage categories={categories} />
+      <CategoriesTitleMainPage categories={categories} onFilter={onFilter} />
       <section className={styles.categories}>
         <div className={styles.categories__carouselWrapper}>
           <Carousel

@@ -86,6 +86,9 @@
 @media screen and (max-width: 480px) {
   .special {
     padding: 114px 0 50px;
+    &__backButton {
+      margin: 0 35px;
+    }
     &__title {
       display: none;
     }

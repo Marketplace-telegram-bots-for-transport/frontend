@@ -43,13 +43,13 @@ function CartProduct({
       </div>
       <div className={styles.product__item}>
         {product.discount_category || product.discount_author > 0 ? (
-          <>
+          <div className={styles.product__priceContainer}>
             <h3 className={styles.product__priceOld}>{product.price}₽</h3>
             <h3 className={styles.product__priceDiscount}>
               {product.final_price * product.count}₽
             </h3>
             <div className={styles.product__iconDiscount} />
-          </>
+          </div>
         ) : (
           <p className={styles.product__price}>
             {product.price * product.count}₽

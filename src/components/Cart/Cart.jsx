@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartProduct from '../CartProduct/CartProduct';
 import Payment from '../Payment/Payment';
-/* import ModalWithAuth from '../ModalWithAuth/ModalWithAuth';
- */ import BackButton from '../BackButton/BackButton';
+import BackButton from '../BackButton/BackButton';
 import styles from './Cart.module.scss';
 import {
   NUMBER_UNIT_OF_GOODS,
@@ -153,7 +152,6 @@ function Cart({
           countText={countText}
         />
       )}
-      {/* {!isLoggedIn && !showButton && <ModalWithAuth />} */}
     </section>
   );
 }

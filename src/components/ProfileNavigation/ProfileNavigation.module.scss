@@ -1,9 +1,9 @@
 @import '../../vendor/varibles';
 
 .profileNavigation {
-  min-width: 330px;
+  min-width: 570px;
   margin-top: 0;
-  padding: 200px 40px 230px;
+  padding: 200px 40px 245px 165px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,5 +158,112 @@
       $line-height-normal,
       $color-blue-dark-title
     );
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .profileNavigation {
+    min-width: 375px;
+    width: 100%;
+    padding: 114px 15px 50px;
+    position: relative;
+    &__profileContainer {
+      position: absolute;
+      top: 114px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+    &__avatarContainer {
+      height: 100%;
+    }
+    &__image {
+      width: 120px;
+      height: 120px;
+    }
+    &__name {
+      @include text(
+        $mobile-font-24,
+        $weight-500,
+        $mobile-lh-24,
+        $color-blue-dark-title
+      );
+    }
+    &__navigation {
+      gap: 0;
+      margin: 50px 0 0;
+      padding: 170px 20px 25px;
+      border-radius: 20px;
+      @include shadowBackground($background-white, $mobile-box-shadow-category);
+    }
+    &__link {
+      height: 40px;
+      margin: 5px 0 5px;
+      padding: 10px 0 10px 15px;
+      border-bottom: 0.5px solid #d3e2f7;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    &__icon {
+      width: 20px;
+      height: 20px;
+      margin: 0 10px 0 0;
+      &_user {
+        background-image: url(../../images/images-for-mobile/profile/profile/user.svg);
+        &_activ {
+          background-image: url(../../images/images-for-mobile/profile/profile/user-activ.svg);
+        }
+      }
+      &_purchases {
+        background-image: url(../../images/images-for-mobile/profile/profile/icon-purchases.svg);
+        &_activ {
+          background-image: url(../../images/images-for-mobile/profile/profile/icon-purchases-activ.svg);
+        }
+      }
+      &_favourites {
+        background-image: url(../../images/images-for-mobile/profile/profile/icon-love.svg);
+        &_activ {
+          background-image: url(../../images/images-for-mobile/profile/profile/icon-love-activ.svg);
+        }
+      }
+      &_faq {
+        background-image: url(../../images/images-for-mobile/profile/profile/icon-faq.svg);
+        &_activ {
+          background-image: url(../../images/images-for-mobile/profile/profile/icon-faq-activ.svg);
+        }
+      }
+      &_seller {
+        background-image: url(../../images/images-for-mobile/profile/profile/icon-seller.svg);
+        &_activ {
+          background-image: url(../../images/icon-seller-activ.svg);
+        }
+      }
+      &_exit {
+        background-image: url(../../images/images-for-mobile/profile/profile/icon-exit.svg);
+      }
+    }
+
+    &__textLink {
+      margin: 0;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-link-main
+      );
+      &_activ {
+        @include text(
+          $mobile-font-14,
+          $weight-500,
+          $line-height-small-14,
+          $color-blue-dark-title
+        );
+      }
+    }
   }
 }

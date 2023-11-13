@@ -18,12 +18,14 @@ import ResetPassword from '../ResetPassword/ResetPassword';
 import ChangePassword from '../ResetPassword/ChangePassword/ChangePassword';
 import RegisterSeller from '../RegisterSeller/RegisterSeller';
 import Payment from '../Payment/Payment';
+import SuccessPayment from '../Payment/SuccessPayment/SuccessPayment';
 import Profile from '../Profile/Profile';
 import Purchases from '../Purchases/Purchases';
 import Favourites from '../Favourites/Favourites';
 import Faq from '../Faq/Faq';
 import Seller from '../Seller/Seller';
 import AddNewBotsPage from '../AddNewBotsPage/AddNewBotsPage';
+import FAQCommon from '../Faq/FAQCommon/FAQCommon';
 
 import {
   fetchInitialBots,
@@ -37,6 +39,7 @@ import {
   updateCartWithLocalStorage,
   checkAndRemoveExpiredData,
 } from '../../hooks/useCartInLocalStorage';
+import SellerProfile from '../SellerProfile/SellerProfile';
 
 const App = () => {
   const navigate = useNavigate();
@@ -103,7 +106,6 @@ const App = () => {
   // Функция фильтрации по имени категории на главной
   const handleFilterByCategory = async (category) => {
     const botsData = await filterBotsByCategory(category);
-
     setMainPageActiveCategory(category);
     setApiBots(botsData);
   };
@@ -264,7 +266,12 @@ const App = () => {
                   apiBots !== null ? (
                     <SpecialOffers
                       apiBots={apiBots}
+                      onFilter={handleFilterByCategory}
+                      cartProducts={cartProducts}
+                      isProductInCart={isProductInCart}
                       addProductToCart={addProductToCart}
+                      increaseProductCount={increaseProductCount}
+                      decreaseProductCount={decreaseProductCount}
                     />
                   ) : null
                 }
@@ -296,7 +303,6 @@ const App = () => {
                     decreaseProductCount={decreaseProductCount}
                     comeBack={handleGoBack}
                   />
-                  // <Reviews />
                 }
               />
 
@@ -372,6 +378,17 @@ const App = () => {
               />
 
               <Route
+                path='/seller-profile'
+                element={
+                  <ProtectedRoute
+                    element={SellerProfile}
+                    onLogout={handleLogOut}
+                    isLoggedIn={isLoggedIn}
+                  />
+                }
+              />
+
+              <Route
                 path='/reset-password'
                 element={<ResetPassword comeBack={handleGoBack} />}
               />
@@ -391,6 +408,11 @@ const App = () => {
                   <Payment totalSum={totalSum} comeBack={handleGoBack} />
                 }
               />
+
+              <Route path='/faq-common' element={<FAQCommon />} />
+
+              <Route path='/success-singup' element={<SuccessPayment />} />
+
               <Route
                 path='/add-new-bots'
                 element={<AddNewBotsPage comeBack={handleGoBack} />}

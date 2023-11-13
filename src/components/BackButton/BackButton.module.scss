@@ -56,7 +56,7 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .returnElement {
-    margin: 0 35px;
+    /* margin: 0 35px; */
     &__btn {
       background-image: url(../../images/back-left-lg-min.svg);
       &:hover {

@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './RegisterConfirmation.module.scss';
 import sellerImage from '../../images/seller-image.png';
 
-function RegisterConfirmation({ changeProgressBar }) {
+function RegisterConfirmation() {
+  const navigate = useNavigate();
   return (
     <section className={styles.confirm}>
       <h2 className={styles.confirm__title}>
@@ -31,7 +33,7 @@ function RegisterConfirmation({ changeProgressBar }) {
       <button
         type='button'
         className={styles.confirm__button}
-        onClick={changeProgressBar}
+        onClick={() => navigate('/seller-profile')}
       >
         Продолжить
       </button>

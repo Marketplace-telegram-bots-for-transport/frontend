@@ -50,7 +50,9 @@ function SpecialOffers({
 
   return (
     <section className={styles.special} style={backgroundStyle}>
-      <BackButton comeBack={comeBack} title={banner.title} />
+      <div className={styles.special__backButton}>
+        <BackButton comeBack={comeBack} title={banner.title} />
+      </div>
       <h1 className={styles.special__title}>{banner.title}</h1>
       {isMobile ? (
         <div className={styles.special__banner} style={imgStyleMobile} />
@@ -81,7 +83,7 @@ function SpecialOffers({
                   mainPhoto={bot.main_photo}
                   name={bot.name}
                   author={bot.author}
-                  category={bot.category}
+                  categories={bot.categories}
                   discountAuthor={bot.discount_author}
                   discountCategory={bot.discount_category}
                   finalPrice={bot.final_price}

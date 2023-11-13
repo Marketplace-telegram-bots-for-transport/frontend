@@ -1,8 +1,15 @@
 @import './../../vendor/_varibles.scss';
 
 .details {
-  background-color: $background-white;
-  padding: 150px 180px 90px 165px;
+  background: url(../../images/Background.jpg) no-repeat center center fixed;
+  background-size: cover;
+
+  &__container {
+    padding: 150px 180px 90px 165px;
+    width: 100%;
+    max-width: 1920px;
+    @include shadowBackground($background-white, $box-shadow-main);
+  }
 }
 
 .basketSection {
@@ -131,27 +138,36 @@
     position: relative;
     background-color: inherit;
     padding: 114px 15px 50px;
+    &__container {
+      padding: 0;
+      border-radius: 20px;
+    }
     &__mainSection {
       display: flex;
       flex-direction: column;
       padding: 25px 20px;
       border-radius: 20px;
-      @include shadowBackground($background-white, $mobile-box-shadow-category);
     }
   }
   .basketSection {
     position: static;
     &__containerFixedButtonMobile {
-      position: absolute;
-      top: 590px;
-      left: 0;
+      z-index: 10;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      display: flex;
       width: 100%;
-      padding: 15px 35px;
+      max-height: 70px;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
-      background-color: $background-white;
-      box-shadow: $box-shadow-category;
-      height: 70px;
+      padding: 15px 48px;
+      transform: translateX(-50%);
+      @include shadowBackground($background-white, $box-shadow-category);
+      &_hidden {
+        visibility: hidden;
+        opacity: 0;
+      }
     }
     &__basket {
       display: flex;
@@ -169,6 +185,7 @@
       align-items: center;
     }
     &__finalPrice {
+      margin: 0;
       margin-right: 20px;
       @include text(
         $mobile-font-32,
@@ -178,6 +195,7 @@
       );
     }
     &__oldPrice {
+      margin: 0;
       margin-right: 10px;
       @include text(
         $mobile-font-18,

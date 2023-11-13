@@ -7,7 +7,7 @@ import { useWindowSize } from '../../context/WindowSizeContext';
 import styles from './CategoriesTitleMainPage.module.scss';
 import Category from '../Category/Category';
 
-const CategoriesTitleMainPage = ({ categories }) => {
+const CategoriesTitleMainPage = ({ categories, onFilter }) => {
   const isMobile = useWindowSize();
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,13 +34,13 @@ const CategoriesTitleMainPage = ({ categories }) => {
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategories((prev) => {
-      if (prev.includes(category)) {
-        return prev.filter((c) => c !== category);
-      }
-      return [...prev, category];
-    });
+    const updatedCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((c) => c !== category)
+      : [...selectedCategories, category];
+
+    setSelectedCategories(updatedCategories);
     setSearchQuery('');
+    onFilter(updatedCategories);
   };
 
   // фильтр для отображения выбранных категорий
@@ -58,14 +58,13 @@ const CategoriesTitleMainPage = ({ categories }) => {
       (option) => option !== categoryName
     );
     setSelectedCategories(updatedOptions);
+    onFilter(updatedOptions);
   };
 
   // функция удаления всех выбранных категорий
-  const removeCategories = (value) => {
-    const updatedOptions = selectedCategories.filter(
-      (option) => option.value !== value
-    );
-    setSelectedCategories(updatedOptions);
+  const removeCategories = () => {
+    setSelectedCategories([]);
+    onFilter([]);
   };
 
   return (
@@ -152,6 +151,8 @@ const CategoriesTitleMainPage = ({ categories }) => {
                           key={category.id}
                           name={category.name}
                           imageUrl={category.imageUrl}
+                          imageUrlHover={category.imageUrlHover}
+                          imageUrlActive={category.imageUrlActive}
                         />
                         <input
                           className={styles.category__input}

@@ -16,8 +16,32 @@
 
   &__titlebox {
     height: 442px;
-    background-image: url('../../images/banner-background-new.png');
     text-decoration: none;
+    background-image: url('../../images/banner-background-new.png');
+  }
+
+  &__specialOne {
+    background-image: url('../../images/special-1.png');
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__specialTwo {
+    background-image: url('../../images/special-2.png');
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__specialThree {
+    background-image: url('../../images/special-3.png');
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__dot {
@@ -30,6 +54,10 @@
     &_active {
       background-color: #3b7dd6;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -40,18 +68,21 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .banner {
-    min-width: 305px;
-    width: 100%;
-    min-height: 250px;
     height: 100%;
     margin-bottom: 50px;
     padding: 0 15px;
     border-radius: 10px;
     &__dotList {
-      display: none;
+      gap: 20px;
+      bottom: 0 !important;
     }
     &__dot {
-      display: none;
+      width: 15px;
+      height: 15px;
+      background-color: #d3e2f7;
+      &_active {
+        background-color: #5a8cd2;
+      }
     }
     &__carousel {
       display: flex;
@@ -60,14 +91,23 @@
       min-height: 250px;
       height: 100%;
     }
-    &__titleboxMobile {
+    &__titlebox {
       width: 305px;
       height: 250px;
-      background-image: url(../../images/images-for-mobile/banners/banner3.svg);
       background-size: cover;
-      background-position: center;
+      background-position: 61%;
       border-radius: 10px;
       margin: 0 15px 0 18px;
+    }
+
+    &__specialOne {
+      background-image: url(../../images/images-for-mobile/banners/banner1.svg);
+    }
+    &__specialTwo {
+      background-image: url(../../images/images-for-mobile/banners/banner2.svg);
+    }
+    &__specialThree {
+      background-image: url(../../images/images-for-mobile/banners/banner3.svg);
     }
   }
 }

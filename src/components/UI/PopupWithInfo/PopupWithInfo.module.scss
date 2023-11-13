@@ -37,6 +37,7 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .popup {
-    display: none;
+    top: 85px;
+    right: 8%;
   }
 }

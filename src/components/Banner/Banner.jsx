@@ -1,10 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import styles from './Banner.module.scss';
 import 'react-multi-carousel/lib/styles.css';
 import CarouselBannerLeftBtn from '../UI/CarouselBannerLeftBtn/CarouselBannerLeftBtn';
 import CarouselBannerRightBtn from '../UI/CarouselBannerRightBtn/CarouselBannerRightBtn';
-import { useWindowSize } from '../../context/WindowSizeContext';
 
 const CustomDot = ({ index, onClick, active }) => {
   const dotClass = `${styles.banner__dot} ${
@@ -26,7 +30,7 @@ const CustomDot = ({ index, onClick, active }) => {
 };
 
 const Banner = () => {
-  const isMobile = useWindowSize();
+  const navigate = useNavigate();
   const carouselRef = useRef(null);
 
   const responsive = {
@@ -50,29 +54,41 @@ const Banner = () => {
 
   return (
     <div className={styles.banner}>
-      {isMobile ? (
-        <div className={styles.banner__carousel} />
-      ) : (
-        <Carousel
-          ref={carouselRef}
-          renderArrowsWhenDisabled
-          showDots
-          infinite
-          responsive={responsive}
-          className={styles.banner__carousel}
-          dotListClass={styles.banner__dotList}
-          customLeftArrow={<CarouselBannerLeftBtn carouselRef={carouselRef} />}
-          customRightArrow={
-            <CarouselBannerRightBtn carouselRef={carouselRef} />
-          }
-          customDot={<CustomDot />}
-        >
-          <div className={styles.banner__titlebox} />
-          <div className={styles.banner__titlebox} />
-          <div className={styles.banner__titlebox} />
-          <div className={styles.banner__titlebox} />
-        </Carousel>
-      )}
+      <Carousel
+        ref={carouselRef}
+        renderArrowsWhenDisabled
+        showDots
+        infinite
+        responsive={responsive}
+        className={styles.banner__carousel}
+        dotListClass={styles.banner__dotList}
+        customLeftArrow={<CarouselBannerLeftBtn carouselRef={carouselRef} />}
+        customRightArrow={<CarouselBannerRightBtn carouselRef={carouselRef} />}
+        customDot={<CustomDot />}
+      >
+        <div className={styles.banner__titlebox} />
+        <div
+          className={`${styles.banner__titlebox} ${styles.banner__specialOne}`}
+          onClick={() => navigate('/special-offers/1')}
+          role='button'
+          tabIndex={0}
+          aria-label='special-1'
+        />
+        <div
+          className={`${styles.banner__titlebox} ${styles.banner__specialTwo}`}
+          onClick={() => navigate('/special-offers/2')}
+          role='button'
+          tabIndex={0}
+          aria-label='special-2'
+        />
+        <div
+          className={`${styles.banner__titlebox} ${styles.banner__specialThree}`}
+          onClick={() => navigate('/special-offers/3')}
+          role='button'
+          tabIndex={0}
+          aria-label='special-3'
+        />
+      </Carousel>
     </div>
   );
 };

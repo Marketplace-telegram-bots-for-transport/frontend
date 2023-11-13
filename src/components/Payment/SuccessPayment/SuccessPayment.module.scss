@@ -1,0 +1,217 @@
+@import '../../../vendor/_varibles';
+
+.payment {
+  &__successPopap {
+    display: flex;
+    justify-content: center;
+    padding: 180px 0 235px;
+  }
+
+  &__success {
+    display: flex;
+    max-width: 1112px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 50px 60px;
+    @include shadowBackground($background-white, $box-shadow-main);
+  }
+
+  &__successContainer {
+    width: 456px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    padding-right: 40px;
+    border-right: 1px solid #d3e2f7;
+    &_des {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+  }
+  &__successPicture {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 40px;
+  }
+  &__successTitle {
+    text-wrap: nowrap;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-medium-24,
+      $color-blue-dark-title
+    );
+  }
+  &__successButton {
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    height: 50px;
+    background-color: $background-color-button2-default;
+    @include text(
+      $font-medium-24,
+      $weight-400,
+      $line-height-medium-24,
+      $color-blue-text
+    );
+    &:hover {
+      background-color: $background-color-button2-hover;
+    }
+    &:active {
+      background-color: $background-color-button2-pressed;
+    }
+  }
+  &__successReg {
+    width: 456px;
+    &_title {
+      text-align: center;
+      margin-bottom: 30px;
+      @include text(
+        $font-medium-24,
+        $weight-600,
+        $line-height-medium-24,
+        $color-blue-dark-title
+      );
+    }
+    &_button {
+      margin-top: 30px;
+      width: 100%;
+      border: none;
+      border-radius: 15px;
+      height: 50px;
+      padding: 11px 15px;
+      background-color: $background-color-button-default;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+      cursor: pointer;
+      @include text(
+        $font-medium-24,
+        $weight-400,
+        $line-height-medium-24,
+        $color-button-text
+      );
+      &:hover {
+        background-color: $background-color-button-hover;
+      }
+      &:active {
+        background-color: $background-color-button-pressed;
+      }
+    }
+    &_plusesSubtitle {
+      margin: 30px 0 15px;
+      @include text(
+        $font-18,
+        $weight-300,
+        $line-height-payment-18,
+        $color-blue-dark-title
+      );
+    }
+    &_plusesList {
+      padding: 0 0 0 20px;
+      &_item {
+        margin: 0 0 5px;
+        @include text(
+          $font-18,
+          $weight-300,
+          $line-height-payment-18,
+          $color-blue-dark-title
+        );
+      }
+    }
+  }
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .payment {
+    &__successPopap {
+      display: flex;
+      justify-content: center;
+      padding: 114px 15px 50px;
+    }
+    &__success {
+      flex-direction: column;
+      padding: 25px 20px;
+    }
+    &__successContainer {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border-right: none;
+    }
+    &__successTitle {
+      @include text(
+        $mobile-font-18,
+        $weight-500,
+        $mobile-lh-18,
+        $color-blue-dark-title
+      );
+    }
+    &__successButton {
+      margin-bottom: 30px;
+      border-radius: 10px;
+      padding: 11px 15px;
+      height: 40px;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
+    }
+    &__successReg {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-top: 30px;
+      border-top: 1px solid #d3e2f7;
+      &_title {
+        order: 1;
+        @include text(
+          $mobile-font-18,
+          $weight-500,
+          $mobile-lh-18,
+          $color-blue-dark-title
+        );
+      }
+      &_button {
+        order: 2;
+        margin: 0;
+        height: 40px;
+        border-radius: 10px;
+        @include text(
+          $mobile-font-14,
+          $weight-500,
+          $line-height-small-14,
+          $color-button-text
+        );
+      }
+      &_plusesSubtitle {
+        order: 3;
+        @include text(
+          $mobile-font-16,
+          $weight-300,
+          $mobile-lh-small-16,
+          $color-blue-dark-title
+        );
+      }
+      &_plusesList {
+        order: 4;
+        &_item {
+          @include text(
+            $mobile-font-16,
+            $weight-300,
+            $mobile-lh-small-16,
+            $color-blue-dark-title
+          );
+        }
+      }
+    }
+  }
+}

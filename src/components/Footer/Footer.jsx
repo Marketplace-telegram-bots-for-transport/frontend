@@ -34,7 +34,7 @@ function Footer() {
               className={styles.footer__contacts_link}
               href='mailto:mail@example.com'
             >
-              example@yandex.ru
+              botdepot@yandex.ru
             </a>
           </div>
         </address>
@@ -46,7 +46,7 @@ function Footer() {
           <Link className={styles.footer__link_navigate} to='/about-us'>
             О нас
           </Link>
-          <Link className={styles.footer__link_navigate} to='/FAQ'>
+          <Link className={styles.footer__link_navigate} to='/faq-common'>
             FAQ
           </Link>
         </nav>
