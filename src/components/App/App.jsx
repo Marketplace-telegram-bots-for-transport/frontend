@@ -39,7 +39,7 @@ import {
   updateCartWithLocalStorage,
   checkAndRemoveExpiredData,
 } from '../../hooks/useCartInLocalStorage';
-import SellerProfile from '../SellerProfile/SellerProfile';
+import SellerOn from '../SellerOn/SellerOn';
 
 const App = () => {
   const navigate = useNavigate();
@@ -381,7 +381,7 @@ const App = () => {
                 path='/seller-profile'
                 element={
                   <ProtectedRoute
-                    element={SellerProfile}
+                    element={SellerOn}
                     onLogout={handleLogOut}
                     isLoggedIn={isLoggedIn}
                   />
