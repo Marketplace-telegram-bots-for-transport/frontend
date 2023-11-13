@@ -43,9 +43,21 @@ function Profile({ onLogout }) {
     setEditButtonNotifications(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEditButton(false);
+    setIsDisabled(true);
+  };
+
+  const handleSubmitNotifications = (e) => {
+    e.preventDefault();
+    setEditButtonNotifications(false);
+    setIsDisabledNotifications(true);
+  };
+
   return (
     <main className={styles.profile}>
-      <ProfileNavigation onLogout={onLogout} />
+      <ProfileNavigation onLogout={onLogout} editButton={editButton} />
       {isMobile ? (
         <>
           <h2 className={styles.user__title}>Личные данные</h2>
@@ -202,6 +214,7 @@ function Profile({ onLogout }) {
                 </span>
               </div>
             </form>
+            
             <div className={styles.user__titleContainer_notification}>
               <h2 className={styles.user__subtitle}>Уведомления</h2>
               {!editButtonNotifications ? (
@@ -217,6 +230,7 @@ function Profile({ onLogout }) {
                 />
               )}
             </div>
+            
             <form className={styles.user__formNotifications}>
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Получать на почту</label>
@@ -250,7 +264,7 @@ function Profile({ onLogout }) {
               ${editButton ? styles.user__editButton_hidden : ''}`}
               aria-label='редактировать'
               onClick={handleEdit}
-            >
+               >
               Редактировать информацию
             </button>
             {editButton && (
@@ -263,8 +277,9 @@ function Profile({ onLogout }) {
             )}
           </section>
         </>
-      ) : (
-        <section className={styles.user}>
+
+          ) : (
+          <section className={styles.user}>
           <div className={styles.user__titleContainer}>
             <h2 className={styles.user__title}>Личные данные</h2>
             {!editButton ? (
@@ -279,109 +294,109 @@ function Profile({ onLogout }) {
                 aria-label='редактировать'
               />
             )}
+          )}
+        </div>
+        
+        <form className={styles.user__form} noValidate onSubmit={handleSubmit}>
+          <div className={styles.user__inputContainer}>
+            <label className={styles.user__text}>Имя и фамилия</label>
+            <input
+              className={styles.user__input}
+              type='text'
+              name='username'
+              id='username'
+              value={values.username || ''}
+              disabled={isDisabled}
+              onChange={handleChange}
+              minLength='2'
+              maxLength='30'
+              required
+              pattern='^[a-zA-Zа-яА-Я\s]+$'
+              onBlur={() => {
+                setIsUsernameError(true);
+              }}
+            />
+            <span
+              className={`${styles.user__error} ${
+                isUsernameError && styles.user__errorVisible
+              }`}
+            >
+              {errors.username}
+            </span>
           </div>
-          <form className={styles.user__form} noValidate>
-            <div className={styles.user__inputContainer}>
-              <label className={styles.user__text}>Имя и фамилия</label>
-              <input
-                className={styles.user__input}
-                type='text'
-                name='username'
-                id='username'
-                value={values.username || ''}
-                disabled={isDisabled}
-                onChange={handleChange}
-                minLength='2'
-                maxLength='30'
-                required
-                pattern='^[a-zA-Zа-яА-Я\s]+$'
-                onBlur={() => {
-                  setIsUsernameError(true);
-                }}
-              />
-              <span
-                className={`${styles.user__error} ${
-                  isUsernameError && styles.user__errorVisible
-                }`}
-              >
-                {errors.username}
-              </span>
-            </div>
-            <div className={styles.user__inputContainer}>
-              <label className={styles.user__text}>Телефон</label>
-              <input
-                className={styles.user__input}
-                type='tel'
-                name='phone'
-                id='phone'
-                placeholder='введите в формате 10 цифр'
-                value={values.phone || ''}
-                disabled={isDisabled}
-                onChange={handleChange}
-                minLength='10'
-                pattern='[0-9]{3}[0-9]{3}[0-9]{4}'
-                onBlur={() => {
-                  setIsPhoneError(true);
-                }}
-              />
-              <span
-                className={`${styles.user__error} ${
-                  isPhoneError && styles.user__errorVisible
-                }`}
-              >
-                {errors.phone}
-              </span>
-            </div>
-            <div className={styles.user__inputContainer}>
-              <label className={styles.user__text}>Дата рождения</label>
-              <input
-                className={styles.user__input}
-                type='date'
-                name='date'
-                id='date'
-                value={values.date || ''}
-                disabled={isDisabled}
-                onChange={handleChange}
-                onBlur={() => {
-                  setIsDateError(true);
-                }}
-                minLength='10'
-                maxLength='10'
-                pattern='^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[0-2]).\d{4}$'
-              />
-              <span
-                className={`${styles.user__error} ${
-                  isDateError && styles.user__errorVisible
-                }`}
-              >
-                {errors.date}
-              </span>
-            </div>
-            <div className={styles.user__inputContainer}>
-              <label className={styles.user__text}>Почта</label>
-              <input
-                className={styles.user__input}
-                type='email'
-                name='email'
-                id='email'
-                value={values.email || ''}
-                disabled={isDisabled}
-                onChange={handleChange}
-                minLength='2'
-                required
-                pattern={PATTERN_EMAIL}
-                onBlur={() => {
-                  setIsEmailError(true);
-                }}
-              />
-              <span
-                className={`${styles.user__error} ${
-                  isEmailError && styles.user__errorVisible
-                }`}
-              >
-                {errors.email}
-              </span>
-            </div>
+          <div className={styles.user__inputContainer}>
+            <label className={styles.user__text}>Телефон</label>
+            <input
+              className={styles.user__input}
+              type='tel'
+              name='phone'
+              id='phone'
+              placeholder='введите в формате 10 цифр'
+              value={values.phone || ''}
+              disabled={isDisabled}
+              onChange={handleChange}
+              minLength='10'
+              pattern='[0-9]{3}[0-9]{3}[0-9]{4}'
+              onBlur={() => {
+                setIsPhoneError(true);
+              }}
+            />
+            <span
+              className={`${styles.user__error} ${
+                isPhoneError && styles.user__errorVisible
+              }`}
+            >
+              {errors.phone}
+            </span>
+          </div>
+          <div className={styles.user__inputContainer}>
+            <label className={styles.user__text}>Дата рождения</label>
+            <input
+              className={styles.user__input}
+              type='date'
+              name='date'
+              id='date'
+              value={values.date || ''}
+              disabled={isDisabled}
+              onChange={handleChange}
+              onBlur={() => {
+                setIsDateError(true);
+              }}
+              minLength='10'
+              maxLength='10'
+              pattern='^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[0-2]).\d{4}$'
+            />
+            <span
+              className={`${styles.user__error} ${
+                isDateError && styles.user__errorVisible
+              }`}
+            >
+              {errors.date}
+            </span>
+          </div>
+          <div className={styles.user__inputContainer}>
+            <label className={styles.user__text}>Почта</label>
+            <input
+              className={styles.user__input}
+              type='email'
+              name='email'
+              id='email'
+              value={values.email || ''}
+              disabled={isDisabled}
+              onChange={handleChange}
+              minLength='2'
+              required
+              pattern={PATTERN_EMAIL}
+              onBlur={() => {
+                setIsEmailError(true);
+              }}
+            />
+            <span
+              className={`${styles.user__error} ${
+                isEmailError && styles.user__errorVisible
+              }`}
+          </div>
+          
             <div className={styles.user__inputContainer}>
               <label className={styles.user__text}>Пол</label>
               {editButton ? (
@@ -408,17 +423,7 @@ function Profile({ onLogout }) {
                   onChange={handleChange}
                 />
               )}
-              {/* // <select
-            //   className={styles.user__select}
-            //   name='sex'
-            //   id='sex'
-            //   value={values.sex || ''}
-            //   disabled={isDisabled}
-            //   onChange={handleChange}
-            // >
-            //   <option>мужской</option>
-            //   <option>женский</option>
-            // </select> */}
+              
             </div>
             {editButton && (
               <button className={styles.user__buttonEdit} disabled={!isValid}>
@@ -426,6 +431,7 @@ function Profile({ onLogout }) {
               </button>
             )}
           </form>
+          
           <div
             className={`${styles.user__titleContainer} ${styles.user__titleContainer_notification}`}
           >
@@ -443,7 +449,8 @@ function Profile({ onLogout }) {
               />
             )}
           </div>
-          <form className={styles.user__formNotifications}>
+          
+          <form className={styles.user__formNotifications} onSubmit={handleSubmitNotifications}>
             <div className={styles.user__inputContainer}>
               <label className={styles.user__text}>Получать на почту</label>
               <input

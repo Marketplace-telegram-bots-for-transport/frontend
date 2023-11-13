@@ -14,10 +14,58 @@
     flex-direction: column;
   }
 
-  &__image {
+  &__avatarContainer {
+    justify-content: center;
+    display: flex;
+    position: relative;
     width: 200px;
     height: 200px;
     margin: 0 auto;
+  }
+
+  &__image {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__iconAuthor {
+    background: url('../../images/Icon-author.svg');
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__editAvatarButton {
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    border: none;
+    background: none;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__iconEditAvatar {
+    margin: 0 10px 0 0;
+    background-image: url('../../images/edit-avatar.svg');
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__textEditAvatar {
+    margin: 0;
+    @include text(
+      $font-small-14,
+      $weight-500,
+      $line-height-normal,
+      $color-blue-edit
+    );
   }
 
   &__name {
@@ -77,6 +125,12 @@
       }
     }
     &_seller {
+      background-image: url('../../images/icon-seller.svg');
+      &_activ {
+        background-image: url('../../images/icon-seller-activ.svg');
+      }
+    }
+    &_selleron {
       background-image: url('../../images/icon-seller.svg');
       &_activ {
         background-image: url('../../images/icon-seller-activ.svg');

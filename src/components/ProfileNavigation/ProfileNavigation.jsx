@@ -4,22 +4,34 @@ import styles from './ProfileNavigation.module.scss';
 import CurrentUserContext from '../../context/CurrentUserContext';
 import foto from '../../images/defaultImage.svg';
 
-function ProfileNavigation({ onLogout }) {
+function ProfileNavigation({ onLogout, editButton }) {
   const { currentUser } = React.useContext(CurrentUserContext);
   const { pathname } = useLocation();
 
   return (
     <main className={styles.profileNavigation}>
       <div className={styles.profileNavigation__profileContainer}>
-        <img
-          className={styles.profileNavigation__image}
-          src={currentUser.image ? currentUser.image : foto}
-          alt='фото профиля'
-        />
+        <div className={styles.profileNavigation__avatarContainer}>
+          <img
+            className={styles.profileNavigation__image}
+            src={currentUser.image ? currentUser.image : foto}
+            alt='фото профиля'
+          />
+          {currentUser.is_author && (
+            <div className={styles.profileNavigation__iconAuthor} />
+          )}
+        </div>
+        {editButton && (
+          <button className={styles.profileNavigation__editAvatarButton}>
+            <div className={styles.profileNavigation__iconEditAvatar} />
+            <p className={styles.profileNavigation__textEditAvatar}>
+              Изменить аватар
+            </p>
+          </button>
+        )}
         <h1 className={styles.profileNavigation__name}>
           {currentUser.username}
         </h1>
-        {/* <h1 className={styles.profileNavigation__name}>Имя</h1> */}
       </div>
       <nav className={styles.profileNavigation__navigation}>
         <Link to='/profile' className={styles.profileNavigation__link}>
@@ -95,22 +107,45 @@ function ProfileNavigation({ onLogout }) {
           </p>
         </Link>
         <Link to='/seller' className={styles.profileNavigation__link}>
-          <div
-            className={
-              pathname === '/seller'
-                ? `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_seller} ${styles.profileNavigation__icon_seller_activ}`
-                : `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_seller}`
-            }
-          />
-          <p
-            className={
-              pathname === '/seller'
-                ? `${styles.profileNavigation__textLink} ${styles.profileNavigation__textLink_activ}`
-                : `${styles.profileNavigation__textLink}`
-            }
-          >
-            Стать продавцом
-          </p>
+          {!currentUser.is_author ? (
+            <>
+              <div
+                className={
+                  pathname === '/seller'
+                    ? `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_seller} ${styles.profileNavigation__icon_seller_activ}`
+                    : `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_seller}`
+                }
+              />
+              <p
+                className={
+                  pathname === '/seller'
+                    ? `${styles.profileNavigation__textLink} ${styles.profileNavigation__textLink_activ}`
+                    : `${styles.profileNavigation__textLink}`
+                }
+              >
+                Стать продавцом
+              </p>
+            </>
+          ) : (
+            <>
+              <div
+                className={
+                  pathname === '/seller'
+                    ? `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_selleron} ${styles.profileNavigation__icon_selleron_activ}`
+                    : `${styles.profileNavigation__icon} ${styles.profileNavigation__icon_selleron}`
+                }
+              />
+              <p
+                className={
+                  pathname === '/seller'
+                    ? `${styles.profileNavigation__textLink} ${styles.profileNavigation__textLink_activ}`
+                    : `${styles.profileNavigation__textLink}`
+                }
+              >
+                Данные продавца
+              </p>
+            </>
+          )}
         </Link>
         <Link
           to='/'
