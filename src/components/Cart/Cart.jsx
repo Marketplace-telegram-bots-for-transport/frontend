@@ -146,14 +146,11 @@ function Cart({
           )}
         </div>
       </div>
-      {!isMobile && (
-        <Payment
-          totalSum={totalSum}
-          isLoggedIn={isLoggedIn}
-          countText={countText}
-        />
-      )}
-      {/* {!isLoggedIn && !showButton && <ModalWithAuth />} */}
+      <Payment
+        totalSum={totalSum}
+        isLoggedIn={isLoggedIn}
+        countText={countText}
+      />
     </section>
   );
 }

@@ -91,9 +91,7 @@ function Rating({ currentBotById }) {
             ))}
           </div>
           {isMobile && (
-            <button className={styles.rating__readReviews}>
-              Читать отзывы
-            </button>
+            <button className={styles.rating__readReviews}>Все отзывы</button>
           )}
           <p className={styles.countOfReviews}>{totalGradeValue} оценок</p>
         </div>

@@ -4,8 +4,8 @@
   max-width: 445px;
   max-height: 350px;
   border-radius: 20px;
+  margin: auto 0;
   padding: 40px;
-  margin: 335px auto 0;
   @include shadowBackground($background-white, $box-shadow-main);
 
   &__container {
@@ -61,23 +61,11 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .success {
-    border-radius: 20px;
     padding: 25px 20px;
-    @include shadowBackground($background-white, $box-shadow-main);
-
-    &__successContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    &__img {
       margin-bottom: 40px;
     }
-    &__successPicture {
-      width: 130px;
-      height: 130px;
-      margin-bottom: 40px;
-    }
-    &__successTitle {
-      text-wrap: nowrap;
+    &__title {
       @include text(
         $mobile-font-18,
         $weight-500,
@@ -85,27 +73,29 @@
         $color-blue-dark-title
       );
     }
-    &__successButton {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      padding: 11px 15px;
-      background-color: $background-color-button-default;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-      cursor: pointer;
+    &__button {
+      height: 40px;
       @include text(
         $mobile-font-14,
         $weight-500,
         $line-height-small-14,
         $color-button-text
       );
+    }
+    &__buttonPayment {
+      height: 40px;
+      background-color: $background-color-button2-default;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-text
+      );
       &:hover {
-        background-color: $background-color-button-hover;
+        background-color: $background-color-button2-hover;
       }
       &:active {
-        background-color: $background-color-button-pressed;
+        background-color: $background-color-button2-pressed;
       }
     }
   }

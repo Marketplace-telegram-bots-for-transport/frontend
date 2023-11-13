@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { useWindowSize } from '../../context/WindowSizeContext';
 import styles from './Payment.module.scss';
 import PopupWithInfo from '../UI/PopupWithInfo/PopupWithInfo';
 import BackButton from '../BackButton/BackButton';
-import SuccessBlock from '../SuccessBlock/SuccessBlock';
-import Register from '../Register/Register';
+import SuccessPayment from './SuccessPayment/SuccessPayment';
 
 function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
   const isMobile = useWindowSize();
+  const navigate = useNavigate();
   const { handleChange, errors, isValid, resetForm } = useFormAndValidation();
   const [formPayment, setFormPayment] = useState({
     email: '',
@@ -19,11 +20,10 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
     promocode: '',
   });
   const [isPaid, setPaidStatus] = useState(false);
-  const [isPaidMobile, setPaidStatusMobile] = useState(false);
+  const [, setPaidStatusMobile] = useState(false);
   const buttonClassName = isValid
     ? `${styles.payment__button} ${styles.payment__button_active}`
     : styles.payment__button;
-  console.log(isPaidMobile);
   // Функця маски для номера карты
   const formatCardNumber = (inputValue) => {
     const numericValue = inputValue.replace(/\D/g, '');
@@ -79,9 +79,10 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
         }, 3000);
       }
     }
-    // для мобилки
+
     if (isValid && !isLoggedIn) {
       setPaidStatusMobile(true);
+      navigate('/success-singup');
     }
   };
 
@@ -104,199 +105,196 @@ function Payment({ comeBack, totalSum, countText, isLoggedIn }) {
 
   return (
     <div className={styles.payment}>
-      {isPaid && !isLoggedIn && (
-        <div className={styles.payment__popap}>
-          <div className={styles.payment__popap_container}>
-            <div className={styles.payment__popap_register}>
-              <Register />
+      {isPaid && !isLoggedIn ? (
+        <SuccessPayment />
+      ) : (
+        <div className={styles.payment__content}>
+          {isMobile ? (
+            <div className={styles.payment__backButton}>
+              <BackButton comeBack={comeBack} />
             </div>
-            <SuccessBlock title='Оплата прошла успешно!' textButton='Назад' />
-          </div>
-        </div>
-      )}
-      {isPaid && isLoggedIn && <PopupWithInfo isPaid={isPaid} />}
-      <div className={styles.payment__content}>
-        {isMobile ? (
-          <BackButton comeBack={comeBack} />
-        ) : (
-          <h3 className={styles.payment__title}>Оплата картой</h3>
-        )}
-        <form
-          action='#'
-          className={styles.payment__form}
-          onSubmit={handleSubmit}
-        >
-          <label className={styles.payment__label} htmlFor='email-input'>
-            {' '}
-            <span className={styles.payment__inputHeading}>
-              Email для отправки бота и чека
-            </span>
-            <input
-              name='email'
-              value={formPayment.email || ''}
-              placeholder='Введите email'
-              type='email'
-              id='email-input'
-              className={styles.payment__input}
-              minLength='2'
-              maxLength='64'
-              required
-              onChange={(e) => {
-                setFormPayment((prevCardInfo) => ({
-                  ...prevCardInfo,
-                  email: e.target.value,
-                }));
-              }}
-              onBlur={handleChange}
-            />
-            {errors.email && (
-              <span className={styles.payment__error}>
-                {handleError(errors.email)}
-              </span>
-            )}
-          </label>
-          <fieldset className={styles.payment__card}>
-            <label className={styles.payment__label} htmlFor='number-input'>
+          ) : (
+            <h3 className={styles.payment__title}>Оплата картой</h3>
+          )}
+          <form
+            action='#'
+            className={styles.payment__form}
+            onSubmit={handleSubmit}
+          >
+            <label className={styles.payment__label} htmlFor='email-input'>
+              {' '}
               <span className={styles.payment__inputHeading}>
-                {' '}
-                Номер карты для оплаты
+                Email для отправки бота и чека
               </span>
               <input
-                className={`${styles.payment__input} ${styles.payment__inputNumber}`}
-                name='number'
-                value={formPayment.number || ''}
-                placeholder='_ _ _ _   _ _ _ _   _ _ _ _   _ _ _ _'
-                autoComplete='cc-number'
-                inputMode='numeric'
-                type='text'
-                id='number-input'
-                minLength={19}
-                maxLength={19}
+                name='email'
+                value={formPayment.email || ''}
+                placeholder='Введите email'
+                type='email'
+                id='email-input'
+                className={styles.payment__input}
+                minLength='2'
+                maxLength='64'
                 required
-                onChange={(e) => handleCardChange(e, 'number')}
+                onChange={(e) => {
+                  setFormPayment((prevCardInfo) => ({
+                    ...prevCardInfo,
+                    email: e.target.value,
+                  }));
+                }}
                 onBlur={handleChange}
               />
-              {errors.number && (
+              {errors.email && (
                 <span className={styles.payment__error}>
-                  {handleError(errors.number)}
+                  {handleError(errors.email)}
                 </span>
               )}
             </label>
-            <div className={styles.payment__cardInfo}>
+            <fieldset className={styles.payment__card}>
               <label className={styles.payment__label} htmlFor='number-input'>
                 <span className={styles.payment__inputHeading}>
-                  Срок действия
+                  {' '}
+                  Номер карты для оплаты
                 </span>
-                <div className={styles.payment__cardDate}>
-                  <input
-                    className={`${styles.payment__input} ${styles.payment__inputDate_mm}`}
-                    name='month'
-                    value={formPayment.month || ''}
-                    placeholder='_ _'
-                    autoComplete='cc-month'
-                    inputMode='numeric'
-                    type='text'
-                    id='month-input'
-                    minLength='2'
-                    maxLength='2'
-                    required
-                    onChange={(e) => handleCardChange(e, 'month')}
-                    onBlur={handleChange}
-                  />
-                  <span className={styles.payment__cardDateSlash}>/</span>
-                  <input
-                    className={`${styles.payment__input} ${styles.payment__inputDate_gg}`}
-                    name='year'
-                    value={formPayment.year || ''}
-                    placeholder='_ _ _ _'
-                    autoComplete='cc-year'
-                    inputMode='numeric'
-                    type='text'
-                    id='year-input'
-                    minLength='4'
-                    maxLength='4'
-                    required
-                    onChange={(e) => handleCardChange(e, 'year')}
-                    onBlur={handleChange}
-                  />
-                </div>
-              </label>
-              <label
-                className={`${styles.payment__label} ${styles.payment__labelCode}`}
-                htmlFor='code-input'
-              >
-                <span className={styles.payment__inputHeading}>CVV</span>
                 <input
-                  className={`${styles.payment__input} ${styles.payment__inputCode}`}
-                  name='code'
-                  value={formPayment.code || ''}
-                  placeholder='_ _ _'
+                  className={`${styles.payment__input} ${styles.payment__inputNumber}`}
+                  name='number'
+                  value={formPayment.number || ''}
+                  placeholder='_ _ _ _   _ _ _ _   _ _ _ _   _ _ _ _'
                   autoComplete='cc-number'
                   inputMode='numeric'
                   type='text'
-                  id='code-input'
-                  minLength='3'
-                  maxLength='3'
+                  id='number-input'
+                  minLength={19}
+                  maxLength={19}
                   required
-                  onChange={(e) => handleCardChange(e, 'code')}
+                  onChange={(e) => handleCardChange(e, 'number')}
                   onBlur={handleChange}
                 />
+                {errors.number && (
+                  <span className={styles.payment__error}>
+                    {handleError(errors.number)}
+                  </span>
+                )}
               </label>
-              {(errors.month || errors.year || errors.code) && (
-                <span className={styles.payment__error}>
-                  {handleError(errors.month) ||
-                    handleError(errors.year) ||
-                    handleError(errors.code) ||
-                    ''}
-                </span>
-              )}
-            </div>
-          </fieldset>
-          <p className={styles.payment__totalCount}>Всего: {countText}</p>
-          <input
-            className={`${styles.payment__input} ${styles.payment__inputPromocode}`}
-            name='promocode'
-            value={formPayment.promocode || ''}
-            placeholder='Промокод'
-            type='text'
-            id='promocode-input'
-            minLength='2'
-            maxLength='6'
-            onChange={handlePromocodeChange}
-          />
-          <div className={styles.payment__total}>
-            <p className={styles.payment__sum}>{totalSum}₽</p>
-            <button className={buttonClassName} disabled={!isValid}>
-              Купить
-            </button>
-          </div>
-          {isMobile && (
-            <>
-              <input
-                className={`${styles.payment__input} ${styles.payment__inputPromocodeMobile}`}
-                name='promocode'
-                value={formPayment.promocode || ''}
-                placeholder='Промокод'
-                type='text'
-                id='promocode-input'
-                minLength='2'
-                maxLength='6'
-                onChange={handlePromocodeChange}
-              />
-              <div className={styles.payment__totalMobile}>
-                <p className={styles.payment__totalCountMobile}>
-                  Всего: {countText}
-                </p>
-                <p className={styles.payment__sumMobile}>{totalSum}₽</p>
+              <div className={styles.payment__cardInfo}>
+                <label className={styles.payment__label} htmlFor='number-input'>
+                  <span className={styles.payment__inputHeading}>
+                    Срок действия
+                  </span>
+                  <div className={styles.payment__cardDate}>
+                    <input
+                      className={`${styles.payment__input} ${styles.payment__inputDate_mm}`}
+                      name='month'
+                      value={formPayment.month || ''}
+                      placeholder='_ _'
+                      autoComplete='cc-month'
+                      inputMode='numeric'
+                      type='text'
+                      id='month-input'
+                      minLength='2'
+                      maxLength='2'
+                      required
+                      onChange={(e) => handleCardChange(e, 'month')}
+                      onBlur={handleChange}
+                    />
+                    <span className={styles.payment__cardDateSlash}>/</span>
+                    <input
+                      className={`${styles.payment__input} ${styles.payment__inputDate_gg}`}
+                      name='year'
+                      value={formPayment.year || ''}
+                      placeholder='_ _ _ _'
+                      autoComplete='cc-year'
+                      inputMode='numeric'
+                      type='text'
+                      id='year-input'
+                      minLength='4'
+                      maxLength='4'
+                      required
+                      onChange={(e) => handleCardChange(e, 'year')}
+                      onBlur={handleChange}
+                    />
+                  </div>
+                </label>
+                <label
+                  className={`${styles.payment__label} ${styles.payment__labelCode}`}
+                  htmlFor='code-input'
+                >
+                  <span className={styles.payment__inputHeading}>CVV</span>
+                  <input
+                    className={`${styles.payment__input} ${styles.payment__inputCode}`}
+                    name='code'
+                    value={formPayment.code || ''}
+                    placeholder='_ _ _'
+                    autoComplete='cc-number'
+                    inputMode='numeric'
+                    type='text'
+                    id='code-input'
+                    minLength='3'
+                    maxLength='3'
+                    required
+                    onChange={(e) => handleCardChange(e, 'code')}
+                    onBlur={handleChange}
+                  />
+                </label>
+                {(errors.month || errors.year || errors.code) && (
+                  <span className={styles.payment__error}>
+                    {handleError(errors.month) ||
+                      handleError(errors.year) ||
+                      handleError(errors.code) ||
+                      ''}
+                  </span>
+                )}
               </div>
+            </fieldset>
+            <p className={styles.payment__totalCount}>Всего: {countText}</p>
+            <input
+              className={`${styles.payment__input} ${styles.payment__inputPromocode}`}
+              name='promocode'
+              value={formPayment.promocode || ''}
+              placeholder='Промокод'
+              type='text'
+              id='promocode-input'
+              minLength='2'
+              maxLength='6'
+              onChange={handlePromocodeChange}
+            />
+            <div className={styles.payment__total}>
+              <p className={styles.payment__sum}>{totalSum}₽</p>
               <button className={buttonClassName} disabled={!isValid}>
                 Купить
               </button>
-            </>
-          )}
-        </form>
-      </div>
+            </div>
+            {isMobile && (
+              <>
+                <input
+                  className={`${styles.payment__input} ${styles.payment__inputPromocodeMobile}`}
+                  name='promocode'
+                  value={formPayment.promocode || ''}
+                  placeholder='Промокод'
+                  type='text'
+                  id='promocode-input'
+                  minLength='2'
+                  maxLength='6'
+                  onChange={handlePromocodeChange}
+                />
+                <div className={styles.payment__totalMobile}>
+                  <p className={styles.payment__totalCountMobile}>
+                    Всего: {countText}
+                  </p>
+                  <p className={styles.payment__sumMobile}>{totalSum}₽</p>
+                </div>
+                <button className={buttonClassName} disabled={!isValid}>
+                  Купить
+                </button>
+              </>
+            )}
+          </form>
+        </div>
+      )}
+      {isPaid && isLoggedIn && <PopupWithInfo isPaid={isPaid} />}
     </div>
   );
 }
+
 export default Payment;

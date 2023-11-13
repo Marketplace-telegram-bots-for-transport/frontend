@@ -12,7 +12,8 @@ function PopupWithInfo({ isPaid, copied }) {
   return (
     <div className={popupClassName}>
       <p className={styles.popup__text}>
-        {copied ? 'Ссылка скопирована' : 'Покупка прошла успешно!'}
+        {copied && 'Ссылка скопирована'}
+        {isPaid && 'Покупка прошла успешно!'}
       </p>
     </div>
   );

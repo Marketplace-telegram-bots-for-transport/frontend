@@ -16,7 +16,7 @@ function SuccessBlock({ title, textButton, path }) {
         <h3 className={styles.success__title}>{title}</h3>
       </div>
       <button
-        className={styles.success__button}
+        className={`${styles.success__button} ${styles.success__buttonPayment}`}
         type='button'
         aria-label={`Кнопка ${textButton}`}
         onClick={() => handelRedirect(path)}

@@ -212,7 +212,7 @@
       );
     }
     &__description {
-      margin-top: 70px;
+      margin-top: 30px;
       @include text(
         $mobile-font-16,
         $weight-300,
@@ -223,9 +223,9 @@
     &__showMoreButton {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
       margin: 0 0 30px;
-      background-position: 37%;
+      background-position: 20%;
       padding: 10px 15px;
     }
   }

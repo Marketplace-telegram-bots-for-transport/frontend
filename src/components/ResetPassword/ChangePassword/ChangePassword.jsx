@@ -96,7 +96,7 @@ function ChangePassword({ comeBack }) {
       {isPasswordChanged ? (
         <SuccessBlock
           title='Пароль успешно изменен!'
-          textButton='Назад к авторизации'
+          textButton='Войти'
           path='/login'
         />
       ) : (
