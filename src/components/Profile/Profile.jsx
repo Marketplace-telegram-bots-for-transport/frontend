@@ -41,9 +41,21 @@ function Profile({ onLogout }) {
     setEditButtonNotifications(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEditButton(false);
+    setIsDisabled(true);
+  };
+
+  const handleSubmitNotifications = (e) => {
+    e.preventDefault();
+    setEditButtonNotifications(false);
+    setIsDisabledNotifications(true);
+  };
+
   return (
     <main className={styles.profile}>
-      <ProfileNavigation onLogout={onLogout} />
+      <ProfileNavigation onLogout={onLogout} editButton={editButton} />
       <section className={styles.user}>
         <div className={styles.user__titleContainer}>
           <h2 className={styles.user__title}>Личные данные</h2>
@@ -60,7 +72,7 @@ function Profile({ onLogout }) {
             />
           )}
         </div>
-        <form className={styles.user__form} noValidate>
+        <form className={styles.user__form} noValidate onSubmit={handleSubmit}>
           <div className={styles.user__inputContainer}>
             <label className={styles.user__text}>Имя и фамилия</label>
             <input
@@ -188,17 +200,6 @@ function Profile({ onLogout }) {
                 onChange={handleChange}
               />
             )}
-            {/* // <select
-            //   className={styles.user__select}
-            //   name='sex'
-            //   id='sex'
-            //   value={values.sex || ''}
-            //   disabled={isDisabled}
-            //   onChange={handleChange}
-            // >
-            //   <option>мужской</option>
-            //   <option>женский</option>
-            // </select> */}
           </div>
           {editButton && (
             <button className={styles.user__buttonEdit} disabled={!isValid}>
@@ -223,7 +224,10 @@ function Profile({ onLogout }) {
             />
           )}
         </div>
-        <form className={styles.user__formNotifications}>
+        <form
+          className={styles.user__formNotifications}
+          onSubmit={handleSubmitNotifications}
+        >
           <div className={styles.user__inputContainer}>
             <label className={styles.user__text}>Получать на почту</label>
             <input
