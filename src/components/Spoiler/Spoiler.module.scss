@@ -1,0 +1,132 @@
+@import '../../vendor/varibles';
+
+.spoiler {
+  margin: 0;
+  // padding: 223px 135px 140px;
+  // background: #fff;
+  width: 100%;
+
+  &__topic {
+    display: block;
+    padding: 40px 0 40px 0;
+    border-bottom: 0.5px solid #84a7d5;
+    background-color: #fff;
+  }
+
+  &__title {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    padding-right: 30px;
+    @include text(
+      $font-medium-24,
+      $weight-600,
+      $line-height-normal,
+      $color-blue-dark-title
+    );
+
+    &:before {
+      display: block;
+      background: url('../../images/faq_marker.svg') no-repeat;
+      transition: transform 0.5s;
+      content: ' ';
+      top: 8px;
+      right: 0;
+      width: 22px;
+      height: 15px;
+      margin-left: 20px;
+      position: absolute;
+    }
+  }
+
+  &__topic[open] > &__title:before {
+    transform: scale(1, -1);
+  }
+
+  &__text {
+    padding-top: 20px;
+    overflow: hidden;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-normal,
+      $color-blue-dark-title
+    );
+  }
+
+  &__topic[open] div {
+    animation: spoiler 0.3s;
+  }
+  @keyframes spoiler {
+    0% {
+      max-height: 0;
+    }
+    100% {
+      max-height: 20em;
+    }
+  }
+
+  &__list {
+    margin-top: 10px;
+    margin-left: 33px;
+    @include text(
+      $font-medium-24,
+      $weight-300,
+      $line-height-normal,
+      $color-blue-dark-title
+    );
+  }
+
+  &__item {
+    padding-left: 2px;
+  }
+}
+
+/* стили меньше 1024px */
+@media screen and (max-width: 1023px) {
+}
+
+/* стили меньше 480px */
+@media screen and (max-width: 480px) {
+  .spoiler {
+    &__topic {
+      padding: 20px 0;
+      border-bottom: 0.5px solid #84a7d5;
+    }
+
+    &__title {
+      padding-right: 44px;
+      @include text(
+        $mobile-font-14,
+        $weight-500,
+        $line-height-small-14,
+        $color-blue-dark-title
+      );
+      &:before {
+        content: ' ';
+        top: 5px;
+        right: -10px;
+        background-size: 12px 8px;
+      }
+    }
+
+    &__text {
+      padding-top: 10px;
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+
+    &__list {
+      @include text(
+        $mobile-font-14,
+        $weight-300,
+        $mobile-lh-small-14,
+        $color-blue-dark-title
+      );
+    }
+  }
+}

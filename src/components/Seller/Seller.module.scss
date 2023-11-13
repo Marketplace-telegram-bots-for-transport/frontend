@@ -1,0 +1,109 @@
+@import '../../vendor/varibles';
+
+.profile {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  &__link {
+    position: absolute;
+    width: 1350px;
+    height: 825px;
+    top: 0;
+    right: 0;
+    background: url(../../images/bannerForSeller.svg) no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+  }
+}
+
+.seller {
+  padding: 825px 0 0;
+  &__container {
+    padding: 80px 169px 140px 136px;
+    border-radius: 20px 20px 0 0;
+    background: $background-white;
+  }
+  &__title {
+    margin-bottom: 40px;
+    @include text(
+      $font-h1-60,
+      $weight-600,
+      $line-height-h1,
+      $color-blue-dark-title
+    );
+  }
+
+  &__gridContainer {
+    display: grid;
+    grid-template-columns: minmax(235px, 505px) minmax(235px, 505px);
+    gap: 40px;
+    margin-bottom: 80px;
+    &_item {
+      border-radius: 20px;
+      padding: 40px;
+      @include shadowBackground(#f2f7fa, $box-shadow-main);
+    }
+    &_header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    &_icon1 {
+      width: 30px;
+      height: 30px;
+      background: url(../../images/sellerIcon/coin.svg) no-repeat center;
+    }
+    &_icon2 {
+      width: 30px;
+      height: 30px;
+      background: url(../../images/sellerIcon/flag-2.svg) no-repeat center;
+    }
+    &_icon3 {
+      width: 30px;
+      height: 30px;
+      background: url(../../images/sellerIcon/shield-game.svg) no-repeat center;
+    }
+    &_icon4 {
+      width: 30px;
+      height: 30px;
+      background: url(../../images/sellerIcon/emoji-blink.svg) no-repeat center;
+    }
+    &_title {
+      margin-left: 10px;
+      text-wrap: nowrap;
+      @include text(
+        $font-h2-36,
+        $weight-600,
+        $line-height-h2,
+        $color-blue-dark-title
+      );
+    }
+    &_text {
+      @include text(
+        $font-medium-24,
+        $weight-300,
+        $line-height-medium-24,
+        $color-blue-dark-title
+      );
+    }
+  }
+  &__faq {
+    &_subtitle {
+      margin: 80px 0 0;
+      @include text(
+        $font-medium-24,
+        $weight-300,
+        $line-height-medium-24,
+        $color-blue-dark-title
+      );
+    }
+    &_emal {
+      @include text(
+        $font-medium-24,
+        $weight-600,
+        $line-height-medium-24,
+        $color-blue-dark-title
+      );
+    }
+  }
+}
