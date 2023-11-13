@@ -62,6 +62,7 @@
 @media screen and (max-width: 480px) {
   .product {
     &__count {
+      order: 1;
       column-gap: 10px;
       width: 123px;
       padding: 10px;

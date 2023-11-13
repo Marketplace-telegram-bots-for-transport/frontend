@@ -166,7 +166,8 @@
       );
     }
     &__successReg {
-      display: block;
+      display: flex;
+      flex-direction: column;
       width: 100%;
       padding-top: 30px;
       border-top: 1px solid #d3e2f7;

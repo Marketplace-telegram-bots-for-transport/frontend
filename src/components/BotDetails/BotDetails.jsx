@@ -137,7 +137,7 @@ function BotDetails({
               botImage={currentBotById.main_photo}
               botName={currentBotById.name}
               botAuthor={currentBotById.author}
-              botCategory={currentBotById.category}
+              botCategory={currentBotById.categories}
               botDescription={currentBotById.description}
               comeBack={comeBack}
             />
@@ -256,7 +256,7 @@ function BotDetails({
                 botImage={currentBotById.main_photo}
                 botName={currentBotById.name}
                 botAuthor={currentBotById.author}
-                botCategory={currentBotById.category}
+                botCategory={currentBotById.categories}
                 botDescription={currentBotById.description}
               />
               <ScreenExamples array={currentBotById.photo_examples} />

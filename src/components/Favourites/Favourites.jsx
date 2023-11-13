@@ -13,7 +13,7 @@ function Favourites({ onLogout }) {
       <ProfileNavigation onLogout={onLogout} />
       {isMobile ? (
         <>
-          <h2 className={styles.favourites__title}>Мои покупки</h2>
+          <h2 className={styles.favourites__title}>Избранное</h2>
           <section className={styles.favourites}>
             <div className={styles.favourites__container}>
               <p className={styles.favourites__subtitle}>
@@ -32,7 +32,22 @@ function Favourites({ onLogout }) {
           </section>
         </>
       ) : (
-        <section className={styles.favourites} />
+        <section className={styles.favourites}>
+          <h2 className={styles.favourites__title}>Избранное</h2>
+
+          <div className={styles.favourites__container}>
+            <p className={styles.favourites__subtitle}>
+              В списке избранного пока ничего нет. Добавьте понравившиеся товары
+              из каталога!
+            </p>
+            <button
+              className={styles.favourites__button}
+              onClick={() => navigate('/')}
+            >
+              Перейти в каталог
+            </button>
+          </div>
+        </section>
       )}
     </main>
   );

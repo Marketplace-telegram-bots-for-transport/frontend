@@ -114,6 +114,7 @@
 /* стили меньше 480px */
 @media screen and (max-width: 480px) {
   .profileNavigation {
+    min-width: 375px;
     width: 100%;
     padding: 114px 0 50px;
     position: relative;

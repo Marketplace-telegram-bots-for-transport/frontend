@@ -47,7 +47,10 @@
       $color-blue-dark-title
     );
   }
-
+  &__priceContainer {
+    display: flex;
+    align-items: center;
+  }
   &__price {
     margin: 0;
     padding: 0;
@@ -82,7 +85,7 @@
   }
 
   &__priceDiscount {
-    /* margin-right: 10px; */
+    margin-left: 15px;
     @include text(
       $font-medium-24,
       $weight-600,
@@ -167,8 +170,12 @@
         background-image: url('../../images/delete-btn-hover.svg');
       }
     }
-    &__price {
+    &__priceContainer {
+      flex-direction: column;
+      margin: 0 0 0 15px;
       order: 2;
+    }
+    &__price {
       margin-left: 20px;
       @include text(
         $mobile-font-18,
@@ -182,7 +189,6 @@
     }
 
     &__priceDiscount {
-      order: 2;
       margin-left: 20px;
       margin-right: 10px;
       @include text(

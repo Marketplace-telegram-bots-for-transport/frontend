@@ -41,11 +41,7 @@ const BotCard = ({
         <p className={styles.bot__author}>{wrapAuthorName(author)}</p>
       </div>
       <div className={styles.bot__categories}>
-        <p className={styles.bot__category}>
-          {categories && categories.length > 0
-            ? categories[0]
-            : 'Нет категории'}
-        </p>
+        <p className={styles.bot__category}>{categories}</p>
         {categories && categories.length > 1 && (
           <p className={styles.bot__category}>+{categories.length - 1}</p>
         )}

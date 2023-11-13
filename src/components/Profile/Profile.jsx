@@ -7,6 +7,7 @@ import CurrentUserContext from '../../context/CurrentUserContext';
 import { useWindowSize } from '../../context/WindowSizeContext';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { PATTERN_EMAIL } from '../../utils/constants';
+import foto from '../../images/defaultImage.svg';
 import CheckBox from '../CheckBox/CheckBox';
 
 function Profile({ onLogout }) {
@@ -43,9 +44,21 @@ function Profile({ onLogout }) {
     setEditButtonNotifications(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEditButton(false);
+    setIsDisabled(true);
+  };
+
+  const handleSubmitNotifications = (e) => {
+    e.preventDefault();
+    setEditButtonNotifications(false);
+    setIsDisabledNotifications(true);
+  };
+
   return (
     <main className={styles.profile}>
-      <ProfileNavigation onLogout={onLogout} />
+      <ProfileNavigation onLogout={onLogout} editButton={editButton} />
       {isMobile ? (
         <>
           <h2 className={styles.user__title}>Личные данные</h2>
@@ -53,18 +66,26 @@ function Profile({ onLogout }) {
             <h2 className={styles.user__subtitle}>Персональная информация</h2>
             <form className={styles.user__form}>
               {editButton && (
-                <div>
-                  <img /* src={} */ alt='Аватар пользователя' />
-                  <button>
-                    Изменить аватар
-                    <input type='file' />
-                  </button>
+                <div className={styles.user__addImg}>
+                  <img
+                    src={currentUser.image ? currentUser.image : foto}
+                    alt='Аватар пользователя'
+                  />
+                  <input
+                    className={styles.user__form_type_examples}
+                    type='file'
+                    accept='image/jpeg,image/png'
+                    placeholder='Изменить аватар'
+                  />
+                  <div className={styles.user__addImg_text} />
                 </div>
               )}
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Имя и фамилия</label>
                 <input
-                  className={styles.user__input}
+                  className={`${styles.user__input} ${
+                    editButton ? styles.user__input_active : ''
+                  }`}
                   type='text'
                   name='username'
                   id='username'
@@ -91,7 +112,9 @@ function Profile({ onLogout }) {
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Дата рождения</label>
                 <input
-                  className={styles.user__input}
+                  className={`${styles.user__input} ${
+                    editButton ? styles.user__input_active : ''
+                  }`}
                   type='date'
                   name='date'
                   id='date'
@@ -139,22 +162,13 @@ function Profile({ onLogout }) {
                     onChange={handleChange}
                   />
                 )}
-                {/* // <select
-            //   className={styles.user__select}
-            //   name='sex'
-            //   id='sex'
-            //   value={values.sex || ''}
-            //   disabled={isDisabled}
-            //   onChange={handleChange}
-            // >
-            //   <option>мужской</option>
-            //   <option>женский</option>
-            // </select> */}
               </div>
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Телефон</label>
                 <input
-                  className={styles.user__input}
+                  className={`${styles.user__input} ${
+                    editButton ? styles.user__input_active : ''
+                  }`}
                   type='tel'
                   name='phone'
                   id='phone'
@@ -179,7 +193,9 @@ function Profile({ onLogout }) {
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Почта</label>
                 <input
-                  className={styles.user__input}
+                  className={`${styles.user__input} ${
+                    editButton ? styles.user__input_active : ''
+                  }`}
                   type='email'
                   name='email'
                   id='email'
@@ -217,6 +233,7 @@ function Profile({ onLogout }) {
                 />
               )}
             </div>
+
             <form className={styles.user__formNotifications}>
               <div className={styles.user__inputContainer}>
                 <label className={styles.user__text}>Получать на почту</label>
@@ -241,10 +258,12 @@ function Profile({ onLogout }) {
                 </button>
               )}
             </form>
+
             <div className={styles.user__checkBoxContainer}>
               <CheckBox title='Рассылки с акциями и скидками' />
               <CheckBox title='Уведомления о товарах в избранном' />
             </div>
+
             <button
               className={`${styles.user__editButton} 
               ${editButton ? styles.user__editButton_hidden : ''}`}
@@ -280,7 +299,11 @@ function Profile({ onLogout }) {
               />
             )}
           </div>
-          <form className={styles.user__form} noValidate>
+          <form
+            className={styles.user__form}
+            noValidate
+            onSubmit={handleSubmit}
+          >
             <div className={styles.user__inputContainer}>
               <label className={styles.user__text}>Имя и фамилия</label>
               <input
@@ -408,17 +431,6 @@ function Profile({ onLogout }) {
                   onChange={handleChange}
                 />
               )}
-              {/* // <select
-            //   className={styles.user__select}
-            //   name='sex'
-            //   id='sex'
-            //   value={values.sex || ''}
-            //   disabled={isDisabled}
-            //   onChange={handleChange}
-            // >
-            //   <option>мужской</option>
-            //   <option>женский</option>
-            // </select> */}
             </div>
             {editButton && (
               <button className={styles.user__buttonEdit} disabled={!isValid}>
@@ -443,7 +455,10 @@ function Profile({ onLogout }) {
               />
             )}
           </div>
-          <form className={styles.user__formNotifications}>
+          <form
+            className={styles.user__formNotifications}
+            onSubmit={handleSubmitNotifications}
+          >
             <div className={styles.user__inputContainer}>
               <label className={styles.user__text}>Получать на почту</label>
               <input

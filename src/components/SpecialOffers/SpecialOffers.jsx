@@ -83,7 +83,7 @@ function SpecialOffers({
                   mainPhoto={bot.main_photo}
                   name={bot.name}
                   author={bot.author}
-                  category={bot.category}
+                  categories={bot.categories}
                   discountAuthor={bot.discount_author}
                   discountCategory={bot.discount_category}
                   finalPrice={bot.final_price}

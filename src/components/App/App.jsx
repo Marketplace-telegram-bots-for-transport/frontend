@@ -105,7 +105,6 @@ const App = () => {
   // Функция фильтрации по имени категории на главной
   const handleFilterByCategory = async (category) => {
     const botsData = await filterBotsByCategory(category);
-
     setMainPageActiveCategory(category);
     setApiBots(botsData);
   };
@@ -266,7 +265,12 @@ const App = () => {
                   apiBots !== null ? (
                     <SpecialOffers
                       apiBots={apiBots}
+                      onFilter={handleFilterByCategory}
+                      cartProducts={cartProducts}
+                      isProductInCart={isProductInCart}
                       addProductToCart={addProductToCart}
+                      increaseProductCount={increaseProductCount}
+                      decreaseProductCount={decreaseProductCount}
                     />
                   ) : null
                 }

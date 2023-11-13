@@ -24,7 +24,7 @@ const request = (endpoint, method, body, jwt) => {
   };
 
   return fetch(
-    `${BASE_URL}/${endpoint}`,
+    `${BASE_URL}/${endpoint}/`,
     body
       ? {
           ...fetchInit,
@@ -51,6 +51,7 @@ export const deleteUser = (userData) => {
 };
 
 export const resetPassword = (email) => {
+  console.log(email);
   return request('users/reset_password', 'POST', { email });
 };
 

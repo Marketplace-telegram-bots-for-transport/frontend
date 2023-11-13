@@ -32,7 +32,21 @@ function Purchases({ onLogout }) {
           </section>
         </>
       ) : (
-        <section className={styles.purchases} />
+        <section className={styles.purchases}>
+          <h2 className={styles.purchases__title}>Мои покупки</h2>
+          <div className={styles.purchases__container}>
+            <p className={styles.purchases__subtitle}>
+              История покупок пока что пустая. Приобретите бота из каталога и
+              здесь отобразится ваша история покупок!
+            </p>
+            <button
+              className={styles.purchases__button}
+              onClick={() => navigate('/')}
+            >
+              Перейти в каталог
+            </button>
+          </div>
+        </section>
       )}
     </main>
   );
