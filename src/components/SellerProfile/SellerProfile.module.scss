@@ -48,7 +48,7 @@
     display: grid;
     column-gap: 30px;
     row-gap: 30px;
-    grid-template-columns: repeat(3, minmax(280px, 510px));
+    grid-template-columns: repeat(3, minmax(200px, 510px));
   }
 
   &__inputContainer {
